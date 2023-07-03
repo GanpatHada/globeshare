@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Poppins&display=swap');
 *{
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
 }
+
 body{
   background-color: #f0f2f5
 }
@@ -12,6 +14,7 @@ body{
 button{
   border: none;
   cursor: pointer;
+  letter-spacing: 0.5px;
 }
 .all-centered{
   display: flex;
@@ -21,14 +24,12 @@ button{
 a{
   color: var(--primary-color);
   text-decoration: none;
-  font-weight: 600;
   text-transform: capitalize;
+}
+a:hover{
+  text-decoration: underline;
+}
 
-}
-#loadingimg{
-  height: 40px;
-  width: 40px;
-}
 hr{
   height: 1px;
   background-color: rgb(221, 221, 221);
