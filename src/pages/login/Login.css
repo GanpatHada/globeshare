@@ -5,7 +5,8 @@
 }
 
 .login-page-btns {
-  height: 3rem;
+  min-height: 2.4rem;
+  max-height: fit-content;
   width: 100%;
   border-radius: 0.3rem;
   font-size: 1rem;
@@ -14,26 +15,23 @@
   color: white;
 }
 
-#login-btn:hover {
-  background-color: #1363cc;
-}
 #login-box {
-  width: 480px;
+  width: 420px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   padding: 1.25rem;
   background-color: white;
   border-radius: 0.6rem;
-  padding-bottom: 2.5rem;
-  margin: 3rem 1.2rem;
+  padding-bottom: 2rem;
+  margin: 2rem 1.2rem;
 }
 
 #login-box > * {
-  margin: 1.2rem 0px;
+  margin: 1rem 0px;
 }
 .passwordbox,
-.emailbox {
+.emailbox,.namebox{
   border: 1.5px solid rgb(199, 199, 199);
-  height: 3rem;
+  height: 2.4rem;
   border-radius: 5px;
   overflow: hidden;
   position: relative;
@@ -48,17 +46,36 @@ input {
 input:focus {
   outline: none;
 }
+.namebox{
+  display: flex;
+  justify-content: space-between;
+  border: none;
+  overflow: visible;
+}
+.namebox input{
+  height: 100%;
+  width: calc(50% - 5px);
+  border-radius: 5px;
+  border: 1px solid rgb(199, 199, 199);
+  padding: 0px 10px;
+}
 .emailbox input {
   height: 100%;
   width: 100%;
   border: none;
-  padding-left: 10px;
+  padding:0px 10px;
+}
+.namebox input:focus{
+  border: 1.5px solid var(--primary-color);
+}
+input::placeholder{
+  color: rgb(167, 167, 167);
 }
 .passwordbox input {
   height: 100%;
   width: calc(100% - 2.5rem);
   border: none;
-  padding-left: 10px;
+  padding:0px 10px;
 }
 #login-boxsection {
   width: 100%;
@@ -67,7 +84,7 @@ input:focus {
 #login-box h2 {
   margin: 1rem 0px;
   margin-bottom: 2rem;
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: rgb(68, 68, 68);
   font-weight: normal;
 }
@@ -80,15 +97,16 @@ input:focus {
   margin: 20px;
 }
 #login-page aside h1 {
-  font-size: 4rem;
+  font-size: 3rem;
   margin-bottom: 1rem;
   color: var(--primary-color);
+  font-weight: bolder;
 }
 #login-page aside p {
   font-size: 1.75rem;
   color: #1c1e21;
-  font-family: "Lato", sans-serif;
-  letter-spacing: 1px;
+  font-family: SFProDisplay-Regular, Helvetica, Arial, sans-serif;
+  letter-spacing: normal;
   line-height: 2rem;
 }
 p span {
@@ -104,14 +122,11 @@ p span:hover {
   text-align: center;
 }
 #signup-btn {
- 
   background: linear-gradient(to bottom, #00c000, #169500);
-  
- 
 }
 #eyebox {
-  height: 3rem;
-  width: 3rem;
+  height: 2.4rem;
+  width: 2.4rem;
   background-color: transparent;
   position: absolute;
   top: 0px;
@@ -128,8 +143,8 @@ p span:hover {
   color: rgb(87, 87, 87);
 }
 #loadingimg {
-  height: 2.5rem;
-  width: 2.5rem;
+  height: 2.4rem;
+  width: 2.4rem;
   filter: brightness(90%);
 }
 hr {
@@ -143,12 +158,15 @@ hr {
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
 #google-btn:hover {
-  box-shadow: rgba(90, 90, 90, 0.5) 0px 0px 1px 1px,
-    rgba(90, 90, 90, 0.5) 0px 0px 1px 1px;
+  /* box-shadow: rgba(90, 90, 90, 0.5) 0px 0px 1px 1px,
+    rgba(90, 90, 90, 0.5) 0px 0px 1px 1px; */
+    background-color: #3d3d3d;
+    color: white;
+    box-shadow: none;
 }
 
 #google-icon {
-  height: 24px;
+  height: 1.5rem;
   margin-right: 10px;
 }
 #guest-btn {
@@ -187,10 +205,9 @@ hr {
     margin-bottom: 0px;
   }
   #login-box {
-    width: calc(100vw - 3rem);
+    width: calc(100vw - 2.5rem);
     margin: auto;
-    box-shadow: none;
-    border: 1px solid rgb(192, 192, 192);
+    margin-bottom: 3rem;
   }
 }
 
@@ -218,6 +235,9 @@ hr {
   }
   #login-box {
     margin: auto;
+    margin-bottom: 3rem;
+    width: 440px;
+    
   }
 }
 @media only screen and (min-width: 769px) and (max-width: 1024px) {
@@ -236,4 +256,11 @@ hr {
   #login-page aside {
     padding-left: 20px;
   }
+}
+.toastify-slide-enter {
+  transition: transform 0.1s ease!important;
+}
+
+.toastify-slide-exit {
+  transition: transform 0.1s ease!important;
 }
