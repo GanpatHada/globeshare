@@ -1,0 +1,36 @@
+#main-profile-image{
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: white;
+    margin-right: 40px;
+}
+#profile-header{
+    padding: 20px;
+    padding-bottom: 40px;
+    
+}
+#profile-header img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}   
+#profile-bio > div{
+    display: flex;
+    margin: 20px 0px;
+    
+}
+#profile-bio div > *{
+    margin-right:  20px;
+}
+#profile-bio button{
+    padding: 10px;
+    border-radius: 5px;
+}
+#profile-bio button:hover{
+    background-color: rgb(196, 196, 196);
+}
+#profile-bio section > *{
+    margin: 6px 0px;
+}

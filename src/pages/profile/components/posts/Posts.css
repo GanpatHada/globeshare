@@ -1,0 +1,16 @@
+.user-posts{
+    width: calc(25% - 10px);
+    background-color: pink;
+    aspect-ratio: 1/1;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+#posts-wrapper{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding-left: 10px;
+    padding-top: 10px;
+}

@@ -1,0 +1,27 @@
+#bottom-nav{
+    position: fixed;
+    bottom: 0px;
+    z-index: 1;
+    width: 100vw;
+    height: 50px;
+    display: none;
+    border-top: 1px solid rgb(172, 172, 172);
+}
+#bottom-nav ul{
+    display: flex;
+    justify-content: space-around;
+}
+#bottom-nav ul li{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 50px;
+    font-size: 2rem;
+}
+@media only screen and (max-width: 768px)
+{
+    #bottom-nav{
+        display: block;
+    }
+}

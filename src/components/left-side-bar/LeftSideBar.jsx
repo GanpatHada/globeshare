@@ -1,0 +1,79 @@
+import React from "react";
+import "./LeftSideBar.css";
+import { AiFillHome, AiOutlineSearch, AiOutlineHeart ,AiOutlineMenu} from "react-icons/ai";
+import { MdOutlineExplore } from "react-icons/md";
+import { BsPlusSquare } from "react-icons/bs";
+const LeftSideBar = () => {
+  return (
+    <nav id="left-nav">
+      <h2>globeshare</h2>
+      <ul>
+        <li>
+          <div className="list-items">
+            <div className="nav-icons">
+              <AiFillHome />
+            </div>
+            <span>Home </span>
+          </div>
+        </li>
+        <li>
+          <div className="list-items">
+            <div className="nav-icons">
+              <AiOutlineSearch />
+            </div>
+            <span>Search </span>
+          </div>
+        </li>
+        <li>
+          <div className="list-items">
+            <div className="nav-icons">
+              <MdOutlineExplore />
+            </div>
+            <span>Explore </span>{" "}
+          </div>
+        </li>
+        <li>
+          <div className="list-items">
+            <div className="nav-icons">
+              <BsPlusSquare />
+            </div>
+            <span>Create </span>{" "}
+          </div>
+        </li>
+        <li>
+          <div className="list-items">
+            <div className="nav-icons">
+              <AiOutlineHeart />
+            </div>
+            <span>Likes </span>
+          </div>
+        </li>
+        <li>
+          <div className="list-items">
+        <div id="nav-profile-box" className="nav-icons">
+
+        </div>
+            <span>Profile</span>
+          </div>
+        </li>
+        <li>
+        <div className="list-items" id="more">
+            <div className="nav-icons" >
+            <AiOutlineMenu/>
+            </div>
+            <span>More</span>
+          </div>
+        </li>
+
+       
+      </ul>
+
+      
+         
+       
+      
+    </nav>
+  );
+};
+
+export default LeftSideBar;

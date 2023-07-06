@@ -29,6 +29,9 @@ a{
 a:hover{
   text-decoration: underline;
 }
+li{
+  list-style: none;
+}
 
 hr{
   height: 1px;
