@@ -1,5 +1,5 @@
 .user-posts{
-    width: calc(25% - 10px);
+    width: calc(33.3% - 10px);
     background-color: pink;
     aspect-ratio: 1/1;
     margin-right: 10px;
