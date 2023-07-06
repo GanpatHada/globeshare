@@ -60,6 +60,15 @@
     right: 0px;
     
 }
+#menu-box{
+    position: absolute;
+    bottom: 80px;
+    left: 20px;
+    border: 1px solid lightgray;
+    width: 60%;
+    aspect-ratio:1;
+    transition: all 0.2s ease-in-out;
+}
 @media only screen and (max-width: 768px){
     #left-nav{
         display: none;

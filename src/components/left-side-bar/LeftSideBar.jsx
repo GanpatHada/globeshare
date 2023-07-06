@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./LeftSideBar.css";
 import { AiFillHome, AiOutlineSearch, AiOutlineHeart ,AiOutlineMenu} from "react-icons/ai";
 import { MdOutlineExplore } from "react-icons/md";
 import { BsPlusSquare } from "react-icons/bs";
 const LeftSideBar = () => {
+  const[showBox,setShowBox]=useState(false)
   return (
     <nav id="left-nav">
       <h2>globeshare</h2>
@@ -57,20 +58,17 @@ const LeftSideBar = () => {
           </div>
         </li>
         <li>
-        <div className="list-items" id="more">
+        <div className="list-items" id="more" onClick={()=>setShowBox(!showBox)}>
             <div className="nav-icons" >
             <AiOutlineMenu/>
             </div>
             <span>More</span>
           </div>
         </li>
-
-       
-      </ul>
-
-      
-         
-       
+      </ul>  
+      <div id="menu-box" style={{opacity:showBox?'1':'0'}}>
+          dfgdgdgdgfdgd
+      </div>
       
     </nav>
   );

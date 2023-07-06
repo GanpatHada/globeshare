@@ -4,10 +4,16 @@ import Login from './pages/login/Login';
 import Home from './pages/home/Home';
 
 import BottomNavbar from './components/bottom-navbar/BottomNavbar';
+import EmojiPicker from 'emoji-picker-react';
+import { useState } from 'react';
 
 function App() {
+  
   return (
     <div className="App">
+      {/* <div id="emoji-picker">
+      <EmojiPicker onEmojiClick={(emoji)=>setValue(value.concat(emoji.emoji))} />
+      </div> */}
       {/* <Login/> */}
       <Home />
       {/* <BottomNavbar/> */}

@@ -38,5 +38,12 @@ hr{
   background-color: rgb(221, 221, 221);
   border: none;
 }
+#emoji-picker{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 4;
+}
 
 

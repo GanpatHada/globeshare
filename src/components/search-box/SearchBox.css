@@ -1,0 +1,9 @@
+#search-box{
+    height: 100vh;
+    width: 360px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: orange;
+    z-index: 3;
+}

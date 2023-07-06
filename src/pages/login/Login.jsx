@@ -17,7 +17,7 @@ const Login = () => {
       <aside className="all-centered">
         <Info/>
       </aside>
-      <main>
+      <main id="login-main">
         {page === "login" ? (
           <LoginBox setPage={setPage} />
         ) : (
