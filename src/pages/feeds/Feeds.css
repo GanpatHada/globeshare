@@ -1,5 +1,5 @@
 #feeds-box{
-    width: 100%;
+    flex: 2;
     min-height: 100vh;  
     margin-bottom: 50px;
 }

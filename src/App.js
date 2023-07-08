@@ -8,6 +8,7 @@ import EmojiPicker from 'emoji-picker-react';
 import { useState } from 'react';
 import BackDrop from './components/backdrop/BackDrop';
 import CreatePost from './components/create-post/CreatePost';
+import EditProfile from './pages/edit-profile/EditProfile';
 
 function App() {
   
@@ -18,7 +19,7 @@ function App() {
       </div> */}
       {/* <Login/> */}
       <BackDrop/>
-      <CreatePost/>
+      {/* <CreatePost/> */}
       <Home />
       {/* <BottomNavbar/> */}
     </div>

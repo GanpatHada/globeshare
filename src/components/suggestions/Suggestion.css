@@ -1,0 +1,23 @@
+#suggestion-box{
+    flex: 0.6;
+    margin-top: 72px;
+    height: fit-content;
+    padding: 20px;
+    margin-left: 10px;
+    padding-top: 0px;
+}
+#suggestion-box p{
+    margin: 10px 0px;
+    color: gray;
+    margin-top: 15px;
+}
+#filter-box{
+    height: 50px;
+    width: 150px;
+    position: relative;
+    border: 1px solid lightgray;
+    font-size: 1.2rem;
+}
+#filter-box span{
+    margin-right: 20px;
+}

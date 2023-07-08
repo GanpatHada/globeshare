@@ -6,19 +6,27 @@ import BottomNavbar from "../../components/bottom-navbar/BottomNavbar";
 import Profile from "../profile/Profile";
 import SearchBox from "../../components/search-box/SearchBox";
 import Feeds from "../feeds/Feeds";
+import Suggestion from "../../components/suggestions/Suggestion";
+import EditProfile from "../edit-profile/EditProfile";
+import Followers from "../../components/followers/Followers";
+
+const FeedsList=()=><> <Feeds/>
+<Suggestion/></>
+
 const Home = () => {
   return (
     <div id="home-page">
-      <SearchBox/>
+       <SearchBox/>
       <LeftSideBar />
-      <main id="home-page">
+      <main id="content">
         <div id="main-content">
           {/* <Profile /> */}
-          <Feeds/>
+          {/* <FeedsList/> */}
+          <EditProfile/>
+          <Followers/>
         </div>
       </main>
-      <RightSideBar />
-      <BottomNavbar/>
+      
     </div>
   );
 };

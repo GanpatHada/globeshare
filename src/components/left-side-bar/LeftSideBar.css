@@ -1,6 +1,7 @@
 #left-nav{
     height: 100vh;
-    flex: 0.8;
+    width: 30%;
+    max-width: 300px;
     background-color: white;
     position: relative;
     border-right: 1px solid rgb(194, 194, 194);

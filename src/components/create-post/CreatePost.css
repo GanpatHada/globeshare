@@ -58,7 +58,7 @@
     height: auto;
     position: relative;
 }
-textarea{
+#caption textarea{
     margin-top: 10px;
     resize: none;
     font-size: 1.3rem;

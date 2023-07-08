@@ -1,9 +1,8 @@
 #right-side-bar{
-    flex: 0.8;
+    width: 100%;
     height: 100vh;
-    background-color: white;
-    border-left: 1px solid rgb(194, 194, 194);
-    min-width: 250px;
+    background-color: rgb(255, 255, 255);
+   
 }
 #right-side-bar input{
     display: block;
@@ -18,43 +17,7 @@
     width: 90%;
     margin: auto;
     min-height: calc(100vh - 100px);
-    border: 1px solid rgb(216, 216, 216);
-    border-radius: 5px;
+    border-radius: 5px; 
+    padding: 0px 30px 0px 20px;
     
-}
-.user-basic{
-    width: 100%;
-    height: 80px;
-    padding: 0px 5%;
-    justify-content: space-between;
-}
-.user-basic h6{
-    font-size: 0.8rem;
-    font-weight: 200;
-    color: rgb(126, 126, 126);
-}
-.user-basic-image{
-    height: 50px;
-    width: 50px;
-    background-color: aqua;
-    border-radius: 50%;
-    margin-right: 10px;
-    overflow: hidden;
-}
-.user-basic-image img{
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-}
-.follow-btn{
-    background-color: white;
-    color: var(--primary-color);
-    text-transform: capitalize;
-    letter-spacing: normal;
-    font-weight: bold;
-}
-@media only screen and (max-width: 768px){
-    #right-side-bar{
-        display: none;
-    }
 }
