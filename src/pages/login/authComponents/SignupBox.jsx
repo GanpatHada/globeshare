@@ -4,46 +4,138 @@ import Loading from '../../../images/loading.svg'
 import GoogleButton from './GoogleButton';
 import GuestButton from './GuestButton';
 import { useState } from 'react';
-import { SignupUser, areThereSignupErrors } from './authAssets';
+import { toast } from 'react-toastify';
+import isEmail from 'validator/lib/isEmail';
+import {
+  createUserWithEmailAndPassword,
+  setPersistence,
+  browserLocalPersistence,
+} from "firebase/auth";
+import { auth, db } from "../../../assets/Firebase";
+import { addDoc, collection } from "firebase/firestore";
+import { useNavigate } from 'react-router-dom';
 const SignupBox = ({ setPage }) => {
+    const navigate=useNavigate();
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [showCPassword, setShowCPassword] = useState(false);
     const [signupData, setSignupData] = useState({
-      fname: "",
-      lname: "",
+      username:'',
       email: "",
       password: "",
       cpassword: "",
     });
-    const { email, password, cpassword, fname, lname } = signupData;
-    const handleSignup = async () => {
-      if(areThereSignupErrors(signupData))
-        return 0;
-      SignupUser(signupData,setLoading);
-      
+    const[usernameError,setUsernameError]=useState(false)
+    const { email, password, cpassword, username } = signupData;
+
+
+    const areThereSignupErrors = () => {
+      if (username.length === 0) {
+        toast.warning("Please enter your user name !",{autoClose: 2000});
+        return true;
+      }
+      if (email.length === 0) {
+        toast.warning("Please enter email",{autoClose: 2000});
+        return true;
+      }
+      if (password.length === 0) {
+        toast.warning("Please enter password",{autoClose: 2000});
+        return true;
+      }
+      if (cpassword.length === 0) {
+        toast.warning("Please confirm password",{autoClose: 2000});
+        return true;
+      }
+      if (password.length < 6) {
+        toast.warning("Password should be atleast six characters",{autoClose: 2000});
+        return true;
+      }
+      if (cpassword !== password) {
+        toast.warning("Passwords do no match",{autoClose: 2000});
+        return true;
+      }
+      if(!isEmail(email))
+      {
+        toast.warning("Enter a valid email",{autoClose: 2000});
+        return true;
+      }
+      if(username.trim().includes(" "))
+      {
+        toast.warning("invalid username",{autoClose: 2000});
+        return true;
+      }
+      return false;
     };
+
+
+    const signupUser=async()=>{
+      setLoading(true)
+      try {
+        const {user} = await createUserWithEmailAndPassword(
+          auth,
+          email.trim(),
+          password.trim()
+        );
+        if(user)
+        {
+              await addDoc(collection(db, "users"), {
+              userName:username,
+              profilePhoto:null,
+              followers:[],
+              following:[],
+              likes:[],
+              bio:'i am using globeshare',
+              website:null,
+            });
+            toast.success('Account Created successfully',{autoClose: 2000})
+            navigate('/')        
+        }
+        
+      } catch ({code}) {
+        if(code.includes('auth/email-already-in-use'))
+            toast.error('There is already an account with this email');    
+        else
+           toast.error('Something went wrong !')  
+        return false     
+    
+      } finally {
+        setLoading(false)
+      }
+    }
+    
+
+
+    const handleSignup = async() => {
+      
+      if(!areThereSignupErrors())
+      {
+        return await signupUser()          
+      }   
+      return 0;
+    };
+
+    const handleUserName=e=>{
+      setSignupData({ ...signupData, username: e.target.value })
+      if(e.target.value.trim().includes(" "))
+         return setUsernameError(true);
+      return setUsernameError(false)   
+    }
+
     return (
       <div id="login-box" className="authbox">
         <h2>Signup</h2>
-        <div className="namebox">
+        <div className="namebox"  >
           <input
+            style={{border:usernameError&&'1px solid #c50303'}}
             type="text"
-            value={fname}
-            onChange={(e) =>
-              setSignupData({ ...signupData, fname: e.target.value })
-            }
-            placeholder="Enter First Name"
-          />
-          <input
-            type="text"
-            value={lname}
-            onChange={(e) =>
-              setSignupData({ ...signupData, lname: e.target.value })
-            }
-            placeholder="Enter Last Name"
-          />
+            value={username}
+            onChange={handleUserName}
+            placeholder="Create user name"
+          /> 
         </div>
+         <p style={{color:usernameError&&'#c50303'}} id='username-warning'>username must not contain whitespace</p>
+        
+        
         <div className="emailbox">
           <input
             type="email"

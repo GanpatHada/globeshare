@@ -1,0 +1,42 @@
+#comments-box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%,-50%) ;
+    z-index: 5;
+    width: 50vw;
+    aspect-ratio: 3/2;
+   background-color: white;
+    display: flex;
+    border-radius: 10px;
+    overflow: hidden;
+}
+#comment-image-section{
+    flex: 1.25;
+    background-color: white;
+    border-right: 1px solid lightgrey;
+}
+#comment-image-section img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+#comments{
+    flex: 1;
+   
+}
+#comments > *{
+    padding: 10px;
+    border-bottom: 1px solid lightgray;
+}
+#all-comments{
+    height: calc(100% - 4.5rem - 50px - 3.8rem);
+    overflow: auto;
+    
+}#all-comments::-webkit-scrollbar{
+    display: none;
+}
+#comments-box .feed-comment-box{
+    padding: 0px 10px;
+    border-bottom: 0px;
+}

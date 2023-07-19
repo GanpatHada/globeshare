@@ -23,6 +23,7 @@
   border-radius: 0.6rem;
   padding-bottom: 2rem;
   margin: 2rem 1.2rem;
+  
 }
 
 #login-box > * {
@@ -51,10 +52,21 @@ input:focus {
   justify-content: space-between;
   border: none;
   overflow: visible;
+  position: relative;
+  margin-bottom: 0px!important;
+  
+ 
+}
+#username-warning{
+  margin: 0px!important;
+  font-style: italic;
+  color: rgb(104, 104, 104);
+  padding-left: 10px;
+  
 }
 .namebox input{
   height: 100%;
-  width: calc(50% - 5px);
+  width: 100%;
   border-radius: 5px;
   border: 1px solid rgb(199, 199, 199);
   padding: 0px 10px;

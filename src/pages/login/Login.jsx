@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./Login.css";
-import { ToastContainer,toast,Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import  Info  from "./authComponents/Info";
 import LoginBox from "./authComponents/LoginBox";
@@ -24,13 +23,6 @@ const Login = () => {
           <SignupBox setPage={setPage} />
         )}
       </main>
-      <ToastContainer
-        position={"top-center"} autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={true} closeOnClick={true} rtl={false}
-        pauseOnFocusLoss={true} draggable={false} pauseOnHover={true} theme={"light"}
-        transition={Slide}
-      />
     </div>
   );
 };

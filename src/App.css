@@ -1,12 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato&family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Lato&family=Poppins&display=swap');
 *{
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
+  text-decoration: none;
+  
+}
+img{
+  height: 100%;
+  object-fit: cover;
 }
 
 body{
-  background-color: #f0f2f5
+  background-color: #f0f2f5;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 :root{
   --primary-color:#1877f2;
@@ -14,7 +22,10 @@ body{
 button{
   border: none;
   cursor: pointer;
-  letter-spacing: 0.5px;
+  letter-spacing: normal;
+  background-color: transparent;
+  color: inherit;
+ 
 }
 .all-centered{
   display: flex;
@@ -32,7 +43,6 @@ a:hover{
 li{
   list-style: none;
 }
-
 hr{
   height: 1px;
   background-color: rgb(221, 221, 221);
@@ -45,5 +55,8 @@ hr{
   transform: translate(-50%,-50%);
   z-index: 4;
 }
-
+.Toastify__toast-container {
+  transition-duration: 0.2s!important; /* Adjust the duration to your desired value */
+  transition-timing-function: ease-in-out; /* Adjust the easing function to your desired value */
+}
 

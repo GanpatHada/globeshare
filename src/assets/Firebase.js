@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth } from "firebase/auth";
-// TODO: Replace the following with your app's Firebase project configuration
+import { browserLocalPersistence, getAuth } from "firebase/auth";
+import { getFirestore } from 'firebase/firestore';
+import { getStorage,ref} from "firebase/storage";
 const firebaseConfig = {
     apiKey: "AIzaSyC3tUnl3c7sAiBNMhifeW3bL0Ci6CA1yL0",
     authDomain: "globeshare-bb494.firebaseapp.com",
@@ -12,4 +13,9 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
+export const db=getFirestore(app);
+export const auth = getAuth(app,{
+    persistence: browserLocalPersistence
+  });
+export const storage = getStorage(app);
+export const imageRef=ref(storage);

@@ -4,8 +4,13 @@ import GoogleButton from "./GoogleButton";
 import GuestButton from "./GuestButton";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import Loading from '../../../images/loading.svg'
-import { LoginUser, areThereLoginErrors } from "./authAssets";
+import { toast } from "react-toastify";
+import isEmail from "validator/lib/isEmail";
+import { browserLocalPersistence, setPersistence, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../../assets/Firebase";
+import { useNavigate } from "react-router-dom";
 const LoginBox = ({ setPage }) => {
+  const navigate=useNavigate();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [loginData, setLoginData] = useState({
@@ -13,10 +18,55 @@ const LoginBox = ({ setPage }) => {
     password: "",
   });
   const { email, password } = loginData;
-  const handleLogin = () => {
-    if(areThereLoginErrors(loginData))
-       return false
-    LoginUser(email,password,setLoading)   
+
+
+  const areThereLoginErrors=()=>{
+    if(email.length===0)
+    {
+      toast.warning("Please enter email",{autoClose: 2000});
+      return true;
+    }
+    if(password.length===0)
+    {
+      toast.warning("Please enter password",{autoClose: 2000});
+      return true;
+    }
+    if(!isEmail(email))
+    {
+      toast.warning("Enter a valid email",{autoClose: 2000});
+      return true;
+    }
+    return false
+  
+  }
+  const loginUser=async(email,password)=>{
+    setLoading(true)
+    try {
+      await signInWithEmailAndPassword(
+        auth,
+        email.trim(),
+        password.trim()
+      );
+      toast.success('Logged in successfully',{autoClose: 2000})
+      navigate('/');
+    } catch ({code}) {
+      if(code.includes('user-not-found'))
+          return toast.error('account does not exists with this email');
+      if(code.includes('auth/wrong-password'))
+          return toast.error('Incorrect password');    
+      return toast.error('Something went wrong !')    
+  
+    } finally {
+      setLoading(false)
+    }
+  }
+  const handleLogin = async() => {
+    if(!areThereLoginErrors())
+    {
+        return await loginUser(email,password);
+    }
+    return 0;
+      
   };
   return (
     <div id="login-box" className="authbox">

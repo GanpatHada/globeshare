@@ -12,12 +12,20 @@
     margin-top: 15px;
 }
 #filter-box{
-    height: 50px;
-    width: 150px;
+    height: 40px;
+    width: 130px;
     position: relative;
-    border: 1px solid lightgray;
-    font-size: 1.2rem;
+    /* border: 1px solid lightgray; */
+    font-size: 1rem;
+    background-color: rgb(231, 231, 231);
+    border-radius: 4px;
+    cursor: pointer;
+    background: linear-gradient(to right,rgb(0, 102, 185),skyblue);
+    color: #e9f7ff;
+}
+#funnel{
+    height: 1.5rem;
 }
 #filter-box span{
-    margin-right: 20px;
+    margin-right: 5px;
 }

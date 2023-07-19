@@ -3,7 +3,7 @@
     justify-content: space-between;    
 }
 #main-content{
-    width: 70vw;
+    width: 60vw;
     display: flex;
     max-width: 1020px;
     margin: auto;

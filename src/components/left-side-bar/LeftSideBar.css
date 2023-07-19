@@ -26,6 +26,8 @@
     transition: background 0.2s ease-in-out;
     cursor: pointer;  
     padding-left: 20px;
+    color: rgb(39, 39, 39);
+    font-weight: 500;
 }
 
 .list-items span{
@@ -38,14 +40,16 @@
     font-weight: lighter;
     position: relative;
     top: 3px;
+    color: rgb(36, 36, 36);
 }
 #nav-profile-box{
-    height: 30px;
-    width: 30px;
+    height: 2rem;
+    aspect-ratio: 1;
     border-radius: 50%;
     background-color: gray;
     position: relative;
     top: 0px;
+    overflow: hidden;
 }
 
 .list-items:hover{
@@ -61,14 +65,63 @@
     right: 0px;
     
 }
+#main-logo{
+    width: 70%;
+    margin: 40px auto;
+    margin-left: 35px;
+    cursor: pointer;
+}
+
+#main-logo img{
+    height: 100%;
+    width: 100%;
+}
 #menu-box{
     position: absolute;
     bottom: 80px;
     left: 20px;
-    border: 1px solid lightgray;
+    box-shadow: rgba(180, 180, 180, 0.158) 0px 1px 6px 4px, rgba(180, 180, 180, 0.158) 0px 1px 6px 4px;
     width: 60%;
-    aspect-ratio:1;
+    height: 140px;
     transition: all 0.2s ease-in-out;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    transition: visibility 0.1s, opacity 0.1s linear;
+    overflow: hidden;
+   
+}
+#menu-box ul{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+#menu-box li{
+    flex: 1;
+}
+#menu-box li button{
+    height: 100%;
+    width: 100%;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    justify-content: flex-start;
+    padding-left: 10px;
+   
+}
+#menu-box li button:first-child{
+    margin-top: 0px;
+}
+#menu-box li button:hover{
+    background-color: rgb(231, 231, 231);
+}
+.active {
+    color: black!important;
+    font-weight: bold;
+    
+}
+#left-nav a:hover{
+    text-decoration: none;
 }
 @media only screen and (max-width: 768px){
     #left-nav{
