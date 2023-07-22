@@ -5,23 +5,21 @@ import Home from "./pages/home/Home";
 
 import BottomNavbar from "./components/bottom-navbar/BottomNavbar";
 import EmojiPicker from "emoji-picker-react";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import BackDrop from "./components/backdrop/BackDrop";
 import CreatePost from "./components/create-post/CreatePost";
 import EditProfile from "./pages/edit-profile/EditProfile";
 import { ToastContainer } from "react-toastify";
 import { PrivateRoute } from "./components/private-route/PrivateRoute";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import PageNotFound from "./components/page-not-found/PageNotFound";
 import Loader from "./components/loader/Loader";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./assets/Firebase";
 import Profile from "./pages/profile/Profile";
+import { UserContext } from "./contexts/UserContext";
 
 function App() {
-  
-  
-  
 
   return (
     <div className="App">
@@ -38,12 +36,15 @@ function App() {
         theme={"light"}
       />
       {/* <Loader/> */}
-      <Home/>
-      
+      <Routes>
+          <Route exact path='*' element={<PrivateRoute><Home/></PrivateRoute>}/>
+          <Route exact path='/login' element={<Login/>}/>
+          <Route exact path='/404' element={<PageNotFound/>}/>
+      </Routes>
 
 
         {/* <Login/> */}
-        {/* <BackDrop/> */}
+        <BackDrop/>
         {/* <CreatePost/> */}
 
         {/* <BottomNavbar/> */}

@@ -11,36 +11,28 @@ import EditProfile from "../edit-profile/EditProfile";
 import Followers from "../../components/followers/Followers";
 import Comments from "../../components/comments/Comments";
 import CreatePost from "../../components/create-post/CreatePost";
-import { db } from "../../assets/Firebase";
+import { auth, db } from "../../assets/Firebase";
+import Login from '../login/Login'
 import { collection, getDocs } from "firebase/firestore";
-import { Route, Routes } from "react-router-dom";
-import { Login } from "@mui/icons-material";
+import { Navigate, Route, Routes, useNavigate,useRouteMatch } from "react-router-dom";
 import PageNotFound from "../../components/page-not-found/PageNotFound";
 const FeedsList=()=><> <Feeds/>
 <Suggestion/></>
 
 const Home = () => {
-  useEffect(()=>{
-    (async function getPosts() {
-      const postsCol = collection(db, 'posts');
-      const postSnapshot = await getDocs(postsCol);
-      const postList = postSnapshot.docs.map(doc => doc.data());
-      return console.log(postList);
-    })();
-  })
+  
   return (
-    <div id="home-page">
+     <div id="home-page">
        {/* <SearchBox/> */}
       <LeftSideBar />
       <main id="content">
         <div id="main-content">
           <Routes>
-             <Route exact path="/" element={<FeedsList />} />
-             <Route exact path="/profile" element={<Profile />}>
-                  <Route  path="likes" element={<Profile />} />    
-             </Route>  
-             <Route exact path="/login" element={<Login />} />
-             <Route exact path="*" element={<PageNotFound/>} />
+            <Route  path='/' element={<FeedsList/>}/>
+            <Route  path='/:userId' element={<Profile/>}/>
+            <Route  path='/:userId/likes' element={<Profile/>}/>
+            <Route  path='/:userId/edit' element={<EditProfile/>}/>
+            <Route  path='*' element={<Navigate to='404'/>}/>
           </Routes>
           {/* <Profile /> */}
           {/* <CreatePost/> */}
@@ -51,6 +43,8 @@ const Home = () => {
       </main>
       
     </div>
+    
+    
   );
 };
 

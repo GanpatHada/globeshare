@@ -51,7 +51,9 @@
     top: 0px;
     overflow: hidden;
 }
-
+#logout-btn{
+    border-top: 1px solid rgb(231, 231, 231);
+}
 .list-items:hover{
     background-color: rgb(231, 231, 231);
 }

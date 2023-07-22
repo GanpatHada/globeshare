@@ -59,4 +59,14 @@ hr{
   transition-duration: 0.2s!important; /* Adjust the duration to your desired value */
   transition-timing-function: ease-in-out; /* Adjust the easing function to your desired value */
 }
+.fixed-centered{
+  position: fixed;
+  z-index: 6;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.danger{
+  color: red;
+}
 

@@ -12,7 +12,7 @@ import {
   browserLocalPersistence,
 } from "firebase/auth";
 import { auth, db } from "../../../assets/Firebase";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
 const SignupBox = ({ setPage }) => {
     const navigate=useNavigate();
@@ -78,7 +78,7 @@ const SignupBox = ({ setPage }) => {
         );
         if(user)
         {
-              await addDoc(collection(db, "users"), {
+              await setDoc(doc(db, "users",user.uid), {
               userName:username,
               profilePhoto:null,
               followers:[],
@@ -96,6 +96,7 @@ const SignupBox = ({ setPage }) => {
             toast.error('There is already an account with this email');    
         else
            toast.error('Something went wrong !')  
+        console.log(code)   
         return false     
     
       } finally {

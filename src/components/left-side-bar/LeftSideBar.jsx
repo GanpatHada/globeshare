@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./LeftSideBar.css";
 import {
   AiOutlineHome,
@@ -17,10 +17,11 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../../assets/Firebase";
 import { toast } from "react-toastify";
+import { UserContext } from "../../contexts/UserContext";
 const LeftSideBar = () => {
   const location=useLocation();
   const navigate=useNavigate()
-
+  const{user}=useContext(UserContext)
 
   const [showBox, setShowBox] = useState(false);
 
@@ -88,7 +89,7 @@ const LeftSideBar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to='/profile/likes'>
+          <NavLink to={`/${user.uid}/likes`}>
             <div className="list-items">
               <div className="nav-icons">
                 {isActive('/profile/likes')? <AiFillHeart/>:<AiOutlineHeart />}
@@ -98,7 +99,7 @@ const LeftSideBar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to='/profile'>
+          <NavLink to={`/${user.uid}`}>
             <div className="list-items">
               <div id="nav-profile-box" style={{border:isActive&&'1px solid black'}} className="nav-icons">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR99wz8XtNxseLZm4S3JSf2k2sbgMqhdrGEnQ&usqp=CAU" alt="" />
@@ -124,7 +125,7 @@ const LeftSideBar = () => {
         <ul>
           <li><button className="all-centered">switch appearence</button></li>
           <li><button className="all-centered">switch appearence</button></li>
-          <li><button className="all-centered" onClick={handleLogout}>Logout</button></li>
+          <li><button id="logout-btn" className="all-centered" onClick={handleLogout}>Logout</button></li>
         </ul>
       </div>
     </nav>

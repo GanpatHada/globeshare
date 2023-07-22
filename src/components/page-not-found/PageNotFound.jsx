@@ -10,7 +10,7 @@ const PageNotFound = () => {
             <h5 className='all-centered'>Opps ! Page Not Found</h5>
             <p className='all-centered'>The page you are looking for does not seems to exist</p>
             <div className='all-centered'> 
-                <button onClick={()=>navigate(-1)}>Go Back</button>
+                <button onClick={()=>navigate('/')}>Go Back</button>
             </div>
         </div>
         
