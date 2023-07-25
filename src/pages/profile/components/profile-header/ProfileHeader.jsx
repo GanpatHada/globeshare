@@ -1,28 +1,22 @@
 import React from "react";
 import "./ProfileHeader.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import profile from "../../../../images/profile.png";
 const ProfileHeader = ({ user }) => {
-  const navigate=useNavigate()
-  const {userId}=useParams()
-  const { bio, profilePhoto, userName, followers, following, website } = user;
+  const navigate = useNavigate();
+  const { bio, profilePic, userName, followers, following, website } = user;
   return (
     <header id="profile-header" className="all-centered">
-      
       <div id="main-profile-image">
-        <img
-          src={
-            profilePhoto
-              ? profilePhoto
-              : "https://w0.peakpx.com/wallpaper/979/876/HD-wallpaper-shahrukh-khan-actor-black-bollywood-csk-cute-jannat-king-love-movies-srk-thumbnail.jpg"
-          }
-          alt=""
-        />
+        <img src={profilePic ?? profile} alt="" />
       </div>
-      <div id="profile-bio">
+      <div id="profile-bio"> 
         <div>
           <h2>{userName}</h2>
-          <button onClick={()=>navigate(`/${userId}/edit`)}>Edit Profile</button>
-          <button>Logout</button>
+          <button className="secondary-btn" onClick={() => navigate("edit")}>
+            Edit Profile
+          </button>
+          <button className="secondary-btn">Logout</button>
         </div>
         <div>
           <span>
@@ -36,10 +30,14 @@ const ProfileHeader = ({ user }) => {
           </span>
         </div>
         <section>
-          <p>{bio} Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed possimus cupiditate soluta repellat perspiciatis ipsa</p>
-          <h5>{website} <a href="https://ganpathada.vercel.app" target="_blank">{"https://ganpathada.vercel.app".replace('https://','')}</a> </h5>
+          <p>
+            {bio} 
+          </p>
+          <h5>
+            <a href={website} target="_blank">{website}</a>
+          </h5>
         </section>
-      </div>
+        </div>
     </header>
   );
 };

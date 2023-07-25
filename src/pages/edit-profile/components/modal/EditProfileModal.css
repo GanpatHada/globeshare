@@ -5,16 +5,13 @@
     border-radius: 8px;
     overflow: hidden;
 }
-#edit-profile-modal div:first-child{
+
+#edit-profile-modal > div:first-child{
     outline: 1px solid lightgrey;
 }
 #edit-profile-modal div{
     text-align: center;
-   
-    width: 100%;
-    
-   
-    
+    width: 100%;    
 }
 #edit-profile-modal div button{
     display: block;
@@ -22,6 +19,7 @@
     width: 100%;
     font-family: 'Inter', sans-serif;
     font-weight: bolder;
+     background-color: white;
    
 }
 #edit-profile-modal div button:hover{

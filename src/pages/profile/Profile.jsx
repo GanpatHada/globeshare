@@ -8,33 +8,19 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../assets/Firebase";
 import { useParams } from "react-router-dom";
 import Loader from "../../components/loader/Loader";
+import { useLocation } from 'react-router-dom';
+
+
+
 const Profile = () => {
-  const{userDetails,setUserDetails}=useContext(UserContext)
-  const{userId}=useParams()
-  const fetchUserDetails = async () => {
-    const docRef = doc(db, "users", userId);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      setUserDetails(docSnap.data());
-      console.log(docSnap.data())
-
-    } else {
-      // docSnap.data() will be undefined in this case
-      console.log("No such document!");
-    }
-  };
-  useEffect(() => {
-    fetchUserDetails();
-  }, []);
+  const{userDetails}=useContext(UserContext)
 
   return (
     <div id="profile-page">
-     {userDetails?<>
+     
       <ProfileHeader user={userDetails} />
       <ProfileNav />
       <Posts />
-      </>:<Loader/>}
     </div>
   );
 };

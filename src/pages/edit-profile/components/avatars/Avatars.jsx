@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Avatars.css";
 import av1 from "../../../../images/av-1.png";
 import av2 from "../../../../images/av-2.png";
@@ -10,15 +10,18 @@ import av7 from "../../../../images/av-7.png";
 import av8 from "../../../../images/av-8.jpg";
 import av9 from "../../../../images/av-9.jpg";
 import tick from '../../../../images/tick.svg'
-const Avatars = ({setSelectedImage,selectedImage}) => {
+import { ModalContext } from "../../../../contexts/ModalContext";
+const Avatars = ({updateDetails,setUpdateDetails}) => {
+  const{closeProfileModal}=useContext(ModalContext)
   const avt = [av1, av2, av3, av4, av5, av6, av7, av8, av9];
 
   const handleAvatarClick=(av)=>{
-    setSelectedImage(av)
+    setUpdateDetails({...updateDetails,profilePic:av})
+    closeProfileModal()
   }
   
   //returns index of avatar if it is selcted
-  const curAvSelected=avt.findIndex(a=>a===selectedImage)
+  const curAvSelected=avt.findIndex(a=>a===updateDetails.profilePic)
   
   return (
     <div id="avatars-box">

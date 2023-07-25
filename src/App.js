@@ -1,29 +1,18 @@
-import logo from "./logo.svg";
+
 import "./App.css";
 import Login from "./pages/login/Login";
 import Home from "./pages/home/Home";
-
-import BottomNavbar from "./components/bottom-navbar/BottomNavbar";
-import EmojiPicker from "emoji-picker-react";
-import { useContext, useEffect, useState } from "react";
-import BackDrop from "./components/backdrop/BackDrop";
-import CreatePost from "./components/create-post/CreatePost";
-import EditProfile from "./pages/edit-profile/EditProfile";
 import { ToastContainer } from "react-toastify";
 import { PrivateRoute } from "./components/private-route/PrivateRoute";
-import { Navigate, Route, Routes } from "react-router-dom";
+import {Route, Routes } from "react-router-dom";
 import PageNotFound from "./components/page-not-found/PageNotFound";
-import Loader from "./components/loader/Loader";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./assets/Firebase";
-import Profile from "./pages/profile/Profile";
-import { UserContext } from "./contexts/UserContext";
+
+
 
 function App() {
-
   return (
     <div className="App">
-      <ToastContainer
+        <ToastContainer
         position={"top-center"}
         autoClose={3000}
         hideProgressBar={false}
@@ -35,19 +24,20 @@ function App() {
         pauseOnHover={true}
         theme={"light"}
       />
-      {/* <Loader/> */}
+      
       <Routes>
-          <Route exact path='*' element={<PrivateRoute><Home/></PrivateRoute>}/>
-          <Route exact path='/login' element={<Login/>}/>
-          <Route exact path='/404' element={<PageNotFound/>}/>
+        <Route
+          exact
+          path="*"
+          element={
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute>
+          }
+          />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/404" element={<PageNotFound />} />
       </Routes>
-
-
-        {/* <Login/> */}
-        <BackDrop/>
-        {/* <CreatePost/> */}
-
-        {/* <BottomNavbar/> */}
     </div>
   );
 }

@@ -109,6 +109,8 @@
     font-size: 0.9rem;
     justify-content: flex-start;
     padding-left: 10px;
+    color: rgb(34, 34, 34);
+    letter-spacing: 0.5px;
    
 }
 #menu-box li button:first-child{

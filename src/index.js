@@ -5,15 +5,18 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 import { UserProvider } from "./contexts/UserContext";
+import { ModalProvider } from "./contexts/ModalContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Router>
+    <ModalProvider>
     <UserProvider>
       <React.StrictMode>
         <App />
       </React.StrictMode>
     </UserProvider>
+    </ModalProvider>
   </Router>
 );
 

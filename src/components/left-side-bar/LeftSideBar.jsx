@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import "./LeftSideBar.css";
 import {
   AiOutlineHome,
@@ -18,7 +18,10 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../assets/Firebase";
 import { toast } from "react-toastify";
 import { UserContext } from "../../contexts/UserContext";
+import useClickOutsideHandler from "../../hooks/useClickOutsideHandler";
+import { ModalContext } from "../../contexts/ModalContext";
 const LeftSideBar = () => {
+  const{openCreatePostModal}=useContext(ModalContext)
   const location=useLocation();
   const navigate=useNavigate()
   const{user}=useContext(UserContext)
@@ -35,7 +38,18 @@ const LeftSideBar = () => {
       console.log(error)
     }
   }
-
+  const Menu=()=>{
+    const menuRef=useRef(null)
+    return(
+      <div ref={menuRef} id="menu-box" style={{ visibility: showBox ? 'visible' : 'hidden',opacity:showBox ? '1':'0' }}>
+        <ul>
+          <li><button className="all-centered">Switch appearence</button></li>
+          <li><button className="all-centered">Switch appearence</button></li>
+          <li><button id="logout-btn" className="all-centered" onClick={handleLogout}>Logout</button></li>
+        </ul>
+      </div>
+    )
+  }
   const isActive = (match) => {
     // Add your custom logic here to determine if the NavLink is active
     // For example, you can check the location pathname
@@ -79,7 +93,7 @@ const LeftSideBar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to='/'>
+          <NavLink to='/' onClick={openCreatePostModal}>
             <div className="list-items">
               <div className="nav-icons">
                 {isActive('/')?<BsPlusSquareFill/>:<BsPlusSquare />}
@@ -89,7 +103,7 @@ const LeftSideBar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to={`/${user.uid}/likes`}>
+          <NavLink to={`/profile/likes`}>
             <div className="list-items">
               <div className="nav-icons">
                 {isActive('/profile/likes')? <AiFillHeart/>:<AiOutlineHeart />}
@@ -99,7 +113,7 @@ const LeftSideBar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to={`/${user.uid}`}>
+          <NavLink to={`/profile`}>
             <div className="list-items">
               <div id="nav-profile-box" style={{border:isActive&&'1px solid black'}} className="nav-icons">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR99wz8XtNxseLZm4S3JSf2k2sbgMqhdrGEnQ&usqp=CAU" alt="" />
@@ -121,13 +135,7 @@ const LeftSideBar = () => {
           </div>
         </li>
       </ul>
-      <div id="menu-box" style={{ visibility: showBox ? 'visible' : 'hidden',opacity:showBox ? '1':'0' }}>
-        <ul>
-          <li><button className="all-centered">switch appearence</button></li>
-          <li><button className="all-centered">switch appearence</button></li>
-          <li><button id="logout-btn" className="all-centered" onClick={handleLogout}>Logout</button></li>
-        </ul>
-      </div>
+      <Menu/>
     </nav>
   );
 };

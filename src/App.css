@@ -6,8 +6,13 @@
   text-decoration: none;
   
 }
+.App{
+  height: 100vh;
+  width: 100%;
+}
 img{
   height: 100%;
+  width: 100%;
   object-fit: cover;
 }
 
@@ -15,6 +20,8 @@ body{
   background-color: #f0f2f5;
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
+  width: 100vw;
+  min-height:100vh;
 }
 :root{
   --primary-color:#1877f2;
@@ -24,7 +31,7 @@ button{
   cursor: pointer;
   letter-spacing: normal;
   background-color: transparent;
-  color: inherit;
+  color: white;
  
 }
 .all-centered{
@@ -59,14 +66,34 @@ hr{
   transition-duration: 0.2s!important; /* Adjust the duration to your desired value */
   transition-timing-function: ease-in-out; /* Adjust the easing function to your desired value */
 }
-.fixed-centered{
-  position: fixed;
-  z-index: 6;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-}
+
 .danger{
   color: red;
 }
-
+button label{
+  cursor: pointer;
+  display: block;
+  height: 100%;
+  width: 100%!important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.secondary-btn{
+  color: rgb(31, 31, 31);
+  background-color: rgb(211, 211, 211);
+}
+.primary-btn{
+  color: white;
+  background-color: var(--primary-color);
+}
+.primary-btn:disabled{
+  cursor: not-allowed;
+  color: #d5d5d5;
+  opacity: 0.7;
+}
+.secondary-btn:disabled{
+  color: gray;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
