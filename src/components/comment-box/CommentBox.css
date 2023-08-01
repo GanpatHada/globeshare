@@ -1,0 +1,13 @@
+.emoji-box{
+    position: absolute;
+    z-index: 6;
+    bottom: 325px;
+    right: 55px;
+}
+.feed-comment-box{
+    position: relative;
+}
+.emoji-box{
+    width: 300px;
+    height: 200px;
+}

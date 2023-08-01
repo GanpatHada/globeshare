@@ -1,0 +1,17 @@
+.feed-actions button{
+    color: black;
+    font-size: 1.5rem;
+}
+.feed-actions button:hover{
+    color: rgb(94, 94, 94);
+}
+#outlined-heart {
+    color: black;
+    
+}
+.like-btn{
+    transition: 0.2s ease-in-out;
+}
+.like-btn:hover{
+    transform: scale(1.2);
+}

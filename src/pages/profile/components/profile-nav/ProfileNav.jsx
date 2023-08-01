@@ -1,19 +1,47 @@
-import React from 'react'
-import './ProfileNav.css'
-import { BsGrid3X3,BsBookmarks } from "react-icons/bs";
-import { AiOutlineHeart } from 'react-icons/ai';
-const ProfileNav = () => {
+import React from "react";
+import "./ProfileNav.css";
+import { BsGrid3X3, BsBookmarks } from "react-icons/bs";
+import { AiOutlineHeart } from "react-icons/ai";
+const ProfileNav = ({ setTab,tab }) => {
+  
+  const getMargin=()=>{
+    if(tab==='POSTS')
+       return '0px'
+    if(tab==='LIKES')
+       return '120px'   
+    if(tab==='BOOKMARKS')
+       return '240px'   
+  }
+
   return (
     <nav id="profile-nav">
-       
-        <ul className='all-centered'>
-        <div id="active-nav"></div>
-            <li className='all-centered'> <span><BsGrid3X3/></span> Posts</li>
-            <li className='all-centered'> <span> <AiOutlineHeart /></span>Likes</li>
-            <li className='all-centered'> <span> <BsBookmarks/></span>Saved</li>
-        </ul>
-      </nav>
-  )
-}
+      <ul className="all-centered">
+        <div id="active-nav" style={
+          {
+            marginLeft:getMargin()
+          }
+        }></div>
+        <li className="all-centered">
+          <button onClick={() => setTab("POSTS")}>
+            <span><BsGrid3X3 /></span>
+            Posts
+          </button>
+        </li>
+        <li className="all-centered">
+          <button onClick={() => setTab("LIKES")}>
+            <span><AiOutlineHeart /></span>
+            Likes
+          </button>
+        </li>
+        <li className="all-centered">
+          <button onClick={() => setTab("BOOKMARKS")}>
+            <span><BsBookmarks /></span>
+            Saved
+          </button>
+        </li>
+      </ul>
+    </nav>
+  );
+};
 
-export default ProfileNav
+export default ProfileNav;

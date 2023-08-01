@@ -31,7 +31,7 @@ const EditProfile = () => {
   const [loading, setLoading] = useState(false);
   const { showProfileModal, openProfileModal, closeProfileModal } =
     useContext(ModalContext);
-  const { userDetails, user } = useContext(UserContext);
+  const { userDetails,setUserDetails, user } = useContext(UserContext);
   const [updateDetails, setUpdateDetails] = useState({ ...userDetails });
   const bio = useRef(null);
   useEffect(() => {
@@ -85,6 +85,7 @@ const EditProfile = () => {
           userName: updateDetails.userName,
         });
       }
+      setUserDetails(updateDetails)
       setLoading(false);
       toast.success('Profile updated successfully')
     } catch (error) {

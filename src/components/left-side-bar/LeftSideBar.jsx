@@ -11,7 +11,7 @@ import {
 import {GoHome, GoHomeFill} from 'react-icons/go'
 import {IoSearch, IoSearchOutline} from 'react-icons/io5'
 import { MdExplore, MdOutlineExplore } from "react-icons/md";
-import { BsPlusSquare, BsPlusSquareFill } from "react-icons/bs";
+import { BsBookmarks, BsBookmarksFill, BsPlusSquare, BsPlusSquareFill } from "react-icons/bs";
 import globeshare from "../../images/globeshare.svg";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
@@ -20,14 +20,35 @@ import { toast } from "react-toastify";
 import { UserContext } from "../../contexts/UserContext";
 import useClickOutsideHandler from "../../hooks/useClickOutsideHandler";
 import { ModalContext } from "../../contexts/ModalContext";
+
+
+const Menu=({handleLogout,ref,closeMenu})=>{
+  const menuRef=useRef(null)
+  useClickOutsideHandler(menuRef,closeMenu)
+  return(
+    <div id="menu-box"  ref={menuRef} >
+      <ul>
+        <li><button className="all-centered">Switch appearence</button></li>
+        <li><button className="all-centered">Switch appearence</button></li>
+        <li><button id="logout-btn" className="all-centered" onClick={handleLogout}>Logout</button></li>
+      </ul>
+    </div>
+  )
+}
+
+
+
 const LeftSideBar = () => {
+ 
+  const menuRef=useRef(null)
+  const[expandMenu,setExpandMenu]=useState(false)
   const{openCreatePostModal}=useContext(ModalContext)
   const location=useLocation();
   const navigate=useNavigate()
-  const{user}=useContext(UserContext)
-
+  const{user,userDetails}=useContext(UserContext)
   const [showBox, setShowBox] = useState(false);
-
+  const closeMenu=()=>setExpandMenu(false)
+  console.log(user)
   const handleLogout=async()=>{
     try{
       await signOut(auth);
@@ -38,23 +59,16 @@ const LeftSideBar = () => {
       console.log(error)
     }
   }
-  const Menu=()=>{
-    const menuRef=useRef(null)
-    return(
-      <div ref={menuRef} id="menu-box" style={{ visibility: showBox ? 'visible' : 'hidden',opacity:showBox ? '1':'0' }}>
-        <ul>
-          <li><button className="all-centered">Switch appearence</button></li>
-          <li><button className="all-centered">Switch appearence</button></li>
-          <li><button id="logout-btn" className="all-centered" onClick={handleLogout}>Logout</button></li>
-        </ul>
-      </div>
-    )
-  }
   const isActive = (match) => {
     // Add your custom logic here to determine if the NavLink is active
     // For example, you can check the location pathname
     return location.pathname === match;
   };
+
+  const handleMenuClick=(e)=>{
+     setExpandMenu(!expandMenu)
+  }
+
 
   return (
     <nav id="left-nav">
@@ -113,29 +127,41 @@ const LeftSideBar = () => {
           </NavLink>
         </li>
         <li>
+          <NavLink to={`/profile/likes`}>
+            <div className="list-items">
+              <div className="nav-icons">
+                {isActive('/profile/likes')? <BsBookmarks/>:<BsBookmarksFill />}
+              </div>
+              <span>Bookmarks </span>
+            </div>
+          </NavLink>
+        </li>
+        <li>
           <NavLink to={`/profile`}>
             <div className="list-items">
               <div id="nav-profile-box" style={{border:isActive&&'1px solid black'}} className="nav-icons">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR99wz8XtNxseLZm4S3JSf2k2sbgMqhdrGEnQ&usqp=CAU" alt="" />
+                <img src={userDetails?.profilePic} alt="" />
               </div>
               <span>Profile</span>
             </div>
           </NavLink>
         </li>
         <li>
-          <div
+          <div 
             className="list-items"
             id="more"
-            onClick={() => setShowBox(!showBox)}
+            onClick={handleMenuClick}
           >
             <div className="nav-icons">
               <AiOutlineMenu />
             </div>
-            <span>More</span>
+            <span >More</span>
           </div>
         </li>
       </ul>
-      <Menu/>
+      {
+        expandMenu&&<Menu handleLogout={handleLogout} closeMenu={closeMenu}/>
+      } 
     </nav>
   );
 };

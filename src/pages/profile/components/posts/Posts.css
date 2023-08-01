@@ -1,16 +1,20 @@
-.user-posts{
+#user-posts-image{
     width: calc(33.3% - 10px);
-    background-color: pink;
     aspect-ratio: 1/1;
+    background-color: rgb(157, 216, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
     margin-right: 10px;
     margin-bottom: 10px;
+    overflow: hidden;
+    position: relative;
 }
-#posts-wrapper{
-    width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    padding-left: 10px;
-    padding-top: 10px;
+.more-images-sign{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    height: 40px;
+    width: 40px;
 }

@@ -1,31 +1,78 @@
-import React from 'react'
-import './Comments.css'
-import { FeedActions, FeedHeader, MakeComment } from '../../pages/feeds/components/feed/Feed'
-import User from '../user/User'
-const Comments = () => {
-  return (
-    <div id='comments-box'>
-        <section id="comment-image-section">
-            <img src='https://images.pexels.com/photos/16972014/pexels-photo-16972014/free-photo-of-greenway.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load' alt="" />
-        </section>
-        <section id="comments">
-           <FeedHeader/>
-           <section id="all-comments">
-              <User/>
-              <User/>
-              <User/>
-              <User/>
-              <User/>
-              <User/>
-              <User/>
-              <User/>
-              <User/>
-           </section>
-           <FeedActions/>
-           <MakeComment/>
-        </section>
-    </div>
-  )
-}
+import React, { useContext, useEffect, useState } from "react";
+import "./Comments.css";
 
-export default Comments
+import User from "../user/User";
+import FeedHeader from "../../pages/feeds/components/feed-header/FeedHeader";
+import FeedActions from "../../pages/feeds/components/feed-actions/FeedActions";
+import { MakeComment } from "../../pages/feeds/components/feed/Feed";
+import FeedImage from "../../pages/feeds/components/feed-image/FeedImage";
+import FeedCaption from "../../pages/feeds/components/feed-caption/FeedCaption";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../assets/Firebase";
+import { toast } from "react-toastify";
+import CommentBox from "../comment-box/CommentBox";
+import { PostContext } from "../../contexts/PostContext";
+const EachComments = ({ comment: { comment, userId } }) => {
+  const { setCurrentPost } = useContext(PostContext);
+  const [user, setUser] = useState(null);
+
+  const fetchUserDetails = async () => {
+    try {
+      const docRef = doc(db, "users", userId);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const { profilePic, userName } = docSnap.data();
+        setUser({ profilePic, userName });
+      }
+    } catch (error) {
+      toast.error("Could not fetch Users!");
+    }
+  };
+  useEffect(() => {
+    fetchUserDetails(userId);
+  });
+
+  return (
+    <div className="each-comment">
+      <header>
+        <div className="profile-pic">
+          <img src={user?.profilePic} alt="" />
+        </div>
+        <div>
+          <span>{user?.userName}</span>
+          <div className="comment-text">{comment}after so that the i mean that i am not sure about you that you could be better than i was the greate of that we can </div>
+        </div>
+      </header>
+    </div>
+  );
+};
+
+const Comments = ({ currentPost, posts }) => {
+  const post = posts.find((eachPost) => eachPost.postId === currentPost.postId);
+  const { caption, likes, comments, images, user, time, postId } = post;
+  return (
+    <div id="comments-box">
+      <section id="comment-image-section">
+        <FeedImage images={images} />
+      </section>
+      <section id="comments">
+        <FeedHeader userId={user} time={time} />
+        <FeedCaption caption={caption} post={post} />
+        <section id="all-comments">
+          {comments.map((comment) => {
+            return <EachComments key={comment.commentId} comment={comment} />;
+          })}
+        </section>
+        <FeedActions
+          likes={likes}
+          comments={comments}
+          postId={postId}
+          post={post}
+        />
+        <CommentBox postId={postId} userId={user} />
+      </section>
+    </div>
+  );
+};
+
+export default Comments;

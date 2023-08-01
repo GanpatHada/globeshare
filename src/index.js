@@ -6,15 +6,16 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 import { UserProvider } from "./contexts/UserContext";
 import { ModalProvider } from "./contexts/ModalContext";
+import { PostProvider } from "./contexts/PostContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Router>
     <ModalProvider>
     <UserProvider>
-      <React.StrictMode>
+      <PostProvider>
         <App />
-      </React.StrictMode>
+      </PostProvider>
     </UserProvider>
     </ModalProvider>
   </Router>

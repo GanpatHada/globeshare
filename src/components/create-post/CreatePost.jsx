@@ -1,7 +1,7 @@
 import React, { useContext,useState } from "react";
 import "./CreatePost.css";
 import { toast } from "react-toastify";
-import { collection,addDoc,} from "firebase/firestore";
+import { collection,addDoc, Timestamp,} from "firebase/firestore";
 import { db, storage} from "../../assets/Firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { UserContext } from "../../contexts/UserContext";
@@ -11,9 +11,11 @@ import PreviewImageSection from "./components/preview-image-section/PreviewImage
 import CaptionSection from "./components/caption-section/CaptionSection";
 import CrossButton from "../cross-button/CrossButton";
 import { ModalContext } from "../../contexts/ModalContext";
+import { PostContext } from "../../contexts/PostContext";
 
 const CreatePost = () => {
   const{closeCreatePostModal}=useContext(ModalContext)
+  const{ handleCreatePostInClient}=useContext(PostContext)
   //refs
   //states
   const[loading,setLoading]=useState(false);
@@ -26,9 +28,11 @@ const CreatePost = () => {
 
 
   const handlePostClick = async () => {
+    let postId=null;
+    const imageUrls=[]
     try {
       setLoading(true);
-      const imageUrls=[];
+      
       for(let image of images)
         {
           setLoadingInfo('Uploading Images ...')
@@ -47,18 +51,21 @@ const CreatePost = () => {
                   
         }
         setLoadingInfo('Uploading data')
-        await addDoc(collection(db, "posts"), {
+        const docRef=await addDoc(collection(db, "posts"), {
         user: user.uid,
-        userImage:userDetails.profilePic,
-        userName:userDetails.userName,
         caption:caption,
         images:imageUrls,
         likes:[],
-        comments:[]
+        comments:[],
+        time:Date.now()
       });
+      postId=docRef.id
+      console.log(docRef)
       setLoading(false)
       setLoadingInfo('')
       closeCreatePostModal()
+      handleCreatePostInClient({user:user.uid,caption:caption,images:imageUrls,likes:[],comments:[],time:Date.now(),postId})
+      
       toast.success('Posted Successfully');
     } catch (error) {
         toast.error('Something went wrong!')

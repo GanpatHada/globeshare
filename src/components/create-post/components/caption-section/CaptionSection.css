@@ -36,6 +36,7 @@
 }
 #emoji-btn-main{
     
+    height: 26px;
     border-radius: 50%;
     font-size: 26px;
     color: rgb(119, 119, 119);
@@ -62,4 +63,9 @@
 #post-btn{
     margin: 10px;
     background-color: transparent;
+    filter: contrast(120%);
+    transition: 0.2s ease-in-out;
+}
+#post-btn:disabled{
+    opacity: 0.5;
 }

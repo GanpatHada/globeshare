@@ -26,6 +26,7 @@ const CaptionSection = ({images,handlePostClick,caption,setCaption}) => {
   const closeEmoji = () => setEmojiMove("translateY(0px)");
   const openEmoji = () => setEmojiMove("translateY(300px)");
   
+  const isDisabled=()=>(caption.trim().length===0&&images.length===0)
 
 
   useEffect(() => {
@@ -50,7 +51,7 @@ const CaptionSection = ({images,handlePostClick,caption,setCaption}) => {
           autoFocus={true}
           value={caption}
         />
-        <button onClick={handlePostClick} className="secondary-btn" disabled={caption.trim().length===0&&images.length===0} id="post-btn">
+        <button onClick={handlePostClick} className="secondary-btn" disabled={isDisabled()} id="post-btn">
           <img src={sendImage} alt=".." />
         </button>
       </section>
