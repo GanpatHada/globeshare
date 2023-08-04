@@ -2,22 +2,24 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Profile.css";
 import ProfileHeader from "./components/profile-header/ProfileHeader";
 import ProfileNav from "./components/profile-nav/ProfileNav";
-import MyPosts from "./components/my-posts/MyPosts";
+import MyPosts, { myPosts } from "./components/my-posts/MyPosts";
 import { UserContext } from "../../contexts/UserContext";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../assets/Firebase";
-import { useParams } from "react-router-dom";
-import Loader from "../../components/loader/Loader";
-import { useLocation } from "react-router-dom";
 import MyLikes from "./components/my-likes/MyLikes";
 import MyBookmarks from "./components/my-bookmarks/MyBookmarks";
+import { PostContext } from "../../contexts/PostContext";
 
-const Profile = () => {
-  const { userDetails } = useContext(UserContext);
-  const [tab, setTab] = useState("POSTS");
+const Profile = ({content}) => {
+  const { userDetails,user } = useContext(UserContext);
+  const {posts}=useContext(PostContext)
+  const [tab, setTab] = useState(null);
+  
+  useEffect(()=>{
+      setTab(content)
+  },[content])
+
   return (
     <div id="profile-page">
-      <ProfileHeader user={userDetails} />
+      <ProfileHeader user={userDetails} postsCount={myPosts(posts,user).length} />
       <ProfileNav setTab={setTab} tab={tab} />
       <div id="profile-content">
         {tab === "POSTS" && <MyPosts />}

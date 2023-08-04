@@ -20,6 +20,7 @@ import { toast } from "react-toastify";
 import { UserContext } from "../../contexts/UserContext";
 import useClickOutsideHandler from "../../hooks/useClickOutsideHandler";
 import { ModalContext } from "../../contexts/ModalContext";
+import gs from '../../images/gs-favicon.svg'
 
 
 const Menu=({handleLogout,ref,closeMenu})=>{
@@ -42,7 +43,7 @@ const LeftSideBar = () => {
  
   const menuRef=useRef(null)
   const[expandMenu,setExpandMenu]=useState(false)
-  const{openCreatePostModal}=useContext(ModalContext)
+  const{openCreatePostModal,displayMode,openSearchModal,showSearchModal,closeSearchModal}=useContext(ModalContext)
   const location=useLocation();
   const navigate=useNavigate()
   const{user,userDetails}=useContext(UserContext)
@@ -62,7 +63,8 @@ const LeftSideBar = () => {
   const isActive = (match) => {
     // Add your custom logic here to determine if the NavLink is active
     // For example, you can check the location pathname
-    return location.pathname === match;
+    return match===location.pathname
+    return false;
   };
 
   const handleMenuClick=(e)=>{
@@ -71,91 +73,91 @@ const LeftSideBar = () => {
 
 
   return (
-    <nav id="left-nav">
-      <div id="main-logo">
-        <img src={globeshare} alt="..." />
+    <nav id={displayMode==='PC'?"left-nav":'left-nav-tablet'}>
+      <div id={displayMode==='TABLET'?'main-logo-tablet':"main-logo"}>
+        {displayMode==='PC'?<img src={globeshare} alt="..." />:<img src={gs} alt="..." />}
       </div>
       <ul>
         <li>
           <NavLink to='/'>
-            <div className="list-items" style={{fontWeight:isActive('/')&&'bold'}}>
+            <div className={displayMode==='TABLET'?'list-items-tablet':'list-items'} style={{fontWeight:isActive('/')&&'bold'}}>
               <div className="nav-icons">
                 {isActive('/')?<GoHomeFill />:<GoHome/>}
               </div>
-              <span>Home </span>
+              {displayMode==='PC'&&<span>Home </span>}
             </div>
           </NavLink>
         </li>
         <li>
-          <NavLink to='/'>
-            <div className="list-items">
+          <NavLink to='/' onClick={!showSearchModal?openSearchModal:closeSearchModal}>
+            <div className={displayMode==='TABLET'?'list-items-tablet':'list-items'}>
               <div className="nav-icons">
                 {isActive('/')?<IoSearch/>:<IoSearchOutline />}   
               </div>
-              <span>Search </span>
+              {displayMode==='PC'&&<span>Search </span>}
             </div>
           </NavLink>
         </li>
         <li>
           <NavLink>
-            <div className="list-items">
+            <div className={displayMode==='TABLET'?'list-items-tablet':'list-items'}>
               <div className="nav-icons">
                 {isActive('/')? <MdExplore/>:<MdOutlineExplore />}
               </div>
-              <span>Explore </span>{" "}
+              {displayMode==='PC'&&<span>Explore </span>}
             </div>
           </NavLink>
         </li>
         <li>
           <NavLink to='/' onClick={openCreatePostModal}>
-            <div className="list-items">
+            <div className={displayMode==='TABLET'?'list-items-tablet':'list-items'}>
               <div className="nav-icons">
                 {isActive('/')?<BsPlusSquareFill/>:<BsPlusSquare />}
               </div>
-              <span>Create </span>{" "}
+              {displayMode==='PC'&&<span>Create </span>}
             </div>
           </NavLink>
         </li>
         <li>
           <NavLink to={`/profile/likes`}>
-            <div className="list-items">
+            <div className={displayMode==='TABLET'?'list-items-tablet':'list-items'}>
               <div className="nav-icons">
                 {isActive('/profile/likes')? <AiFillHeart/>:<AiOutlineHeart />}
               </div>
-              <span>Likes </span>
+              {displayMode==='PC'&&<span>Likes </span>}
             </div>
           </NavLink>
         </li>
         <li>
-          <NavLink to={`/profile/likes`}>
-            <div className="list-items">
+          <NavLink to={`/profile/bookmarks`}>
+            <div className={displayMode==='TABLET'?'list-items-tablet':'list-items'}>
               <div className="nav-icons">
-                {isActive('/profile/likes')? <BsBookmarks/>:<BsBookmarksFill />}
+                {isActive('/profile/likes')?<BsBookmarksFill />:<BsBookmarks/>}
               </div>
-              <span>Bookmarks </span>
+              {displayMode==='PC'&&<span>Bookmarks </span>}
             </div>
           </NavLink>
         </li>
         <li>
           <NavLink to={`/profile`}>
-            <div className="list-items">
+            <div className={displayMode==='TABLET'?'list-items-tablet':'list-items'}>
               <div id="nav-profile-box" style={{border:isActive&&'1px solid black'}} className="nav-icons">
                 <img src={userDetails?.profilePic} alt="" />
               </div>
-              <span>Profile</span>
+              {displayMode==='PC'&&<span>Profile</span>}
             </div>
           </NavLink>
         </li>
         <li>
           <div 
-            className="list-items"
+            className={displayMode==='TABLET'?'list-items-tablet':'list-items'}
             id="more"
             onClick={handleMenuClick}
           >
             <div className="nav-icons">
               <AiOutlineMenu />
             </div>
-            <span >More</span>
+            {displayMode==='PC'&&<span >More</span>}
           </div>
         </li>
       </ul>

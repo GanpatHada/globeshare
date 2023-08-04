@@ -1,4 +1,4 @@
-import React, { useContext,useState } from "react";
+import React, { useContext,useEffect,useState } from "react";
 import "./CreatePost.css";
 import { toast } from "react-toastify";
 import { collection,addDoc, Timestamp,} from "firebase/firestore";
@@ -12,6 +12,7 @@ import CaptionSection from "./components/caption-section/CaptionSection";
 import CrossButton from "../cross-button/CrossButton";
 import { ModalContext } from "../../contexts/ModalContext";
 import { PostContext } from "../../contexts/PostContext";
+import { useNavigate } from "react-router-dom";
 
 const CreatePost = () => {
   const{closeCreatePostModal}=useContext(ModalContext)
@@ -23,7 +24,10 @@ const CreatePost = () => {
   const [caption, setCaption] = useState("");
   const[loadingInfo,setLoadingInfo]=useState('')
   const{user,userDetails}=useContext(UserContext)
+  const navigate=useNavigate()
   //fuctions
+   
+
 
 
 
@@ -77,6 +81,8 @@ const CreatePost = () => {
 
 
   }
+
+  
 
   return (
 

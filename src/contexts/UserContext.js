@@ -31,7 +31,7 @@ export function UserProvider({ children }) {
       await updateDoc(userRef, {
         bookmarks:isPostBookmarked(postId)?arrayRemove(postId):arrayUnion(postId)
       });
-      toast.success('Post has been saved')
+      isPostBookmarked(postId)?toast.success('Post has been removed from bookmarks'):toast.success('Post has been saved to bookmarks')
       handleBookmarksInClient(postId);
     } catch (error) {
       console.log(error)

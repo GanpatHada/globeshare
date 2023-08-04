@@ -1,16 +1,23 @@
-.feed .feed-headers{
+.feed-headers{
     
     height: 4.5rem;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    padding: 0px 10px;
 }
-.feed-headers > *{
-    margin: 0px 0.2rem;
+.feed-headers > div:first-child{
+    align-items: center;
+    display: flex;
 }
 .feed-actions{
     height: 3.8rem;
     display: flex;
     justify-content: space-between;
+}
+.feed-headers button{
+    color: black;
+    font-size: 1rem;
 }
 .feed-headers .feed-time{
     font-size: 0.8rem;
@@ -19,6 +26,7 @@
     letter-spacing: 0px;
     color: rgb(145, 145, 145);
     word-spacing: -1px;
+    margin-left: 10px;
 }
 .feed-headers .feed-owner-name{
     font-size: 1rem;

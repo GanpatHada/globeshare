@@ -21,6 +21,9 @@
     font-size: 1.2rem;
     
 }
+#profile-nav li:hover{
+    background-color: whitesmoke;
+}
 #profile-nav li button{
     height: 100%;
     width: 100%;

@@ -1,13 +1,20 @@
-import React, { useState } from 'react'
-import './SearchBox.css'
-import RightSideBar from '../right-side-bar/RightSideBar';
-const SearchBox = () => {
-  const[openSearch,setOpenSearch]=useState(true);
-  return (
-    <div id='search-box' style={{transform:openSearch?'translateX(0px)':'translateX(-360px)'}}>
-        <RightSideBar/>
-    </div>
-  )
-}
+import React, { useContext, useRef, useState } from "react";
+import "./SearchBox.css";
+import useClickOutsideHandler from "../../hooks/useClickOutsideHandler";
+import { ModalContext } from "../../contexts/ModalContext";
 
-export default SearchBox
+const SearchBox = () => {
+  const{closeSearchModal}=useContext(ModalContext)
+  const searchRef=useRef(null)
+  useClickOutsideHandler(searchRef,closeSearchModal)
+  return (
+    <div id="search-box" ref={searchRef}>
+      <header>
+        <h3>Search</h3>
+        <input type="search" placeholder="Search" />
+      </header>
+    </div>
+  );
+};
+
+export default SearchBox;

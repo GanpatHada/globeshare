@@ -40,7 +40,7 @@ const EachComments = ({ comment: { comment, userId } }) => {
         </div>
         <div>
           <span>{user?.userName}</span>
-          <div className="comment-text">{comment}after so that the i mean that i am not sure about you that you could be better than i was the greate of that we can </div>
+          <div className="comment-text">{comment}</div>
         </div>
       </header>
     </div>

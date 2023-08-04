@@ -48,7 +48,6 @@ export function PostProvider({ children }) {
       await updateDoc(postRef, {
         comments:arrayUnion(commentObject)
       });
-      toast.success('commented '+commentObject.comment)
       handleCommentinClient(commentObject,postId)
       setLoading(false)
     } catch (error) {
@@ -71,8 +70,6 @@ export function PostProvider({ children }) {
     setPosts([createdPost,...posts])
   }
   
-  
-
   return (
     <PostContext.Provider
       value={{

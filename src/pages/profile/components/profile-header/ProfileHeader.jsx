@@ -2,7 +2,7 @@ import React from "react";
 import "./ProfileHeader.css";
 import { useNavigate } from "react-router-dom";
 import profile from "../../../../images/profile.png";
-const ProfileHeader = ({ user }) => {
+const ProfileHeader = ({ user,postsCount }) => {
   const navigate = useNavigate();
   const { bio, profilePic, userName, followers, following, website } = user;
   return (
@@ -20,7 +20,7 @@ const ProfileHeader = ({ user }) => {
         </div>
         <div>
           <span>
-            <strong>0</strong> posts
+            <strong>{postsCount}</strong> posts
           </span>
           <span>
             <strong>{followers.length}</strong> followers

@@ -16,6 +16,8 @@ import Modal from "../../components/modal/Modal";
 import { toast } from "react-toastify";
 import { PostContext } from "../../contexts/PostContext";
 import Comments from "../../components/comments/Comments";
+import SearchBox from "../../components/search-box/SearchBox";
+
 const FeedsList = () => (
   <>
     {" "}
@@ -29,7 +31,8 @@ const Home = () => {
     showCreatePostModal,
     showCommentsModal,
     closeCommentsModal,
-    currentPost
+    currentPost,
+    showSearchModal
   }=useContext(ModalContext)
   const { setUserDetails, userDetails, user } = useContext(UserContext);
   const { posts, setPosts } = useContext(PostContext);
@@ -94,14 +97,19 @@ const Home = () => {
                 <Comments currentPost={currentPost} posts={posts} />
               </Modal>
          }
+         {
+          showSearchModal&&
+             <SearchBox/>
+         }
           <LeftSideBar />
           {!loading ?
             <main id="content">
               <div id="main-content">
                 <Routes>
                   <Route path="/" element={<FeedsList />} />
-                  <Route path="/profile" element={<Profile />} />
-                  <Route path="/profile/likes" element={<Profile />} />
+                  <Route path="/profile" element={<Profile content={'POSTS'} />} />
+                  <Route path="/profile/likes" element={<Profile content={'LIKES'} />} />
+                  <Route path="/profile/bookmarks" element={<Profile content={'BOOKMARKS'} />} />
                   <Route path="profile/edit" element={<EditProfile />} />
                   {/* <Route  path='*' element={<Navigate to='404'/>}/> */}
                 </Routes>
