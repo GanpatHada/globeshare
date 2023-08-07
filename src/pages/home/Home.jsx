@@ -17,6 +17,7 @@ import { toast } from "react-toastify";
 import { PostContext } from "../../contexts/PostContext";
 import Comments from "../../components/comments/Comments";
 import SearchBox from "../../components/search-box/SearchBox";
+import EditMenu from "../../components/edit-menu/EditMenu";
 
 const FeedsList = () => (
   <>
@@ -32,7 +33,10 @@ const Home = () => {
     showCommentsModal,
     closeCommentsModal,
     currentPost,
-    showSearchModal
+    showSearchModal,
+    closeEditMenu,
+    showEditMenu,
+    showEditPostModal
   }=useContext(ModalContext)
   const { setUserDetails, userDetails, user } = useContext(UserContext);
   const { posts, setPosts } = useContext(PostContext);
@@ -89,7 +93,7 @@ const Home = () => {
       {user.uid && userDetails?<>
           {showCreatePostModal&&
             <Modal>
-              <CreatePost />
+              <CreatePost mode='CREATE' />
             </Modal>
           }
          {showCommentsModal &&
@@ -100,6 +104,18 @@ const Home = () => {
          {
           showSearchModal&&
              <SearchBox/>
+         }
+         {
+          showEditMenu&&
+          <Modal onClose={closeEditMenu}>
+              <EditMenu posts={posts} currentPost={currentPost}/>
+          </Modal>
+         }
+         {
+          showEditPostModal&&
+          <Modal>
+              <CreatePost mode='EDIT'  />
+          </Modal>
          }
           <LeftSideBar />
           {!loading ?

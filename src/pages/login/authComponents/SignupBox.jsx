@@ -200,7 +200,7 @@ const SignupBox = ({ setPage }) => {
             "Create Account"
           )}
         </button>
-        <GoogleButton />
+        {/* <GoogleButton /> */}
         <hr />
         <p>
           Already have  an account ? 

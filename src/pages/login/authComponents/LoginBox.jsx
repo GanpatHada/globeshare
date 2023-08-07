@@ -107,7 +107,7 @@ const LoginBox = ({ setPage }) => {
       >
         {loading ? <img src={Loading} id="loadingimg" alt="..." /> : "Login"}
       </button>
-      <GoogleButton />
+      
 
       <hr />
       <p>

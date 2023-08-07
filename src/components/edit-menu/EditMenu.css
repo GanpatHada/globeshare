@@ -1,0 +1,14 @@
+#edit-menu{
+    display: flex;
+    flex-direction: column;
+}
+
+#edit-menu button{
+    height: 40px;
+    width: 200px;
+    color: black;
+    border-bottom: 1px solid lightgray;
+}
+#edit-menu button:hover{
+    background-color: whitesmoke;
+}

@@ -1,4 +1,4 @@
-import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { arrayRemove, arrayUnion, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { createContext, useContext, useState } from "react";
 import { db } from "../assets/Firebase";
 import { UserContext } from "./UserContext";
@@ -69,6 +69,31 @@ export function PostProvider({ children }) {
   const handleCreatePostInClient=(createdPost)=>{
     setPosts([createdPost,...posts])
   }
+
+  const handleUpdatePostInClient=(images,caption,currentPost)=>{
+    let tempPosts=posts.map(post=>{
+      if(post.postId===currentPost)
+        return {...post,images:images,caption:caption}
+      return {...post}  
+    })
+    setPosts(tempPosts)
+  }
+
+
+  const deletePostFromServer=async(postId)=>{
+    try {
+      await deleteDoc(doc(db, "posts", postId));
+      deletePostFromClient(postId)
+      toast.success('Post deleted successfully')
+    } catch (error) {
+      toast.error('Something went wrong while deleting')
+    }
+   
+  }
+
+  const deletePostFromClient=postId=>{
+    setPosts(posts.filter(post=>post.postId!==postId))
+  }
   
   return (
     <PostContext.Provider
@@ -79,7 +104,9 @@ export function PostProvider({ children }) {
         handleLikesInServer,
         isLiked,
         handleCommentInServer,
-        handleCreatePostInClient
+        handleCreatePostInClient,
+        deletePostFromServer,
+        handleUpdatePostInClient
       }}
     >
       {children}

@@ -1,12 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./FeedHeader.css";
 import { Timestamp, doc, getDoc } from "firebase/firestore";
 import { db } from "../../../../assets/Firebase";
 import { toast } from "react-toastify";
 import { BsThreeDots } from "react-icons/bs";
-const FeedHeader = ({ userId, time }) => {
+import { ModalContext } from "../../../../contexts/ModalContext";
+const FeedHeader = ({ userId, time , postId }) => {
   const [userBasic, setUserBasic] = useState(null);
   const [timeDifference, setTimeDifference] = useState("");
+  const {setCurrentPost,openEditMenu}=useContext(ModalContext)
+
+  const handleMenuClick=()=>{
+      setCurrentPost(postId);
+      openEditMenu();
+  }
 
   function getDateDifference(startDate, endDate) {
     const seconds = Math.floor(endDate / 1000 - startDate / 1000);
@@ -74,7 +81,7 @@ const FeedHeader = ({ userId, time }) => {
         <div className="feed-time">{`${timeDifference} ago`}</div>
       </div>
       <div>
-        <button>
+        <button onClick={handleMenuClick}>
             <BsThreeDots />
         </button>
       </div>

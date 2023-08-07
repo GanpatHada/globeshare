@@ -3,7 +3,7 @@ import "./CaptionSection.css";
 import { BsEmojiSmile } from "react-icons/bs";
 import EmojiPicker from "emoji-picker-react";
 import sendImage from "../../../../images/send.png";
-const Emoji = ({ setCaption, caption, emojiMove}) => {
+const Emoji = ({ setCaption, caption, emojiMove,}) => {
   return (
     <div className="emoji-picker" style={{ transform: emojiMove }}>
       <EmojiPicker
@@ -15,8 +15,18 @@ const Emoji = ({ setCaption, caption, emojiMove}) => {
   );
 };
 
-const CaptionSection = ({images,handlePostClick,caption,setCaption}) => {
+const CaptionSection = ({images,handlePostClick,caption,setCaption, mode,handlePostEditClick,currentPost}) => {
+
+  const isAnythingUpdated=()=>{
+    let prevCaption=currentPost.caption;
+    let prevImages=currentPost.images;
+    return(caption===prevCaption&&JSON.stringify(prevImages)===JSON.stringify(images))
+  }
+
+
   const textAreaRef=useRef(null)
+  
+  
   const [emojiMove, setEmojiMove] = useState("translateY(300px)");
   const handleTextareaChange = (e) => {
     setCaption(e.target.value);
@@ -27,11 +37,16 @@ const CaptionSection = ({images,handlePostClick,caption,setCaption}) => {
   const openEmoji = () => setEmojiMove("translateY(300px)");
   
   const isDisabled=()=>(caption.trim().length===0&&images.length===0)
-
+  
+  const setHeightOfCaptionInput=()=>{
+    if(mode==='EDIT')
+         return textAreaRef.current.style.height = textAreaRef.current.scrollHeight + "px";
+    return  textAreaRef.current.style.height = "42px";
+  }
 
   useEffect(() => {
-    textAreaRef.current.style.height = "42px";
-  }, [textAreaRef]);
+       setHeightOfCaptionInput()
+  }, []);
   return (
     <>
       <Emoji emojiMove={emojiMove} setCaption={setCaption} caption={caption} />
@@ -51,9 +66,12 @@ const CaptionSection = ({images,handlePostClick,caption,setCaption}) => {
           autoFocus={true}
           value={caption}
         />
-        <button onClick={handlePostClick} className="secondary-btn" disabled={isDisabled()} id="post-btn">
+        {
+          mode==='EDIT'?<button onClick={handlePostEditClick} disabled={isAnythingUpdated()} id="edit-btn" className="primary-btn">EDIT</button>:<button onClick={handlePostClick} className="secondary-btn" disabled={isDisabled()} id="post-btn">
           <img src={sendImage} alt=".." />
         </button>
+        }
+        
       </section>
     </>
   );

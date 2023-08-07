@@ -29,3 +29,16 @@
 #filter-box span{
     margin-right: 5px;
 }
+#filter-modal{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    position: absolute;
+    top: 45px;
+    left: 0px;
+}
+#filter-modal button{
+    height: 40px;
+    width: 200px;
+    color: black;
+    background-color: white;
+    border-bottom: 1px solid lightgray;
+}

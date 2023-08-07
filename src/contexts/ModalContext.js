@@ -5,22 +5,30 @@ export function ModalProvider({ children }) {
   //states here
   const [showCreatePostModal, setShwoCreatePostModal] = useState(false);
   const [currentPost, setCurrentPost] = useState(null);
-
   const [displayMode, setDisplayMode] = useState("PC");
-
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showCommentsModal, setShowCommentsModal] = useState(false);
+  const [showSearchModal, setShowSearchModal] = useState(false);
+  const [showEditMenu, setShowEditMenu] = useState(false);
+  const [showEditPostModal,setShowEditPostModal]=useState(false)
 
-  const [showSearchModal, setShowSearchModal] = useState(true);
 
   const openCreatePostModal = () => setShwoCreatePostModal(true);
   const closeCreatePostModal = () => setShwoCreatePostModal(false);
+  
+  const openEditPostModal = () => setShowEditPostModal(true);
+  const closeEditPostModal = () => setShowEditPostModal(false);
+
+
 
   const openProfileModal = () => setShowProfileModal(true);
   const closeProfileModal = () => setShowProfileModal(false);
 
   const openCommentsModal = () => setShowCommentsModal(true);
   const closeCommentsModal = () => setShowCommentsModal(false);
+
+  const openEditMenu = () => setShowEditMenu(true);
+  const closeEditMenu = () => setShowEditMenu(false);
 
   const openSearchModal = () => {
     setShowSearchModal(true);
@@ -30,6 +38,8 @@ export function ModalProvider({ children }) {
     setShowSearchModal(false);
     setDisplayMode("PC");
   };
+
+
 
   return (
     <ModalContext.Provider
@@ -50,6 +60,12 @@ export function ModalProvider({ children }) {
         openSearchModal,
         closeSearchModal,
         showSearchModal,
+        openEditMenu,
+        closeEditMenu,
+        showEditMenu,
+        openEditPostModal,
+        closeEditPostModal,
+        showEditPostModal
       }}
     >
       {children}

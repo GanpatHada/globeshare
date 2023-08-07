@@ -1,0 +1,34 @@
+import React, { useContext, useRef } from 'react'
+import useClickOutsideHandler from '../../hooks/useClickOutsideHandler'
+import { ModalContext} from '../../contexts/ModalContext'
+import {PostContext} from '../../contexts/PostContext'
+import './EditMenu.css'
+const EditMenu = ({currentPost,posts}) => { 
+  const{deletePostFromServer}=useContext(PostContext)
+  const{openEditPostModal,setCurrentPost}=useContext(ModalContext)
+
+  const handlePostDelete=(postId)=>{
+    closeEditMenu()
+    deletePostFromServer(postId)
+
+  }
+
+  const handlePostEdit=(postId)=>{
+    closeEditMenu()
+    setCurrentPost(postId)
+    openEditPostModal();
+  }
+
+  const{closeEditMenu}=useContext(ModalContext)  
+  const editMenuRef=useRef(null)  
+  useClickOutsideHandler(editMenuRef,closeEditMenu)  
+  return (
+    <div id='edit-menu' ref={editMenuRef}>
+        <button onClick={()=>handlePostEdit(currentPost)}>Edit</button>
+        <button onClick={()=>handlePostDelete(currentPost)}>Delete</button>
+        <button>Cancel</button>
+    </div>
+  )
+}
+
+export default EditMenu

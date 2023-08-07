@@ -25,7 +25,7 @@ const Feed = ({post}) => {
   return (
     <>
     <div className="feed">
-      <FeedHeader userId={user} time={time}  />
+      <FeedHeader userId={user} time={time} postId={postId}  />
       <FeedImage images={images} />
       <FeedActions likes={likes} comments={comments} postId={postId} post={post} />
       <div className="feed-info-wrapper">
