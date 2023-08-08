@@ -48,15 +48,16 @@ const EachComments = ({ comment: { comment, userId } }) => {
 };
 
 const Comments = ({ currentPost, posts }) => {
-  const post = posts.find((eachPost) => eachPost.postId === currentPost.postId);
+  console.log(currentPost)
+  const post = posts.find((eachPost) => eachPost.postId === currentPost);
   const { caption, likes, comments, images, user, time, postId } = post;
   return (
     <div id="comments-box">
-      <section id="comment-image-section">
+      {images.length>0&&<section id="comment-image-section">
         <FeedImage images={images} />
-      </section>
+      </section>}
       <section id="comments">
-        <FeedHeader userId={user} time={time} />
+        <FeedHeader userId={user} time={time} postId={currentPost} />
         <FeedCaption caption={caption} post={post} />
         <section id="all-comments">
           {comments.map((comment) => {

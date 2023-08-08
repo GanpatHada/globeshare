@@ -78,6 +78,7 @@ const CreatePost = ({ mode}) => {
         images:imageUrls,
         caption,
       });
+      toast.success('Post edited successfully')
       handleUpdatePostInClient(imageUrls,caption,currentPost)
     } catch (error) {
       toast.error("Something went wrong!");

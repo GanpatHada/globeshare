@@ -1,12 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, {useRef} from 'react'
 import './Modal.css'
-import useClickOutsideHandler from '../../hooks/useClickOutsideHandler'
 const Modal = ({children,onClose}) => {
-  const modalRef=useRef(null)
-  useClickOutsideHandler(modalRef,onClose) 
+  
+  // useClickOutsideHandler(modalRef,onClose) 
+  const handleOutsideClick=(e)=>{
+    if(onClose)
+    onClose()
+  }
+
   return (
-    <div id='backdrop' className='all-centered'>
-        <div id="modal" ref={modalRef}>
+    <div id='backdrop' className='all-centered' onClick={handleOutsideClick}>
+        <div id="modal" onClick={e=>e.stopPropagation()}>
          {children}
         </div>
     </div>

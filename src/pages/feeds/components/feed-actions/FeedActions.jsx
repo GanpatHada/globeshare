@@ -25,7 +25,7 @@ const FeedActions = ({postId,post}) => {
   }
   
   const handleCommentsModal=()=>{
-    setCurrentPost(post)
+    setCurrentPost(postId)
     openCommentsModal()
   }
 

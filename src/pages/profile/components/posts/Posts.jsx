@@ -8,7 +8,7 @@ const Posts = ({ myPost }) => {
   const{setCurrentPost,openCommentsModal}=useContext(ModalContext)
 
   const handlePostClick=()=>{
-      setCurrentPost(myPost);
+      setCurrentPost(myPost.postId);
       openCommentsModal()
   }
   

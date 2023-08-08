@@ -9,7 +9,7 @@ const FeedCaption = ({caption,postId}) => {
   let post=posts.find(post=>post.postId===postId)
 
   const handleCommentsModal=()=>{
-    setCurrentPost(post);
+    setCurrentPost(postId);
     openCommentsModal();
   }
   return (

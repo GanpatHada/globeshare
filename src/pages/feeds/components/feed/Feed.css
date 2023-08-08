@@ -1,93 +1,9 @@
 .feed{
     width: 100%;
-    border-top: 1px solid rgb(189, 189, 189);
+   
 }
 .feed:first-child{
     border-top: 0px;
 }
 
-.feed-actions ul{
-    display: flex;
-}
-.feed-actions ul li{
-    display: block;
-    height: 100%;
-    width: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-}
-.caption p{
-    font-size: 1rem;
-}
-.feed-owner-image{
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background-color: gray;
-    margin: 0px 0.8rem!important;
-    overflow: hidden;
-}
-#fill-heart-icon{
-    color: red;
-}
 
-.feed-comment-box{
-    height: 50px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-    
-}
-.feed-comment-box input{
-    height: 100%;
-    width: calc(100% - 50px);   
-    border: none;
-    padding: 0px 20px 0px 0px;
-}
-.view-all-comments-btn{
-    background-color: transparent;
-    color: rgb(156, 156, 156);
-    font-size: 0.9rem;
-}
-.caption{
-    margin: 10px 0px;
-    margin-bottom: 0px;
-    font-size: 1.2rem;
-}
-.show-more{
-    background-color: transparent;
-    color: var(--primary-color);
-    font-size: 0.9rem;
-}
-.emoji-btn{
-    height: 100%;
-    width: 50px;
-    font-size: 1.5rem;
-    background-color: white;
-    color: black;
-}
-.post-btn{
-    height: 80%;
-    width: 80px;
-    font-size: 1rem;
-    background-color: transparent;
-    color: var(--primary-color);
-    text-transform: capitalize;    
-}
-.post-btn img{
-    height: 25px;
-    width: 25px;
-    
-}
-
-.post-btn:disabled{
-    color: #1876f275;
-    cursor: not-allowed;
-}
-.feed-info-wrapper{
-    padding:0px 10px;
-}

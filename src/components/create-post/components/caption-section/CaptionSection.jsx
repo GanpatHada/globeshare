@@ -37,16 +37,16 @@ const CaptionSection = ({images,handlePostClick,caption,setCaption, mode,handleP
   const openEmoji = () => setEmojiMove("translateY(300px)");
   
   const isDisabled=()=>(caption.trim().length===0&&images.length===0)
-  
-  const setHeightOfCaptionInput=()=>{
-    if(mode==='EDIT')
-         return textAreaRef.current.style.height = textAreaRef.current.scrollHeight + "px";
-    return  textAreaRef.current.style.height = "42px";
-  }
 
-  useEffect(() => {
-       setHeightOfCaptionInput()
-  }, []);
+  const setCaptionHieght=()=>{
+    if(mode==='EDIT')
+    {
+      return textAreaRef.current.style.height = textAreaRef.current.scrollHeight + "px";
+    }
+  }
+  useEffect(()=>{
+     setCaptionHieght()
+  },[mode])
   return (
     <>
       <Emoji emojiMove={emojiMove} setCaption={setCaption} caption={caption} />

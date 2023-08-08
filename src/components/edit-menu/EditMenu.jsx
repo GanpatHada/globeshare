@@ -5,10 +5,11 @@ import {PostContext} from '../../contexts/PostContext'
 import './EditMenu.css'
 const EditMenu = ({currentPost,posts}) => { 
   const{deletePostFromServer}=useContext(PostContext)
-  const{openEditPostModal,setCurrentPost}=useContext(ModalContext)
+  const{openEditPostModal,setCurrentPost,closeCommentsModal}=useContext(ModalContext)
 
   const handlePostDelete=(postId)=>{
     closeEditMenu()
+    closeCommentsModal()
     deletePostFromServer(postId)
 
   }

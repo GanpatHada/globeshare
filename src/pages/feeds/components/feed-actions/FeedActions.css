@@ -2,6 +2,28 @@
     color: black;
     font-size: 1.5rem;
 }
+
+.feed-actions ul{
+    display: flex;
+}
+.feed-actions ul li{
+    display: block;
+    height: 100%;
+    width: fit-content;
+    margin-right: 30px;
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+#fill-heart-icon{
+    color: red;
+}
+
+.feed-actions ul li:last-child{
+    justify-content: flex-end;
+    margin-right: 0px;
+}
 .feed-actions button:hover{
     color: rgb(94, 94, 94);
 }

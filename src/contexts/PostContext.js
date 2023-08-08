@@ -9,6 +9,7 @@ export function PostProvider({ children }) {
   //states here
   const{user}=useContext(UserContext)
   const [posts, setPosts] = useState([]);
+  const [postFilter,setPostFilter]=useState('LATEST-FIRST')
   const handleLikesInServer=async(postId,action)=>{
       try {
         const postRef = doc(db, "posts", postId );
@@ -106,7 +107,8 @@ export function PostProvider({ children }) {
         handleCommentInServer,
         handleCreatePostInClient,
         deletePostFromServer,
-        handleUpdatePostInClient
+        handleUpdatePostInClient,
+        postFilter,setPostFilter
       }}
     >
       {children}
