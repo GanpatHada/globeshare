@@ -3,18 +3,26 @@
     height: 80px;
     justify-content: space-between;
 }
-.user-basic h6{
+.user-basic h4{
+    font-family: 'Inter';
     font-size: 0.8rem;
+    font-weight: bold;
+}
+.user-basic h6{
+    
+    font-size: 0.75rem;
     font-weight: 200;
     color: rgb(126, 126, 126);
 }
 .user-basic-image{
     height: 50px;
     width: 50px;
-    background-color: aqua;
     border-radius: 50%;
     margin-right: 10px;
     overflow: hidden;
+}
+.user-basic-info{
+    margin-right: 10px;
 }
 .user-basic-image img{
     height: 100%;
@@ -22,9 +30,9 @@
     object-fit: cover;
 }
 .follow-btn{
-    background-color: white;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     color: var(--primary-color);
-    text-transform: capitalize;
     letter-spacing: normal;
-    font-weight: bold;
+    font-weight: 800; 
+    padding: 5px;
 }

@@ -31,10 +31,10 @@ const ProfileHeader = ({ user,postsCount }) => {
         </div>
         <section>
           <p>
-            {bio} 
+            {bio}
           </p>
           <h5>
-            <a href={website} target="_blank">{website}</a>
+            <a href={website} rel="noreferrer" target="_blank">{website?.replace(/^Https:\/\//i,"").replace(/\/$/, '')}</a>
           </h5>
         </section>
         </div>

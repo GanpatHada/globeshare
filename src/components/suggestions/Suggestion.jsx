@@ -1,4 +1,4 @@
-import React, {useContext, useRef, useState } from "react";
+import React, {useContext, useEffect, useRef, useState } from "react";
 import "./Suggestion.css";
 import funnel from "../../images/funnel.svg";
 import User from "../user/User";
@@ -6,6 +6,7 @@ import useClickOutsideHandler from "../../hooks/useClickOutsideHandler";
 import tick from '../../images/tick.svg'
 import { PostContext } from "../../contexts/PostContext";
 import { toast } from "react-toastify";
+import { UserContext } from "../../contexts/UserContext";
 
 const FilterModal = ({closeFilterModal}) => {
 
@@ -27,10 +28,15 @@ const FilterModal = ({closeFilterModal}) => {
 
 const Suggestion = () => {
   const[showFilterModal,setShowFilterModal]=useState(false)
-
+  const {getSomeRandomUsers,randomUsers}=useContext(UserContext)
   const closeFilterModal=()=>setShowFilterModal(false)
 
   const openFilterModal=()=>setShowFilterModal(true)
+ 
+  useEffect(()=>{
+    getSomeRandomUsers();
+  },[])
+
   return (
     <div id="suggestion-box" >
       <section id="filter-box" className="all-centered" onClick={openFilterModal}>
@@ -41,11 +47,11 @@ const Suggestion = () => {
         {showFilterModal&&<FilterModal closeFilterModal={closeFilterModal}/>}
       </section>
       <p>suggested for you</p>
-      <User type="followers" />
-      <User type="followers" />
-      <User type="followers" />
-      <User type="followers" />
-      <User type="followers" />
+      {
+        randomUsers.map(user=>{
+          return <User type="followers" key={user.userId} userInfo={user} />
+        })
+      }
     </div>
   );
 };

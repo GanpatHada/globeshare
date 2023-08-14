@@ -83,6 +83,7 @@ const SignupBox = ({ setPage }) => {
               profilePhoto:null,
               followers:[],
               following:[],
+              bookmarks:[],
               likes:[],
               bio:'i am using globeshare',
               website:null,

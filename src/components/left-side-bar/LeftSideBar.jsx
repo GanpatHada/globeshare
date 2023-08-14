@@ -21,7 +21,7 @@ import { UserContext } from "../../contexts/UserContext";
 import useClickOutsideHandler from "../../hooks/useClickOutsideHandler";
 import { ModalContext } from "../../contexts/ModalContext";
 import gs from '../../images/gs-favicon.svg'
-
+import defaultProfile from '../../images/profile.png'
 
 const Menu=({handleLogout,ref,closeMenu})=>{
   const menuRef=useRef(null)
@@ -141,8 +141,8 @@ const LeftSideBar = () => {
         <li>
           <NavLink to={`/profile`}>
             <div className={displayMode==='TABLET'?'list-items-tablet':'list-items'}>
-              <div id="nav-profile-box" style={{border:isActive&&'1px solid black'}} className="nav-icons">
-                <img src={userDetails?.profilePic} alt="" />
+              <div id="nav-profile-box" className="nav-icons">
+                <img src={userDetails?.profilePic?userDetails.profilePic:defaultProfile} alt="" />
               </div>
               {displayMode==='PC'&&<span>Profile</span>}
             </div>
