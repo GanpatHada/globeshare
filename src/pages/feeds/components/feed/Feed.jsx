@@ -17,10 +17,12 @@ import CommentBox from "../../../../components/comment-box/CommentBox";
 import Modal from "../../../../components/modal/Modal";
 import Comments from "../../../../components/comments/Comments";
 import { ModalContext } from "../../../../contexts/ModalContext";
+import { UserContext } from "../../../../contexts/UserContext";
 
 
 
 const Feed = ({post}) => {
+  const {user:{uid}}=useContext(UserContext)
   const {caption,likes,comments,images,user,time,postId}=post;
   return (
     <>
@@ -31,7 +33,7 @@ const Feed = ({post}) => {
       <div className="feed-info-wrapper">
       <p className="feed-likes">{likes.length} likes</p>
       <FeedCaption caption={caption} postId={postId}/>
-      <CommentBox postId={postId} userId={user} />
+      <CommentBox postId={postId} userId={uid} />
       </div>
     </div>
     </>

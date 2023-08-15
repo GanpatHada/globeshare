@@ -21,7 +21,6 @@ import { PostContext } from "../../contexts/PostContext";
 import { useNavigate } from "react-router-dom";
 
 const CreatePost = ({ mode}) => {
-  console.log(mode)
   const { closeCreatePostModal, closeEditPostModal, currentPost } =
     useContext(ModalContext);
   const { handleCreatePostInClient,handleUpdatePostInClient,posts} = useContext(PostContext);

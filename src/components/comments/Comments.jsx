@@ -12,6 +12,8 @@ import { db } from "../../assets/Firebase";
 import { toast } from "react-toastify";
 import CommentBox from "../comment-box/CommentBox";
 import { PostContext } from "../../contexts/PostContext";
+import { UserContext } from "../../contexts/UserContext";
+import defaultProfile from '../../images/profile.png'
 const EachComments = ({ comment: { comment, userId } }) => {
   const { setCurrentPost } = useContext(PostContext);
   const [user, setUser] = useState(null);
@@ -21,8 +23,8 @@ const EachComments = ({ comment: { comment, userId } }) => {
       const docRef = doc(db, "users", userId);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        const { profilePic, userName } = docSnap.data();
-        setUser({ profilePic, userName });
+        const { profilePhoto, userName } = docSnap.data();
+        setUser({ profilePhoto, userName });
       }
     } catch (error) {
       toast.error("Could not fetch Users!");
@@ -36,7 +38,7 @@ const EachComments = ({ comment: { comment, userId } }) => {
     <div className="each-comment">
       <header>
         <div className="profile-pic">
-          <img src={user?.profilePic} alt="" />
+          <img src={user?.profilePhoto??defaultProfile} alt="" />
         </div>
         <div>
           <span>{user?.userName}</span>
@@ -48,7 +50,7 @@ const EachComments = ({ comment: { comment, userId } }) => {
 };
 
 const Comments = ({ currentPost, posts }) => {
-  console.log(currentPost)
+  const{user:{uid}}=useContext(UserContext)
   const post = posts.find((eachPost) => eachPost.postId === currentPost);
   const { caption, likes, comments, images, user, time, postId } = post;
   return (
@@ -70,7 +72,7 @@ const Comments = ({ currentPost, posts }) => {
           postId={postId}
           post={post}
         />
-        <CommentBox postId={postId} userId={user} />
+        <CommentBox postId={postId} userId={uid} />
       </section>
     </div>
   );
