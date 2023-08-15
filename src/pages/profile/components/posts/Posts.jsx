@@ -26,7 +26,7 @@ const Posts = ({ myPost }) => {
       {myPost.images.length > 0 ? (
          <span><img src={myPost.images[0]} alt="..." /></span>
       ) : (
-        <span>{myPost.caption}</span>
+        <span className="post-caption">{myPost.caption}</span>
       )}
     </section>
   );

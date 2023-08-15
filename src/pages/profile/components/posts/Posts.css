@@ -51,7 +51,9 @@
 .like-comment-box >*{
     margin: 10px;
 }
-
+.post-caption{
+    margin: 0px 20px;
+}
 .like-comment-box > span > *:first-child{
     position: relative;
     top: 5px;

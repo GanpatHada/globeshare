@@ -11,7 +11,7 @@ import { db, storage } from "../../assets/Firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
+import { v4 as uuid } from 'uuid'
 export const getPreview = (updateDetails) => {
   if (!updateDetails.profilePhoto) return profile;
   if (typeof updateDetails.profilePhoto === "object")
@@ -53,7 +53,7 @@ const EditProfile = () => {
         image = await response.blob();
       }
 
-      const storageRef = ref(storage, `${image.name}`);
+      const storageRef = ref(storage,uuid() );
       const snapshot = await uploadBytes(storageRef, image);
       const downloadUrl = await getDownloadURL(snapshot.ref);
 

@@ -22,6 +22,9 @@
     padding-left: 20px;
     padding-right: 20px;
 }
+.nav-active{
+    font-weight: bold!important;
+}
 .list-items{
     height: 50px;
     width: 90%;
@@ -157,11 +160,7 @@
 #menu-box li button:hover{
     background-color: rgb(231, 231, 231);
 }
-.active {
-    color: black!important;
-    font-weight: bold;
-    
-}
+
 #left-nav a:hover{
     text-decoration: none;
 }

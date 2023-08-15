@@ -7,12 +7,13 @@ import { UserContext } from "../../contexts/UserContext";
 import MyLikes from "./components/my-likes/MyLikes";
 import MyBookmarks from "./components/my-bookmarks/MyBookmarks";
 import { PostContext } from "../../contexts/PostContext";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../assets/Firebase";
 import { toast } from "react-toastify";
 
 const Profile = ({ content }) => {
+  const location=useLocation();
   const [tab, setTab] = useState(null);
   const [userProfile, setUserProfile] = useState(null);
   const { userId } = useParams();
@@ -37,7 +38,7 @@ const Profile = ({ content }) => {
 
   useEffect(() => {
     fetchUserProfile();
-  },[]);
+  },[location.pathname]);
 
   return (
     <div id="profile-page">

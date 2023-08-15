@@ -4,7 +4,7 @@ import defaultProfile from '../../images/profile.png'
 import { UserContext } from '../../contexts/UserContext'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-const User = ({userInfo}) => {
+const User = ({userInfo,noRelation}) => {
   const {userDetails,followUser,unFollowUser,followBackUser}=useContext(UserContext)
   const navigate=useNavigate()
   const getUserRelationToMe=()=>{
@@ -47,9 +47,9 @@ const User = ({userInfo}) => {
             <h6>{userInfo.userName}</h6>
           </div>
         </div>
-        <div>
+        {!noRelation&&<div>
           <button className='follow-btn' onClick={handleUserRelationClick}>{getUserRelationToMe()}</button>
-        </div>
+        </div>}
       </div>
   )
 }
