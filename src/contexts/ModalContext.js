@@ -12,6 +12,10 @@ export function ModalProvider({ children }) {
   const [showEditMenu, setShowEditMenu] = useState(false);
   const [showEditPostModal,setShowEditPostModal]=useState(false)
 
+  const [showFollowersModal,setShowFollowersModal]=useState(false)
+
+  const openFollowersModal=()=>setShowFollowersModal(true)
+  const closeFollowersModal=()=>setShowFollowersModal(false)
 
   const openCreatePostModal = () => setShwoCreatePostModal(true);
   const closeCreatePostModal = () => setShwoCreatePostModal(false);
@@ -65,7 +69,10 @@ export function ModalProvider({ children }) {
         showEditMenu,
         openEditPostModal,
         closeEditPostModal,
-        showEditPostModal
+        showEditPostModal,
+        openFollowersModal,
+        closeFollowersModal,
+        showFollowersModal
       }}
     >
       {children}

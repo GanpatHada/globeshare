@@ -1,9 +1,4 @@
-import React, {
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "./EditProfile.css";
 import { UserContext } from "../../contexts/UserContext";
 import profile from "../../images/profile.png";
@@ -11,27 +6,25 @@ import { ModalContext } from "../../contexts/ModalContext";
 import EditProfileModal from "./components/modal/EditProfileModal";
 import Modal from "../../components/modal/Modal";
 import Loader from "../../components/loader/Loader";
-import {
-  getDownloadURL,
-  ref,
-  uploadBytes,
-} from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { db, storage } from "../../assets/Firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export const getPreview = (updateDetails) => {
-  if (!updateDetails.profilePic) return profile;
-  if (typeof updateDetails.profilePic === "object")
-    return URL.createObjectURL(updateDetails.profilePic);
-  return updateDetails.profilePic;
+  if (!updateDetails.profilePhoto) return profile;
+  if (typeof updateDetails.profilePhoto === "object")
+    return URL.createObjectURL(updateDetails.profilePhoto);
+  return updateDetails.profilePhoto;
 };
 
 const EditProfile = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const { showProfileModal, openProfileModal, closeProfileModal } =
     useContext(ModalContext);
-  const { userDetails,setUserDetails, user } = useContext(UserContext);
+  const { userDetails, setUserDetails, user } = useContext(UserContext);
   const [updateDetails, setUpdateDetails] = useState({ ...userDetails });
   const bio = useRef(null);
   useEffect(() => {
@@ -51,23 +44,23 @@ const EditProfile = () => {
   };
 
   const handleUpdateProfile = async () => {
-    const { profilePic } = updateDetails;
+    const { profilePhoto } = updateDetails;
     try {
       setLoading(true);
-      let image = profilePic;
+      let image = profilePhoto;
       if (typeof image === "string") {
-        const response = await fetch(profilePic);
+        const response = await fetch(profilePhoto);
         image = await response.blob();
       }
 
-      const storageRef = ref(storage, "profilePic");
+      const storageRef = ref(storage, "profilePhoto");
       const snapshot = await uploadBytes(storageRef, image);
       const downloadUrl = await getDownloadURL(snapshot.ref);
 
       const userRef = doc(db, "users", user.uid);
-      if (downloadUrl !== userDetails.profilePic) {
+      if (downloadUrl !== userDetails.profilePhoto) {
         await updateDoc(userRef, {
-          profilePic: downloadUrl,
+          profilePhoto: downloadUrl,
         });
       }
       if (updateDetails.bio !== userDetails.bio) {
@@ -85,14 +78,13 @@ const EditProfile = () => {
           userName: updateDetails.userName,
         });
       }
-      setUserDetails(updateDetails)
+      setUserDetails(updateDetails);
       setLoading(false);
-      toast.success('Profile updated successfully')
+      toast.success("Profile updated successfully");
     } catch (error) {
       toast.error("Something went wrong!");
     } finally {
       setLoading(false);
-      
     }
   };
 
@@ -119,7 +111,7 @@ const EditProfile = () => {
                   <strong>{userDetails?.userName}</strong>
                   <div>
                     <button id="profile-image-btn" onClick={openProfileModal}>
-                      {updateDetails?.profilePic ? "Change" : "Add"} profile
+                      {updateDetails?.profilePhoto ? "Change" : "Add"} profile
                       photo
                     </button>
                   </div>
@@ -189,7 +181,7 @@ const EditProfile = () => {
               <button
                 className="profile-btns secondary-btn"
                 id="can-btn"
-                disabled={isDetailsUpdated()}
+                onClick={() => navigate(-1)}
               >
                 Cancel
               </button>

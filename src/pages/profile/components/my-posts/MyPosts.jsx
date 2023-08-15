@@ -4,15 +4,14 @@ import "./MyPosts.css";
 import { UserContext } from "../../../../contexts/UserContext";
 import Posts from '../../components/posts/Posts'
 
-export const myPosts = (posts,user) => posts.filter((post) => post.user === user.uid);
+export const myPosts = (posts,user) => posts.filter((post) => post.user === user);
 
-const MyPosts = () => {
+const MyPosts = ({userProfile:{userId}}) => {
   const { posts } = useContext(PostContext);
-  const { user } = useContext(UserContext);
   
   return (
     <div className="posts-wrapper">
-      {myPosts(posts,user).map((myPost) => {
+      {myPosts(posts,userId).map((myPost) => {
         return (
          <Posts myPost={myPost}/>
         )

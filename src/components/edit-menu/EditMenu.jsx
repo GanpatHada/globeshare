@@ -5,7 +5,7 @@ import {PostContext} from '../../contexts/PostContext'
 import './EditMenu.css'
 const EditMenu = ({currentPost,posts}) => { 
   const{deletePostFromServer}=useContext(PostContext)
-  const{openEditPostModal,setCurrentPost,closeCommentsModal}=useContext(ModalContext)
+  const{openEditPostModal,setCurrentPost,closeCommentsModal,closeEditMenu}=useContext(ModalContext)
 
   const handlePostDelete=(postId)=>{
     closeEditMenu()
@@ -19,15 +19,13 @@ const EditMenu = ({currentPost,posts}) => {
     setCurrentPost(postId)
     openEditPostModal();
   }
-
-  const{closeEditMenu}=useContext(ModalContext)  
   const editMenuRef=useRef(null)  
   useClickOutsideHandler(editMenuRef,closeEditMenu)  
   return (
     <div id='edit-menu' ref={editMenuRef}>
         <button onClick={()=>handlePostEdit(currentPost)}>Edit</button>
         <button onClick={()=>handlePostDelete(currentPost)}>Delete</button>
-        <button>Cancel</button>
+        <button onClick={()=>closeEditMenu()}>Cancel</button>
     </div>
   )
 }

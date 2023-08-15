@@ -46,20 +46,11 @@ const LeftSideBar = () => {
   const{openCreatePostModal,displayMode,openSearchModal,showSearchModal,closeSearchModal}=useContext(ModalContext)
   const location=useLocation();
   const navigate=useNavigate()
-  const{user,userDetails}=useContext(UserContext)
+  const{user,userDetails,logOut}=useContext(UserContext)
   const [showBox, setShowBox] = useState(false);
   const closeMenu=()=>setExpandMenu(false)
   console.log(user)
-  const handleLogout=async()=>{
-    try{
-      await signOut(auth);
-      toast.success('Logged out successfully')
-      navigate('/login')
-    }
-    catch(error){
-      console.log(error)
-    }
-  }
+  
   const isActive = (match) => {
     // Add your custom logic here to determine if the NavLink is active
     // For example, you can check the location pathname
@@ -119,7 +110,7 @@ const LeftSideBar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to={`/profile/likes`}>
+          <NavLink to={`/profile/${user.uid}/likes`}>
             <div className={displayMode==='TABLET'?'list-items-tablet':'list-items'}>
               <div className="nav-icons">
                 {isActive('/profile/likes')? <AiFillHeart/>:<AiOutlineHeart />}
@@ -129,7 +120,7 @@ const LeftSideBar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to={`/profile/bookmarks`}>
+          <NavLink to={`/profile/${user.uid}/bookmarks`}>
             <div className={displayMode==='TABLET'?'list-items-tablet':'list-items'}>
               <div className="nav-icons">
                 {isActive('/profile/likes')?<BsBookmarksFill />:<BsBookmarks/>}
@@ -139,10 +130,10 @@ const LeftSideBar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to={`/profile`}>
+          <NavLink to={`/profile/${user.uid}`}>
             <div className={displayMode==='TABLET'?'list-items-tablet':'list-items'}>
               <div id="nav-profile-box" className="nav-icons">
-                <img src={userDetails?.profilePic?userDetails.profilePic:defaultProfile} alt="" />
+                <img src={userDetails?.profilePhoto?userDetails.profilePhoto:defaultProfile} alt="" />
               </div>
               {displayMode==='PC'&&<span>Profile</span>}
             </div>
@@ -162,7 +153,7 @@ const LeftSideBar = () => {
         </li>
       </ul>
       {
-        expandMenu&&<Menu handleLogout={handleLogout} closeMenu={closeMenu}/>
+        expandMenu&&<Menu handleLogout={logOut} closeMenu={closeMenu}/>
       } 
     </nav>
   );

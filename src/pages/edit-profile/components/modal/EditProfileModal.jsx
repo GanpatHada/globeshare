@@ -13,7 +13,7 @@ const EditProfileModal = ({updateDetails,setUpdateDetails}) => {
   const { closeProfileModal } = useContext(ModalContext);
   const handlePhotoUpload = (e) => {
     const file = e.target.files[0];
-    setUpdateDetails({...updateDetails,profilePic:file});
+    setUpdateDetails({...updateDetails,profilePhoto:file});
     closeProfileModal();
 
   };
@@ -55,7 +55,7 @@ const EditProfileModal = ({updateDetails,setUpdateDetails}) => {
           updateDetails={updateDetails} setUpdateDetails={setUpdateDetails}
         />
       </div>
-      {userDetails?.profilePic && (
+      {userDetails?.profilePhoto && (
         <div>
           <button className="danger">Remove Current photo</button>
         </div>

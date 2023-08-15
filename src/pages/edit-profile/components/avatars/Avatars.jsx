@@ -16,12 +16,12 @@ const Avatars = ({updateDetails,setUpdateDetails}) => {
   const avt = [av1, av2, av3, av4, av5, av6, av7, av8, av9];
 
   const handleAvatarClick=(av)=>{
-    setUpdateDetails({...updateDetails,profilePic:av})
+    setUpdateDetails({...updateDetails,profilePhoto:av})
     closeProfileModal()
   }
   
   //returns index of avatar if it is selcted
-  const curAvSelected=avt.findIndex(a=>a===updateDetails.profilePic)
+  const curAvSelected=avt.findIndex(a=>a===updateDetails.profilePhoto)
   
   return (
     <div id="avatars-box">

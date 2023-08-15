@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./ProfileNav.css";
 import { BsGrid3X3, BsBookmarks } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
-const ProfileNav = ({ setTab,tab }) => {
-  
+import { UserContext } from "../../../../contexts/UserContext";
+const ProfileNav = ({ setTab,tab,userProfile:{userId}}) => {
+  const{user}=useContext(UserContext)
   const getMargin=()=>{
     if(tab==='POSTS')
        return '0px'
@@ -27,18 +28,18 @@ const ProfileNav = ({ setTab,tab }) => {
             Posts
           </button>
         </li>
-        <li className="all-centered">
+        {user.uid===userId&&<li className="all-centered">
           <button onClick={() => setTab("LIKES")}>
             <span><AiOutlineHeart /></span>
             Likes
           </button>
-        </li>
-        <li className="all-centered">
+        </li>}
+        {user.uid===userId&&<li className="all-centered">
           <button onClick={() => setTab("BOOKMARKS")}>
             <span><BsBookmarks /></span>
             Saved
           </button>
-        </li>
+        </li>}
       </ul>
     </nav>
   );

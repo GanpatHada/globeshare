@@ -18,6 +18,7 @@ import { PostContext } from "../../contexts/PostContext";
 import Comments from "../../components/comments/Comments";
 import SearchBox from "../../components/search-box/SearchBox";
 import EditMenu from "../../components/edit-menu/EditMenu";
+import Followers from '../../components/followers/Followers'
 
 const FeedsList = () => (
   <>
@@ -36,8 +37,11 @@ const Home = () => {
     showSearchModal,
     closeEditMenu,
     showEditMenu,
-    showEditPostModal
-  }=useContext(ModalContext)
+    showEditPostModal,
+    openFollowersModal,
+    closeFollowersModal,
+    showFollowersModal,
+  } = useContext(ModalContext);
   const { setUserDetails, userDetails, user } = useContext(UserContext);
   const { posts, setPosts } = useContext(PostContext);
   const [loading, setLoading] = useState(false);
@@ -90,54 +94,61 @@ const Home = () => {
   }, [user]);
   return (
     <div id="home-page">
-      {user.uid && userDetails?<>
-          {showCreatePostModal&&
+      {user.uid && userDetails ? (
+        <>
+          {showCreatePostModal && (
             <Modal>
-              <CreatePost mode='CREATE' />
+              <CreatePost mode="CREATE" />
             </Modal>
-          }
-         {showCommentsModal &&
-              <Modal onClose={closeCommentsModal}>
-                <Comments currentPost={currentPost} posts={posts} />
-              </Modal>
-         }
-         {
-          showSearchModal&&
-             <SearchBox/>
-         }
-         {
-          showEditMenu&&
-          <Modal onClose={closeEditMenu}>
-              <EditMenu posts={posts} currentPost={currentPost}/>
-          </Modal>
-         }
-         {
-          showEditPostModal&&
-          <Modal>
-              <CreatePost mode='EDIT'  />
-          </Modal>
-         }
+          )}
+          {showCommentsModal && (
+            <Modal onClose={closeCommentsModal}>
+              <Comments currentPost={currentPost} posts={posts} />
+            </Modal>
+          )}
+          {showSearchModal && <SearchBox />}
+          {showEditMenu && (
+            <Modal onClose={closeEditMenu}>
+              <EditMenu posts={posts} currentPost={currentPost} />
+            </Modal>
+          )}
+          {showEditPostModal && (
+            <Modal>
+              <CreatePost mode="EDIT" />
+            </Modal>
+          )}
+          
           <LeftSideBar />
-          {!loading ?
+          {!loading ? (
             <main id="content">
               <div id="main-content">
                 <Routes>
                   <Route path="/" element={<FeedsList />} />
-                  <Route path="/profile" element={<Profile content={'POSTS'} />} />
-                  <Route path="/profile/likes" element={<Profile content={'LIKES'} />} />
-                  <Route path="/profile/bookmarks" element={<Profile content={'BOOKMARKS'} />} />
+                  <Route
+                    path="/profile/:userId"
+                    element={<Profile content={"POSTS"} />}
+                  />
+                  <Route
+                    path="/profile/:userId/likes"
+                    element={<Profile content={"LIKES"} />}
+                  />
+                  <Route
+                    path="/profile/:userId/bookmarks"
+                    element={<Profile content={"BOOKMARKS"} />}
+                  />
                   <Route path="profile/edit" element={<EditProfile />} />
                   {/* <Route  path='*' element={<Navigate to='404'/>}/> */}
                 </Routes>
-                {/* <Profile /> */}
-                {/* <CreatePost/> */}
-                {/* <EditProfile/> */}
-                {/* <Followers/> */}
-                {/* <Comments/> */}
+                
               </div>
-            </main>:<Loader info={loadingInfo} />}
-        </>:
-        <Loader info={loadingInfo} />}
+            </main>
+          ) : (
+            <Loader info={loadingInfo} />
+          )}
+        </>
+      ) : (
+        <Loader info={loadingInfo} />
+      )}
     </div>
   );
 };

@@ -4,11 +4,14 @@ import { Timestamp, doc, getDoc } from "firebase/firestore";
 import { db } from "../../../../assets/Firebase";
 import { toast } from "react-toastify";
 import { BsThreeDots } from "react-icons/bs";
+import defaultProfile from '../../../../images/profile.png'
 import { ModalContext } from "../../../../contexts/ModalContext";
+import { UserContext } from "../../../../contexts/UserContext";
 const FeedHeader = ({ userId, time , postId }) => {
   const [userBasic, setUserBasic] = useState(null);
   const [timeDifference, setTimeDifference] = useState("");
   const {setCurrentPost,openEditMenu}=useContext(ModalContext)
+  const {user}=useContext(UserContext);
 
   const handleMenuClick=()=>{
       setCurrentPost(postId);
@@ -59,6 +62,7 @@ const FeedHeader = ({ userId, time , postId }) => {
       } else {
         toast.error("Something went wrong a!");
       }
+      console.log(docSnap.data())
     } catch (error) {
       toast.error("something went wrong b");
     }
@@ -73,7 +77,7 @@ const FeedHeader = ({ userId, time , postId }) => {
     <header className="feed-headers">
       <div>
         <div className="feed-owner-image">
-          <img src={userBasic?.profilePic} alt="" />
+          <img src={userBasic?.profilePhoto?userBasic.profilePhoto:defaultProfile} alt="" />
         </div>
         <div className="feed-owner-name">
           <h5>{userBasic?.userName}</h5>
@@ -82,7 +86,7 @@ const FeedHeader = ({ userId, time , postId }) => {
       </div>
       <div>
         <button onClick={handleMenuClick}>
-            <BsThreeDots />
+            {userId===user.uid&&<BsThreeDots />}
         </button>
       </div>
     </header>

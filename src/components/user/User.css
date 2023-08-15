@@ -7,7 +7,10 @@
     font-family: 'Inter';
     font-size: 0.8rem;
     font-weight: bold;
+    cursor: pointer;
+    height: 15px;
 }
+
 .user-basic h6{
     
     font-size: 0.75rem;

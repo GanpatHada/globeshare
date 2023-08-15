@@ -3,9 +3,10 @@ import './User.css'
 import defaultProfile from '../../images/profile.png'
 import { UserContext } from '../../contexts/UserContext'
 import { toast } from 'react-toastify'
-const User = ({type,userInfo}) => {
+import { useNavigate } from 'react-router-dom'
+const User = ({userInfo}) => {
   const {userDetails,followUser,unFollowUser,followBackUser}=useContext(UserContext)
-
+  const navigate=useNavigate()
   const getUserRelationToMe=()=>{
     const{followers,following}=userDetails;
     if((!followers.includes(userInfo.userId))&&(!following.includes(userInfo.userId)))   
@@ -30,6 +31,9 @@ const User = ({type,userInfo}) => {
      if(action==='Message')
         return toast.warning('Messenging services will start shortly')    
   }
+  const handleUserClick=()=>{
+     navigate(`/profile/${userInfo.userId}`)
+  }
 
   useEffect(()=>{
     getUserRelationToMe()
@@ -37,10 +41,10 @@ const User = ({type,userInfo}) => {
   return (
     <div className="user-basic all-centered">
         <div className="all-centered">
-          <div className="user-basic-image"><img src={userInfo.profilePic?userInfo.profilePic:defaultProfile} alt="..." /></div>
+          <div className="user-basic-image"><img src={userInfo.profilePhoto??defaultProfile} alt="..." /></div>
           <div className="user-basic-info">
-            <h4>{userInfo.userName}</h4>
-            <h6>followed by xyz</h6>
+            <h4 onClick={handleUserClick}>{userInfo.userName}</h4>
+            <h6>{userInfo.userName}</h6>
           </div>
         </div>
         <div>

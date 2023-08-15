@@ -1,11 +1,13 @@
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
 import { auth, db } from "../assets/Firebase";
 import { arrayRemove, arrayUnion, collection, doc, getDocs, limit, query, updateDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export const UserContext = createContext();
 export function UserProvider({ children }) {
+  const navigate=useNavigate()
   //states here
   const [user,setUser]=useState({});
   const [randomUsers,setRandomUsers]=useState([])
@@ -115,13 +117,25 @@ export function UserProvider({ children }) {
     }
   }
 
+  const logOut=async()=>{
+      try{
+        await signOut(auth);
+        toast.success('Logged out successfully')
+        navigate('/login')
+      }
+      catch(error){
+        console.log(error)
+      }
+    }
+  
+
 
 
   return (
     <UserContext.Provider
       value={{
         user,
-        userDetails,setUserDetails,handleBookmarkInServer,isPostBookmarked,getSomeRandomUsers,randomUsers,followUser,unFollowUser,followBackUser
+        userDetails,setUserDetails,handleBookmarkInServer,isPostBookmarked,getSomeRandomUsers,randomUsers,followUser,unFollowUser,followBackUser,logOut
       }}
     >
       {children}

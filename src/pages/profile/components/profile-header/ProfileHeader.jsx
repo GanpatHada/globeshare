@@ -1,43 +1,75 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import "./ProfileHeader.css";
 import { useNavigate } from "react-router-dom";
 import profile from "../../../../images/profile.png";
-const ProfileHeader = ({ user,postsCount }) => {
+import { ModalContext } from "../../../../contexts/ModalContext";
+import { PostContext } from "../../../../contexts/PostContext";
+import { UserContext } from "../../../../contexts/UserContext";
+import Followers from "../../../../components/followers/Followers";
+import Modal from "../../../../components/modal/Modal";
+const ProfileHeader = ({ userProfile }) => {
+  const { posts } = useContext(PostContext);
+  const { user, logOut } = useContext(UserContext);
   const navigate = useNavigate();
-  const { bio, profilePic, userName, followers, following, website } = user;
+  const { bio, profilePhoto, userName, followers, following, website, userId } =userProfile;
+  const { openFollowersModal, closeFollowersModal, showFollowersModal } = useContext(ModalContext);
+  const postsCount = () => posts.filter((post) => post.user === userId).length;
+  const [modalFor, setModalFor] = useState(null);
+
+  const handleFollowersClick = (modalFor) => {
+    
+    setModalFor(modalFor);
+    openFollowersModal();
+  };
   return (
     <header id="profile-header" className="all-centered">
+      {showFollowersModal && (
+        <Modal onClose={closeFollowersModal}>
+          <Followers modalFor={modalFor} userProfile={userProfile} />
+        </Modal>
+      )}
       <div id="main-profile-image">
-        <img src={profilePic ?? profile} alt="" />
+        <img src={profilePhoto ?? profile} alt="" />
       </div>
-      <div id="profile-bio"> 
+      <div id="profile-bio">
         <div>
           <h2>{userName}</h2>
-          <button className="secondary-btn" onClick={() => navigate("edit")}>
-            Edit Profile
-          </button>
-          <button className="secondary-btn">Logout</button>
+          {user.uid === userId && (
+            <>
+              <button
+                className="secondary-btn"
+                onClick={() => navigate("/profile/edit")}
+              >
+                Edit Profile
+              </button>
+              <button className="secondary-btn" onClick={logOut}>
+                Logout
+              </button>
+            </>
+          )}
         </div>
         <div>
+          <span><strong>{postsCount()}</strong> posts</span>
           <span>
-            <strong>{postsCount}</strong> posts
+            <span onClick={()=>handleFollowersClick('followers')}>
+              <strong>{followers.length}</strong> followers
+            </span>
           </span>
           <span>
-            <strong>{followers.length}</strong> followers
-          </span>
-          <span>
-            <strong>{following.length}</strong> following
+            <span onClick={()=>handleFollowersClick('following')}>
+              <strong>{following.length} </strong>following
+            </span>
           </span>
         </div>
         <section>
-          <p>
-            {bio}
-          </p>
+          <p>{bio}</p>
           <h5>
-            <a href={website} rel="noreferrer" target="_blank">{website?.replace(/^Https:\/\//i,"").replace(/\/$/, '')}</a>
+            <a href={website} rel="noreferrer" target="_blank">
+              {website?.replace(/^Https:\/\//i, "").replace(/\/$/, "")}
+            </a>
           </h5>
         </section>
-        </div>
+      </div>
     </header>
   );
 };
