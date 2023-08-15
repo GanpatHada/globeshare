@@ -33,7 +33,7 @@ const Feed = ({post}) => {
       <div className="feed-info-wrapper">
       <p className="feed-likes">{likes.length} likes</p>
       <FeedCaption caption={caption} postId={postId}/>
-      <CommentBox postId={postId} userId={uid} />
+      <CommentBox postId={postId} userId={uid}/>
       </div>
     </div>
     </>
