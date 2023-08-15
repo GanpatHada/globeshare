@@ -53,7 +53,7 @@ const EditProfile = () => {
         image = await response.blob();
       }
 
-      const storageRef = ref(storage, "profilePhoto");
+      const storageRef = ref(storage, `${image.name}`);
       const snapshot = await uploadBytes(storageRef, image);
       const downloadUrl = await getDownloadURL(snapshot.ref);
 

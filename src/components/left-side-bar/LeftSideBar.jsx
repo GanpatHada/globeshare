@@ -133,7 +133,7 @@ const LeftSideBar = () => {
           <NavLink to={`/profile/${user.uid}`}>
             <div className={displayMode==='TABLET'?'list-items-tablet':'list-items'}>
               <div id="nav-profile-box" className="nav-icons">
-                <img src={userDetails?.profilePhoto?userDetails.profilePhoto:defaultProfile} alt="" />
+                <img src={userDetails?.profilePhoto??defaultProfile} alt="" />
               </div>
               {displayMode==='PC'&&<span>Profile</span>}
             </div>
