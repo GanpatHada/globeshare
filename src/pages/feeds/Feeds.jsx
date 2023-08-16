@@ -2,9 +2,8 @@ import React, { useContext } from 'react'
 import './Feeds.css'
 import Feed from './components/feed/Feed'
 import { PostContext } from '../../contexts/PostContext'
-const Feeds = () => {
+const Feeds = ({explore}) => {
   const{posts,postFilter}=useContext(PostContext)
-  
   const filteredPosts=()=>{
     let tempPosts=posts
     if(postFilter==='LATEST-FIRST')
