@@ -15,7 +15,7 @@ const CommentBox = ({postId,userId}) => {
     const[loading,setLoading]=useState(false)
     const handleComment=()=>{
        handleCommentInServer(comment,uuid(),userId,postId,setLoading)
-     
+       setComment('')
     }
     const closeEmoji=()=>setEmojiOpen(false)
     useClickOutsideHandler(emojiRef,closeEmoji)

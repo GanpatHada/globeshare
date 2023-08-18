@@ -68,7 +68,8 @@ export function UserProvider({ children }) {
   }
 
 
-  const followBackUser=async(userId)=>{
+  const followBackUser=async(userId,setLoading)=>{
+    setLoading(true)
     try {
       const myRef = doc(db, "users", user.uid );
       const userRef = doc(db, "users", userId );
@@ -79,14 +80,21 @@ export function UserProvider({ children }) {
         followers:arrayUnion(user.uid)
       });
       setUserDetails({...userDetails,following:[...userDetails.following,userId]})
+      const userName=randomUsers.find(user=>user.userId===userId).userName;
+      toast.success(`Started following ${userName} `)
     } catch (error) {
       toast.error("!Something went wrong,Couldn't follow back")
+    }
+    finally
+    {
+      setLoading(false)
     }
 
   }
 
-  const followUser=async(userId)=>{
+  const followUser=async(userId,setLoading)=>{
     try {
+      setLoading(true)
       const myRef = doc(db, "users", user.uid );
       const userRef=doc(db,'users',userId)
       await updateDoc(myRef, {
@@ -96,13 +104,19 @@ export function UserProvider({ children }) {
         followers:arrayUnion(user.uid)
       });
       setUserDetails({...userDetails,following:[...userDetails.following,userId]})
+      const userName=randomUsers.find(user=>user.userId===userId).userName;
+      toast.success(`Started following ${userName} `)
     } catch (error) {
       toast.error("!Something went wrong,Couldn't follow")
     }
+    finally{
+      setLoading(false)
+    }
   }
 
-  const unFollowUser=async(userId)=>{
+  const unFollowUser=async(userId,setLoading)=>{
     try {
+      setLoading(true);
       const myRef = doc(db, "users", user.uid );
       const userRef = doc(db, "users", userId );
       await updateDoc(myRef, {
@@ -112,8 +126,13 @@ export function UserProvider({ children }) {
         followers:arrayRemove(user.uid)
       });
       setUserDetails({...userDetails,following:userDetails.following.filter(ids=>ids!==userId)})
+      const userName=randomUsers.find(user=>user.userId===userId).userName;
+      toast.success(`You unfollowed ${userName}`)
     } catch (error) {
       toast.error("!Something went wrong,Couldn't unfollow")
+    }
+    finally{
+      setLoading(false)
     }
   }
 

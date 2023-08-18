@@ -11,16 +11,22 @@ import { useLocation, useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../assets/Firebase";
 import { toast } from "react-toastify";
+import Loader from "../../components/loader/Loader";
 
 const Profile = ({ content }) => {
   const location=useLocation();
+  const[loading,setLoading]=useState(false)
   const [tab, setTab] = useState(null);
   const [userProfile, setUserProfile] = useState(null);
   const { userId } = useParams();
-  const {user}=useContext(UserContext)
+  const {user,userDetails}=useContext(UserContext)
   const fetchUserProfile = async () => {
+
+    if(user.uid===userId)
+       return setUserProfile({userId,...userDetails})
     try {
-      const docRef = doc(db, "users", userId);
+    setLoading(true);  
+    const docRef = doc(db, "users", userId);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       setUserProfile({userId,...docSnap.data()})
@@ -29,6 +35,9 @@ const Profile = ({ content }) => {
     }
     } catch (error) {
       toast.error('Something went wrong')
+    }
+    finally{
+      setLoading(false);
     }
   };
 
@@ -42,6 +51,7 @@ const Profile = ({ content }) => {
 
   return (
     <div id="profile-page">
+      {loading&&<Loader/>}
       {userProfile&&<>
       <ProfileHeader
         userProfile={userProfile}

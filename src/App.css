@@ -87,6 +87,9 @@ button label{
   color: white;
   background-color: var(--primary-color);
 }
+.primary-btn:hover{
+  background-color: #1263cc;
+}
 .primary-btn:disabled{
   cursor: not-allowed;
   color: #d5d5d5;

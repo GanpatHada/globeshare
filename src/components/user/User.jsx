@@ -1,35 +1,36 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './User.css'
 import defaultProfile from '../../images/profile.png'
 import { UserContext } from '../../contexts/UserContext'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-const User = ({userInfo,noRelation}) => {
+import miniLoader from '../../images/mini-loader.svg'
+ const User = ({userInfo,noRelation}) => {
+  const [loading,setLoading]=useState(false) 
   const {userDetails,followUser,unFollowUser,followBackUser}=useContext(UserContext)
   const navigate=useNavigate()
   const getUserRelationToMe=()=>{
     const{followers,following}=userDetails;
     if((!followers.includes(userInfo.userId))&&(!following.includes(userInfo.userId)))   
        return 'Follow'  
-    if(followers.includes(userInfo.userId)&&following.includes(userInfo.userId))
-       return 'Message'
-    if(followers.includes(userInfo.userId))
+    if(followers.includes(userInfo.userId)&&(!following.includes(userInfo.userId)))
        return 'Follow back'
     if(following.includes(userInfo.userId)) 
        return 'Unfollow'    
   }    
 
   const handleUserRelationClick=(e)=>{
+     setLoading(true);
      const{userId}=userInfo
      const action=e.target.innerText;
      if(action==='Follow')
-        return followUser(userId)
+        return followUser(userId,setLoading)
      if(action==='Follow back')   
-        return followBackUser(userId)
+        return followBackUser(userId,setLoading)
      if(action==='Unfollow')
-        return unFollowUser(userId)  
-     if(action==='Message')
-        return toast.warning('Messenging services will start shortly')    
+        return unFollowUser(userId,setLoading)  
+     
+           
   }
   const handleUserClick=()=>{
      navigate(`/profile/${userInfo.userId}`)
@@ -48,7 +49,7 @@ const User = ({userInfo,noRelation}) => {
           </div>
         </div>
         {!noRelation&&<div>
-          <button className='follow-btn' onClick={handleUserRelationClick}>{getUserRelationToMe()}</button>
+          <button className='follow-btn' onClick={handleUserRelationClick}>{loading?<img src={miniLoader} alt="..." />:getUserRelationToMe()}</button>
         </div>}
       </div>
   )
