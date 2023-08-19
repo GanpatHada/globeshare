@@ -7,7 +7,7 @@ import Suggestion from "../../components/suggestions/Suggestion";
 import EditProfile from "../edit-profile/EditProfile";
 import CreatePost from "../../components/create-post/CreatePost";
 import { db } from "../../assets/Firebase";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { Route, Routes } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 import Loader from "../../components/loader/Loader";
@@ -19,6 +19,8 @@ import Comments from "../../components/comments/Comments";
 import SearchBox from "../../components/search-box/SearchBox";
 import EditMenu from "../../components/edit-menu/EditMenu";
 import BottomNavbar from '../../components/bottom-navbar/BottomNavbar'
+import Explore from "../explore/Explore";
+
 
 const FeedsList = () => (
   <div id="feed-content">
@@ -46,11 +48,12 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [loadingInfo, setLoadingInfo] = useState("Initializing...");
 
-  const fetchPosts = async () => {
+  const fetchPosts = async (myFollowing) => {
     try {
       setLoading(false);
       setLoadingInfo("Getting data...");
-      const postList = await getDocs(collection(db, "posts"));
+      const q = query(collection(db,'posts'), where('user', 'in', [...myFollowing,user.uid]));
+      const postList = await getDocs(q);
       let initialPosts = [];
       postList.forEach((post) => {
         initialPosts.push({ ...post.data(), postId: post.id });
@@ -65,7 +68,7 @@ const Home = () => {
     }
   };
 
-  const fetchCurrentUserDetails = async () => {
+  const fetchCurrentUserDetails = async (fetchPosts) => {
     try {
       setLoading(true);
       setLoadingInfo("Getting user details...");
@@ -73,6 +76,7 @@ const Home = () => {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         setUserDetails(docSnap.data());
+        fetchPosts(docSnap.data().following)
       } else {
         toast.error("Something went wrong!");
       }
@@ -85,8 +89,8 @@ const Home = () => {
   };
   useEffect(() => {
     if (user.uid) {
-      fetchCurrentUserDetails();
-      fetchPosts();
+      fetchCurrentUserDetails(fetchPosts);
+      
     }
   }, [user]);
   return (
@@ -123,6 +127,10 @@ const Home = () => {
                   <Route
                     path="/profile/:userId"
                     element={<Profile content={"POSTS"} />}
+                  />
+                  <Route
+                    path="/explore"
+                    element={<Explore/>}
                   />
                   <Route
                     path="/profile/:userId/likes"

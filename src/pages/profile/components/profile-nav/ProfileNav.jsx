@@ -9,9 +9,9 @@ const ProfileNav = ({ setTab,tab,userProfile:{userId}}) => {
     if(tab==='POSTS')
        return '0px'
     if(tab==='LIKES')
-       return '120px'   
+       return '33.33%'   
     if(tab==='BOOKMARKS')
-       return '240px'   
+       return '66.66%'   
   }
 
   return (

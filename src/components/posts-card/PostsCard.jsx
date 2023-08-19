@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
-import Icon from "../../../../components/copy/Copy";
-import "./Posts.css";
+import Icon from "../../components/copy/Copy";
+import "./PostsCard.css";
 import {AiFillHeart} from 'react-icons/ai'
 import {FaComment} from 'react-icons/fa'
-import { ModalContext } from "../../../../contexts/ModalContext";
-const Posts = ({ myPost }) => {
+import { ModalContext } from "../../contexts/ModalContext";
+
+const PostsCard = ({ myPost }) => {
   const{setCurrentPost,openCommentsModal}=useContext(ModalContext)
 
   const handlePostClick=()=>{
@@ -32,4 +33,4 @@ const Posts = ({ myPost }) => {
   );
 };
 
-export default Posts;
+export default PostsCard;

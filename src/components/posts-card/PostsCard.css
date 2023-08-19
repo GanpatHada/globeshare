@@ -1,5 +1,5 @@
 #user-posts-image{
-    width: calc(33.3% - 10px);
+    width: 100%;
     aspect-ratio: 1/1;
     flex-grow: 0;
     flex-shrink: 0;
@@ -8,12 +8,11 @@
     align-items: center;
     justify-content: center;
     color: white;
-    margin-right: 10px;
-    margin-bottom: 10px;
     overflow: hidden;
     position: relative;
     cursor: pointer;
 }
+
 .like-comment-box{
     display: none;
     position: absolute;
@@ -60,4 +59,3 @@
     margin-right: 4px;
     font-size: 1.2rem;
 }
-

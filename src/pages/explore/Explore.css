@@ -1,0 +1,10 @@
+#explore-page{
+    width: 100%;
+    min-height: 100vh;
+    position: relative; 
+}
+#posts-wrapper{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 5px;   
+}

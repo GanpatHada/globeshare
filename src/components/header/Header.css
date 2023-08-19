@@ -1,4 +1,4 @@
-header{
+#top-header{
     display: none;
     border-bottom: 1px solid var(--primary-border);
 }
@@ -11,7 +11,7 @@ header{
     object-fit: contain;
 }
 @media only screen and (max-width: 480px){
-    header{
+    #top-header{
         display: flex;
         align-items: center;
         justify-content: flex-start;

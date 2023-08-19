@@ -1,24 +1,23 @@
 #profile-page{
-    min-height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: column;  
     position: relative;
+    min-height: calc(100vh - 50px);
+    
 }
 #profile-content{
-    padding: 10px;
-    padding-right: 0px;
     position: relative;
-    width: 100%;
-    aspect-ratio: 3/1;
-   
+    width: 100%; 
+    min-height: calc(100% - 250px);
+    
+    
 }
 .posts-wrapper{
-    height: 100%;
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-   
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;  
 }
 .no-data-found{
     display: flex;
@@ -26,13 +25,14 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    font-weight: normal;
-    
-    
+    height: 100%;
+    font-weight: normal;    
 }
 .no-data-found span{
+    display: block;
+    text-align: center;
     margin: 10px 0px;
-    font-size: 1.4rem;
+    font-size: 1rem;
 }
 .no-data-found img{
     height: 80px;

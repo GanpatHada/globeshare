@@ -22,7 +22,7 @@ const ProfileHeader = ({ userProfile }) => {
     openFollowersModal();
   };
   return (
-    <header id="profile-header" className="all-centered">
+    <header id="profile-header">
       {showFollowersModal && (
         <Modal onClose={closeFollowersModal}>
           <Followers modalFor={modalFor} userProfile={userProfile} />
@@ -35,7 +35,7 @@ const ProfileHeader = ({ userProfile }) => {
         <div>
           <h2>{userName}</h2>
           {user.uid === userId && (
-            <>
+            <div id="main-buttons">
               <button
                 className="secondary-btn"
                 onClick={() => navigate("/profile/edit")}
@@ -45,20 +45,20 @@ const ProfileHeader = ({ userProfile }) => {
               <button className="secondary-btn" onClick={logOut}>
                 Logout
               </button>
-            </>
+            </div>
           )}
         </div>
-        <div>
+        <div id="posts-info">
           <span><strong>{postsCount()}</strong> posts</span>
           <span>
-            <span onClick={()=>handleFollowersClick('followers')}>
+            <button onClick={()=>handleFollowersClick('followers')}>
               <strong>{followers.length}</strong> followers
-            </span>
+            </button>
           </span>
           <span>
-            <span onClick={()=>handleFollowersClick('following')}>
+            <button onClick={()=>handleFollowersClick('following')}>
               <strong>{following.length} </strong>following
-            </span>
+            </button>
           </span>
         </div>
         <section>
