@@ -24,7 +24,7 @@ const UserData = ({ userId }) => {
 
   useEffect(() => {
     fetchUserDetails(userId);
-  },[]);
+  }, []);
 
   return <User userInfo={userInfo} />;
 };

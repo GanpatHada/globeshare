@@ -3,36 +3,43 @@
     justify-content: space-between;    
 }
 #main-content{
-    width: 60vw;
+    width: 90%;
     display: flex;
     max-width: 1020px;
     margin: auto;
-    
-
 }
 #content{
     min-width: calc(100vw - 300px);
-    width: 70%;
+    flex: 4;
     height: 100vh;
     background-color: white;
     flex-shrink: 5;
     overflow: auto;
-   
-    
+      
+}
+#feed-content{
+    height: 100%;
+    width: 100%;
+    display: flex;
 }
 main::-webkit-scrollbar{
     display: none;
 }
-@media only screen and (max-width: 768px){
+@media only screen and (max-width: 480px){
+    #home-page{
+        flex-direction: column;
+    }
     #content{
         width: 100vw;
         flex-shrink: 1;
         padding: 0px;
+        margin-bottom: 50px;
     }
     #suggestion-box{
         display: none;
     }
     #main-content{
         width: 100vw;
+        height: 100%;
     }
 }

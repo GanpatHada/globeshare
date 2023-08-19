@@ -1,8 +1,10 @@
-import React, { useContext } from 'react'
+import React, { useContext, useRef } from 'react'
 import './Feeds.css'
 import Feed from './components/feed/Feed'
 import { PostContext } from '../../contexts/PostContext'
+import Header from '../../components/header/Header'
 const Feeds = ({explore}) => {
+  
   const{posts,postFilter}=useContext(PostContext)
   const filteredPosts=()=>{
     let tempPosts=posts
@@ -19,10 +21,12 @@ const Feeds = ({explore}) => {
 
   return (
     <div id='feeds-box'>
+      <Header/>
       {
         filteredPosts().map(post=><Feed key={post.postId} post={post}/>)
       }
     </div>
+    
   )
 }
 

@@ -62,7 +62,6 @@ const FeedHeader = ({ userId, time , postId }) => {
       } else {
         toast.error("Something went wrong a!");
       }
-      console.log(docSnap.data())
     } catch (error) {
       toast.error("something went wrong b");
     }

@@ -52,7 +52,7 @@ const LeftSideBar = () => {
   const { user, userDetails, logOut } = useContext(UserContext);
   const { showCreatePostModal, showEditPostModal } = useContext(ModalContext);
   const closeMenu = () => setExpandMenu(false);
-  console.log(user);
+  
 
   const isActive = (match) => {
     if (match === "createPost") return showCreatePostModal || showEditPostModal;

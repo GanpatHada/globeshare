@@ -18,14 +18,13 @@ import { PostContext } from "../../contexts/PostContext";
 import Comments from "../../components/comments/Comments";
 import SearchBox from "../../components/search-box/SearchBox";
 import EditMenu from "../../components/edit-menu/EditMenu";
-import Followers from '../../components/followers/Followers'
+import BottomNavbar from '../../components/bottom-navbar/BottomNavbar'
 
 const FeedsList = () => (
-  <>
-    {" "}
+  <div id="feed-content">
     <Feeds />
     <Suggestion />
-  </>
+  </div>
 );
 
 const Home = () => {
@@ -56,7 +55,6 @@ const Home = () => {
       postList.forEach((post) => {
         initialPosts.push({ ...post.data(), postId: post.id });
       });
-      console.log(initialPosts);
       setPosts(initialPosts);
     } catch (error) {
       toast.error("something went wrong!");
@@ -89,7 +87,6 @@ const Home = () => {
     if (user.uid) {
       fetchCurrentUserDetails();
       fetchPosts();
-      console.log("run");
     }
   }, [user]);
   return (
@@ -117,11 +114,10 @@ const Home = () => {
               <CreatePost mode="EDIT" />
             </Modal>
           )}
-          
           <LeftSideBar />
           {!loading ? (
             <main id="content">
-              <div id="main-content">
+              <div id="main-content" >
                 <Routes>
                   <Route path="/" element={<FeedsList />} />
                   <Route
@@ -145,6 +141,7 @@ const Home = () => {
           ) : (
             <Loader info={loadingInfo} />
           )}
+          <BottomNavbar />
         </>
       ) : (
         <Loader info={loadingInfo} />

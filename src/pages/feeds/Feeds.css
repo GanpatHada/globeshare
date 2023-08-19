@@ -1,6 +1,7 @@
 #feeds-box{
-    flex: 1.5;
-    min-height: 100vh;  
+    flex: 2;
+    height: 100vh;  
     margin-bottom: 50px;
+    
     
 }

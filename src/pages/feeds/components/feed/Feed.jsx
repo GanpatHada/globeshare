@@ -6,17 +6,9 @@ import "./Feed.css";
 import FeedHeader from "../feed-header/FeedHeader";
 import  FeedActions  from "../feed-actions/FeedActions";
 import FeedImage from "../feed-image/FeedImage";
-import { BsEmojiSmile } from "react-icons/bs";
-import { arrayUnion, doc, updateDoc } from "firebase/firestore";
-import { db } from "../../../../assets/Firebase";
-import { toast } from "react-toastify";
-import { PostContext } from "../../../../contexts/PostContext";
-import miniLoader from '../../../../images/miniLoader.svg'
+
 import FeedCaption from "../feed-caption/FeedCaption";
 import CommentBox from "../../../../components/comment-box/CommentBox";
-import Modal from "../../../../components/modal/Modal";
-import Comments from "../../../../components/comments/Comments";
-import { ModalContext } from "../../../../contexts/ModalContext";
 import { UserContext } from "../../../../contexts/UserContext";
 
 
@@ -25,7 +17,6 @@ const Feed = ({post}) => {
   const {user:{uid}}=useContext(UserContext)
   const {caption,likes,comments,images,user,time,postId}=post;
   return (
-    <>
     <div className="feed">
       <FeedHeader userId={user} time={time} postId={postId}  />
       <FeedImage images={images} />
@@ -36,7 +27,7 @@ const Feed = ({post}) => {
       <CommentBox postId={postId} userId={uid}/>
       </div>
     </div>
-    </>
+
   );
 };
 

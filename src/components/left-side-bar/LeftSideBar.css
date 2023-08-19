@@ -1,6 +1,6 @@
 #left-nav{
     height: 100vh;
-    width: 30%;
+    flex: 1;
     max-width: 300px;
     background-color: white;
     position: relative;

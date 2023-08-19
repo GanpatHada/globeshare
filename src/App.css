@@ -25,6 +25,7 @@ body{
 }
 :root{
   --primary-color:#1877f2;
+  --primary-border:lightgray;
 }
 button{
   border: none;
