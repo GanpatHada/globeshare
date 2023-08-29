@@ -16,12 +16,12 @@ const ProfileNav = ({ setTab,tab,userProfile:{userId}}) => {
 
   return (
     <nav id="profile-nav">
-      <ul className="all-centered">
-        <div id="active-nav" style={
+      <ul className="all-centered nav-container">
+        {user.uid===userId&&<div id="active-nav" style={
           {
             marginLeft:getMargin()
           }
-        }></div>
+        }></div>}
         <li className="all-centered">
           <button onClick={() => setTab("POSTS")}>
             <span><BsGrid3X3 /></span>
