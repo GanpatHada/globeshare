@@ -1,72 +1,50 @@
-import "../Login.css";
-import React, { useState } from "react";
-import GoogleButton from "./GoogleButton";
+
+import React, { useReducer } from "react";
 import GuestButton from "./GuestButton";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
-import Loading from '../../../images/loading.svg'
+import Loading from "../../../images/loading.svg";
 import { toast } from "react-toastify";
-import isEmail from "validator/lib/isEmail";
-import { browserLocalPersistence, setPersistence, signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../../assets/Firebase";
 import { useNavigate } from "react-router-dom";
+import {
+  initialLoginFormState,
+  loginFormReducer,
+} from "../../../reducers/LoginReducer";
+import { areThereLoginErrors, getLoginError } from "../../../utils/LoginHelper";
+import { login } from "../../../services/LoginService";
+import "../Login.css";
+
 const LoginBox = ({ setPage }) => {
-  const navigate=useNavigate();
-  const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
-  });
-  const { email, password } = loginData;
+  const [state, dispatch] = useReducer(loginFormReducer, initialLoginFormState);
+  const { email, password, showPassword, loading } = state;
 
+  const navigate = useNavigate();
 
-  const areThereLoginErrors=()=>{
-    if(email.length===0)
-    {
-      toast.warning("Please enter email",{autoClose: 2000});
-      return true;
-    }
-    if(password.length===0)
-    {
-      toast.warning("Please enter password",{autoClose: 2000});
-      return true;
-    }
-    if(!isEmail(email))
-    {
-      toast.warning("Enter a valid email",{autoClose: 2000});
-      return true;
-    }
-    return false
-  
-  }
-  const loginUser=async(email,password)=>{
-    setLoading(true)
+  const handleFieldChange = ({ target: { name, value } }) => {
+    return dispatch({ type: "SET_FIELD", payload: { field: name, value } });
+  };
+
+  const handleShowPassword = () => {
+    return dispatch({ type: "TOGGLE_SHOW_PASSWORD" });
+  };
+
+  const startLoading = () => dispatch({ type: "START_LOADING" });
+  const stopLoading = () => dispatch({ type: "STOP_LOADING" });
+
+  const loginUser = async () => {
+    startLoading();
     try {
-      await signInWithEmailAndPassword(
-        auth,
-        email.trim(),
-        password.trim()
-      );
-      toast.success('Logged in successfully',{autoClose: 2000})
-      navigate('/');
-    } catch ({code}) {
-      if(code.includes('user-not-found'))
-          return toast.error('account does not exists with this email');
-      if(code.includes('auth/wrong-password'))
-          return toast.error('Incorrect password');    
-      return toast.error('Something went wrong !')    
-  
+      await login(email.trim(), password.trim());
+      navigate("/");
+    } catch (errorCode) {
+      toast.error(getLoginError(errorCode), { autoClose: 2000 });
     } finally {
-      setLoading(false)
+      stopLoading();
     }
-  }
-  const handleLogin = async() => {
-    if(!areThereLoginErrors())
-    {
-        return await loginUser(email,password);
-    }
-    return 0;
-      
+  };
+  const handleLogin = () => {
+    const loginError = areThereLoginErrors(email, password);
+    if (!loginError) return loginUser();
+    return toast.warning(loginError, { autoClose: 2000 });
   };
   return (
     <div id="login-box" className="authbox">
@@ -74,24 +52,22 @@ const LoginBox = ({ setPage }) => {
       <div className="emailbox">
         <input
           type="email"
+          name="email"
           value={email}
-          onChange={(e) =>
-            setLoginData({ ...loginData, email: e.target.value })
-          }
+          onChange={(e) => handleFieldChange(e)}
           placeholder="Enter email"
         />
       </div>
       <div className="passwordbox">
         <input
           autoComplete="new-password"
+          name="password"
           value={password}
-          onChange={(e) =>
-            setLoginData({ ...loginData, password: e.target.value })
-          }
+          onChange={(e) => handleFieldChange(e)}
           type={showPassword ? "text" : "password"}
           placeholder="Enter password"
         />
-        <button id="eyebox" onClick={() => setShowPassword(!showPassword)}>
+        <button id="eyebox" onClick={handleShowPassword}>
           {showPassword ? (
             <BsEyeSlashFill className="eye" title="Hide Password" />
           ) : (
@@ -107,7 +83,6 @@ const LoginBox = ({ setPage }) => {
       >
         {loading ? <img src={Loading} id="loadingimg" alt="..." /> : "Login"}
       </button>
-      
 
       <hr />
       <p>

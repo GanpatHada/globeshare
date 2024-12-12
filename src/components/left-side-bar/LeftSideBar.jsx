@@ -13,7 +13,7 @@ import defaultProfileImage from "../../images/profile.png";
 
 const SideNavHeader = ({ searchBox }) => {
   return (
-    <section id={"main-logo"} className={searchBox && "all-centered"}>
+    <section id={"main-logo"} className={searchBox ? "all-centered" : ""}>
       <img src={searchBox ? globeShareMin : globeShare} alt="..." />
     </section>
   );

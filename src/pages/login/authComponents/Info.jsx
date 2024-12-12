@@ -1,11 +1,11 @@
 import '../Login.css'
 import React from 'react'
-import globeshare from '../../../images/globeshare.svg'
+import globeshare from '../../../images/mainLogoText.svg'
 const Info = () => (
-      <div>
-        <h1 style={{ justifyContent: "flex-start" }} className="all-centered">
-           <img src={globeshare} alt="" />
-        </h1>
+      <div id='globeshare-info'>
+        <section className="main-logo">
+        <img src={globeshare} alt="" />
+        </section>
         <p>
           Let's connect with your friends across the globe through{" "}
           <strong>globeshare</strong>{" "}

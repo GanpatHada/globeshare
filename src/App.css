@@ -20,6 +20,8 @@ img{
 :root{
   --primary-color:#1877f2;
   --primary-border:lightgray;
+  --logo-color2:#FF6AD2;
+  --logo-color1:#2F6AFF;
 }
 button{
   border: none;
