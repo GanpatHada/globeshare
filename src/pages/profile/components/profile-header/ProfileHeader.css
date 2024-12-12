@@ -1,0 +1,105 @@
+#main-profile-image{
+    height: 120px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: white;
+    margin-right: 20px;
+}
+#profile-header{
+    width: 100%;   
+    min-height: 200px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#profile-header img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}  
+
+
+#profile-bio > div{
+    display: flex;
+    margin: 20px 0px;
+    align-items: center;
+    margin-top: 6px;
+    
+}
+#profile-bio > div:first-child{
+    display: flex;
+    justify-content: space-between;
+}
+#profile-bio h2{
+    font-weight: 400;
+    font-size: 1rem;
+   
+}
+#profile-bio a{
+    color: var(--primary-color);
+}
+#profile-bio p{
+    font-size: 0.9rem;
+    font-family:sans-serif;
+}
+
+#profile-bio button{
+    
+    border-radius: 5px;
+    margin-left: 15px;
+    color: black;
+    font-size: 1rem;
+   
+    
+}
+#profile-bio > div:first-child button{
+    padding: 10px;
+    margin-left: 20px;
+}
+#profile-bio > div:first-child button:hover{
+    background-color: rgb(196, 196, 196);
+}
+#profile-bio section > *{
+    margin: 6px 0px;
+}
+
+/* mobile-responsive */
+@media only screen and (max-width: 480px){
+    #main-profile-image{
+        height: 80px;
+        
+    }
+    #profile-header{
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+        
+    }
+    #profile-bio > div{
+        margin: 10px 0px;
+    }
+    #posts-info{
+        position: absolute;
+        right: 0px;
+        top: 10%;
+        right: 10px;
+        
+        
+    }
+    #profile-bio{
+        margin-bottom: 40px;
+    }
+    #profile-bio #main-buttons{
+        position: absolute;
+        bottom: 10px;
+    }
+    #profile-bio #main-buttons button{
+        margin: 0px;
+    }
+    #profile-bio #main-buttons button:first-child{
+        margin-right: 10px;
+    }
+    
+}

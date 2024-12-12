@@ -1,0 +1,95 @@
+#left-nav-wrapper{
+    width: 335px;
+
+}
+#left-nav{
+    height: 100%;
+    background-color: white;
+    border-right: 1px solid rgb(194, 194, 194);
+    position: relative;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    z-index: 3;
+    transition: 0.3s ease-in-out;
+    
+}
+#left-nav a{
+    text-decoration: none;
+}
+#main-logo{
+    
+    margin: 20px 0px;
+    cursor: pointer;
+    padding: 10px;
+    height: 60px;
+    overflow: hidden;
+}
+#main-logo img{
+    height: 100%;
+    width: fit-content;
+    object-fit: contain;
+}
+#side-navs{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-between;
+}
+#side-navs ul:first-child{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+#side-navs ul:last-child{
+    position: relative;
+}
+#side-navs .navs{
+    height: 50px;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
+    gap: 10px;
+    font-weight: normal;
+    color: black;
+}
+#side-navs .navs:hover{
+    background-color: whitesmoke;
+}
+#side-navs .navs span{
+    display: flex;
+    height: 100%;
+    aspect-ratio: 1/1;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    border-radius: 10px;
+    
+}
+.active-search-nav{
+    border: 1px solid lightgray;
+}
+#side-navs #profile{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    
+}
+
+
+
+@media only screen and (max-width:1400px) and (min-width:769px)
+{
+    #left-nav-wrapper{
+        width: 244px;
+        
+    }
+}
+@media only screen and (max-width: 768px){
+    #left-nav-wrapper{
+        display: none;
+    }
+}

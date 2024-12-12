@@ -1,0 +1,20 @@
+#main-app {
+  height: 100vh;
+  display: flex;
+  background-color: whitesmoke;
+  background-color: #f2f4f7;
+}
+#app-content {
+  height: 100%;
+  overflow: auto;
+  flex: 1;
+}
+#app-content > .app-pages {
+  max-width: 1000px;
+  margin: auto;
+}
+@media only screen and (max-width: 768px) {
+  #main-app {
+    flex-direction: column;
+  }
+}

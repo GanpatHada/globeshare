@@ -1,0 +1,52 @@
+.emoji-box{
+    position: absolute;
+    z-index: 6;
+    bottom: 325px;
+    right: 55px;
+}
+.feed-comment-box{
+    position: relative;
+    
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center; 
+}
+.emoji-box{
+    width: 300px;
+    height: 200px;
+}
+
+.feed-comment-box input{
+    height: 100%;
+    width: calc(100% - 50px);   
+    border: none;
+    padding: 0px 20px 0px 0px;
+}
+.emoji-btn{
+    height: 100%;
+    width: fit-content;
+    font-size: 1.5rem;
+    background-color: white;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.post-btn{
+    height: 80%;
+    width: 80px;
+    font-size: 1rem;
+    background-color: transparent;
+    color: var(--primary-color);
+    text-transform: capitalize;    
+}
+.post-btn img{
+    height: 25px;
+    width: 25px;
+    
+}
+.post-btn:disabled{
+    color: #1876f275;
+    cursor: not-allowed;
+}

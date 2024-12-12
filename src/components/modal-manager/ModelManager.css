@@ -1,0 +1,12 @@
+#main-modal{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.747);
+    z-index: 5;
+}
+#main-model-content{
+    
+}

@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Lato&family=Poppins&display=swap');
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  
+  
+}
+.App{
+  height: 100%;
+  
+  
+}
+img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+:root{
+  --primary-color:#1877f2;
+  --primary-border:lightgray;
+}
+button{
+  border: none;
+  cursor: pointer;
+  letter-spacing: normal;
+  background-color: transparent;
+ 
+}
+.all-centered{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+a{
+  color: var(--primary-color);
+  text-decoration: none;
+  text-transform: capitalize;
+}
+a:hover{
+  text-decoration: underline;
+}
+li{
+  list-style: none;
+}
+hr{
+  height: 1px;
+  background-color: rgb(221, 221, 221);
+  border: none;
+}
+#emoji-picker{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 4;
+}
+.Toastify__toast-container {
+  transition-duration: 0.2s!important; /* Adjust the duration to your desired value */
+  transition-timing-function: ease-in-out; /* Adjust the easing function to your desired value */
+}
+
+.danger{
+  color: red;
+}
+button label{
+  cursor: pointer;
+  display: block;
+  height: 100%;
+  width: 100%!important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.secondary-btn{
+  color: rgb(31, 31, 31);
+  background-color: rgb(211, 211, 211);
+}
+.primary-btn{
+  color: white;
+  background-color: var(--primary-color);
+}
+.primary-btn:hover{
+  background-color: #1263cc;
+}
+.primary-btn:disabled{
+  cursor: not-allowed;
+  color: #d5d5d5;
+  opacity: 0.7;
+}
+.secondary-btn:disabled{
+  color: gray;
+  opacity: 0.7;
+  cursor: not-allowed;
+}

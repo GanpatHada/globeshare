@@ -1,0 +1,7 @@
+#cross-btn{
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+#cross-btn:hover{
+    color: rgb(182, 0, 0);
+}

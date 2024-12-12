@@ -1,0 +1,27 @@
+#create-post-box{
+    width: 600px;
+    background-color: white;
+    min-height: 400px;
+    position: relative;
+    overflow: hidden;
+}
+#create-post-box > header{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid lightgray;
+    padding: 20px;
+}
+
+#create-post-box h2{
+    display: flex;
+    align-items: center;
+}
+#emoji-picker-in-createPost{
+    position: absolute;
+    bottom: 146px;
+    right: 19px;
+    transition: all 0.1s ease-out;
+    z-index: 5;
+    transform-origin: bottom right;   
+}
+

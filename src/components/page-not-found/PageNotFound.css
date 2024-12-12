@@ -1,0 +1,29 @@
+#page-not-found-page button{
+    background-color: lightgray;
+    color: black;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 20px;
+    
+}
+#page-not-found-page h1{
+    font-size: 3rem;
+    color: red;
+    font-weight: normal;
+}
+#page-not-found-page h1 span{
+    font-size: 3.5rem;
+    font-weight: bold;
+}
+#page-not-found-page > div{
+    padding: 0px 20px;
+    text-align: center;
+}
+#page-not-found-page > div >*{
+    margin: 10px 0px;
+}
+#page-not-found-page{
+    border-bottom: 1px solid lightgray;
+    padding: 40px 0px;
+    
+}

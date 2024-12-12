@@ -1,0 +1,45 @@
+.user-basic{
+    width: 100%;
+    height: 80px;
+    justify-content: space-between;
+}
+.user-basic h4{
+    font-family: 'Inter';
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    height: 15px;
+}
+
+.user-basic h6{
+    
+    font-size: 0.75rem;
+    font-weight: 200;
+    color: rgb(126, 126, 126);
+}
+.user-basic-image{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    overflow: hidden;
+}
+.user-basic-info{
+    margin-right: 10px;
+}
+.user-basic-image img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.follow-btn{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: var(--primary-color);
+    letter-spacing: normal;
+    font-weight: 800; 
+    padding: 5px;
+}
+.follow-btn img{
+    width: 30px;
+    height: 10px;
+}

@@ -1,0 +1,21 @@
+#top-header{
+    display: none;
+    border-bottom: 1px solid var(--primary-border);
+    background-color: white;
+}
+#logo-section{
+    width: 50%;
+    padding: 0.9rem;
+    height: 100%;
+}
+#logo-section img{
+    object-fit: contain;
+}
+@media only screen and (max-width: 768px){
+    #top-header{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        height: 60px;
+    }
+}
