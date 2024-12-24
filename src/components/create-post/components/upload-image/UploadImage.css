@@ -1,0 +1,24 @@
+#upload-image{
+    flex: 1;
+}
+#upload-image-content{
+    flex-direction: column;
+}
+#upload-image-content #upload-image-placeholder{
+    font-size: 2rem;
+}
+#upload-image-content button{
+    padding: 10px 15px;
+    font-size: 1rem;
+    
+}
+#upload-from-device{
+    padding: 10px;
+    font-family: Roboto;
+    cursor: pointer;
+}
+#upload-image-content #enter-url{
+    padding: 0px;
+    margin: 5px 0px;
+    
+}

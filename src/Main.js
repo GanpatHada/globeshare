@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import LeftSideBar from "./components/left-side-bar/LeftSideBar";
 import "./Main.css";
 import Home from "./pages/home/Home";
@@ -7,12 +7,17 @@ import BottomNavbar from "./components/bottom-navbar/BottomNavbar";
 import AppRoutes from "./AppRoutes";
 import SearchBox from "./components/search-box/SearchBox";
 import ModalManager from "./components/modal-manager/ModalManager";
+import { ModalContext } from "./contexts/ModalContext";
+import Loader from "./components/loader/Loader";
+import { UserContext } from "./contexts/UserContext";
+import { getCurrentUserDetails } from "./services/UserService";
+import { toast } from "react-toastify";
 
 const AppSideNav = () => {
-  const [searchBox,setSearchBox]=useState(false);
+  const [searchBox, setSearchBox] = useState(false);
 
-  const openSearchBox=()=>setSearchBox(true);
-  const closeSearchBox=()=>setSearchBox(false);
+  const openSearchBox = () => setSearchBox(true);
+  const closeSearchBox = () => setSearchBox(false);
   return (
     <>
       <LeftSideBar openSearchBox={openSearchBox} searchBox={searchBox} />
@@ -32,13 +37,40 @@ const AppContent = () => {
 };
 
 const Main = () => {
+  const { showModal, openModal, closeModal } = useContext(ModalContext);
+  const { state, dispatch } = useContext(UserContext);
+  const {
+    user: { userId },
+    loading,
+  } = state;
+  const fetchUserDetails = async () => {
+    try {
+      const user = await getCurrentUserDetails(userId);
+      dispatch({ type: "SET_USER", payload: user });
+      dispatch({ type: "STOP_LOADING" });
+    } catch (error) {
+      toast.error("Unable to fetch user details");
+    } finally {
+      
+    }
+  };
+
+  useEffect(() => {
+    fetchUserDetails();
+  }, []);
   return (
     <main id="main-app">
-      <ModalManager/>
-      <AppSideNav />
-      <Header />
-      <AppContent />
-      <BottomNavbar />
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          {showModal && <ModalManager closePopup={closeModal} />}
+          <AppSideNav />
+          <Header />
+          <AppContent />
+          <BottomNavbar />
+        </>
+      )}
     </main>
   );
 };

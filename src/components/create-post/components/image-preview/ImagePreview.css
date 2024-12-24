@@ -1,0 +1,29 @@
+#image-preview{
+    display: flex;
+    gap: 5px;
+    padding: 5px;
+    border-left: 1px solid rgb(238, 238, 238); 
+    flex-direction: column;
+    flex: 0.5;
+}
+.image-preview-box{
+    overflow: hidden;
+    background-color: rgb(43, 43, 43);
+    display: flex;
+    position: relative;
+    height: 190px;
+}
+.delete-preview-button{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 40px;
+    width: 40px;
+    border-radius: 40px;
+    background-color: rgb(221, 221, 221);
+    padding: 10px;
+}
+
+.image-preview-box img{
+    object-fit: contain;
+}

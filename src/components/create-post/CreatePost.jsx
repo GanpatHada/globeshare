@@ -1,161 +1,128 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useReducer, useRef } from "react";
 import "./CreatePost.css";
-import { toast } from "react-toastify";
-import {
-  collection,
-  addDoc,
-  Timestamp,
-  doc,
-  updateDoc,
-} from "firebase/firestore";
-import { db, storage } from "../../assets/Firebase";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { UserContext } from "../../contexts/UserContext";
-import Loader from "../loader/Loader";
-import UploadImageSection from "./components/upload-image-section/UploadImageSection";
-import PreviewImageSection from "./components/preview-image-section/PreviewImageSection";
-import CaptionSection from "./components/caption-section/CaptionSection";
 import CrossButton from "../cross-button/CrossButton";
-import { ModalContext } from "../../contexts/ModalContext";
-import { PostContext } from "../../contexts/PostContext";
-import { useNavigate } from "react-router-dom";
+import UploadImage from "./components/upload-image/UploadImage";
+import ImagePreview from "./components/image-preview/ImagePreview";
+import { GrEmoji } from "react-icons/gr";
+import { IoMdSend } from "react-icons/io";
+import {
+  createPostReducer,
+  initialCreatePostState,
+} from "../../reducers/CreatePostReducer";
+import EmojiPicker from "emoji-picker-react";
+import useClickOutsideHandler from "../../hooks/useClickOutsideHandler";
+import { saveImages, savePostData } from "../../services/CreatePostService";
+import Waiting from "../waiting/Waiting";
+import { toast } from "react-toastify";
+import { UserContext } from "../../contexts/UserContext";
 
-const CreatePost = ({ mode}) => {
-  const { closeCreatePostModal, closeEditPostModal, currentPost } =
-    useContext(ModalContext);
-  const { handleCreatePostInClient,handleUpdatePostInClient,posts} = useContext(PostContext);
-  //refs
-  //states
+const CreatePostHeader = ({ mode,closePopup }) => {
+  return (
+    <header id="create-post-header">
+      <h2>{mode.charAt(0) + mode.slice(1).toLowerCase()} Post</h2>
+      <span id="cr-btn" onClick={closePopup}>
+        <CrossButton />
+      </span>
+    </header>
+  );
+};
 
-  const { user } = useContext(UserContext);
-  //fuctions
+const CreatePostUploads = ({ state, dispatch }) => {
+  return (
+    <section className="image-section">
+      <UploadImage state={state} dispatch={dispatch} />
+      {state.images.length !== 0 && (
+        <ImagePreview state={state} dispatch={dispatch} />
+      )}
+    </section>
+  );
+};
 
-  const handleCloseBtn = () => {
-    if (mode === "EDIT") return closeEditPostModal();
-    return closeCreatePostModal();
-  };
+const CreatePostFooter = ({ state, dispatch }) => {
+  const{state:userState}=useContext(UserContext)
+  const { caption, images, emojiPopup } = state;
+  const textRef = useRef(null);
+  const emojiRef = useRef(null);
 
-  const getCurrentPost = () => {
-    return posts.find((post) => post.postId === currentPost);
-  };
-
-  const getCaption = () => {
-    if (mode === "EDIT") 
-        return getCurrentPost().caption;
-    return "";
-  };
-
-  const getImages = () => {
-    if (mode === "EDIT") 
-        return getCurrentPost().images;
-    return [];
-  };
-
-  const [loading, setLoading] = useState(false);
-  const [images, setImages] = useState(getImages());
-  const [caption, setCaption] = useState(getCaption());
-  const [loadingInfo, setLoadingInfo] = useState("");
-
-  const handlePostEditClick = async () => {
-    const imageUrls = [];
-    try {
-      setLoading(true);
-      for (let image of images) {
-        setLoadingInfo("Updating Images ...");
-        if (typeof image === "string") {
-          imageUrls.push(image);
-        } else {
-          const storageRef = ref(storage, `${image.name}`);
-          const snapshot = await uploadBytes(storageRef, image);
-          const downloadUrl = await getDownloadURL(snapshot.ref);
-          imageUrls.push(downloadUrl);
-        }
-      }
-      setLoadingInfo("Updating data");
-      const postRef = doc(db, "posts", currentPost);
-      await updateDoc(postRef, {
-        images:imageUrls,
-        caption,
-      });
-      toast.success('Post edited successfully')
-      handleUpdatePostInClient(imageUrls,caption,currentPost)
-    } catch (error) {
-      toast.error("Something went wrong!");
-      console.log(error);
-    } finally {
-      setLoading(false);
-      setLoadingInfo("");
-      closeEditPostModal();
+  const handleCaption = (e) => {
+    const textarea = textRef.current;
+    if (textarea) {
+      textarea.style.height = "auto";
+      textarea.style.height = `${textarea.scrollHeight}px`;
     }
+    dispatch({ type: "SET_CAPTION", payload: e.target.value });
   };
+  const closeEmojiPopup = () => dispatch({ type: "CLOSE_EMOJI" });
+  const startLoading=(loadingInfo)=>dispatch({type:'START_LOADING',payload:loadingInfo})
+  const stopLoading=()=>dispatch({type:'STOP_LOADING'})
 
-  const handlePostClick = async () => {
-    let postId = null;
-    const imageUrls = [];
+  const handlePostSend=async()=>{  
     try {
-      setLoading(true);
-
-      for (let image of images) {
-        setLoadingInfo("Uploading Images ...");
-        if (typeof image === "string") {
-          imageUrls.push(image);
-        } else {
-          const storageRef = ref(storage, `${image.name}`);
-          const snapshot = await uploadBytes(storageRef, image);
-          const downloadUrl = await getDownloadURL(snapshot.ref);
-          imageUrls.push(downloadUrl);
-        }
-      }
-      setLoadingInfo("Uploading data");
-      const docRef = await addDoc(collection(db, "posts"), {
-        user: user.uid,
-        caption: caption,
-        images: imageUrls,
-        likes: [],
-        comments: [],
-        time: Date.now(),
-      });
-      postId = docRef.id;
-      handleCreatePostInClient({
-        user: user.uid,
-        caption: caption,
-        images: imageUrls,
-        likes: [],
-        comments: [],
-        time: Date.now(),
-        postId,
-      });
-
-      toast.success("Posted Successfully");
+      startLoading()
+      const postDetails=await savePostData(userState.user.userId,images,caption);
+      toast.success("Posted successfully")
     } catch (error) {
-      toast.error("Something went wrong!");
-      console.log(error);
-    } finally {
-      setLoading(false);
-      setLoadingInfo("");
-      closeCreatePostModal();
+      toast.error("Something went wrong")
     }
-  };
+    finally{
+      dispatch({type:'RESET_FIELDS'})
+      stopLoading();
+
+    }
+  }
+  useClickOutsideHandler(emojiRef, closeEmojiPopup);
+
+  const handleEmojiClick = (obj) =>
+    dispatch({ type: "SET_CAPTION", payload: caption.concat(obj.emoji) });
+  return (
+    <footer id="create-post-footer">
+      <button
+        id="create-post-emoji"
+        onClick={() => dispatch({ type: "OPEN_EMOJI" })}
+        className="all-centered"
+      >
+        <GrEmoji />
+      </button>
+      {emojiPopup && (
+        <div id="create-post-emoji-picker" ref={emojiRef}>
+          <EmojiPicker height={"570px"} onEmojiClick={handleEmojiClick} />
+        </div>
+      )}
+      <div id="create-post-caption">
+        <textarea
+          value={caption}
+          onChange={handleCaption}
+          ref={textRef}
+          placeholder="Enter your caption here "
+          id="create-post-text-area"
+          rows={1}
+        ></textarea>
+      </div>
+
+      <button
+        onClick={handlePostSend}
+        id="create-post-send"
+        disabled={caption.trim().length === 0 && images.length === 0}
+        className="all-centered"
+      >
+        <IoMdSend />
+      </button>
+    </footer>
+  );
+};
+
+const CreatePost = ({ mode,closePopup}) => {
+  const [state, dispatch] = useReducer(
+    createPostReducer,
+    initialCreatePostState
+  );
+  const{loading}=state;
   return (
     <div id="create-post-box">
-      {loading && <Loader info={loadingInfo} />}
-      <header>
-        <h2>{mode.charAt(0) + mode.slice(1).toLowerCase()} Post</h2>
-        <span id="cr-btn" onClick={handleCloseBtn}>
-          <CrossButton />
-        </span>
-      </header>
-      <UploadImageSection images={images} setImages={setImages} />
-      <PreviewImageSection images={images} setImages={setImages} />
-      <CaptionSection
-        images={images}
-        handlePostClick={handlePostClick}
-        caption={caption}
-        setCaption={setCaption}
-        mode={mode}
-        handlePostEditClick={handlePostEditClick}
-        currentPost={getCurrentPost()}
-      />
+      {loading && <Waiting/>}
+      <CreatePostHeader mode={mode} closePopup={closePopup} />
+      <CreatePostUploads state={state} dispatch={dispatch} />
+      <CreatePostFooter state={state} dispatch={dispatch} />
     </div>
   );
 };

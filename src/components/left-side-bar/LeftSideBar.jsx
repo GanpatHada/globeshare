@@ -10,6 +10,8 @@ import { GoHome } from "react-icons/go";
 import { AiOutlineHeart, AiOutlineMenu } from "react-icons/ai";
 import { MdOutlineExplore } from "react-icons/md";
 import defaultProfileImage from "../../images/profile.png";
+import { ModalContext } from "../../contexts/ModalContext";
+import { UserContext } from "../../contexts/UserContext";
 
 const SideNavHeader = ({ searchBox }) => {
   return (
@@ -43,10 +45,13 @@ const MenuNav = () => {
 };
 
 const SideNavs = ({ openSearchBox,searchBox }) => {
+  const{state}=useContext(UserContext);
+  const{user:{userId}}=state;
+  const{openModal}=useContext(ModalContext)
   return (
     <section id="side-navs">
       <ul>
-        <NavLink className="navs">
+        <NavLink to={"/"} className="navs">
           <span className="icons">
             <GoHome />
           </span>
@@ -64,7 +69,7 @@ const SideNavs = ({ openSearchBox,searchBox }) => {
           </span>
           Explore
         </NavLink>
-        <li className="navs">
+        <li className="navs" onClick={openModal}>
           <span className="icons">
             <BsPlusSquare />
           </span>
@@ -82,7 +87,7 @@ const SideNavs = ({ openSearchBox,searchBox }) => {
           </span>
           Saved
         </NavLink>
-        <NavLink className="navs">
+        <NavLink className="navs" to={`/profile/${userId}`}>
           <span className="icons">
             <div id="profile">
               <img src={defaultProfileImage} alt="" />

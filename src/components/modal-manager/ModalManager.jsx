@@ -1,11 +1,11 @@
 import React from "react";
 import './ModelManager.css'
 import CreatePost from "../create-post/CreatePost";
-const ModalManager = () => {
+const ModalManager = ({type,closePopup}) => {
   return (
-    <div id="main-modal">
+    <div id="main-modal" className="all-centered">
       <div id="main-modal-content">
-        {/* <CreatePost/> */}
+        <CreatePost mode="CREATE" closePopup={closePopup}/>
       </div>
     </div>
   );

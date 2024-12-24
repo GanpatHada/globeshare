@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useReducer, useState } from "react";
 import "./Explore.css";
 import { collection, getDocs } from "firebase/firestore";
 import { db, imageRef } from "../../assets/Firebase";
@@ -8,6 +8,9 @@ import { toast } from "react-toastify";
 import Loader from "../../components/loader/Loader";
 import { IoCloseCircle } from "react-icons/io5";
 import loading from '../../images/loading2.gif'
+import Waiting from '../../components/waiting/Waiting'
+import { explorePostReducer, initialExplorePostState } from "../../reducers/ExplorePostReducer";
+import { getExplorePosts } from "../../services/ExplorePostService";
 
 const SmallDeviceSearchBox = () => {
   const [searchInput, setSearchInput] = useState("");
@@ -37,25 +40,21 @@ const SmallDeviceSearchResults = () => {
 };
 
 const Explore = () => {
-  const [allPosts, setAllPosts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [loadingInfo, setLoadingInfo] = useState("");
-  const { posts } = useContext(PostContext);
+  const[state,dispatch]=useReducer(explorePostReducer,initialExplorePostState);
+  const{posts,loading}=state;
+
+  const startLoading=()=>dispatch({type:'START_LOADING'});
+  const stopLoading=()=>dispatch({type:'STOP_LOADING'})
+
   const fetchAllPosts = async () => {
     try {
-      setLoadingInfo("fetching Posts...");
-      setLoading(true);
-      let allPosts = [];
-      const posts = await getDocs(collection(db, "posts"));
-      posts.forEach((doc) => {
-        allPosts.push({ postId: doc.id, ...doc.data() });
-      });
-      setAllPosts([...allPosts, ...allPosts, ...allPosts]);
+      startLoading()
+      const posts = await getExplorePosts();
+      dispatch({type:'SET_POSTS',payload:[...posts,...posts]})
     } catch (error) {
       toast.error("Something went wrong!");
     } finally {
-      setLoadingInfo("");
-      setLoading(false);
+      stopLoading();
     }
   };
 
@@ -64,13 +63,15 @@ const Explore = () => {
   }, []);
   return (
     <div id="explore-page" className="app-pages">
-      {loading && <Loader info={loadingInfo} />}
+      {loading ? <Waiting />:
+      <>
       <SmallDeviceSearchBox />
       <div id="posts-wrapper">
-        {allPosts.map((post) => {
-          return <PostsCard key={post.postId} myPost={post} />;
+        {posts.map((post) => {
+          return <PostsCard key={post.postId} post={post} />;
         })}
       </div>
+      </>}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../assets/Firebase";
 
 export async function fetchMyFollowingsPosts(myFollowings){
@@ -14,3 +14,15 @@ export async function fetchMyFollowingsPosts(myFollowings){
       throw error;
     } 
 };
+
+export async function getPostDetails(postId){
+  try {
+    const docRef = doc(db, "posts", postId);
+    const docSnap = await getDoc(docRef);
+    if(!docSnap)
+      return null;
+    return {postId,...docSnap.data()}
+  } catch (error) {
+    throw error;
+  }
+}

@@ -1,0 +1,13 @@
+#waiting{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    z-index: 2;
+}
+#waiting div{
+    height: 5%;
+    aspect-ratio: 1/1;
+}

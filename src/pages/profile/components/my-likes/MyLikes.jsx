@@ -1,27 +1,55 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "./MyLikes.css";
-
-import Loader from "../../../../components/loader/Loader";
-import { PostContext } from "../../../../contexts/PostContext";
-import { UserContext } from "../../../../contexts/UserContext";
-import { eventWrapper } from "@testing-library/user-event/dist/utils";
 import NoDataFound from "../no-data-found/NoDataFound";
 import PostsCard from "../../../../components/posts-card/PostsCard";
+import { ProfileContext } from "../../../../contexts/ProfileContext";
+import { getPostDetails } from "../../../../services/PostService";
+import { toast } from "react-toastify";
+import Waiting from "../../../../components/waiting/Waiting";
 const MyLikes = () => {
-  const { posts } = useContext(PostContext);
-  const { user } = useContext(UserContext);
-  const myLikes = () => posts.filter((post) => post.likes.includes(user.uid));
-  return (
-    <>
+  const { state, dispatch } = useContext(ProfileContext);
+  const{likedPosts,postLoading,profile:{likes}}=state;
+ 
+  
 
-      {myLikes().length>0?<div className='posts-wrapper'>
-      {myLikes().map((myLike) => {
-        return <PostsCard myPost={myLike} key={myLike.id} />;
-      })}
-      </div>:<NoDataFound mode="likes" />}
-      
-    </>
-  );
+  const fetchLikes = async () => {
+    try {
+      dispatch({type:'START_POST_LOADING'});
+      let postDetails=[]
+      for(let postId of likes)
+      {
+         const post=await getPostDetails(postId);
+         postDetails.push(post);
+      }
+      dispatch({type:'SET_POSTS',payload:{type:'likedPosts',value:postDetails}}) 
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
+    finally{
+      dispatch({type:'STOP_POST_LOADING'});
+    }
+  };
+ 
+  useEffect(()=>{
+     fetchLikes();
+  },[])
+  
+
+  if(postLoading)
+    return <Waiting/>
+  else
+  {
+    if(likedPosts.length===0)
+      return <NoDataFound type="likes" />
+    else{
+      return(<div className="posts-wrapper">
+        {likedPosts.map((post) => {
+          return <PostsCard post={post} />;
+        })}
+      </div>)
+    }
+
+  }
 };
 
 export default MyLikes;

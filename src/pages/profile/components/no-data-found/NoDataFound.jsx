@@ -1,19 +1,12 @@
 import React, { useContext } from "react";
 import emptyBox from "../../../../images/empty-box.png";
-import { UserContext } from "../../../../contexts/UserContext";
-import { ModalContext } from "../../../../contexts/ModalContext";
-const NoDataFound = ({ mode, userId }) => {
-  const { user } = useContext(UserContext);
-  const { openCreatePostModal } = useContext(ModalContext);
+import './NoDataFound.css'
+const NoDataFound = ({type='data'}) => {
+  
   return (
-    <div className="no-data-found">
+    <div className="no-data-found all-centered">
       <img src={emptyBox} alt="" />
-      <span>{`opps! No ${mode} yet`}</span>
-      {user.uid === userId && mode==='posts' &&(
-        <button onClick={openCreatePostModal} className="primary-btn">
-          Create
-        </button>
-      )}
+      <p>{`No ${type} found`}</p>
     </div>
   );
 };

@@ -18,10 +18,10 @@ img{
 }
 
 :root{
-  --primary-color:#1877f2;
+  --primary-color:#2785ff;
   --primary-border:lightgray;
-  --logo-color2:#FF6AD2;
-  --logo-color1:#2F6AFF;
+  --logo-color2:#85EDFF;
+  --logo-color1:#023548;
 }
 button{
   border: none;
@@ -29,6 +29,9 @@ button{
   letter-spacing: normal;
   background-color: transparent;
  
+}
+button:disabled{
+  cursor: not-allowed;
 }
 .all-centered{
   display: flex;
@@ -82,9 +85,15 @@ button label{
 .primary-btn{
   color: white;
   background-color: var(--primary-color);
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-weight: bold;
 }
 .primary-btn:hover{
-  background-color: #1263cc;
+  background-color: #006eff;
+}
+.primary-btn:active{
+  background-color: rgb(68, 165, 255);
 }
 .primary-btn:disabled{
   cursor: not-allowed;

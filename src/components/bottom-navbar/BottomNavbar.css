@@ -1,6 +1,6 @@
 #bottom-nav{
     display: none;
-    border-top: 1px solid rgb(172, 172, 172);
+    outline: 1px solid rgb(172, 172, 172);
     background-color: white;
 }
 #bottom-nav ul{

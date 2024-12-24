@@ -1,8 +1,7 @@
 #login-btn,
 #signup-btn {
   color: whitesmoke;
-  background-color: var(--primary-color);
-  background: linear-gradient(135deg, var(--logo-color1), var(--logo-color2));
+  background-color: rgb(63, 185, 255);
 }
 
 .login-page-btns {
@@ -18,7 +17,8 @@
 
 #login-box {
   width: 420px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; */
+  border: 1px solid rgb(230, 230, 230);
   padding: 1.25rem;
   background-color: white;
   border-radius: 0.6rem;
@@ -109,9 +109,10 @@ input::placeholder {
 }
 #login-page aside .main-logo {
   margin-bottom: 20px;
+  height: 60px;
 }
 #login-page aside img {
-  height: 80px;
+  height: 100%;
   width: fit-content;
 }
 #login-page aside p {
@@ -200,7 +201,7 @@ hr {
 @media only screen and (max-width: 480px) {
   #login-page {
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
   }
   #login-page aside p {
     display: none;
@@ -210,16 +211,21 @@ hr {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 2rem auto;
+    margin: 1rem auto;
   }
-  #login-page aside h1 {
-    font-size: 2.4rem;
-    margin-bottom: 0px;
+  #login-page aside .main-logo {
+     height: 40px;
+     margin-bottom: 0px;
   }
   #login-box {
-    width: calc(100vw - 2.5rem);
+    width: 100vw;
+    box-shadow: none;
     margin: auto;
     margin-bottom: 3rem;
+    border: none;
+  }
+  #login-box h2{
+    display: none;
   }
 }
 

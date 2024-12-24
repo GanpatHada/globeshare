@@ -8,11 +8,7 @@ const useClickOutsideHandler = (ref, onClose, optionalRef = false) => {
         if (onClose) onClose();
       }
     };
-
-    // Bind the event listener
     document.addEventListener("mousedown", handleClickOutside);
-
-    // Cleanup on unmount
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };

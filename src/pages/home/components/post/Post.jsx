@@ -28,12 +28,12 @@ const PostHeader = () => {
   );
 };
 
-const PostImage = () => {
+const PostImage = ({images}) => {
   return (
     <section className="post-image">
       <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrx3DrA7A0jrJ1INYunhUAbC1ygCPXlILILg&s"
-        alt=""
+        src={images[0]}
+        alt="not found"
       />
     </section>
   );
@@ -58,33 +58,32 @@ const PostActions = () => {
   );
 };
 
-const PostLikesComments = () => {
+const PostLikesComments = ({likes,comments}) => {
   return (
     <section className="post-likes-comments">
       <p className="likes">
-        <span className="like-count">23</span>Likes
+        <span className="like-count">{likes.length}</span>Likes
       </p>
       <p className="comments">
-        <span className="comments-count">45</span>Comments
+        <span className="comments-count">{comments.length}</span>Comments
       </p>
     </section>
   );
 };
 
-const PostCaption = () => {
-  let caption =
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas ex Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas ex Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas ex ";
+const PostCaption = ({caption}) => {
+  let finalCaption =caption;
   const [showMore, setShowMore] = useState(false);
   useEffect(() => {
-    if (caption.length > 100) setShowMore(true);
+    if (finalCaption.length > 100) setShowMore(true);
   }, [caption]);
 
   return (
     <section className="post-caption">
-      {showMore ? caption.substring(0, 100) : caption}
-      <button onClick={() => setShowMore(!showMore)}>
+      {showMore ? finalCaption.substring(0, 100) : finalCaption}
+      {finalCaption.length>100&&<button onClick={() => setShowMore(!showMore)}>
         {showMore ? "read more" : "read less"}
-      </button>
+      </button>}
     </section>
   );
 };
@@ -102,9 +101,6 @@ const EmojiPopup = ({closeEmojiPopup,addEmojiToCaption}) => {
 const PostComment = () => {
   const [emojiPopup, setEmojiPopup] = useState(false);
   const [commentText,setCommentText]=useState('');
-
-  
-
   const closeEmojiPopup=()=>setEmojiPopup(false);
   const openEmojiPopup=()=>setEmojiPopup(true);
   const handleEmojiButtonClick=()=>{
@@ -137,14 +133,15 @@ const PostComment = () => {
   );
 };
 
-const Post = () => {
+const Post = ({feed}) => {
+  const{images,comments,likes,caption,time}=feed;
   return (
     <div className="post">
-      <PostHeader />
-      <PostImage />
+      <PostHeader time={time} />
+      <PostImage images={images} />
       <PostActions />
-      <PostLikesComments />
-      <PostCaption />
+      <PostLikesComments likes={likes} comments={comments} />
+      <PostCaption caption={caption} />
       <PostComment />
     </div>
   );

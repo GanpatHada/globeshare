@@ -1,0 +1,10 @@
+
+#profile-content > .no-data-found img{
+    height: 100px;
+    width: 100px;
+    
+}
+#profile-content > .no-data-found p{
+    color: gray;
+    margin-top: 10px;
+}

@@ -1,17 +1,71 @@
 #create-post-box{
-    width: 600px;
+    width: 800px;
     background-color: white;
-    min-height: 400px;
+    min-height: 720px;
     position: relative;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
-#create-post-box > header{
+#create-post-box .image-section{
+    flex: 1;
+    display: flex;
+    
+}
+#create-post-header{
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid lightgray;
     padding: 20px;
 }
-
+#create-post-footer{
+    background-color: rgb(241, 241, 241);
+    display: flex;
+    padding: 10px;
+    gap: 10px;
+    position: relative;
+}
+#create-post-caption{
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+#create-post-text-area{
+    font-size: 1rem;
+    padding: 10px;
+    flex: 1;
+    border: none;
+    border-radius: 5px;
+    resize: none;
+    font-family: inherit;
+}
+#create-post-text-area:focus{
+    outline: 1px solid rgb(56, 56, 56)
+}
+#create-post-emoji{
+    font-size: 2rem;
+    background-color: transparent;
+    width: fit-content;
+    color: gray;
+}
+#create-post-emoji:hover{
+    color: rgb(83, 83, 83);
+}
+#create-post-emoji-picker{
+    position: absolute;
+    top: -580px;
+    left: 10px;
+    height: 570px;
+    border: none;
+}
+#create-post-send{
+    flex: 0.1;
+    font-size: 2.2rem;
+    color: var(--primary-color);
+   
+}
+#create-post-send:disabled{
+    color: lightgray;
+}
 #create-post-box h2{
     display: flex;
     align-items: center;

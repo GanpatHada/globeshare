@@ -12,7 +12,7 @@ const Loader = ({ info }) => {
         <img src={mainLogoText} alt="" />
       </section>
       <section id="app-version-section">
-         <p>Version 1.01</p>
+         <p>Version 2.0</p>
       </section>
       {/* <p>{info ?? "Please Wait"}</p> */}
     </div>

@@ -10,11 +10,18 @@
   flex: 1;
 }
 #app-content > .app-pages {
+  min-height: 100vh;
   max-width: 1000px;
   margin: auto;
+  display: flex;
+  
 }
 @media only screen and (max-width: 768px) {
   #main-app {
     flex-direction: column;
+  }
+  #app-content > .app-pages {
+    min-height: calc(100vh - 110px);
+    
   }
 }

@@ -2,7 +2,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    
+    min-height: 100vh;   
 }
 #posts-wrapper{
     display: grid;
@@ -66,10 +66,17 @@
 }
 @media screen and (max-width:768px)
 {
+    #posts-wrapper{
+        gap: 2px;
+        padding: 2px;
+    }
     #small-device-search-box{
         display: flex;
     }
     #small-device-search-results{
         display: block;
+    }
+    #explore-page{
+        min-height: calc(100vh - 220px);
     }
 }

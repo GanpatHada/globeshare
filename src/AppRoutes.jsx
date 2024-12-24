@@ -4,23 +4,23 @@ import Home from "./pages/home/Home";
 import Profile from "./pages/profile/Profile";
 import Explore from "./pages/explore/Explore";
 import EditProfile from "./pages/edit-profile/EditProfile";
+import MyLikes from "./pages/profile/components/my-likes/MyLikes";
+import MyBookmarks from "./pages/profile/components/my-bookmarks/MyBookmarks";
+import MyPosts from "./pages/profile/components/my-posts/MyPosts";
+import { ProfileProvider } from "./contexts/ProfileContext";
 
 const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/profile/:userId" element={<Profile content={"POSTS"} />} />
       <Route path="/explore" element={<Explore />} />
-      <Route
-        path="/profile/:userId/likes"
-        element={<Profile content={"LIKES"} />}
-      />
-      <Route
-        path="/profile/:userId/bookmarks"
-        element={<Profile content={"BOOKMARKS"} />}
-      />
+      <Route path="/profile/:userId" element={<ProfileProvider><Profile /></ProfileProvider>}>
+        <Route  index element={<MyPosts />} />
+        <Route  path="/profile/:userId/likes" element={<MyLikes />} />
+        <Route  path="/profile/:userId/bookmarks" element={<MyBookmarks />} />
+      </Route>
       <Route path="profile/edit" element={<EditProfile />} />
-      <Route  path='*' element={<Navigate to='404'/>}/>
+      <Route path="*" element={<Navigate to="404" />} />
     </Routes>
   );
 };

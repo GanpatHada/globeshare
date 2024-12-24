@@ -7,17 +7,18 @@ import { PostContext } from "../../../../contexts/PostContext";
 import { UserContext } from "../../../../contexts/UserContext";
 import Followers from "../../../../components/followers/Followers";
 import Modal from "../../../../components/modal/Modal";
+import { FaLink } from "react-icons/fa6";
 const ProfileHeader = ({ userProfile }) => {
-  const { posts } = useContext(PostContext);
-  const { user, logOut } = useContext(UserContext);
+  console.log(userProfile);
   const navigate = useNavigate();
-  const { bio, profilePhoto, userName, followers, following, website, userId } =userProfile;
-  const { openFollowersModal, closeFollowersModal, showFollowersModal } = useContext(ModalContext);
-  const postsCount = () => posts.filter((post) => post.user === userId).length;
+  const { bio, profilePhoto, userName, followers, following, website, userId } =
+    userProfile;
+  const { openFollowersModal, closeFollowersModal, showFollowersModal } =
+    useContext(ModalContext);
+  // const postsCount = () => posts.filter((post) => post.user === userId).length;
   const [modalFor, setModalFor] = useState(null);
 
   const handleFollowersClick = (modalFor) => {
-    
     setModalFor(modalFor);
     openFollowersModal();
   };
@@ -28,48 +29,46 @@ const ProfileHeader = ({ userProfile }) => {
           <Followers modalFor={modalFor} userProfile={userProfile} />
         </Modal>
       )}
-      <div id="main-profile-image">
-        <img src={profilePhoto ?? profile} alt="" />
-      </div>
-      <div id="profile-bio">
+      <section className="profile-image-section">
+        <div className="profile-image">
+          <img src={profilePhoto ?? profile} alt="" />
+        </div>
+      </section>
+      <section className="profile-bio-section">
         <div>
-          <h2>{userName}</h2>
-          {user.uid === userId && (
-            <div id="main-buttons">
-              <button
-                className="secondary-btn"
-                onClick={() => navigate("/profile/edit")}
-              >
-                Edit Profile
-              </button>
-              <button className="secondary-btn" onClick={logOut}>
-                Logout
-              </button>
-            </div>
-          )}
+          <h3>{"username@rtj" || "unknown"}</h3>
+          <button onClick={()=>navigate("/profile/edit")}>Edit Profile</button>
+          <button>Logout</button>
         </div>
+
         <div id="posts-info">
-          <span><strong>{postsCount()}</strong> posts</span>
-          <span>
-            <button onClick={()=>handleFollowersClick('followers')}>
-              <strong>{followers.length}</strong> followers
-            </button>
-          </span>
-          <span>
-            <button onClick={()=>handleFollowersClick('following')}>
-              <strong>{following.length} </strong>following
-            </button>
-          </span>
+          <p><strong>{"2"}</strong>Posts</p>
+          <button onClick={() => handleFollowersClick("followers")}>
+            <strong>{followers.length}</strong>Followers
+          </button>
+          <button onClick={() => handleFollowersClick("following")}>
+            <strong>{following.length}</strong>Following
+          </button>
         </div>
-        <section>
+        <div id="profile-bio">
+          <h4>Ganpat Hada</h4>
           <p>{bio}</p>
-          <h5>
-            <a href={website} rel="noreferrer" target="_blank">
-              {website?.replace(/^Https:\/\//i, "").replace(/\/$/, "")}
+          <p>
+            <a
+              href={website}
+              title="https://localhost:500"
+              rel="noreferrer"
+              target="_blank"
+            >
+              <span>
+                <FaLink />
+              </span>
+              this is website
+              {/* {website?.replace(/^Https:\/\//i, "").replace(/\/$/, "")} */}
             </a>
-          </h5>
-        </section>
-      </div>
+          </p>
+        </div>
+      </section>
     </header>
   );
 };
