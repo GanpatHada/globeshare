@@ -16,11 +16,11 @@ import Waiting from "../waiting/Waiting";
 import { toast } from "react-toastify";
 import { UserContext } from "../../contexts/UserContext";
 
-const CreatePostHeader = ({ mode,closePopup }) => {
+const CreatePostHeader = ({ mode,closeModal }) => {
   return (
     <header id="create-post-header">
       <h2>{mode.charAt(0) + mode.slice(1).toLowerCase()} Post</h2>
-      <span id="cr-btn" onClick={closePopup}>
+      <span id="cr-btn" onClick={closeModal}>
         <CrossButton />
       </span>
     </header>
@@ -59,7 +59,7 @@ const CreatePostFooter = ({ state, dispatch }) => {
   const handlePostSend=async()=>{  
     try {
       startLoading()
-      const postDetails=await savePostData(userState.user.userId,images,caption);
+      await savePostData(userState.user.userId,images,caption);
       toast.success("Posted successfully")
     } catch (error) {
       toast.error("Something went wrong")
@@ -111,7 +111,7 @@ const CreatePostFooter = ({ state, dispatch }) => {
   );
 };
 
-const CreatePost = ({ mode,closePopup}) => {
+const CreatePost = ({ mode,closeModal}) => {
   const [state, dispatch] = useReducer(
     createPostReducer,
     initialCreatePostState
@@ -120,7 +120,7 @@ const CreatePost = ({ mode,closePopup}) => {
   return (
     <div id="create-post-box">
       {loading && <Waiting/>}
-      <CreatePostHeader mode={mode} closePopup={closePopup} />
+      <CreatePostHeader mode={mode} closeModal={closeModal} />
       <CreatePostUploads state={state} dispatch={dispatch} />
       <CreatePostFooter state={state} dispatch={dispatch} />
     </div>

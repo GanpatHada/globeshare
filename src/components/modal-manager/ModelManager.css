@@ -1,13 +1,22 @@
-#main-modal{
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba(0, 0, 0, 0.747);
-    z-index: 5;
+#main-modal {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.747);
+  z-index: 5;
 }
-#main-modal-content{
-     border-radius: 5px;
-     overflow: hidden;
+#main-modal-content {
+  border-radius: 5px;
+  overflow: hidden;
+  animation: modal-animation 0.2s ease-in-out 0s 1 normal forwards;
+}
+@keyframes modal-animation {
+  0%{
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

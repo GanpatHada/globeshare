@@ -1,11 +1,12 @@
 import React from "react";
 import './ModelManager.css'
-import CreatePost from "../create-post/CreatePost";
-const ModalManager = ({type,closePopup}) => {
+const ModalManager = ({children,closeModal}) => {
   return (
     <div id="main-modal" className="all-centered">
       <div id="main-modal-content">
-        <CreatePost mode="CREATE" closePopup={closePopup}/>
+        {
+          React.cloneElement(children,{closeModal})
+        }
       </div>
     </div>
   );

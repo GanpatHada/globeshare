@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import LeftSideBar from "./components/left-side-bar/LeftSideBar";
 import "./Main.css";
-import Home from "./pages/home/Home";
 import Header from "./components/header/Header";
 import BottomNavbar from "./components/bottom-navbar/BottomNavbar";
 import AppRoutes from "./AppRoutes";
@@ -12,6 +11,7 @@ import Loader from "./components/loader/Loader";
 import { UserContext } from "./contexts/UserContext";
 import { getCurrentUserDetails } from "./services/UserService";
 import { toast } from "react-toastify";
+import CreatePost from './components/create-post/CreatePost'
 
 const AppSideNav = () => {
   const [searchBox, setSearchBox] = useState(false);
@@ -37,7 +37,7 @@ const AppContent = () => {
 };
 
 const Main = () => {
-  const { showModal, openModal, closeModal } = useContext(ModalContext);
+  const { isModalOpen, closeModal, modalType } = useContext(ModalContext);
   const { state, dispatch } = useContext(UserContext);
   const {
     user: { userId },
@@ -51,7 +51,6 @@ const Main = () => {
     } catch (error) {
       toast.error("Unable to fetch user details");
     } finally {
-      
     }
   };
 
@@ -64,7 +63,11 @@ const Main = () => {
         <Loader />
       ) : (
         <>
-          {showModal && <ModalManager closePopup={closeModal} />}
+          {isModalOpen && modalType === "CREATE_POST" && (
+            <ModalManager closeModal={closeModal}>
+               <CreatePost mode={'CREATE'} closeModal={closeModal}/>
+            </ModalManager>
+          )}
           <AppSideNav />
           <Header />
           <AppContent />

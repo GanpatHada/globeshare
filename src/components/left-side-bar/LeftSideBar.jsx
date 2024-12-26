@@ -23,9 +23,7 @@ const SideNavHeader = ({ searchBox }) => {
 
 const MenuNav = () => {
   const [menuBox, setMenuBox] = useState(false);
-
   const handleMenuClick = (e) => setMenuBox(true);
-
   const closeMenuBox = () => setMenuBox(false);
   return (
     <ul>
@@ -46,8 +44,9 @@ const MenuNav = () => {
 
 const SideNavs = ({ openSearchBox,searchBox }) => {
   const{state}=useContext(UserContext);
-  const{user:{userId}}=state;
-  const{openModal}=useContext(ModalContext)
+  const{userId,profilePhoto}=state.user;
+  const{openModal}=useContext(ModalContext);
+
   return (
     <section id="side-navs">
       <ul>
@@ -69,7 +68,7 @@ const SideNavs = ({ openSearchBox,searchBox }) => {
           </span>
           Explore
         </NavLink>
-        <li className="navs" onClick={openModal}>
+        <li className="navs" onClick={()=>openModal('CREATE_POST')}>
           <span className="icons">
             <BsPlusSquare />
           </span>
@@ -88,9 +87,9 @@ const SideNavs = ({ openSearchBox,searchBox }) => {
           Saved
         </NavLink>
         <NavLink className="navs" to={`/profile/${userId}`}>
-          <span className="icons">
+          <span className="icons" >
             <div id="profile">
-              <img src={defaultProfileImage} alt="" />
+              <img src={profilePhoto?.url ?? defaultProfileImage} alt="" />
             </div>
           </span>
           Profile

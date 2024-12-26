@@ -1,13 +1,13 @@
 #avatars-box .avatar-image{
-    width:90px;
-    height: 90px;
+    width:80px;
+    height: 80px;
     border-radius: 50%;
     overflow: hidden;
-    margin: 15px;
+    margin: 10px;
     background-color:white;
     cursor: pointer;
-    position: relative;
-   
+    position: relative; 
+    box-sizing: content-box;
 }
 #avatars-box {
     display: flex;
@@ -16,6 +16,26 @@
     height: 270px!important;
     justify-content: center;
     
+}
+#selected-avatar{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    font-size: 2rem;
+    color: greenyellow;
+    background-color: rgba(0, 0, 0, 0.548);
+    
+}
+
+#avatars-box::-webkit-scrollbar{
+    width: 5px;
+    background-color: transparent;
+}
+#avatars-box::-webkit-scrollbar-thumb{
+    background-color: rgb(150, 150, 150);
+    border-radius: 2.5px;
 }
 #tick{
     position: absolute;
@@ -36,8 +56,6 @@
    
 }
 #avatars-box .avatar-image:hover{
-    /* outline: 2px solid skyblue;
-    outline-offset: 5px; */
     transform: scale(1.1);
     transition: all 0.1s ease-in-out;
     

@@ -3,20 +3,19 @@ import "./ProfileHeader.css";
 import { useNavigate } from "react-router-dom";
 import profile from "../../../../images/profile.png";
 import { ModalContext } from "../../../../contexts/ModalContext";
-import { PostContext } from "../../../../contexts/PostContext";
-import { UserContext } from "../../../../contexts/UserContext";
 import Followers from "../../../../components/followers/Followers";
 import Modal from "../../../../components/modal/Modal";
 import { FaLink } from "react-icons/fa6";
+import { ProfileContext } from "../../../../contexts/ProfileContext";
 const ProfileHeader = ({ userProfile }) => {
   console.log(userProfile);
   const navigate = useNavigate();
-  const { bio, profilePhoto, userName, followers, following, website, userId } =
+  const { bio, profilePhoto, userName,fullName, followers, following, website,} =
     userProfile;
   const { openFollowersModal, closeFollowersModal, showFollowersModal } =
     useContext(ModalContext);
-  // const postsCount = () => posts.filter((post) => post.user === userId).length;
   const [modalFor, setModalFor] = useState(null);
+  const {state:{postedPosts},dispatch}=useContext(ProfileContext)
 
   const handleFollowersClick = (modalFor) => {
     setModalFor(modalFor);
@@ -36,13 +35,13 @@ const ProfileHeader = ({ userProfile }) => {
       </section>
       <section className="profile-bio-section">
         <div>
-          <h3>{"username@rtj" || "unknown"}</h3>
+          <h3>{userName}</h3>
           <button onClick={()=>navigate("/profile/edit")}>Edit Profile</button>
           <button>Logout</button>
         </div>
 
         <div id="posts-info">
-          <p><strong>{"2"}</strong>Posts</p>
+          <p><strong>{postedPosts.length}</strong>Posts</p>
           <button onClick={() => handleFollowersClick("followers")}>
             <strong>{followers.length}</strong>Followers
           </button>
@@ -51,20 +50,19 @@ const ProfileHeader = ({ userProfile }) => {
           </button>
         </div>
         <div id="profile-bio">
-          <h4>Ganpat Hada</h4>
+          <h4>{fullName}</h4>
           <p>{bio}</p>
           <p>
             <a
               href={website}
-              title="https://localhost:500"
+              title={website}
               rel="noreferrer"
               target="_blank"
             >
               <span>
                 <FaLink />
               </span>
-              this is website
-              {/* {website?.replace(/^Https:\/\//i, "").replace(/\/$/, "")} */}
+              {website?.replace(/^Https:\/\//i, "").replace(/\/$/, "")}
             </a>
           </p>
         </div>

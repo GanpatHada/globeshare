@@ -5,22 +5,26 @@
   background-color: #f2f4f7;
 }
 #app-content {
-  height: 100%;
+  height: inherit;
   overflow: auto;
   flex: 1;
 }
-#app-content > .app-pages {
+#app-content::-webkit-scrollbar{
+  display: none;
+}
+#app-content  .app-pages {
   min-height: 100vh;
   max-width: 1000px;
   margin: auto;
-  display: flex;
+  flex: 1;
+  
   
 }
 @media only screen and (max-width: 768px) {
   #main-app {
     flex-direction: column;
   }
-  #app-content > .app-pages {
+  #app-content  .app-pages {
     min-height: calc(100vh - 110px);
     
   }

@@ -1,5 +1,6 @@
 #profile-nav{
-   outline: 1px solid rgb(233, 233, 233);
+   border-top: 1px solid rgb(233, 233, 233);
+   border-bottom: 1px solid rgb(233, 233, 233);
 }
 #profile-nav-container{
     width: 100%;
@@ -9,14 +10,26 @@
 }
 #profile-nav-container > a{
     flex: 1;
-    text-align: center;
+    justify-content: center;
     padding: 10px ;
-    color: rgb(43, 43, 43);
+    color: rgb(75, 75, 75);
+    display: flex;
+    height: 40px;
+    align-items: center;
+    position: relative;
+    
     
 }
 #profile-nav-container > a:hover{
     text-decoration: none;
+    color: rgb(24, 24, 24);
 }
-#profile-nav-container > a.active{
-    border-bottom: 2px solid rgb(66, 66, 66);
+#profile-nav-container > a.active::after{
+    content: "";
+    border-bottom: 1px solid black;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
 }

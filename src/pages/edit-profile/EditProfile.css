@@ -1,10 +1,7 @@
 #edit-profile-page{
-    background-color: rgb(233, 255, 152);
-    flex: 1;
     display: flex;
-    justify-content: center;
-    
-    
+    justify-content: center;  
+    height: 100%; 
 }
 #edit-profile-page-content{
     display: flex;
@@ -13,8 +10,7 @@
     gap: 10px;
     padding: 20px;
     background-color: white;
-    position: relative;
-    
+    position: relative;   
 }
 #edit-profile-page-content h1{
     margin: 20px 0px;
@@ -24,6 +20,10 @@
     padding: 10px 0px;
     display: flex;
     flex-direction: column;
+}
+#edit-profile-page-content .button-section{
+    flex-direction: row;
+    gap: 10px;
 }
 #edit-profile-page-content  .profile-image-section{
     display: flex;
@@ -42,12 +42,22 @@
     overflow: hidden;
 
 }
+#edit-profile-page-content .profile-username{
+    position: relative;
+}
+#edit-profile-page-content #username-loader{
+    position: absolute;
+    top: 40px;
+    right: 5px;
+    height: 32px;
+    width: 32px;
+    padding: 5px;
+}
 #edit-profile-page-content > section input[type='text']
 {
     border: 1.5px solid rgb(216, 216, 216);
     padding: 10px;
     border-radius: 5px;
-    border-color: rgb(187, 0, 0);
 }
 #edit-profile-page-content > section label{
     font-size: 1rem;
@@ -58,6 +68,15 @@
     font-size: 0.8rem;
     margin-top: 5px;
     color: rgb(78, 78, 78);
+}
+#edit-profile-page-content > section .success-username{
+    color: rgb(0, 143, 0);
+    font-weight: bold;
+}
+#edit-profile-page-content > section .error-username{
+   
+    color: rgb(177, 0, 0);
+    font-weight: bold;
 }
 #edit-profile-page-content > section #bio{
     resize: none;
@@ -89,6 +108,16 @@
 #edit-profile-page-content #update-profile-button{
     width: fit-content;
     
+}
+#profile-update-cancel-button{
+    background-color: rgb(255, 215, 215);
+    color: darkred;
+    padding: 10px 15px;
+    width: fit-content;
+    border-radius: 5px;
+}
+#profile-update-cancel-button:hover{
+    background-color: rgb(255, 187, 187);
 }
 @media screen and (max-width:768px) {
     #edit-profile-page-content{

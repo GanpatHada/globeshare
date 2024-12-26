@@ -8,6 +8,7 @@ import MyLikes from "./pages/profile/components/my-likes/MyLikes";
 import MyBookmarks from "./pages/profile/components/my-bookmarks/MyBookmarks";
 import MyPosts from "./pages/profile/components/my-posts/MyPosts";
 import { ProfileProvider } from "./contexts/ProfileContext";
+import { EditProfileProvider } from "./contexts/EditProfileContext";
 
 const AppRoutes = () => {
   return (
@@ -19,7 +20,7 @@ const AppRoutes = () => {
         <Route  path="/profile/:userId/likes" element={<MyLikes />} />
         <Route  path="/profile/:userId/bookmarks" element={<MyBookmarks />} />
       </Route>
-      <Route path="profile/edit" element={<EditProfile />} />
+      <Route path="profile/edit" element={<EditProfileProvider><EditProfile /></EditProfileProvider>} />
       <Route path="*" element={<Navigate to="404" />} />
     </Routes>
   );

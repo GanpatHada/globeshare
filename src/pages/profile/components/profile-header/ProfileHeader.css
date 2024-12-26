@@ -15,6 +15,7 @@
     height: 160px;
     width: 160px;
     border-radius: 80px;
+    overflow: hidden;
 }
 #profile-header > section:first-child{
     justify-content: end;

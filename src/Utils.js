@@ -1,9 +1,3 @@
-import React from 'react'
-
-const Utils = () => {
-  return (
-    <div>Utils</div>
-  )
+export function containsWhiteSpace(string){
+  return string.trim().includes(" ");
 }
-
-export default Utils

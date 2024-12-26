@@ -1,17 +1,18 @@
-import { createContext, useState } from "react";
+import { createContext, useReducer} from "react";
+import { initialModalState, modalReducer } from "../reducers/ModalReducer";
 
 export const ModalContext = createContext();
 export function ModalProvider({ children }) {
-  const [showModal,setShowModal]=useState(false);
+  const [state, dispatch] = useReducer(modalReducer, initialModalState);
 
-  const openModal=()=>setShowModal(true);
-  const closeModal=()=>setShowModal(false);
-
+  const openModal=(type)=>dispatch({type:'OPEN_MODAL',payload:type})
+  const closeModal=()=>dispatch({type:'CLOSE_MODAL'})
+  const{type:modalType,isOpen:isModalOpen}=state;
 
   return (
     <ModalContext.Provider
       value={{
-        openModal,closeModal,showModal
+        openModal,closeModal,isModalOpen,modalType
       }}
     >
       {children}
