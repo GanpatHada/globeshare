@@ -6,9 +6,10 @@ export const userObject = {
   followers: [],
   following: [],
   bookmarks: [],
-  likes: [],
   bio: "i am using globeshare",
   website: null,
+  isPrivate:false,
+  fullName:null
 };
 
 function createInitialUsrName(email) {

@@ -28,7 +28,7 @@ const SelectProfilePhotoModalWrapper = () => {
 const EditProfile = () => {
   const navigate = useNavigate();
   const { state: userState, dispatch: userDispatch } = useContext(UserContext);
-  const { user } = userState;
+  const { userDetails:user } = userState;
   const { openModal } = useContext(ModalContext);
   const {state,dispatch} = useContext(EditProfileContext)
 

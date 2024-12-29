@@ -5,14 +5,6 @@ import GoogleButton from "./GoogleButton";
 import GuestButton from "./GuestButton";
 import { useReducer, useState } from "react";
 import { toast } from "react-toastify";
-import isEmail from "validator/lib/isEmail";
-import {
-  createUserWithEmailAndPassword,
-  setPersistence,
-  browserLocalPersistence,
-} from "firebase/auth";
-import { auth, db } from "../../../assets/Firebase";
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import {
   initialSignupFormState,

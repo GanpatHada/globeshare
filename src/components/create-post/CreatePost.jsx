@@ -59,7 +59,7 @@ const CreatePostFooter = ({ state, dispatch }) => {
   const handlePostSend=async()=>{  
     try {
       startLoading()
-      await savePostData(userState.user.userId,images,caption);
+      await savePostData(userState.user,images,caption);
       toast.success("Posted successfully")
     } catch (error) {
       toast.error("Something went wrong")

@@ -1,0 +1,150 @@
+#post-details{
+    max-height: 800px;
+    max-width: 1000px;
+    width: calc(100vw - 120px);
+    height: calc(100vh - 80px);
+    background-color: white;
+    display: flex;
+}
+#post-details .image-section{
+    flex: 1;
+    background-color: black;
+    overflow: hidden;
+    
+     
+}
+.swiper-button-prev , .swiper-button-next{
+    background-color: rgb(212, 212, 212);
+    color: rgb(0, 0, 0)!important;
+    width: 40px!important;
+    height: 40px!important;
+    border-radius: 20px!important;
+    
+    
+}
+.swiper-button-prev::after,.swiper-button-next::after{
+    font-size: 1rem!important;
+    font-weight: bold!important;
+    
+}
+#post-details .image-section .swiper{
+    width: 100%!important;
+    height: 100%;
+}
+#post-details .post-info-section{
+    flex:1;
+    display: flex;
+    flex-direction: column;
+}
+
+
+#post-details .post-info-section > *{
+    padding: 10px;
+}
+#post-details .post-info-section header{
+    height: fit-content;
+    border-bottom: 1px solid #ececec;
+    
+}
+#post-details .post-info-section header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#post-details .post-info-section header>div{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+#post-details .post-info-section header .user-image{
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+    background-color:whitesmoke;
+    flex-shrink: 0;
+}
+#post-details .post-info-section header p{
+    font-size: 0.9rem;
+}
+#post-details .post-info-section header button{
+    font-size: 1.5rem;
+
+}
+#post-details .post-info-section .post-comments{
+    flex: 1;
+    overflow: auto;   
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+#post-details .post-info-section .post-comments::-webkit-scrollbar{
+    display: none;
+}
+#post-details .post-info-section .post-actions{
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #ececec;
+    
+   
+    
+    
+}
+#post-details .post-info-section .post-actions div{
+    display: flex;
+    gap: 20px;
+    
+
+}
+#post-details .post-info-section .post-actions button{
+    font-size: 1.5rem;
+}
+#post-details .post-info-section .post-actions button:hover{
+    color: gray;
+}
+#post-details .post-info-section .post-time{
+    font-size: 0.8rem;
+    color: rgb(70, 70, 70);
+    border-bottom: 1px solid #ececec;
+    
+}
+#post-details .post-info-section footer{
+    
+    display: flex;
+    gap: 10px;
+}
+#post-details .post-info-section footer .emoji-button{
+    font-size: 1.4rem;
+}
+#post-details .post-info-section footer .emoji-button:hover{
+    color: gray;
+}
+#post-details .post-info-section footer .comment-input{
+    flex: 1;
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+}
+#post-details .post-info-section footer .post-comment-button{
+    color: var(--primary-color);
+}
+
+/*post comment box*/
+
+#post-details .post-info-section .post-comments .post-comment{
+    display: flex;
+    align-items: top;
+    gap: 10px;
+    padding: 20px 10px;
+}
+.post-comment .user-profile{
+    
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+    background-color: whitesmoke;
+    flex-shrink: 0;
+}
+.post-comment p{
+    font-size: 0.8rem;
+}

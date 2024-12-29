@@ -11,7 +11,7 @@ import { AiOutlineHeart, AiOutlineMenu } from "react-icons/ai";
 import { MdOutlineExplore } from "react-icons/md";
 import defaultProfileImage from "../../images/profile.png";
 import { ModalContext } from "../../contexts/ModalContext";
-import { UserContext } from "../../contexts/UserContext";
+import { useUser } from "../../hooks/useUser";
 
 const SideNavHeader = ({ searchBox }) => {
   return (
@@ -43,8 +43,7 @@ const MenuNav = () => {
 };
 
 const SideNavs = ({ openSearchBox,searchBox }) => {
-  const{state}=useContext(UserContext);
-  const{userId,profilePhoto}=state.user;
+  const{user:{profilePhoto,userId}}=useUser();
   const{openModal}=useContext(ModalContext);
 
   return (

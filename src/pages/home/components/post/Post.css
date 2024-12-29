@@ -1,158 +1,147 @@
-.post{
-     display: flex;
-     flex-direction: column;
-     /* border-bottom: 1px solid rgb(177, 177, 177); */
-     background-color: white;
-     border: 1px solid rgb(233, 233, 233);
-     
-
+.post {
+  display: flex;
+  flex-direction: column;
+  /* border-bottom: 1px solid rgb(177, 177, 177); */
+  background-color: white;
+  border: 1px solid rgb(233, 233, 233);
 }
-.post:last-child{
-    border: none;
+.post:last-child {
+  border: none;
 }
-.post-header{
-    display: flex;
-    height: 60px;
-    padding: 10px;
-    align-items: center;
-    gap: 10px;
-    position: relative;
+.post .post-header {
+  display: flex;
+  height: 60px;
+  padding: 10px;
+  align-items: center;
+  gap: 10px;
+  position: relative;
 }
-.post-header .user-name{
-    font-size: 1rem;
-    font-weight: 500;
+.post .post-header .user-name {
+  font-size: 1rem;
+  font-weight: 500;
 }
-.post-header .post-profile{
-    height: 100%;
-    aspect-ratio: 1/1;
-    border-radius: 50%;
-    overflow: hidden;
+.post .post-header .post-profile {
+  height: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  overflow: hidden;
 }
-.post-header .post-profile img{
-    object-fit: contain;
+.post .post-header .post-profile img {
+  object-fit: contain;
 }
-.post-header .post-time{
-    font-size: 0.9rem;
-    color: rgb(167, 167, 167);
+.post .post-header .post-time {
+  font-size: 0.9rem;
+  color: rgb(167, 167, 167);
 }
-.post-header .more{
-    font-size: 2rem;
-    position: absolute;
-    right: 10px;
-    color: rgb(29, 29, 29);
-    
+.post .post-header .more {
+  font-size: 2rem;
+  position: absolute;
+  right: 10px;
+  color: rgb(29, 29, 29);
 }
-.post-image{
-     width: 100%;
-     aspect-ratio: 2/1.5;
-     overflow: hidden;
-     background-color: rgb(53, 53, 53);
+.post .post-image {
+  width: 100%;
+  aspect-ratio: 2/1.5;
+  overflow: hidden;
+  background-color: rgb(53, 53, 53);
 }
-.post-image img{
-      object-fit: contain;
+.post .post-image img {
+  object-fit: contain;
 }
-.post-actions{
-      display: flex;
-      gap: 20px;
-      position: relative;
-      height: 80px;
-      align-items: center;
-      padding: 10px;
+.post .post-actions {
+  display: flex;
+  gap: 20px;
+  position: relative;
+  height: 80px;
+  align-items: center;
+  padding: 10px;
 }
-.post-actions button{
-    font-size:1.6rem;
-    transition: 0.2s ease-in-out;
-    
+.post .post-actions button {
+  font-size: 1.6rem;
+  transition: 0.2s ease-in-out;
 }
-.post-likes-comments{
-    display: flex;
-    padding-left: 10px;
-    gap: 15px;
-    
+.post .post-likes-comments {
+  display: flex;
+  padding-left: 10px;
+  gap: 15px;
 }
-.post-likes-comments > p{
-    font-size: 1rem;
+.post .post-likes-comments > p {
+  font-size: 1rem;
 }
-.post-likes-comments > p >span{
-    margin-right: 5px;
+.post .post-likes-comments > p > span {
+  margin-right: 5px;
 }
-.post-actions button:last-child{
-    position: absolute;
-    right: 10px;
+.post .post-actions button:last-child {
+  position: absolute;
+  right: 10px;
 }
-.post button:hover{
-    color: gray;
+.post button:hover {
+  color: gray;
 }
-.post .post-caption{
-    padding: 10px;
-    text-align: left;
-    color: rgb(63, 63, 63);
+.post .post-caption {
+  padding: 10px;
+  text-align: left;
+  color: rgb(63, 63, 63);
 }
-.post-caption button{
-    color: var(--primary-color);
-    font-size: 1rem;
-    margin-left: 10px;
-    text-transform: capitalize;
-    font-weight: 500;
+.post .post-caption button {
+  color: var(--primary-color);
+  font-size: 1rem;
+  margin-left: 10px;
+  text-transform: capitalize;
+  font-weight: 500;
 }
-.post-caption button:hover{
-    text-decoration: underline;
-    color: var(--primary-color);
+.post .post-caption button:hover {
+  text-decoration: underline;
+  color: var(--primary-color);
 }
-.post-comment{
-    height: 60px;
-    display: flex;
-    gap: 10px;
-    position: relative;
-    align-items: center;
+.post .post-comment {
+  height: 60px;
+  display: flex;
+  gap: 10px;
+  position: relative;
+  align-items: center;
 }
-.post-comment > *{
-    display: flex;   
+.post .post-comment > * {
+  display: flex;
 }
-.post-comment .comment-input-section{
-    
-    flex: 1;
-    display: flex;
-   
+.post .post-comment .comment-input-section {
+  flex: 1;
+  display: flex;
 }
-.post-comment .comment-input{
-    height: 100%;
-    flex: 1;
-    padding: 10px;
-    border: none;
+.post .post-comment .comment-input {
+  height: 100%;
+  flex: 1;
+  padding: 10px;
+  border: none;
 }
-.post-comment .comment-input::placeholder{
-    color: lightgray;
+.post .post-comment .comment-input::placeholder {
+  color: lightgray;
 }
-.post-comment-button{
-    font-size: 0.9rem;
-    color: rgb(79, 190, 255);
-    height: fit-content;
-    
+.post .post-comment-button {
+  font-size: 0.9rem;
+  color: rgb(79, 190, 255);
+  height: fit-content;
 }
-.post-comment .post-comment-button:hover{
-    color: rgb(44, 143, 255);
+.post .post-comment .post-comment-button:hover {
+  color: rgb(44, 143, 255);
 }
-button.emoji{
-    font-size: 1.4rem;
-    padding: 10px;
-    height: fit-content;
-    color: rgb(63, 63, 63);
-    transition: 0.2s ease-in-out;
-    width: 3rem;
-    
+.post button.emoji {
+  font-size: 1.4rem;
+  padding: 10px;
+  height: fit-content;
+  color: rgb(63, 63, 63);
+  transition: 0.2s ease-in-out;
+  width: 3rem;
 }
 
-
-.emoji-popup{
-    position: absolute;
-    top: -460px;
-    right: 10px;
-    height: 450px;
-    width: 350px;
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
-    border-radius: 10px;
-    overflow: hidden;
-    
+.post .emoji-popup {
+  position: absolute;
+  top: -460px;
+  right: 10px;
+  height: 450px;
+  width: 350px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+  border-radius: 10px;
+  overflow: hidden;
 }

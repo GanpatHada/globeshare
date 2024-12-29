@@ -4,13 +4,15 @@ import "./PostsCard.css";
 import {AiFillHeart} from 'react-icons/ai'
 import {FaComment} from 'react-icons/fa'
 import { ModalContext } from "../../contexts/ModalContext";
+import { PostDetailsContext } from "../../contexts/PostDetailsContext";
 
 const PostsCard = ({ post }) => {
-  const{setCurrentPost,openCommentsModal}=useContext(ModalContext)
+  const {openModal}=useContext(ModalContext)
+  const {state,dispatch}=useContext(PostDetailsContext);
 
   const handlePostClick=()=>{
-      setCurrentPost(post.postId);
-      openCommentsModal()
+      dispatch({type:'SET_POST_DETAILS',payload:post})
+      openModal('POST_DETAILS');
   }
   
   return (

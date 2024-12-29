@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from "react";
-import { PostContext } from "../../../../contexts/PostContext";
 import "./MyPosts.css";
 import Waiting from '../../../../components/waiting/Waiting'
 import NoDataFound from "../no-data-found/NoDataFound";

@@ -4,18 +4,30 @@ import { UserContext } from "../../contexts/UserContext";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../assets/Firebase";
 import Loader from "../loader/Loader";
+import { useUser } from "../../hooks/useUser";
+import { getCurrentUserDetails } from "../../services/UserService";
+import { toast } from "react-toastify";
 export const PrivateRoute = ({ children }) => {
-  const { state, dispatch } = useContext(UserContext);
-  const { user, loading } = state;
+  const { user, loading, stopLoading, saveUser } = useUser();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      dispatch({type:"SET_USER",payload:{userId:currentUser.uid}})
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        try {
+          const userDetails = await getCurrentUserDetails(user.uid);
+          saveUser(userDetails);
+        }
+        catch (error) {
+          toast.error("Unable to get User Details");
+          console.log(error);
+        }
+        finally {
+          stopLoading();
+        }
+      } else saveUser(null);
     });
     return () => unsubscribe();
   }, []);
-  if(!user)
-    return <Loader/>
-  else
-    return user?children:<Navigate to={"/login"}/>  
+  if (loading) return <Loader />;
+  else return user ? children : <Navigate to={"/auth"} />;
 };

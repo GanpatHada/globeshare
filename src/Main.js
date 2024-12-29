@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext,useState } from "react";
 import LeftSideBar from "./components/left-side-bar/LeftSideBar";
 import "./Main.css";
 import Header from "./components/header/Header";
@@ -7,11 +7,8 @@ import AppRoutes from "./AppRoutes";
 import SearchBox from "./components/search-box/SearchBox";
 import ModalManager from "./components/modal-manager/ModalManager";
 import { ModalContext } from "./contexts/ModalContext";
-import Loader from "./components/loader/Loader";
-import { UserContext } from "./contexts/UserContext";
-import { getCurrentUserDetails } from "./services/UserService";
-import { toast } from "react-toastify";
-import CreatePost from './components/create-post/CreatePost'
+import CreatePost from "./components/create-post/CreatePost";
+import PostDetails from "./components/post-details/PostDetails";
 
 const AppSideNav = () => {
   const [searchBox, setSearchBox] = useState(false);
@@ -38,42 +35,22 @@ const AppContent = () => {
 
 const Main = () => {
   const { isModalOpen, closeModal, modalType } = useContext(ModalContext);
-  const { state, dispatch } = useContext(UserContext);
-  const {
-    user: { userId },
-    loading,
-  } = state;
-  const fetchUserDetails = async () => {
-    try {
-      const user = await getCurrentUserDetails(userId);
-      dispatch({ type: "SET_USER", payload: user });
-      dispatch({ type: "STOP_LOADING" });
-    } catch (error) {
-      toast.error("Unable to fetch user details");
-    } finally {
-    }
-  };
-
-  useEffect(() => {
-    fetchUserDetails();
-  }, []);
   return (
     <main id="main-app">
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
-          {isModalOpen && modalType === "CREATE_POST" && (
-            <ModalManager closeModal={closeModal}>
-               <CreatePost mode={'CREATE'} closeModal={closeModal}/>
-            </ModalManager>
-          )}
-          <AppSideNav />
-          <Header />
-          <AppContent />
-          <BottomNavbar />
-        </>
+      {isModalOpen && modalType === "CREATE_POST" && (
+        <ModalManager closeModal={closeModal}>
+          <CreatePost mode={"CREATE"} closeModal={closeModal} />
+        </ModalManager>
       )}
+      {isModalOpen && modalType === "POST_DETAILS" && (
+        <ModalManager closeModal={closeModal}>
+          <PostDetails closeModal={closeModal} />
+        </ModalManager>
+      )}
+      <AppSideNav />
+      <Header />
+      <AppContent />
+      <BottomNavbar />
     </main>
   );
 };

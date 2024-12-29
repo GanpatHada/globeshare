@@ -133,8 +133,8 @@ const PostComment = () => {
   );
 };
 
-const Post = ({feed}) => {
-  const{images,comments,likes,caption,time}=feed;
+const Post = ({post}) => {
+  const{images,comments,likes,caption,time}=post;
   return (
     <div className="post">
       <PostHeader time={time} />

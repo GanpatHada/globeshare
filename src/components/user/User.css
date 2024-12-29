@@ -1,45 +1,34 @@
-.user-basic{
-    width: 100%;
-    height: 80px;
+.user-box{
+    padding: 20px;
+    display: flex;
+    align-items: center;
     justify-content: space-between;
 }
-.user-basic h4{
-    font-family: 'Inter';
-    font-size: 0.8rem;
-    font-weight: bold;
-    cursor: pointer;
-    height: 15px;
+.user-box >div{
+    display: flex;
+    gap: 10px;
 }
-
-.user-basic h6{
-    
-    font-size: 0.75rem;
-    font-weight: 200;
-    color: rgb(126, 126, 126);
+.user-box:hover{
+    background-color: whitesmoke;
 }
-.user-basic-image{
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    margin-right: 10px;
+.user-box .user-profile-photo{
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+    background-color: gray;
+    flex-shrink: 0;
     overflow: hidden;
 }
-.user-basic-info{
-    margin-right: 10px;
+.user-box .user-action{
+    font-weight: bold;
+    font-size: 0.8rem;
+    color: rgb(25, 179, 226);
 }
-.user-basic-image img{
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
+.user-box .user-name-button{
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: rgb(83, 83, 83);
 }
-.follow-btn{
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+.user-box button:hover{
     color: var(--primary-color);
-    letter-spacing: normal;
-    font-weight: 800; 
-    padding: 5px;
-}
-.follow-btn img{
-    width: 30px;
-    height: 10px;
 }
