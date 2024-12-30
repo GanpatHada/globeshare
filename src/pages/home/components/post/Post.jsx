@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "./Post.css";
 import { MdMoreHoriz } from "react-icons/md";
 import { FaRegSmile } from "react-icons/fa";
@@ -9,29 +9,32 @@ import {
   IoChatbubbleOutline,
 } from "react-icons/io5";
 import { BsSend } from "react-icons/bs";
-import av1 from "../../../../images/av-2.png";
+import defaultPhoto from '../../../../images/profile.png'
 import EmojiPicker from "emoji-picker-react";
 import useClickOutsideHandler from "../../../../hooks/useClickOutsideHandler";
 import { useUser } from "../../../../hooks/useUser";
 import { toast } from "react-toastify";
-import { likePost, unlikePost } from "../../../../services/PostService";
+import { commentOnPost, likePost, unlikePost } from "../../../../services/PostService";
 import { usePosts } from "../../../../hooks/usePosts";
 import {
   addToBookmark,
+  fetchUserBasicInfo,
   removeFromBookmark,
 } from "../../../../services/UserService";
 import {
   getPostCreationDate,
   getTimeDifference,
 } from "../../../../utils/PostsHelper";
+import { nanoid } from 'nanoid';
+import { ModalContext } from "../../../../contexts/ModalContext";
+import { PostDetailsContext } from "../../../../contexts/PostDetailsContext";
+import UserInfo from "../../../../components/user-info/UserInfo";
 
-const PostHeader = ({ time }) => {
+
+const PostHeader = ({time,user}) => {
   return (
     <header className="post-header">
-      <div className="post-profile all-centered">
-        <img src={av1} alt="" />
-      </div>
-      <h4 className="user-name">@username</h4>
+      <UserInfo userId={user}/>
       <span className="post-time" title={getPostCreationDate(time)}>
         {getTimeDifference(time)} ago
       </span>
@@ -51,7 +54,7 @@ const PostImage = ({ images }) => {
   );
 };
 
-const PostActions = ({ post }) => {
+const PostActions = ({ post,handleCommentsClick  }) => {
   const { user, addToBookmarkOnClient, removeFromBookmarkOnClient } = useUser();
   const { userId } = user;
 
@@ -98,7 +101,7 @@ const PostActions = ({ post }) => {
         {isPostLiked() ? <IoIosHeart /> : <IoIosHeartEmpty />}
       </button>
 
-      <button className="all-centered">
+      <button className="all-centered" onClick={handleCommentsClick }>
         <IoChatbubbleOutline />
       </button>
       <button className="all-centered">
@@ -111,7 +114,7 @@ const PostActions = ({ post }) => {
   );
 };
 
-const PostCaption = ({ post }) => {
+const PostCaption = ({ post}) => {
   const { caption, images } = post;
   let finalCaption = caption;
   const [showMore, setShowMore] = useState(false);
@@ -144,7 +147,7 @@ const EmojiPopup = ({ closeEmojiPopup, addEmojiToCaption }) => {
   );
 };
 
-const PostComment = () => {
+const PostComment = ({post:{postId}}) => {
   const [emojiPopup, setEmojiPopup] = useState(false);
   const [commentText, setCommentText] = useState("");
   const closeEmojiPopup = () => setEmojiPopup(false);
@@ -153,9 +156,29 @@ const PostComment = () => {
     if (emojiPopup) return closeEmojiPopup();
     return openEmojiPopup();
   };
+  const {user:{userId}}=useUser()
 
   const addEmojiToCaption = (emojiObject) =>
     setCommentText(commentText.concat(` ${emojiObject.emoji} `));
+
+  const handlePostComment=async()=>{
+    const commentObj={
+      commentId:nanoid(),
+      comment:commentText,
+      userId,
+      replies:[],
+      likes:[]
+    }
+    try {
+      await commentOnPost(postId,commentObj);
+    } catch (error) {
+      toast.error('Something went wrong ')
+      console.log(error);
+    }
+    finally{
+      setCommentText("")
+    }
+  }
 
   return (
     <section className="post-comment">
@@ -170,7 +193,7 @@ const PostComment = () => {
         />
       </section>
       {commentText.trim().length > 0 && (
-        <button className="post-comment-button">
+        <button className="post-comment-button" onClick={handlePostComment}>
           <strong>Post</strong>
         </button>
       )}
@@ -187,19 +210,28 @@ const PostComment = () => {
   );
 };
 
+
 const Post = ({ post }) => {
   const { images, time, comments, likes, user } = post;
+  const{openModal}=useContext(ModalContext)
+  const{state,dispatch}=useContext(PostDetailsContext)
+  const handleCommentsClick=()=>{
+    dispatch({type:'SET_POST_DETAILS',payload:post})
+    openModal('POST_DETAILS');
+  }
+  
+
   return (
     <div className="post">
       <PostHeader time={time} user={user} />
       {images.length !== 0 && <PostImage images={images} />}
-      <PostActions post={post} />
+      <PostActions post={post} handleCommentsClick={handleCommentsClick} />
       <button id="post-likes-button">
         <strong>{likes.length}</strong> Likes
       </button>
       <PostCaption post={post} />
-      <button id="post-comments-button">{`view all ${comments.length} comments`}</button>
-      <PostComment />
+      <button id="post-comments-button" onClick={handleCommentsClick}>{`view all comments`}</button>
+      <PostComment post={post} />
     </div>
   );
 };

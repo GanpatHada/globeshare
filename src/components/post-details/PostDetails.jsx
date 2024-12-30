@@ -12,17 +12,18 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
+import { usePosts } from "../../hooks/usePosts";
+import { getPostCreationDate, getTimeDifference } from "../../utils/PostsHelper";
+import UserInfo from "../user-info/UserInfo";
 
-const PostComment = () => {
+const PostComment = ({comment}) => {
   return (
     <div className="post-comment">
       <div className="user-profile"></div>
       <div className="comment-info">
         <h5>username</h5>
         <p>
-          comment is this Lorem ipsum dolor sit amet consectetur, adipisicing
-          elit. Vel eum esse, voluptas rem non quos accusamus unde quo iste
-          earum?
+          {comment.comment}
         </p>
       </div>
     </div>
@@ -45,36 +46,30 @@ const ImageSlider = ({ images }) => {
 
 const PostDetails = ({ closeModal }) => {
   const postDetailsRef = useRef(null);
-  const { state, dispatch } = useContext(PostDetailsContext);
+  const { state,} = useContext(PostDetailsContext);
   const { images, user, likes } = state.postDetails;
+  console.log(state.postDetails);
   useOutsideClickHandler(postDetailsRef, closeModal);
   return (
     <div id="post-details" ref={postDetailsRef}>
-      <section className="image-section">
+     {state.postDetails.images.length!==0&&<section className="image-section">
         <ImageSlider images={images} />
-      </section>
+      </section>}
       <section className="post-info-section">
         <header className="post-header">
-          <div>
-            <div className="user-image"></div>
-            <p className="user-name">{user}</p>
-          </div>
+          <UserInfo userId={user}/>
           <button className="all-centered">
             <MdMoreHoriz />
           </button>
         </header>
         <main className="post-comments">
-          <PostComment />
-          <PostComment />
-          <PostComment />
-          <PostComment />
-          <PostComment />
-          <PostComment />
-          <PostComment />
-          <PostComment />
-          <PostComment />
-          <PostComment />
-          <PostComment />
+        {state.postDetails.comments.map(comment=>{
+          return(
+            <PostComment key={comment.commentId} comment={comment}/>
+          )
+        })
+
+        }
         </main>
         <div className="post-actions">
           <div>
@@ -98,7 +93,7 @@ const PostDetails = ({ closeModal }) => {
           <h5>{likes.length} likes</h5>
         </div>
         <div className="post-time">
-          <p>5 hours ago</p>
+          <p>{getPostCreationDate(state.postDetails.time)}</p>
         </div>
         <footer className="do-comment">
           <button className="emoji-button all-centered">

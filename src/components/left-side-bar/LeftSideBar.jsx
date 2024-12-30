@@ -5,7 +5,7 @@ import globeShareMin from "../../images/mainLogoMin.svg";
 import { NavLink } from "react-router-dom";
 import { Search } from "@mui/icons-material";
 import Menu from "./Menu";
-import { BsBookmarks, BsPlusSquare } from "react-icons/bs";
+import {BsPlusSquare } from "react-icons/bs";
 import { GoHome } from "react-icons/go";
 import { AiOutlineHeart, AiOutlineMenu } from "react-icons/ai";
 import { MdOutlineExplore } from "react-icons/md";
@@ -77,13 +77,7 @@ const SideNavs = ({ openSearchBox,searchBox }) => {
           <span className="icons">
             <AiOutlineHeart />
           </span>
-          Likes
-        </NavLink>
-        <NavLink className="navs">
-          <span className="icons">
-            <BsBookmarks />
-          </span>
-          Saved
+          Notifications
         </NavLink>
         <NavLink className="navs" to={`/profile/${userId}`}>
           <span className="icons" >

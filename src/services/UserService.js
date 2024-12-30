@@ -133,3 +133,19 @@ export async function removeFromBookmark(userId,postId)
     throw error;
   }
 }
+
+export async function fetchUserBasicInfo(userId)
+{
+  try {
+    const docRef = doc(db, "users", userId);
+    const docSnap = await getDoc(docRef);
+    let userDetails = null;
+    if (docSnap.exists()) {
+      const{userName,profilePhoto}=docSnap.data()
+      userDetails = {userName,profilePhoto};
+    }
+    return userDetails;
+  } catch (error) {
+    throw error;
+  }
+}

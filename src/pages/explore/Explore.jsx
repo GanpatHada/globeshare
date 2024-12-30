@@ -43,7 +43,7 @@ const Explore = () => {
   const getExploringPosts = async () => {
     try {
       startLoadingPosts()
-      const exploringPosts = await fetchExploringPosts(user);
+      const exploringPosts = await fetchExploringPosts([user.userId,...user.following]);
       addPosts(exploringPosts);
     } catch (error) {
       toast.error("Something went wrong!");

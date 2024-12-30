@@ -27,6 +27,7 @@
 }
 #user-posts-image:hover .like-comment-box{
     display: flex;
+    
 }
 .more-images-sign{
     position: absolute;
@@ -42,6 +43,10 @@
     justify-content: center;
     width: 100%;
     height: 100%;   
+    
+}
+#user-posts-image .post-caption{
+    margin: 20px;
 }
 .like-comment-box >*{
     margin: 10px;
@@ -49,6 +54,7 @@
 .post-caption{
     margin: 0px;
     color: white;
+    
 }
 .like-comment-box > span > *:first-child{
     position: relative;

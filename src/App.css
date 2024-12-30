@@ -14,7 +14,7 @@ img{
 }
 
 :root{
-  --primary-color:#2785ff;
+  --primary-color:#2cb6ec;
   --primary-border:lightgray;
   --logo-color2:#85EDFF;
   --logo-color1:#023548;
@@ -25,6 +25,7 @@ button{
   cursor: pointer;
   letter-spacing: normal;
   background-color: transparent;
+  font-family: "Inter", serif;
  
 }
 button:disabled{
@@ -108,6 +109,7 @@ button label{
   overflow: hidden;
   background-color: var(--skeleton-bg);
   flex: 1;
+  
 }
 .skeleton::after {
   content: '';

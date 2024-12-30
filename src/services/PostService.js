@@ -28,16 +28,17 @@ export async function fetchFeed({ following }) {
   }
 }
 
-export async function fetchExploringPosts({ following }) {
-  let exploringPosts = [];
+export async function fetchExploringPosts(userIdSToExclude) {
   try {
-    const docSnap = await getDocs(collection(db, "posts"));
-    if (!docSnap.empty) {
-      exploringPosts = docSnap.docs.map((post) => {
-        return { postId: post.id, ...post.data() };
-      });
-    }
-    return exploringPosts;
+    const postsRef = collection(db, "posts");
+    const q = query(postsRef, where("user", "not-in", userIdSToExclude));
+    const querySnapshot = await getDocs(q);
+    const posts = [];
+    querySnapshot.forEach((doc) => {
+      posts.push({ postId: doc.id, ...doc.data() });
+    });
+
+    return posts;
   } catch (error) {}
 }
 
@@ -59,10 +60,13 @@ export async function fetchUserPosts(userId) {
 export async function fetchMyBookmarks(bookmarks) {
   try {
     const posts = [];
-    if (bookmarks.length === 0)
-      return posts;
+    if (bookmarks.length === 0) return posts;
     const postsRef = collection(db, "posts");
-    const q = query(postsRef, where("__name__", "in", bookmarks),orderBy("__name__"));
+    const q = query(
+      postsRef,
+      where("__name__", "in", bookmarks),
+      orderBy("__name__")
+    );
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       posts.push({ postId: doc.id, ...doc.data() });
@@ -113,6 +117,6 @@ export async function commentOnPost(postId, comment) {
       comments: arrayUnion(comment),
     });
   } catch (error) {
-    throw error;
+    console.log(error);
   }
 }

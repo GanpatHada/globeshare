@@ -23,6 +23,7 @@
   font-size: 0.9rem;
   font-weight: 500;
 }
+
 .post .post-header .post-profile {
   height: 100%;
   aspect-ratio: 1/1;
@@ -55,9 +56,10 @@
   display: flex;
   gap: 20px;
   position: relative;
-  height: 80px;
+  height: 60px;
   align-items: center;
   padding: 10px;
+  border-top: 1px solid whitesmoke;
 }
 .post .post-actions button {
   font-size: 1.6rem;

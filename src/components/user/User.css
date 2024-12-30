@@ -26,7 +26,7 @@
 }
 .user-box .user-name-button{
     font-size: 0.9rem;
-    font-weight: bold;
+    font-weight: 500;
     color: rgb(83, 83, 83);
 }
 .user-box button:hover{

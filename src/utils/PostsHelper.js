@@ -1,8 +1,12 @@
-export function postsHandler(posts) {
-  let updatedPosts = posts.reduce((acc, cur) => {
-    const postIndex = posts.findIndex((post) => post.postId === cur.postId);
-    if (postIndex === -1) acc.push(cur);
-    else acc[postIndex] = cur;
+export function postsHandler(posts,newPosts) {
+  let updatedPosts=[...posts,...newPosts]
+  updatedPosts = updatedPosts.reduce((acc, cur) => {
+    console.log(cur);
+    const postIndex = updatedPosts.findIndex((post) => post.postId === cur.postId);
+    if (postIndex === -1)
+      acc.push(cur);
+    else 
+      acc[postIndex] = cur;
     return acc;
   }, []);
   return updatedPosts;

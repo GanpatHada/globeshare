@@ -5,18 +5,18 @@ import NoDataFound from "../no-data-found/NoDataFound";
 import PostsCard from "../../../../components/posts-card/PostsCard";
 import { toast } from "react-toastify";
 import { fetchUserPosts } from "../../../../services/PostService";
-import { useUser } from "../../../../hooks/useUser";
 import { usePosts } from "../../../../hooks/usePosts";
 import { useParams } from "react-router-dom";
 
 const MyPosts = () => {
   const { posts, addPosts, startLoadingPosts, stopLoadingPosts, loading }=usePosts();
-  const {user: { userId }} = useUser();
-  const {userId:currentUser}=useParams()
+  const {userId:currentUser}=useParams();
+  console.log(loading);
   const getUserPosts = async () => {
     try {
       startLoadingPosts();
       const posts = await fetchUserPosts(currentUser);
+      console.log(posts);
       addPosts(posts);
     } catch (error) {
       toast.error("Unable to load posts");
