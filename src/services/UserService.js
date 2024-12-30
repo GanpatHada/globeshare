@@ -13,7 +13,7 @@ import {
 import { auth, db, storage } from "../assets/Firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
-export async function getCurrentUserDetails(userId) {
+export async function fetchCurrentUserDetails(userId) {
   try {
     const docRef = doc(db, "users", userId);
     const docSnap = await getDoc(docRef);
@@ -107,5 +107,29 @@ export async function unfollowUser(userId,user)
     });
   } catch (error) {
      throw error
+  }
+}
+
+export async function addToBookmark(userId,postId)
+{
+  try {
+    const docRef = doc(db, "users", userId);
+    await updateDoc(docRef, {
+      bookmarks: arrayUnion(postId),
+    });
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function removeFromBookmark(userId,postId)
+{
+  try {
+    const docRef = doc(db, "users", userId);
+    await updateDoc(docRef, {
+      bookmarks: arrayRemove(postId),
+    });
+  } catch (error) {
+    throw error;
   }
 }

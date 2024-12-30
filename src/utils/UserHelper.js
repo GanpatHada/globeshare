@@ -9,12 +9,15 @@ export function isUserInMyFollowers(myDetails,toUser){
 }
 
 
-export function getUserRelation(myDetails,toUser){
-    
-    if(following.includes(toUser))
-        return 'Follow'
-    else
-    {
-        if(!followers.includes(toUser))
-    }
+
+
+export function addToBookmarkHandler(user,postId)
+{
+    const updatedUser={...user,bookmarks:[...user.bookmarks,postId]}
+    return updatedUser;
+}
+export function removeFromBookmarkHandler(user,postId)
+{
+    const updatedUser={...user,bookmarks:user.bookmarks.filter(bookmark=>bookmark!==postId)};
+    return updatedUser;
 }

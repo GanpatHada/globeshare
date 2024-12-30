@@ -22,7 +22,7 @@ const Feed = () => {
   const getFeed = async () => {
     try {
       startLoadingPosts();
-      const feeds = await fetchFeed(user.following);
+      const feeds = await fetchFeed(user);
       addPosts(feeds);
     } catch (error) {
       toast.error("Something went wrong while loading posts");

@@ -4,8 +4,10 @@ import "./User.css";
 import { followUser } from "../../services/UserService";
 import { UserContext } from "../../contexts/UserContext";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const User = ({ user: { profilePhoto, userName, userId } }) => {
+  const navigate=useNavigate()
   const { state, dispatch } = useContext(UserContext);
   const[buttonText,setButtonText]=useState('Follow');
   const handleActionOnUser = async () => {
@@ -23,6 +25,8 @@ const User = ({ user: { profilePhoto, userName, userId } }) => {
     
   };
 
+  const handleUserClick=()=>navigate(`/profile/${userId}`)
+
   return (
     <div className="user-box">
       <div>
@@ -33,7 +37,7 @@ const User = ({ user: { profilePhoto, userName, userId } }) => {
           />
         </div>
 
-        <button className="user-name-button">
+        <button className="user-name-button" onClick={handleUserClick}>
           <span>{userName}</span>
         </button>
       </div>

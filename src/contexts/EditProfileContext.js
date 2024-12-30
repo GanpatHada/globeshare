@@ -1,18 +1,16 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext,useReducer } from "react";
 import {
   editProfileReducer,
   initialEditProfileState,
 } from "../reducers/EditProfileReducer";
-import { UserContext } from "./UserContext";
+import { useUser } from "../hooks/useUser";
 
 export const EditProfileContext = createContext();
 export function EditProfileProvider({ children }) {
-  const {
-    state: { userDetails },
-  } = useContext(UserContext);
+  const {user}=useUser()
   const [state, dispatch] = useReducer(
     editProfileReducer,
-    userDetails,
+    user,
     initialEditProfileState
   );
   return (

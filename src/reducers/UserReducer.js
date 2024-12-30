@@ -1,8 +1,11 @@
+import {
+  addToBookmarkHandler,
+  removeFromBookmarkHandler,
+} from "../utils/UserHelper";
+
 export const initialUser = {
   user: null,
-  userDetails: null,
   loading: true,
-  userDetailsLoading: true,
 };
 
 export function userReducer(state, action) {
@@ -12,17 +15,6 @@ export function userReducer(state, action) {
         ...state,
         user: action.payload,
       };
-    case "SET_USER_DETAILS":
-      return {
-        ...state,
-        userDetails: action.payload,
-      };
-    case "START_LOADING": {
-      return {
-        ...state,
-        loading: true,
-      };
-    }
     case "ADD_FOLLOWING":
       return {
         ...state,
@@ -31,22 +23,26 @@ export function userReducer(state, action) {
           following: [...state.userDetails.following, action.payload],
         },
       };
+    case "ADD_TO_BOOKMARK":
+      return {
+        ...state,
+        user: addToBookmarkHandler(state.user, action.payload),
+      };
+    case "REMOVE_FROM_BOOKMARK":
+      return {
+        ...state,
+        user: removeFromBookmarkHandler(state.user, action.payload),
+      };
+    case "START_LOADING": {
+      return {
+        ...state,
+        loading: true,
+      };
+    }
     case "STOP_LOADING": {
       return {
         ...state,
         loading: false,
-      };
-    }
-    case "START_USER_DETAILS_LOADING": {
-      return {
-        ...state,
-        userDetailsLoading: true,
-      };
-    }
-    case "STOP_USER_DETAILS_LOADING": {
-      return {
-        ...state,
-        userDetailsLoading: false,
       };
     }
     case "REMOVE_USER":

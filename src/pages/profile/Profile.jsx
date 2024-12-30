@@ -1,58 +1,45 @@
-import React, { useContext, useEffect, useReducer, useState } from "react";
+import React, {useEffect} from "react";
 import "./Profile.css";
 import ProfileHeader from "./components/profile-header/ProfileHeader";
 import ProfileNav from "./components/profile-nav/ProfileNav";
-
-import { UserContext } from "../../contexts/UserContext";
-
-import {
-  Outlet,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import { useUser } from "../../hooks/useUser";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 
 import { toast } from "react-toastify";
 import Waiting from "../../components/waiting/Waiting";
 
-import { getCurrentUserDetails } from "../../services/UserService";
-import { ProfileContext } from "../../contexts/ProfileContext";
+import { fetchCurrentUserDetails } from "../../services/UserService";
+import { useProfile } from "../../hooks/useProfile";
 
 const Profile = () => {
-  const { userId } = useParams();
+  const { userId: currrentUserId } = useParams();
   const navigate = useNavigate();
-  const { state } = useContext(UserContext);
-  const { state: profileState, dispatch: profileDispatch } =
-    useContext(ProfileContext);
-  const {profile, loading } = profileState;
-  const fetchUserProfileAndPosts = async () => {
+  const { user } = useUser();
+  const { profile, stopProfileLoading, profileLoading, saveProfileDetails } =
+    useProfile();
+  const getUserProfile = async () => {
     try {
-      if (state.user.userId === userId)
-        profileDispatch({ type: "SET_PROFILE", payload: state.user });
+      if (user.userId === currrentUserId) saveProfileDetails(user);
       else {
-        const userProfile = await getCurrentUserDetails(userId);
-        if (userProfile)
-          profileDispatch({
-            type: "SET_PROFILE",
-            payload: { ...userProfile, userId },
-          });
+        const userProfile = await fetchCurrentUserDetails(currrentUserId);
+        if (userProfile) saveProfileDetails(userProfile);
         else {
-          toast.error("Unable to find User");
-          navigate("-1");
+          toast.error("Unable to find user");
+          navigate(-1);
         }
       }
     } catch (error) {
       toast.error("Something went wrong");
     } finally {
-      profileDispatch({ type: "STOP_LOADING" });
+      stopProfileLoading();
     }
   };
   useEffect(() => {
-    fetchUserProfileAndPosts();
-  }, []);
-
+    getUserProfile();
+  }, [currrentUserId]);
   return (
     <div id="profile-page" className="app-pages">
-      {loading ? (
+      {profileLoading ? (
         <Waiting />
       ) : (
         <>

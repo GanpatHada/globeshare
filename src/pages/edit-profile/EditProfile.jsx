@@ -12,6 +12,7 @@ import SelectProfilePhotoModal from "./components/select-profile-photo-modal/Sel
 import { EditProfileContext } from "../../contexts/EditProfileContext";
 import { isProfilePhotoChnaged } from "../../utils/EditProfileHelper";
 import defaultProfile from '../../images/profile.png'
+import { useUser } from "../../hooks/useUser";
 const SelectProfilePhotoModalWrapper = () => {
   const { isModalOpen, closeModal, modalType } = useContext(ModalContext);
   return (
@@ -27,8 +28,7 @@ const SelectProfilePhotoModalWrapper = () => {
 
 const EditProfile = () => {
   const navigate = useNavigate();
-  const { state: userState, dispatch: userDispatch } = useContext(UserContext);
-  const { userDetails:user } = userState;
+  const {user,saveUser}=useUser()
   const { openModal } = useContext(ModalContext);
   const {state,dispatch} = useContext(EditProfileContext)
 
@@ -58,7 +58,7 @@ const EditProfile = () => {
           user.userId,
           updatedProfile
         );
-        userDispatch({ type: "SET_USER", payload: updatedData });
+        saveUser(updatedData);
         toast.success("Profile edited successfully");
       } catch (error) {
         toast.error("unable to update at the moment");

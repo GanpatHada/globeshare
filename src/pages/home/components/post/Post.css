@@ -1,12 +1,14 @@
 .post {
   display: flex;
   flex-direction: column;
-  /* border-bottom: 1px solid rgb(177, 177, 177); */
   background-color: white;
   border: 1px solid rgb(233, 233, 233);
 }
 .post:last-child {
   border: none;
+}
+.post > *{
+  order: 2;
 }
 .post .post-header {
   display: flex;
@@ -15,9 +17,10 @@
   align-items: center;
   gap: 10px;
   position: relative;
+  order: 0;
 }
 .post .post-header .user-name {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 500;
 }
 .post .post-header .post-profile {
@@ -30,11 +33,11 @@
   object-fit: contain;
 }
 .post .post-header .post-time {
-  font-size: 0.9rem;
-  color: rgb(167, 167, 167);
+  font-size: 0.8rem;
+  color: rgb(133, 133, 133);
 }
 .post .post-header .more {
-  font-size: 2rem;
+  font-size: 1.5rem;
   position: absolute;
   right: 10px;
   color: rgb(29, 29, 29);
@@ -75,13 +78,14 @@
   position: absolute;
   right: 10px;
 }
-.post button:hover {
-  color: gray;
+.post .post-actions button:hover {
+  transform: scale(1.1);
 }
 .post .post-caption {
   padding: 10px;
   text-align: left;
   color: rgb(63, 63, 63);
+  font-size: 0.9rem;
 }
 .post .post-caption button {
   color: var(--primary-color);
@@ -113,6 +117,7 @@
   flex: 1;
   padding: 10px;
   border: none;
+  font-size: 0.9rem;
 }
 .post .post-comment .comment-input::placeholder {
   color: lightgray;
@@ -144,4 +149,15 @@
   box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
   border-radius: 10px;
   overflow: hidden;
+}
+.post #post-likes-button,#post-comments-button{
+  width: fit-content;
+  margin: 5px 10px;
+  color: gray;
+  font-size: 0.85rem;
+}
+.post #post-likes-button{
+  font-weight: bold;
+  text-transform: lowercase;
+  color: rgb(46, 46, 46);
 }
