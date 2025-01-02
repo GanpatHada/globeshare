@@ -1,20 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
 import Icon from "../../components/copy/Copy";
 import "./PostsCard.css";
 import {AiFillHeart} from 'react-icons/ai'
 import {FaComment} from 'react-icons/fa'
-import { ModalContext } from "../../contexts/ModalContext";
-import { PostDetailsContext } from "../../contexts/PostDetailsContext";
+import { useModal } from "../../hooks/useModal";
+import { IoCopy} from "react-icons/io5";
+
 
 const PostsCard = ({ post }) => {
-  const {openModal}=useContext(ModalContext)
-  const {state,dispatch}=useContext(PostDetailsContext);
-
+  const{openModal}=useModal()
   const handlePostClick=()=>{
-      dispatch({type:'SET_POST_DETAILS',payload:post})
-      openModal('POST_DETAILS');
+      openModal(post.postId,'POST_DETAILS')
   }
-  
   return (
     <section id="user-posts-image" onClick={handlePostClick}>
       <div className="like-comment-box all-centered">
@@ -22,8 +19,8 @@ const PostsCard = ({ post }) => {
         <span> <FaComment/>{post.comments.length}</span>
       </div>
       {post.images.length > 1 && (
-        <div className="more-images-sign">
-          <Icon />
+        <div className="more-images-sign all-centered" >
+          <IoCopy />
         </div>
       )}
       {post.images.length > 0 ? (

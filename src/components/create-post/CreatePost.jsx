@@ -1,4 +1,4 @@
-import React, { useContext, useReducer, useRef } from "react";
+import React, { useContext, useEffect, useReducer, useRef } from "react";
 import "./CreatePost.css";
 import CrossButton from "../cross-button/CrossButton";
 import UploadImage from "./components/upload-image/UploadImage";
@@ -11,12 +11,15 @@ import {
 } from "../../reducers/CreatePostReducer";
 import EmojiPicker from "emoji-picker-react";
 import useClickOutsideHandler from "../../hooks/useClickOutsideHandler";
-import { saveImages, savePostData } from "../../services/CreatePostService";
 import Waiting from "../waiting/Waiting";
 import { toast } from "react-toastify";
-import { UserContext } from "../../contexts/UserContext";
+import { useUser } from "../../hooks/useUser";
+import { createPost, editPost } from "../../services/PostService";
+import { useModal } from "../../hooks/useModal";
+import { usePosts } from "../../hooks/usePosts";
 
-const CreatePostHeader = ({ mode,closeModal }) => {
+const CreatePostHeader = ({ mode }) => {
+  const { closeModal } = useModal();
   return (
     <header id="create-post-header">
       <h2>{mode.charAt(0) + mode.slice(1).toLowerCase()} Post</h2>
@@ -38,12 +41,14 @@ const CreatePostUploads = ({ state, dispatch }) => {
   );
 };
 
-const CreatePostFooter = ({ state, dispatch }) => {
-  const{state:userState}=useContext(UserContext)
+const CreatePostFooter = ({ state, dispatch,mode }) => {
   const { caption, images, emojiPopup } = state;
   const textRef = useRef(null);
   const emojiRef = useRef(null);
-
+  const { user } = useUser();
+  const { closeModal,modalContentId } = useModal();
+  const { addPosts,editPostOnClient} = usePosts();
+  
   const handleCaption = (e) => {
     const textarea = textRef.current;
     if (textarea) {
@@ -53,24 +58,46 @@ const CreatePostFooter = ({ state, dispatch }) => {
     dispatch({ type: "SET_CAPTION", payload: e.target.value });
   };
   const closeEmojiPopup = () => dispatch({ type: "CLOSE_EMOJI" });
-  const startLoading=(loadingInfo)=>dispatch({type:'START_LOADING',payload:loadingInfo})
-  const stopLoading=()=>dispatch({type:'STOP_LOADING'})
+  useClickOutsideHandler(emojiRef, closeEmojiPopup);
+  const startLoading = (loadingInfo) =>
+    dispatch({ type: "START_LOADING", payload: loadingInfo });
+  const stopLoading = () => dispatch({ type: "STOP_LOADING" });
 
-  const handlePostSend=async()=>{  
+  const handlePostSend = async () => {
     try {
-      startLoading()
-      await savePostData(userState.user,images,caption);
-      toast.success("Posted successfully")
+      startLoading();
+      const newPost = await createPost(user.userId, images, caption);
+      addPosts([newPost]);
+      closeModal();
+      toast.success("added successfully");
     } catch (error) {
-      toast.error("Something went wrong")
+      toast.error("Something went wrong");
+    } finally {
+      dispatch({ type: "RESET_FIELDS" });
+      stopLoading();
+    }
+  };
+
+  const handlePostUpdate=async()=>{
+    try {
+      startLoading();
+      const editedPost=await editPost(modalContentId,images,caption);
+      if(editedPost)
+      {
+         editPostOnClient(editedPost)
+      }
+         
+      closeModal();
+      toast.success('edited successfully')
+    } catch (error) {
+      toast.error("Something went wrong");
     }
     finally{
-      dispatch({type:'RESET_FIELDS'})
+      dispatch({type:"RESET_FIELDS"});
       stopLoading();
-
     }
   }
-  useClickOutsideHandler(emojiRef, closeEmojiPopup);
+  
 
   const handleEmojiClick = (obj) =>
     dispatch({ type: "SET_CAPTION", payload: caption.concat(obj.emoji) });
@@ -100,7 +127,7 @@ const CreatePostFooter = ({ state, dispatch }) => {
       </div>
 
       <button
-        onClick={handlePostSend}
+        onClick={mode==='EDIT'?handlePostUpdate:handlePostSend}
         id="create-post-send"
         disabled={caption.trim().length === 0 && images.length === 0}
         className="all-centered"
@@ -111,18 +138,31 @@ const CreatePostFooter = ({ state, dispatch }) => {
   );
 };
 
-const CreatePost = ({ mode,closeModal}) => {
+const CreatePost = ({ mode, closeModal }) => {
   const [state, dispatch] = useReducer(
     createPostReducer,
     initialCreatePostState
   );
-  const{loading}=state;
+  const { posts } = usePosts();
+  const { modalContentId } = useModal();
+
+  useEffect(() => {
+    if (mode === "EDIT") {
+      const currentPost = posts.find((post) => post.postId === modalContentId);
+      if (currentPost.images.length !== 0)
+        currentPost.images.forEach((image) => {
+      return dispatch({ type: "SET_IMAGES", payload:image });
+      });
+      dispatch({ type: "SET_CAPTION", payload: currentPost.caption });
+    }
+  }, []);
+  const { loading } = state;
   return (
     <div id="create-post-box">
-      {loading && <Waiting/>}
+      {loading && <Waiting />}
       <CreatePostHeader mode={mode} closeModal={closeModal} />
       <CreatePostUploads state={state} dispatch={dispatch} />
-      <CreatePostFooter state={state} dispatch={dispatch} />
+      <CreatePostFooter state={state} dispatch={dispatch} mode={mode} />
     </div>
   );
 };

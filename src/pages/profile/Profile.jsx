@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import "./Profile.css";
 import ProfileHeader from "./components/profile-header/ProfileHeader";
 import ProfileNav from "./components/profile-nav/ProfileNav";
@@ -19,7 +19,8 @@ const Profile = () => {
     useProfile();
   const getUserProfile = async () => {
     try {
-      if (user.userId === currrentUserId) saveProfileDetails(user);
+      if (user.userId === currrentUserId)
+        saveProfileDetails({...user});
       else {
         const userProfile = await fetchCurrentUserDetails(currrentUserId);
         if (userProfile) saveProfileDetails(userProfile);
@@ -36,7 +37,7 @@ const Profile = () => {
   };
   useEffect(() => {
     getUserProfile();
-  }, [currrentUserId]);
+  }, [currrentUserId,user]);
   return (
     <div id="profile-page" className="app-pages">
       {profileLoading ? (

@@ -1,0 +1,47 @@
+.do-comment{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    
+}
+.do-comment >section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.do-comment > section:first-child{
+    flex: 1;
+}
+.do-comment > section > button{
+    font-size: 1.5rem;
+    padding: 10px;
+}
+.do-comment .post-comment-button{
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+.do-comment .comment-input{
+    flex: 1;
+    padding: 10px;
+    border: none;
+    font-size: 0.9rem;
+}
+.do-comment .comment-input::placeholder{
+    color: rgb(204, 204, 204);
+}
+.do-comment .emoji-popup {
+    position: absolute;
+    top: -460px;
+    right: 10px;
+    height: 450px;
+    width: 350px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 1rem;
+  }
+  .do-comment .emoji-button{
+    position: relative;
+  }

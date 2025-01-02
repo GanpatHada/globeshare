@@ -7,9 +7,9 @@ export const useUser=()=>{
     const{state,dispatch}=useContext(UserContext);
     const {user,loading}=state;
 
-    const follow=(userIdToFollow)=>followUser(dispatch,userIdToFollow)
+    const followUserOnClient=(userIdToFollow)=>followUser(dispatch,userIdToFollow)
 
-    const unFollow=(userIdToUnfollow)=>unfollowUser(dispatch,userIdToUnfollow)
+    const unFollowUserOnClient=(userIdToUnfollow)=>unfollowUser(dispatch,userIdToUnfollow)
 
     const addToBookmarkOnClient=(postId)=>addToBookmark(dispatch,postId);
     const removeFromBookmarkOnClient=(postId)=>removeFromBookmark(dispatch,postId);
@@ -18,5 +18,5 @@ export const useUser=()=>{
 
     const saveUser=(userDetails)=>saveUserDetails(dispatch,userDetails)
 
-    return {user,loading,follow,unFollow,stopLoading,saveUser,addToBookmarkOnClient,removeFromBookmarkOnClient}
+    return {user,loading,followUserOnClient,unFollowUserOnClient,stopLoading,saveUser,addToBookmarkOnClient,removeFromBookmarkOnClient}
 }

@@ -1,40 +1,26 @@
 #post-details{
     max-height: 800px;
-    max-width: 1000px;
-    width: calc(100vw - 120px);
     height: calc(100vh - 80px);
     background-color: white;
     display: flex;
+    
 }
 #post-details .image-section{
+    width: calc(50vw - 20px );
+    max-width: 500px;
     flex: 1;
-    background-color: black;
+    background-color: whitesmoke;
     overflow: hidden;
-    
+    aspect-ratio: 1/2;
      
-}
-.swiper-button-prev , .swiper-button-next{
-    background-color: rgb(212, 212, 212);
-    color: rgb(0, 0, 0)!important;
-    width: 40px!important;
-    height: 40px!important;
-    border-radius: 20px!important;
-    
-    
-}
-.swiper-button-prev::after,.swiper-button-next::after{
-    font-size: 1rem!important;
-    font-weight: bold!important;
-    
-}
-#post-details .image-section .swiper{
-    width: 100%!important;
-    height: 100%;
 }
 #post-details .post-info-section{
     flex:1;
     display: flex;
     flex-direction: column;
+    aspect-ratio: 1/2;
+    width: calc(50vw - 20px );
+    max-width: 450px;
 }
 
 
@@ -51,11 +37,7 @@
     justify-content: space-between;
     align-items: center;
 }
-#post-details .post-info-section header>div{
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
+
 #post-details .post-info-section header .user-image{
     height: 50px;
     width: 50px;
@@ -66,9 +48,14 @@
 #post-details .post-info-section header p{
     font-size: 0.9rem;
 }
-#post-details .post-info-section header button{
+#post-details .post-info-section header > button{
     font-size: 1.5rem;
 
+}
+#post-details .post-caption{
+    color: rgb(59, 59, 59);
+    font-size: 0.9rem;
+    border-bottom: 1px solid #ececec;
 }
 #post-details .post-info-section .post-comments{
     flex: 1;
@@ -135,7 +122,7 @@
     display: flex;
     align-items: top;
     gap: 10px;
-    padding: 20px 10px;
+    padding: 10px;
 }
 .post-comment .user-profile{
     
@@ -147,4 +134,12 @@
 }
 .post-comment p{
     font-size: 0.8rem;
+}
+#no-comments-box{
+    flex-direction: column;
+    flex:1;
+    color: gray;
+}
+#no-comments-box span{
+    font-size: 2rem;
 }

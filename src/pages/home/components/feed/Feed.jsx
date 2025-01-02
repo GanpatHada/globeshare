@@ -15,10 +15,9 @@ const FeedLoading = () => {
 };
 
 const Feed = () => {
-  const { addPosts, startLoadingPosts, stopLoadingPosts, loading, posts } =
-    usePosts();
+  const { addPosts, startLoadingPosts, stopLoadingPosts, loading, posts }=usePosts();
   const { user } = useUser();
-
+  console.log(user.following)
   const getFeed = async () => {
     try {
       startLoadingPosts();
@@ -33,7 +32,7 @@ const Feed = () => {
 
   useEffect(() => {
      getFeed();
-  }, []);
+  }, [user.following]);
 
   const getFeedFromPosts=()=>{
     return posts.filter(post=>user.following.includes(post.user))

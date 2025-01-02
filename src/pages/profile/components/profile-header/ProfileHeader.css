@@ -4,6 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0.62rem;
 }
 #profile-header > section{
     flex: 1;
@@ -12,9 +13,9 @@
     justify-content: flex-end;
 }
 #profile-header .profile-image{
-    height: 160px;
-    width: 160px;
-    border-radius: 80px;
+    height: 10rem;
+    width: 10rem;
+    border-radius: 5rem;
     overflow: hidden;
 }
 #profile-header > section:first-child{
@@ -22,7 +23,7 @@
     flex: 0.75;
 }
 #profile-header > section:last-child{
-    padding: 40px;
+    padding: 2.5rem;
     justify-content: start;
     flex: 1.25;
     flex-direction: column;
@@ -34,16 +35,10 @@
 #profile-header > section:last-child >div:first-child{
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 0.75rem;
     flex-wrap: wrap;
 }
-#profile-header > section:last-child >div:first-child button{
-    background-color: rgb(224, 224, 224);
-    color: rgb(44, 44, 44);
-    padding: 10px 15px;
-    border-radius: 5px;
-    font-weight: bold;
-}
+
 #profile-header > section:last-child >div:first-child button:hover{
     background-color: rgb(207, 207, 207);
 }
@@ -53,9 +48,9 @@
 }
 #profile-header #posts-info{
     display: flex;
-    margin: 20px 0px;
+    margin: 1.25rem 0px;
     align-items: center;
-    gap: 20px;
+    gap: 1.25rem;
     flex-wrap: wrap;
     
 }
@@ -69,22 +64,8 @@
 #profile-header #profile-bio{
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 0.3rem;
 }
-#profile-header #profile-image{
-    height: 200px;
-    width: 200px;
-    aspect-ratio: 1/1;
-    border-radius: 25%;
-    border: green;
-    overflow: hidden;
-}
-
-#profile-header img{
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-}  
 
 
 #profile-bio > div{
@@ -130,9 +111,9 @@
         
     }
     #profile-header .profile-image{
-        height: 100px;
-        width: 100px;
-        border-radius: 50px;
+        height: 6.25rem;
+        width: 6.25rem;
+        border-radius: 3.12rem;
     }
     #profile-header > section:last-child{
         padding: 10px;

@@ -1,45 +1,63 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useState } from "react";
 import "./Suggestions.css";
-import User from "../../../../components/user/User";
 import {
-  initialSuggestionsState,
-  suggestionsReducer,
-} from "../../../../reducers/SuggestionsReducer";
-import { getSuggestedUser } from "../../../../services/UserService";
+  fetchSuggestedUser,
+  followUser,
+} from "../../../../services/UserService";
 import { useUser } from "../../../../hooks/useUser";
-
 import { toast } from "react-toastify";
+import UserInfo from "../../../../components/user-info/UserInfo";
 
 const SuggestionsLoadig = () => {
   return <div id="suggestions-loading" className="skeleton"></div>;
 };
 
-const Suggestions = () => {
-  const [state, dispatch] = useReducer(
-    suggestionsReducer,
-    initialSuggestionsState
+const SuggestedUser = ({ suggestedUser }) => {
+  const {
+    user: { userId },followUserOnClient
+  } = useUser();
+  const [loading, setLoading] = useState(false);
+  const handleFollowUser = async (userId, user) => {
+    try {
+      setLoading(true);
+      await followUser(userId, user);
+      toast.success("Started following");
+      followUserOnClient(suggestedUser)
+
+    } catch (error) {
+      toast.error("unable to follow at the moment");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div>
+      <UserInfo userId={suggestedUser} />
+      <button onClick={() => handleFollowUser(userId, suggestedUser)}>
+        {loading ? "Following ..." : "Follow"}
+      </button>
+    </div>
   );
+};
+
+const Suggestions = () => {
+  const [loading, setLoading] = useState(true);
+  const [suggestedUsers, setSuggestedUsers] = useState([]);
   const { user } = useUser();
-  const { loading, suggestedUsers } = state;
   useEffect(() => {
-    const fetchSuggestedUsers = async () => {
+    const getSuggestedUsers = async () => {
       try {
-        const suggestedUsers = await getSuggestedUser(user);
-        dispatch({ type: "SET_SUGGESTED_USERS", payload: suggestedUsers });
+        const suggestedUsers = await fetchSuggestedUser(user);
+        setSuggestedUsers(suggestedUsers);
       } catch (error) {
         toast.error("Unable to load suggestions");
       } finally {
-        dispatch({ type: "STOP_LOADING" });
+        setLoading(false);
       }
     };
-    fetchSuggestedUsers();
+    getSuggestedUsers();
   }, []);
-
-  const getUnfollowedUser = () => {
-    return suggestedUsers.filter(
-      (suggestedUser) => !user.following.includes(suggestedUser)
-    );
-  };
   return (
     <div id="suggestions">
       {loading ? (
@@ -49,12 +67,13 @@ const Suggestions = () => {
           <header id="user-suggestion">
             <h4>Suggested for you</h4>
           </header>
-
-          <>
-            {getUnfollowedUser().map((user) => {
-              return <User key={user.userId} user={user} />;
+          <section id="suggested-users">
+            {suggestedUsers.map((user) => {
+              return (
+                <SuggestedUser key={user} suggestedUser={user} />
+              );
             })}
-          </>
+          </section>
         </>
       )}
     </div>

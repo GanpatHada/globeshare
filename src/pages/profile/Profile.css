@@ -18,7 +18,7 @@
     display: grid;
     grid-template-columns: repeat(3,1fr);
     height: fit-content;
-    gap: 5px;
+    gap: 0.15rem;
 }
 #profile-content > .no-data-found{
     flex: 1;

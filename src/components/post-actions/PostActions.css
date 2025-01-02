@@ -1,0 +1,25 @@
+.post-actions{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.post-actions > div{
+    display: flex;
+    gap: 15px;
+}
+.post-actions button{
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s ease-in-out;
+    
+}
+.post-actions button img{
+    height: 1.5rem;
+}
+
+
+.post-actions button:hover{
+    color: gray;
+}

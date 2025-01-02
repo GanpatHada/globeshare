@@ -6,10 +6,11 @@ import { FaLink } from "react-icons/fa6";
 import { usePosts } from "../../../../hooks/usePosts";
 import { logout } from "../../../../services/LoginService";
 import { useUser } from "../../../../hooks/useUser";
+import { useDialog } from "../../../../hooks/useDialog";
 const ProfileHeader = ({ userProfile }) => {
-  console.log('run')
   const {posts}=usePosts()
   const {user}=useUser()
+  const {openDialog}=useDialog()
   const navigate = useNavigate();
   const {
     userId,
@@ -21,7 +22,10 @@ const ProfileHeader = ({ userProfile }) => {
     following,
     website,
   } = userProfile;
-  const myPostsCount=()=>posts.filter(post=>post.user===userId).length
+  const myPostsCount=()=>posts.filter(post=>post.user===userId).length;
+
+  const showFollowing=()=>openDialog(null,'FOLLOWING')
+  const showFollowers=()=>openDialog(null,'FOLLOWERS')
   
   return (
     <header id="profile-header">
@@ -33,10 +37,10 @@ const ProfileHeader = ({ userProfile }) => {
       <section className="profile-bio-section">
         <div>
           <h3>{userName}</h3>
-         {userId===user.userId && <><button onClick={() => navigate("/profile/edit")}>
+         {userId===user.userId && <><button className="secondary-btn" onClick={() => navigate("/profile/edit")}>
             Edit Profile
           </button>
-          <button onClick={logout}>
+          <button className="secondary-btn" onClick={logout}>
             Logout
           </button></>}
         </div>
@@ -45,16 +49,17 @@ const ProfileHeader = ({ userProfile }) => {
           <p>
             <strong>{myPostsCount()}</strong>Posts
           </p>
-          <button>
+          <button  disabled={followers.length===0} onClick={showFollowers}>
             <strong>{followers.length}</strong>Followers
           </button>
-          <button>
+          <button  disabled={following.length===0} onClick={showFollowing}>
             <strong>{following.length}</strong>Following
           </button>
         </div>
         <div id="profile-bio">
           <h4>{fullName}</h4>
           <p>{bio}</p>
+          
           <p>
             {website && <a href={website} title={website} rel="noreferrer" target="_blank">
               <span>

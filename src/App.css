@@ -77,15 +77,17 @@ button label{
   justify-content: center;
 }
 .secondary-btn{
-  color: rgb(31, 31, 31);
-  background-color: rgb(211, 211, 211);
+  padding: 0.5rem 0.75rem;
+  color: rgb(255, 255, 255);
+  background-color: rgb(165, 165, 165);
+  border-radius: 0.3rem;
+  font-size: 0.9rem;
 }
 .primary-btn{
   color: white;
   background-color: var(--primary-color);
   border-radius: 5px;
-  padding: 10px 15px;
-  font-weight: bold;
+  padding: 8px 12px;
 }
 .primary-btn:hover{
   background-color: #006eff;
@@ -99,9 +101,18 @@ button label{
   opacity: 0.7;
 }
 .secondary-btn:disabled{
-  color: gray;
   opacity: 0.7;
   cursor: not-allowed;
+  color: whitesmoke;
+}
+
+.overlay{
+  background-color: rgba(0, 0, 0, 0.274);
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 100vh;
+  width: 100vw;
 }
 
 .skeleton{
@@ -122,9 +133,6 @@ button label{
   animation: loading 1.5s infinite;
 }
 
-.liked-heart-button{
-  color: rgb(228, 0, 0);
-}
 
 @keyframes loading {
   0% {

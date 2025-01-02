@@ -11,19 +11,17 @@ export const PrivateRoute = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (userFound) => {
-      if (userFound) {
-        try {
+      try {
+        if (userFound) {
           const userDetails = await fetchCurrentUserDetails(userFound.uid);
           saveUser(userDetails);
-        }
-        catch (error) {
-          toast.error("Unable to get User Details");
-          console.log(error);
-        }
-        finally {
-          stopLoading();
-        }
-      } else saveUser(null);
+        } else saveUser(null);
+      } catch (error) {
+        toast.error("Unable to get User Details");
+        console.log(error);
+      } finally {
+        stopLoading();
+      }
     });
     return () => unsubscribe();
   }, []);

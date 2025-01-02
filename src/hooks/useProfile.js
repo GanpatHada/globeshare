@@ -4,8 +4,8 @@ import { saveProfile, stopLoading } from "../actions/ProfileAction";
 
 export const useProfile=()=>{
     const{state,dispatch}=useContext(ProfileContext);
+    const{profile,loading:profileLoading}=state;
     const saveProfileDetails=(profile)=>saveProfile(dispatch,profile)
     const stopProfileLoading=()=>stopLoading(dispatch);
-
-    return {profile:state.profile,profileLoading:state.loading,stopProfileLoading,saveProfileDetails}
+    return {profile,profileLoading,stopProfileLoading,saveProfileDetails}
 }

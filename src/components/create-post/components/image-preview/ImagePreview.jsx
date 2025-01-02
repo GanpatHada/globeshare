@@ -6,6 +6,11 @@ const ImagePreview = ({state,dispatch}) => {
   const handlePreviewDelete=(index)=>{
       return dispatch({type:'REMOVE_IMAGE',payload:index})
   }
+  const getImagePreviewURL=(previewImage)=>{
+    if(typeof previewImage==='string')
+      return previewImage
+    return URL.createObjectURL(previewImage)
+  }
 
   return (
     <section id='image-preview'>
@@ -13,7 +18,7 @@ const ImagePreview = ({state,dispatch}) => {
       state.images.map((previewImage,index)=>{
         return <div className='image-preview-box ' key={index}>
           <button className="delete-preview-button" onClick={()=>handlePreviewDelete(index)}><img src={deleteIcon} alt="delete" /></button>
-          <img src={URL.createObjectURL(previewImage)} alt="Preview not available" />
+          <img src={getImagePreviewURL(previewImage)} alt="Preview not available" />
         </div>
       })
     }

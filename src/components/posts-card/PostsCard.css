@@ -31,10 +31,12 @@
 }
 .more-images-sign{
     position: absolute;
-    top: 5px;
-    right: 5px;
-    height: 40px;
-    width: 40px;
+    top: 5%;
+    right: 5%;
+    height: 10%;
+    width: 10%;
+    overflow: hidden;
+    color: white;
 }
 
 #user-posts-image > span{
@@ -47,6 +49,7 @@
 }
 #user-posts-image .post-caption{
     margin: 20px;
+    font-size: 1rem;
 }
 .like-comment-box >*{
     margin: 10px;

@@ -12,6 +12,7 @@ import { MdOutlineExplore } from "react-icons/md";
 import defaultProfileImage from "../../images/profile.png";
 import { ModalContext } from "../../contexts/ModalContext";
 import { useUser } from "../../hooks/useUser";
+import { useModal } from "../../hooks/useModal";
 
 const SideNavHeader = ({ searchBox }) => {
   return (
@@ -44,7 +45,7 @@ const MenuNav = () => {
 
 const SideNavs = ({ openSearchBox,searchBox }) => {
   const{user:{profilePhoto,userId}}=useUser();
-  const{openModal}=useContext(ModalContext);
+  const{openModal}=useModal();
 
   return (
     <section id="side-navs">
@@ -67,7 +68,7 @@ const SideNavs = ({ openSearchBox,searchBox }) => {
           </span>
           Explore
         </NavLink>
-        <li className="navs" onClick={()=>openModal('CREATE_POST')}>
+        <li className="navs" onClick={()=>openModal(null,'CREATE_POST')}>
           <span className="icons">
             <BsPlusSquare />
           </span>

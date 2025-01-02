@@ -5,19 +5,18 @@
 }
 
 .login-page-btns {
-  min-height: 2.4rem;
-  max-height: fit-content;
+  height: 40px;
   width: 100%;
   border-radius: 0.3rem;
-  font-size: 1rem;
+  font-size: 14px;
   transition: background 0.2s;
   letter-spacing: 0.5px;
   color: white;
+  padding: 10px;
 }
 
 #login-box {
   width: 420px;
-  /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; */
   border: 1px solid rgb(230, 230, 230);
   padding: 1.25rem;
   background-color: white;
@@ -32,18 +31,19 @@
 .passwordbox,
 .emailbox,
 .namebox {
+  height: 40px;
   border: 1px solid rgb(199, 199, 199);
-  height: 2.4rem;
   border-radius: 5px;
   overflow: hidden;
   position: relative;
+  
 }
 .passwordbox:focus-within,
 .emailbox:focus-within {
   border: 1.5px solid var(--primary-color);
 }
 input {
-  font-size: 1rem;
+  font-size: 14px;
 }
 input:focus {
   outline: none;
@@ -141,8 +141,8 @@ p span:hover {
 }
 
 #eyebox {
-  height: 2.4rem;
-  width: 2.4rem;
+  height: 40px;
+  width: 40px;
   background-color: transparent;
   position: absolute;
   top: 0px;

@@ -2,7 +2,7 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-   
+    
 
 }
 .user-basic-info .profile-photo{
@@ -10,10 +10,25 @@
     width: 40px;
     border-radius: 20px;
     overflow: hidden;
+    flex-shrink: 0;
 }
 .user-basic-info .username{
     font-size: 0.9rem;
     font-weight: 500;
     min-width: fit-content;
+    color: black;
+    margin-right: 5px;
+    
    
+}
+.user-basic-info .user-comment{
+    color: rgb(100, 100, 100);
+    font-size: 0.9rem;
+    
+    
+}
+.user-basic-info .user-comment::before{
+    position: relative;
+    content: ": ";
+    color: black;
 }

@@ -8,8 +8,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
     grid-auto-rows: auto;
-    gap: 5px;
-    padding: 5px 0px;
+    gap: 0.15rem;
     height: fit-content;
 }
 #small-device-search-box{
@@ -68,10 +67,7 @@
 }
 @media screen and (max-width:768px)
 {
-    #posts-wrapper{
-        gap: 2px;
-        padding: 2px;
-    }
+    
     #small-device-search-box{
         display: flex;
     }

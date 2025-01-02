@@ -1,6 +1,8 @@
 import {
   addToBookmarkHandler,
+  followUserHandler,
   removeFromBookmarkHandler,
+  unfollowUserHandler,
 } from "../utils/UserHelper";
 
 export const initialUser = {
@@ -33,6 +35,12 @@ export function userReducer(state, action) {
         ...state,
         user: removeFromBookmarkHandler(state.user, action.payload),
       };
+    case "FOLLOW_USER" : return {
+      ...state,user:followUserHandler(state.user,action.payload)
+    } ;
+    case "UNFOLLOW_USER" : return {
+      ...state,user:unfollowUserHandler(state.user,action.payload)
+    } 
     case "START_LOADING": {
       return {
         ...state,

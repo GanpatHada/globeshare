@@ -13,6 +13,7 @@ import {
 import { auth, db, storage } from "../assets/Firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
+
 export async function fetchCurrentUserDetails(userId) {
   try {
     const docRef = doc(db, "users", userId);
@@ -26,8 +27,6 @@ export async function fetchCurrentUserDetails(userId) {
     throw error;
   }
 }
-
-
 
 export async function isUserNameAvialable(userName, myUserName) {
   if (userName.trim() === myUserName) return true;
@@ -64,54 +63,62 @@ export async function updateProfile(userId, updatedProfile) {
   }
 }
 
-export async function getSuggestedUser({following}) {
+export async function fetchSuggestedUser({ following }) {
   try {
-    const currentUserId=auth.currentUser.uid;
+    const currentUserId = auth.currentUser.uid;
     const usersCollection = collection(db, "users");
     const usersQuery = query(
       usersCollection,
-      where("__name__", "not-in", [currentUserId,...following]),
+      where("__name__", "not-in", [currentUserId, ...following]),
       orderBy("__name__")
     );
     const querySnapshot = await getDocs(usersQuery);
-    const otherUsers = querySnapshot.docs.map((doc) => ({
-      userId: doc.id,
-      userName: doc.data().userName,
-      profilePhoto: doc.data().profilePhoto,
-    }));
-    
+    const otherUsers = [];
+    querySnapshot.forEach((doc) => {
+      otherUsers.push(doc.id);
+    });
+
     return otherUsers;
   } catch (error) {
-    console.log(error)
+    console.log(error);
     throw error;
   }
 }
 
-export async function followUser(userId, user) {
+export async function followUser(userId,userTofollow) {
   try {
     const docRef = doc(db, "users", userId);
     await updateDoc(docRef, {
-      following: arrayUnion(user)
+      following: arrayUnion(userTofollow),
     });
   } catch (error) {
-    throw error
+    throw error;
   }
 }
 
-export async function unfollowUser(userId,user)
-{
+export async function unfollowUser(userId, userToUnfollow) {
   try {
-    const docRef = doc(db,"users",userId)
-    await updateDoc(docRef,{
-      following:arrayRemove(user)
+    const docRef = doc(db, "users", userId);
+    await updateDoc(docRef, {
+      following: arrayRemove(userToUnfollow),
     });
   } catch (error) {
-     throw error
+    throw error;
   }
 }
 
-export async function addToBookmark(userId,postId)
-{
+export async function removeUser(userId,userToRemove){
+  try {
+    const docRef = doc(db, "users", userId);
+    await updateDoc(docRef, {
+      followers: arrayRemove(userToRemove),
+    });
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function addToBookmark(userId, postId) {
   try {
     const docRef = doc(db, "users", userId);
     await updateDoc(docRef, {
@@ -122,8 +129,7 @@ export async function addToBookmark(userId,postId)
   }
 }
 
-export async function removeFromBookmark(userId,postId)
-{
+export async function removeFromBookmark(userId, postId) {
   try {
     const docRef = doc(db, "users", userId);
     await updateDoc(docRef, {
@@ -134,15 +140,14 @@ export async function removeFromBookmark(userId,postId)
   }
 }
 
-export async function fetchUserBasicInfo(userId)
-{
+export async function fetchUserBasicInfo(userId) {
   try {
     const docRef = doc(db, "users", userId);
     const docSnap = await getDoc(docRef);
     let userDetails = null;
     if (docSnap.exists()) {
-      const{userName,profilePhoto}=docSnap.data()
-      userDetails = {userName,profilePhoto};
+      const { userName, profilePhoto } = docSnap.data();
+      userDetails = { userName, profilePhoto };
     }
     return userDetails;
   } catch (error) {
