@@ -1,38 +1,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&family=Pacifico&family=Roboto:ital,wght@1,900&display=swap");
 
-body {
+body{
   font-family: "Inter", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height: 100vh;
   width: 100vw;
+  height: 100vh;
   overflow-x: hidden;
+  
   font-optical-sizing: auto;
   font-weight: normal;
   font-style: normal;
   text-rendering: optimizeLegibility;
 }
 
-@media (max-width: 1200px) {
-  html {
-    font-size: 15px;
-  }
-}
 
-@media (max-width: 992px) {
-  html {
-    font-size: 14px;
-  }
-}
 
-@media (max-width: 768px) {
-  html {
-    font-size: 13px;
-  }
-}
+
+
 
 @media (max-width: 576px) {
   html {
-    font-size: 12px;
+    font-size: 14px;
   }
-}
+} 

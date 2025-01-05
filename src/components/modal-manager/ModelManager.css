@@ -6,12 +6,18 @@
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.747);
   z-index: 5;
+  overflow: hidden;
 }
 
 #main-modal-content {
   border-radius: 5px;
-  overflow: hidden;
   animation: modal-animation 0.2s ease-in-out 0s 1 normal forwards;
+  width: min(calc(100% - 40px),1000px);
+  height: min(calc(100vh - 80px),800px);
+  display: flex;
+  border-radius: 5px;
+  overflow: hidden;
+ 
 }
 @keyframes modal-animation {
   0%{
@@ -20,4 +26,19 @@
   100% {
     transform: scale(1);
   }
+}@media  screen and (max-width:768px) {
+  #main-modal-content{
+   border-radius: 0px;
+   animation: none;
+   position: fixed;
+   top: 0px;
+   left: 0px;
+   height: calc(var(--vh, 1vh) * 100);
+   width: 100%;
+  }
+  #main-modal{
+    display: block;
+    border-radius: 0px;
+  }
+  
 }

@@ -1,44 +1,30 @@
-import React, { useContext, useEffect, useReducer, useRef } from "react";
+import React, { useContext,useRef } from "react";
 import "./EditProfile.css";
 import Waiting from "../../components/waiting/Waiting";
-import { UserContext } from "../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loading from "../../images/loading2.gif";
 import { isUserNameAvialable, saveProfilePhoto, updateProfile } from "../../services/UserService";
-import { ModalContext } from "../../contexts/ModalContext";
-import ModalManager from "../../components/modal-manager/ModalManager";
-import SelectProfilePhotoModal from "./components/select-profile-photo-modal/SelectProfilePhotoModal";
 import { EditProfileContext } from "../../contexts/EditProfileContext";
 import { isProfilePhotoChnaged } from "../../utils/EditProfileHelper";
 import defaultProfile from '../../images/profile.png'
 import { useUser } from "../../hooks/useUser";
-const SelectProfilePhotoModalWrapper = () => {
-  const { isModalOpen, closeModal, modalType } = useContext(ModalContext);
-  return (
-    <React.Fragment>
-      {isModalOpen && modalType === "SELECT_PROFILE_PHOTO" && (
-        <ModalManager closeModal={closeModal} >
-          <SelectProfilePhotoModal closeModal={closeModal}  />
-        </ModalManager>
-      )}
-    </React.Fragment>
-  );
-};
+import SelectProfilePhotoModal from "./components/select-profile-photo-modal/SelectProfilePhotoModal";
+
 
 const EditProfile = () => {
   const navigate = useNavigate();
   const {user,saveUser}=useUser()
-  const { openModal } = useContext(ModalContext);
-  const {state,dispatch} = useContext(EditProfileContext)
+  const {state,dispatch} = useContext(EditProfileContext);
 
   const timeOut = useRef(null);
-  const { profilePhoto, userName, fullName, isPrivate, bio, website } =
+  const { profilePhoto, userName, fullName, isPrivate, bio, website, } =
     state.updatedProfile;
-  const { loading, userNameFetching, userNameInfo } = state;
+  const { loading, userNameFetching, userNameInfo,selectPhotoModal } = state;
 
   const openSelectProfilePhotoModal = () => {
-    openModal("SELECT_PROFILE_PHOTO");
+    dispatch({type:'OPEN_SELECT_PHOTO_MODAL'})
+    console.log(state)
   };
 
   const handleUpdate = async () => {
@@ -139,7 +125,7 @@ const EditProfile = () => {
 
   return (
     <div id="edit-profile-page" className="app-pages">
-      <SelectProfilePhotoModalWrapper />
+     {selectPhotoModal && <SelectProfilePhotoModal/>}
       <main id="edit-profile-page-content">
         {loading ? (
           <Waiting />

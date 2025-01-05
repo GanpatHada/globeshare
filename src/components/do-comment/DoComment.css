@@ -14,7 +14,7 @@
 }
 .do-comment > section > button{
     font-size: 1.5rem;
-    padding: 10px;
+    padding: 0.6rem;
 }
 .do-comment .post-comment-button{
     font-size: 0.9rem;
@@ -23,7 +23,7 @@
 }
 .do-comment .comment-input{
     flex: 1;
-    padding: 10px;
+    padding: 0.6rem;
     border: none;
     font-size: 0.9rem;
 }
@@ -41,7 +41,15 @@
     border-radius: 10px;
     overflow: hidden;
     font-size: 1rem;
+    z-index: 2;
   }
   .do-comment .emoji-button{
     position: relative;
+  }
+  @media  screen and (max-width:768px) {
+    .do-comment .emoji-button{
+        
+        display: none;
+      }
+    
   }

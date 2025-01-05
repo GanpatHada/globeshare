@@ -16,6 +16,7 @@ import MyFriends from "./pages/profile/components/myFriends/MyFriends";
 import Menu from "./components/menu/Menu";
 import { usePosts } from "./hooks/usePosts";
 import { useMenu } from "./hooks/useMenu";
+import SelectProfilePhotoModal from "./pages/edit-profile/components/select-profile-photo-modal/SelectProfilePhotoModal";
 
 const AppSideNav = () => {
   const [searchBox, setSearchBox] = useState(false);
@@ -51,6 +52,7 @@ const ModalController = () => {
           {modalContentType === "CREATE_POST" && <CreatePost mode={"CREATE"} />}
           {modalContentType === "EDIT_POST" && <CreatePost mode={"EDIT"} />}
           {modalContentType === "POST_DETAILS" && <PostDetails />}
+          
         </ModalManager>
       )}
     </>
@@ -84,6 +86,7 @@ const MenuController=()=>{
 }
 
 const Main = () => {
+  console.log('rubn');
   return (
     <main id="main-app">
       <MenuController/>

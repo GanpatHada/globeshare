@@ -87,10 +87,16 @@ export async function fetchSuggestedUser({ following }) {
 
 export async function followUser(userId,userTofollow) {
   try {
-    const docRef = doc(db, "users", userId);
-    await updateDoc(docRef, {
+    const docRefHost = doc(db, "users", userId);
+    const docRefUser = doc(db,"users",userTofollow)
+    await updateDoc(docRefHost, {
       following: arrayUnion(userTofollow),
     });
+
+    await updateDoc(docRefUser,{
+      followers:arrayUnion(userId)
+    })
+    
   } catch (error) {
     throw error;
   }
@@ -98,10 +104,15 @@ export async function followUser(userId,userTofollow) {
 
 export async function unfollowUser(userId, userToUnfollow) {
   try {
-    const docRef = doc(db, "users", userId);
-    await updateDoc(docRef, {
+    const docRefHost = doc(db, "users", userId);
+    const docRefUser = doc(db,"users",userToUnfollow);
+    await updateDoc(docRefHost, {
       following: arrayRemove(userToUnfollow),
     });
+
+    await updateDoc(docRefUser,{
+      followers:arrayRemove(userId)
+    })
   } catch (error) {
     throw error;
   }
@@ -109,10 +120,16 @@ export async function unfollowUser(userId, userToUnfollow) {
 
 export async function removeUser(userId,userToRemove){
   try {
-    const docRef = doc(db, "users", userId);
-    await updateDoc(docRef, {
+
+    const docRefHost = doc(db, "users", userId);
+    const docRefUser = doc(db,"users",userToRemove);
+    await updateDoc(docRefHost, {
       followers: arrayRemove(userToRemove),
     });
+
+    await updateDoc(docRefUser,{
+      following:arrayRemove(userId)
+    })
   } catch (error) {
     throw error;
   }

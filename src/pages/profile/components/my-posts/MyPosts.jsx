@@ -16,8 +16,8 @@ const MyPosts = () => {
     try {
       startLoadingPosts();
       const posts = await fetchUserPosts(currentUser);
-      console.log(posts);
-      addPosts(posts);
+      if(posts.length!==0)
+        addPosts(posts);
     } catch (error) {
       toast.error("Unable to load posts");
       console.log(error);

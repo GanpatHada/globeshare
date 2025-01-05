@@ -6,6 +6,7 @@ export function initialEditProfileState(user) {
     bio:user.bio,
     website:user.website,
     isPrivate:user.isPrivate
+
   } 
   return {
     updatedProfile: editableFields,
@@ -14,7 +15,8 @@ export function initialEditProfileState(user) {
     userNameInfo:{
         type:'SUCCESS',
         infoText:''
-    }
+    },
+    selectPhotoModal:false
   };
 }
 export function editProfileReducer(state, action) {
@@ -33,6 +35,13 @@ export function editProfileReducer(state, action) {
 
     case "STOP_LOADING":
       return { ...state, loading: false };
+     
+    case "OPEN_SELECT_PHOTO_MODAL":return {
+       ...state,selectPhotoModal:true
+    }  
+    case "CLOSE_SELECT_PHOTO_MODAL":return {
+      ...state,selectPhotoModal:false
+   }
 
     case "START_USERNAME_FETCHING":
       return { ...state, userNameFetching: true };

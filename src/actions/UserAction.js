@@ -4,6 +4,10 @@ export const followUser = (dispatch, userIdToFollow) =>
 export const unfollowUser = (dispatch, userIdToUnfollow) =>
   dispatch({ type: "UNFOLLOW_USER", payload: userIdToUnfollow });
 
+export const removeFollower=(dispatch,userIdToRemove)=>{
+  dispatch({type:'REMOVE_FOLLOWER',payload:userIdToRemove})
+}
+
 export const addToBookmark=(dispatch,postId)=>
   dispatch({type:'ADD_TO_BOOKMARK',payload:postId})
 

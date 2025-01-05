@@ -45,6 +45,7 @@ const Feed = () => {
       {loading ? (
         <FeedLoading />
       ) : (
+        
         <>
           {getFeedFromPosts().map((post) => (
             <Post key={post.postId} post={post} />

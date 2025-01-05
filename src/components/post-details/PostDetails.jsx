@@ -14,6 +14,7 @@ import PostImages from "../post-images/PostImages";
 import PostLikes from '../post-likes/PostLikes'
 import { useModal } from "../../hooks/useModal";
 import { useMenu } from "../../hooks/useMenu";
+import { IoChevronBack } from "react-icons/io5";
 
 const PostComment = ({ userId, comment }) => {
   return (
@@ -28,12 +29,10 @@ const PostComment = ({ userId, comment }) => {
 const PostDetails = () => {
   const {posts}=usePosts()
   const postDetailsRef = useRef(null);
-  const{modalContentId:contentId}=useModal()
+  const{modalContentId:contentId,closeModal}=useModal()
   const currentPost=posts.find(post=>post.postId===contentId);
   const {images,likes,user,caption,comments,time,postId}=currentPost;
-  const {openMenu}=useMenu();
-
-   
+  const {openMenu}=useMenu(); 
   const handleMenuClick=()=>{
     openMenu(postId,'POST')
   }
@@ -41,6 +40,10 @@ const PostDetails = () => {
 
   return (
     <div id="post-details" ref={postDetailsRef}>
+      <header>
+              <button onClick={closeModal}><IoChevronBack /></button>
+             <h1>Post</h1>
+      </header>
       {images.length !== 0 && (
         <section className="image-section">
            <PostImages images={images}/>

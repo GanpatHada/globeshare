@@ -1,6 +1,7 @@
 import {
   addToBookmarkHandler,
   followUserHandler,
+  removeFollowerHandler,
   removeFromBookmarkHandler,
   unfollowUserHandler,
 } from "../utils/UserHelper";
@@ -40,6 +41,9 @@ export function userReducer(state, action) {
     } ;
     case "UNFOLLOW_USER" : return {
       ...state,user:unfollowUserHandler(state.user,action.payload)
+    }
+    case "REMOVE_FOLLOWER":return {
+      ...state,user:removeFollowerHandler(state.user,action.payload)
     } 
     case "START_LOADING": {
       return {

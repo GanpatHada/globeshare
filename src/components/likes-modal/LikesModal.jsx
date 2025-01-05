@@ -3,22 +3,34 @@ import "./LikesModal.css";
 import useClickOutsideHandler from "../../hooks/useClickOutsideHandler";
 import CrossButton from "../cross-button/CrossButton";
 import UserInfo from "../user-info/UserInfo";
-import { ModalContext } from "../../contexts/ModalContext";
 import { usePosts } from "../../hooks/usePosts";
 import { isUserInMyFollowing } from "../../utils/UserHelper";
 import { useUser } from "../../hooks/useUser";
 import { useDialog } from "../../hooks/useDialog";
-const LikesModal = () => {
-  const { posts } = usePosts();
+
+const LikeBox = ({ like: targetUser }) => {
+  const { closeDialog } = useDialog();
   const {
     user: { following, userId },
   } = useUser();
-  const {dialogContentId:contentId,closeDialog}=useDialog()
+  return (
+    <>
+      <UserInfo closeOnClickUser={closeDialog} userId={targetUser} />
+      {userId !== targetUser && (!isUserInMyFollowing(following, targetUser) ? (
+        <button className="primary-btn">Follow</button>
+      ) : (
+        <button className="secondary-btn">Following</button>
+      ))}
+    </>
+  );
+};
+
+const LikesModal = () => {
+  const { posts } = usePosts();
+  const { dialogContentId: contentId, closeDialog } = useDialog();
   const likesRef = useRef(null);
   const requiredPost = posts.find((post) => post.postId === contentId);
   const { likes } = requiredPost;
-
-  const doesIFollowUser = (userId) => isUserInMyFollowing(following, userId);
 
   return (
     <div id="likes-modal" className="modal" ref={likesRef}>
@@ -29,17 +41,7 @@ const LikesModal = () => {
       <main className="dialog-content">
         {likes.map((like) => (
           <div key={like}>
-            <UserInfo closeOnClickUser={closeDialog} userId={like} />
-            {like !== userId && (
-              <button
-                className={
-                  doesIFollowUser(like) ? "secondary-btn" : "primary-btn"
-                }
-                disabled={doesIFollowUser(like)}
-              >
-                {doesIFollowUser(like) ? "Following" : "Follow"}
-              </button>
-            )}
+            <LikeBox like={like} />
           </div>
         ))}
       </main>

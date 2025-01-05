@@ -58,6 +58,9 @@ const Suggestions = () => {
     };
     getSuggestedUsers();
   }, []);
+
+  const filterSuggestedUsers=()=>suggestedUsers.filter(sUser=>!user.following.includes(sUser));
+
   return (
     <div id="suggestions">
       {loading ? (
@@ -68,7 +71,7 @@ const Suggestions = () => {
             <h4>Suggested for you</h4>
           </header>
           <section id="suggested-users">
-            {suggestedUsers.map((user) => {
+            {filterSuggestedUsers().map((user) => {
               return (
                 <SuggestedUser key={user} suggestedUser={user} />
               );

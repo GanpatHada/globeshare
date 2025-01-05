@@ -28,6 +28,7 @@ const Profile = () => {
           toast.error("Unable to find user");
           navigate(-1);
         }
+        console.log(userProfile)
       }
     } catch (error) {
       toast.error("Something went wrong");

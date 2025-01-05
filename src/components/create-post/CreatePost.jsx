@@ -41,27 +41,35 @@ const CreatePostUploads = ({ state, dispatch }) => {
   );
 };
 
-const CreatePostFooter = ({ state, dispatch,mode }) => {
+const CreatePostFooter = ({ state, dispatch, mode }) => {
   const { caption, images, emojiPopup } = state;
   const textRef = useRef(null);
+  const inputRef=useRef(null);
   const emojiRef = useRef(null);
   const { user } = useUser();
-  const { closeModal,modalContentId } = useModal();
-  const { addPosts,editPostOnClient} = usePosts();
-  
+  const { closeModal, modalContentId } = useModal();
+  const { addPosts, editPostOnClient } = usePosts();
+
   const handleCaption = (e) => {
-    const textarea = textRef.current;
+    const textarea = inputRef.current;
     if (textarea) {
       textarea.style.height = "auto";
       textarea.style.height = `${textarea.scrollHeight}px`;
     }
     dispatch({ type: "SET_CAPTION", payload: e.target.value });
   };
+
+  
+
+
+  
   const closeEmojiPopup = () => dispatch({ type: "CLOSE_EMOJI" });
   useClickOutsideHandler(emojiRef, closeEmojiPopup);
   const startLoading = (loadingInfo) =>
     dispatch({ type: "START_LOADING", payload: loadingInfo });
   const stopLoading = () => dispatch({ type: "STOP_LOADING" });
+  
+
 
   const handlePostSend = async () => {
     try {
@@ -78,31 +86,29 @@ const CreatePostFooter = ({ state, dispatch,mode }) => {
     }
   };
 
-  const handlePostUpdate=async()=>{
+  const handlePostUpdate = async () => {
     try {
       startLoading();
-      const editedPost=await editPost(modalContentId,images,caption);
-      if(editedPost)
-      {
-         editPostOnClient(editedPost)
+      const editedPost = await editPost(modalContentId, images, caption);
+      if (editedPost) {
+        editPostOnClient(editedPost);
       }
-         
+
       closeModal();
-      toast.success('edited successfully')
+      toast.success("edited successfully");
     } catch (error) {
       toast.error("Something went wrong");
-    }
-    finally{
-      dispatch({type:"RESET_FIELDS"});
+    } finally {
+      dispatch({ type: "RESET_FIELDS" });
       stopLoading();
     }
-  }
+  };
   
 
   const handleEmojiClick = (obj) =>
     dispatch({ type: "SET_CAPTION", payload: caption.concat(obj.emoji) });
   return (
-    <footer id="create-post-footer">
+    <footer id="create-post-footer" ref={inputRef}>
       <button
         id="create-post-emoji"
         onClick={() => dispatch({ type: "OPEN_EMOJI" })}
@@ -123,11 +129,12 @@ const CreatePostFooter = ({ state, dispatch,mode }) => {
           placeholder="Enter your caption here "
           id="create-post-text-area"
           rows={1}
+          
         ></textarea>
       </div>
 
       <button
-        onClick={mode==='EDIT'?handlePostUpdate:handlePostSend}
+        onClick={mode === "EDIT" ? handlePostUpdate : handlePostSend}
         id="create-post-send"
         disabled={caption.trim().length === 0 && images.length === 0}
         className="all-centered"
@@ -151,11 +158,13 @@ const CreatePost = ({ mode, closeModal }) => {
       const currentPost = posts.find((post) => post.postId === modalContentId);
       if (currentPost.images.length !== 0)
         currentPost.images.forEach((image) => {
-      return dispatch({ type: "SET_IMAGES", payload:image });
-      });
+          return dispatch({ type: "SET_IMAGES", payload: image });
+        });
       dispatch({ type: "SET_CAPTION", payload: currentPost.caption });
     }
   }, []);
+  
+
   const { loading } = state;
   return (
     <div id="create-post-box">

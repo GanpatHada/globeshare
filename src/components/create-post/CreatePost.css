@@ -1,15 +1,14 @@
 #create-post-box{
-    width: 800px;
+    flex: 1;
     background-color: white;
-    min-height: 720px;
     position: relative;
     display: flex;
     flex-direction: column;
+    
 }
 #create-post-box .image-section{
     flex: 1;
-    display: flex;
-    
+    display: flex;    
 }
 #create-post-header{
     display: flex;
@@ -82,4 +81,15 @@
     z-index: 5;
     transform-origin: bottom right;   
 }
+@media  screen and (max-width:768px) {
+    #create-post-content{
+
+    }
+    #create-post-emoji{
+      display: none;
+    }
+    
+    
+    
+  }
 

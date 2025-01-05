@@ -118,7 +118,7 @@ const SignupBox = ({ setPage }) => {
         onClick={handleSignup}
         className="all-centered login-page-btns"
       >
-        {!loading ? (
+        {loading ? (
           <img src={Loading} id="loadingimg" alt="..." />
         ) : (
           "Create Account"

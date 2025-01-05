@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { UserContext } from "../contexts/UserContext"
-import { addToBookmark, followUser, removeFromBookmark, saveUserDetails, stopUserLoading, unfollowUser } from "../actions/UserAction";
+import { addToBookmark, followUser, removeFollower, removeFromBookmark, saveUserDetails, stopUserLoading, unfollowUser } from "../actions/UserAction";
 
 
 export const useUser=()=>{
@@ -11,6 +11,8 @@ export const useUser=()=>{
 
     const unFollowUserOnClient=(userIdToUnfollow)=>unfollowUser(dispatch,userIdToUnfollow)
 
+    const removeFollowerOnClient=(userToRemove)=>removeFollower(dispatch,userToRemove)
+
     const addToBookmarkOnClient=(postId)=>addToBookmark(dispatch,postId);
     const removeFromBookmarkOnClient=(postId)=>removeFromBookmark(dispatch,postId);
 
@@ -18,5 +20,5 @@ export const useUser=()=>{
 
     const saveUser=(userDetails)=>saveUserDetails(dispatch,userDetails)
 
-    return {user,loading,followUserOnClient,unFollowUserOnClient,stopLoading,saveUser,addToBookmarkOnClient,removeFromBookmarkOnClient}
+    return {user,loading,followUserOnClient,unFollowUserOnClient,stopLoading,saveUser,addToBookmarkOnClient,removeFromBookmarkOnClient,removeFollowerOnClient}
 }

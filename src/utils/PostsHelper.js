@@ -1,4 +1,3 @@
-import { nanoid } from "nanoid";
 
 export function postsHandler(posts, newPosts) {
   let updatedPosts = [...posts, ...newPosts];

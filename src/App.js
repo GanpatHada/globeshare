@@ -29,9 +29,7 @@ function App() {
           path="*"
           element={
             <PrivateRoute>
-              
-                <Main />
-              
+              <Main />
             </PrivateRoute>
           }
         />

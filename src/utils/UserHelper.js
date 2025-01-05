@@ -1,9 +1,9 @@
-export function isUserInMyFollowing(myDetails,toUser){
-    const {following}=myDetails;
+export function isUserInMyFollowing(following,toUser){
+    
     return following.includes(toUser)
 }
-export function isUserInMyFollowers(myDetails,toUser){
-    const{followers}=myDetails;
+export function isUserInMyFollowers(followers,toUser){
+   
     return followers.includes(toUser)
 }
 export function getActionForUser(user,targetUser)
@@ -40,5 +40,11 @@ export function followUserHandler(user,userToFollow)
 export function unfollowUserHandler(user,userToUnfollow)
 {
     const updatedUser={...user,following:user.following.filter(followingUser=>followingUser!==userToUnfollow)}
+    return updatedUser;
+}
+
+export function removeFollowerHandler(user,userToRemove)
+{
+    const updatedUser={...user,followers:user.followers.filter(follower=>follower!==userToRemove)}
     return updatedUser;
 }

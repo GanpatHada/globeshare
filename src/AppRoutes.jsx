@@ -6,7 +6,6 @@ import Explore from "./pages/explore/Explore";
 import EditProfile from "./pages/edit-profile/EditProfile";
 import MyBookmarks from "./pages/profile/components/my-bookmarks/MyBookmarks";
 import MyPosts from "./pages/profile/components/my-posts/MyPosts";
-import { ProfileProvider } from "./contexts/ProfileContext";
 import { EditProfileProvider } from "./contexts/EditProfileContext";
 
 const AppRoutes = () => {
