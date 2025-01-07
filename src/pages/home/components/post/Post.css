@@ -63,10 +63,9 @@
 }
 .post .post-caption button {
   color: var(--primary-color);
-  font-size: 1rem;
+  font-size: 0.9rem;
   margin-left: 0.6rem;
   text-transform: capitalize;
-  font-weight: 500;
 }
 .post .post-caption button:hover {
   text-decoration: underline;

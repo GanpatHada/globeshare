@@ -1,29 +1,64 @@
-import React, {useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./SearchBox.css";
 import useClickOutsideHandler from "../../hooks/useClickOutsideHandler";
+import { useSearch } from "../../hooks/useSearch";
+import { fetchAllUsers } from "../../services/UserService";
+import Waiting from "../waiting/Waiting";
+import UserInfo from "../user-info/UserInfo";
 
-;
-const SearchBox = ({searchBox,closeSearchBox}) => {
-  const [searchValue, setSearchValue] = useState("");
+const SearchBox = ({ searchBox, closeSearchBox }) => {
+  const { searchText,loading, setSearchText, startSearchLoading,setSearchResults, stopSearchLoading ,searchResults} =
+    useSearch();
+  console.log(searchResults);
+  console.log(loading)
 
-  const searchRef=useRef(null)
-  useClickOutsideHandler(searchRef,closeSearchBox);
+  const searchRef = useRef(null);
+  useClickOutsideHandler(searchRef, closeSearchBox);
+
+  const getAllUsers = async () => {
+    try {
+      startSearchLoading();
+      const results=await fetchAllUsers();
+      console.log(results)
+      setSearchResults(results)
+    } catch (error) {
+    } finally {
+      stopSearchLoading();
+    }
+  };
+
+  useEffect(() => { 
+    getAllUsers();
+  }, [])
+
+  const getSearchResults=()=>{
+    return searchResults.filter(result=>result.userName.toLowerCase().includes(searchText.toLowerCase()))
+  }
+  
   return (
-    <div id="search-box" ref={searchRef} style={{transform:`translateX(${searchBox?'70px':'-400px'})`}}>
+    <div
+      id="search-box"
+      ref={searchRef}
+      style={{ transform: `translateX(${searchBox ? "70px" : "-400px"})` }}
+    >
+      {loading &&<Waiting/>}
       <header>
         <h3>Search</h3>
         <input
           type="search"
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
           placeholder="Search"
+         
         />
       </header>
-      {searchValue.length > 0 && (
-        <div id="search-content">
-          
-        </div>
-      )}
+      <div id="search-content">
+       
+        {
+          getSearchResults().map(result=><div><UserInfo key={result.userId} userId={result.userId}/></div>)
+        }  
+       
+      </div>
     </div>
   );
 };

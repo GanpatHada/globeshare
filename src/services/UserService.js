@@ -80,7 +80,6 @@ export async function fetchSuggestedUser({ following }) {
 
     return otherUsers;
   } catch (error) {
-    console.log(error);
     throw error;
   }
 }
@@ -170,4 +169,14 @@ export async function fetchUserBasicInfo(userId) {
   } catch (error) {
     throw error;
   }
+}
+
+export async function fetchAllUsers(){
+  const usersCollection = collection(db, 'users');
+  const querySnapshot = await getDocs(usersCollection);
+  const allUsers=[];
+  querySnapshot.forEach((doc) => {
+    allUsers.push({userId:doc.id,fullName:doc.data().fullName,userName:doc.data().userName});
+  });
+  return allUsers
 }

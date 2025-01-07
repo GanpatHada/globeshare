@@ -53,6 +53,8 @@
   #dialog {
     
     border-radius: 0px;
+    animation: none;
+    opacity: 1;
   }
   #dialog>div{
     width: 100vw;

@@ -10,6 +10,7 @@ import { DialogProvider } from "./contexts/DialogContext";
 import "./Fonts.css";
 import { MenuProvider } from "./contexts/MenuContext";
 import { ProfileProvider } from "./contexts/ProfileContext";
+import { SearchProvider } from "./contexts/SearchContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Router>
@@ -18,9 +19,11 @@ root.render(
         <ModalProvider>
           <MenuProvider>
             <DialogProvider>
+              <SearchProvider>
               <ProfileProvider>
                 <App />
               </ProfileProvider>
+              </SearchProvider>
             </DialogProvider>
           </MenuProvider>
         </ModalProvider>

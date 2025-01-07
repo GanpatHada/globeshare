@@ -1,20 +1,12 @@
-
 export function postsHandler(posts, newPosts) {
-  let updatedPosts = [...posts, ...newPosts];
-  updatedPosts = updatedPosts.reduce((acc, cur) => {
-    const postIndex = updatedPosts.findIndex(
-      (post) => post.postId === cur.postId
-    );
-    if (postIndex === -1) acc.push(cur);
-    else acc[postIndex] = cur;
-    return acc;
-  }, []);
+  const updatedPosts = Array.from(
+    new Map([...posts, ...newPosts].map((item) => [item.postId, item])).values()
+  );
   return updatedPosts;
 }
 
-export function postDeleteHanlder(posts,postIdToDelete)
-{
-  let updatedPosts=posts.filter(post=>post.postId!==postIdToDelete);
+export function postDeleteHanlder(posts, postIdToDelete) {
+  let updatedPosts = posts.filter((post) => post.postId !== postIdToDelete);
   return updatedPosts;
 }
 
@@ -27,10 +19,9 @@ export function likeHandler(posts, userId, postId) {
   return updatedPosts;
 }
 
-export function postEditHandler(posts,editedPost){
-  let updatedPosts=posts.map(post=>{
-    if(post.postId===editedPost.postId)
-      return editedPost;
+export function postEditHandler(posts, editedPost) {
+  let updatedPosts = posts.map((post) => {
+    if (post.postId === editedPost.postId) return editedPost;
     return post;
   });
   return updatedPosts;
@@ -45,7 +36,7 @@ export function unlikeHandler(posts, userId, postId) {
   return updatedPosts;
 }
 
-export function commentHandler(posts,comment, postId) {
+export function commentHandler(posts, comment, postId) {
   let updatedPosts = posts.map((post) => {
     if (post.postId === postId)
       return { ...post, comments: [...post.comments, comment] };
@@ -87,5 +78,3 @@ export function getTimeDifference(dateInMs) {
     return `${years} year${years > 1 ? "s" : ""}`;
   }
 }
-
-

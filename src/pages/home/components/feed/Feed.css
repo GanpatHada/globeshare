@@ -17,5 +17,26 @@
     flex: 1;
     background-color: rgb(226, 226, 226);
 }
-
+#no-feed{
+    background-color: white;
+    flex: 1;
+}
+#no-feed-content{
+    overflow: hidden;
+    flex-direction: column;
+    padding: 0px 40px;
+}
+#no-feed-content > *{
+    text-align: center;
+}
+#no-feed-content #no-feed-icon{
+    width: 5rem;
+}
+#no-feed-content  h2{
+    font-weight: 500;
+}
+#no-feed-content p{
+    color: gray;
+    font-size: 1rem;
+}
   

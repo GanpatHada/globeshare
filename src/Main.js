@@ -1,32 +1,31 @@
 import React, { useState } from "react";
+
+import { useModal } from "./hooks/useModal";
+import { useDialog } from "./hooks/useDialog";
+
 import LeftSideBar from "./components/left-side-bar/LeftSideBar";
-import "./Main.css";
 import Header from "./components/header/Header";
 import BottomNavbar from "./components/bottom-navbar/BottomNavbar";
-import AppRoutes from "./AppRoutes";
 import SearchBox from "./components/search-box/SearchBox";
 import ModalManager from "./components/modal-manager/ModalManager";
 import CreatePost from "./components/create-post/CreatePost";
 import PostDetails from "./components/post-details/PostDetails";
 import LikesModal from "./components/likes-modal/LikesModal";
 import Dialog from "./components/dialog/Dialog";
-import { useModal } from "./hooks/useModal";
-import { useDialog } from "./hooks/useDialog";
 import MyFriends from "./pages/profile/components/myFriends/MyFriends";
-import Menu from "./components/menu/Menu";
-import { usePosts } from "./hooks/usePosts";
-import { useMenu } from "./hooks/useMenu";
-import SelectProfilePhotoModal from "./pages/edit-profile/components/select-profile-photo-modal/SelectProfilePhotoModal";
+
+import "./Main.css";
+import { Outlet } from "react-router-dom";
 
 const AppSideNav = () => {
   const [searchBox, setSearchBox] = useState(false);
   const openSearchBox = () => setSearchBox(true);
   const closeSearchBox = () => setSearchBox(false);
   return (
-    <>
+    <React.Fragment>
       <LeftSideBar openSearchBox={openSearchBox} searchBox={searchBox} />
       <SearchBox searchBox={searchBox} closeSearchBox={closeSearchBox} />
-    </>
+    </React.Fragment>
   );
 };
 
@@ -34,35 +33,33 @@ const AppContent = () => {
   return (
     <section id="app-content">
       <div className="app-pages">
-        <AppRoutes />
+        <Outlet/>
       </div>
     </section>
   );
 };
 
 const ModalController = () => {
-  const { isModalOpen, modalContentType,modalContentId } = useModal();
-  const {posts}=usePosts()
-  console.log(modalContentType,modalContentId);
+  const { isModalOpen, modalContentType} = useModal();
+ 
 
   return (
-    <>
+    <React.Fragment>
       {isModalOpen &&  (
         <ModalManager>
           {modalContentType === "CREATE_POST" && <CreatePost mode={"CREATE"} />}
           {modalContentType === "EDIT_POST" && <CreatePost mode={"EDIT"} />}
-          {modalContentType === "POST_DETAILS" && <PostDetails />}
-          
+          {modalContentType === "POST_DETAILS" && <PostDetails />}    
         </ModalManager>
       )}
-    </>
+    </React.Fragment>
   );
 };
 
 const DialogController = () => {
   const { isDialogOpen, dialogContentType } = useDialog();
   return (
-    <>
+    <React.Fragment>
       {isDialogOpen && (
         <Dialog>
           {dialogContentType === "LIKES" && <LikesModal />}
@@ -70,26 +67,15 @@ const DialogController = () => {
         </Dialog>
       )}
      
-    </>
+    </React.Fragment>
   );
 };
 
-const MenuController=()=>{
-    const {isMenuOpen}=useMenu()
-    return(
-      <>
-      {isMenuOpen && <Menu/>
 
-      }
-      </>
-    )
-}
 
 const Main = () => {
-  console.log('rubn');
   return (
     <main id="main-app">
-      <MenuController/>
       <ModalController />
       <DialogController />
       <AppSideNav />
@@ -97,6 +83,7 @@ const Main = () => {
       <AppContent />
       <BottomNavbar />
     </main>
+    
   );
 };
 

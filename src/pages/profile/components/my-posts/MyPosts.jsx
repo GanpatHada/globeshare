@@ -9,28 +9,30 @@ import { usePosts } from "../../../../hooks/usePosts";
 import { useParams } from "react-router-dom";
 
 const MyPosts = () => {
-  const { posts, addPosts, startLoadingPosts, stopLoadingPosts, loading }=usePosts();
-  const {userId:currentUser}=useParams();
-  console.log(loading);
-  const getUserPosts = async () => {
-    try {
-      startLoadingPosts();
-      const posts = await fetchUserPosts(currentUser);
-      if(posts.length!==0)
-        addPosts(posts);
-    } catch (error) {
-      toast.error("Unable to load posts");
-      console.log(error);
-    } finally {
-      stopLoadingPosts();
-    }
-  };
+  const { posts, addPosts, startLoadingPosts, stopLoadingPosts, loading } =
+    usePosts();
+  const { userId: currentUser } = useParams();
 
   useEffect(() => {
-    getUserPosts();
-  }, []);
+    const getUserPosts = async () => {
+      try {
+        startLoadingPosts();
+        const posts = await fetchUserPosts(currentUser);
+        if (posts.length !== 0) addPosts(posts);
+      } catch (error) {
+        toast.error("Unable to load posts");
+        console.log(error);
+      } finally {
+        stopLoadingPosts();
+      }
+    };
 
-  const filterUserPosts = () => posts.filter((post) => post.user === currentUser);
+    getUserPosts();
+    // eslint-disable-next-line
+  }, [currentUser]);
+
+  const filterUserPosts = () =>
+    posts.filter((post) => post.user === currentUser);
 
   if (loading) return <Waiting />;
   else {

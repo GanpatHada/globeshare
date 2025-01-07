@@ -6,14 +6,14 @@ import { useUser } from "../../../../hooks/useUser";
 import { followUser, removeUser, unfollowUser } from "../../../../services/UserService";
 import { toast } from "react-toastify";
 import { useProfile } from "../../../../hooks/useProfile";
-import { isUserInMyFollowers, isUserInMyFollowing } from "../../../../utils/UserHelper";
+import {isUserInMyFollowing } from "../../../../utils/UserHelper";
 import CrossButton from '../../../../components/cross-button/CrossButton'
 
 const FriendList = ({ friend, mode }) => {
   const { closeDialog } = useDialog();
   const [loading, setLoading] = useState(false);
   const {
-    user: { userId, followers, following },
+    user: { userId,following },
     unFollowUserOnClient,followUserOnClient,removeFollowerOnClient
   } = useUser();
   const { profile } = useProfile();
@@ -59,17 +59,7 @@ const FriendList = ({ friend, mode }) => {
     }
   }
 
-  const handleRemoveUser = async (friend) => {
-    try {
-      setLoading(true);
-      await removeUser(userId, friend);
-    } catch (error) {
-      toast.error("Unable to remove");
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  
   return (
     <div key={friend}>
       <UserInfo userId={friend} closeOnClickUser={closeDialog} />
@@ -98,8 +88,6 @@ const FriendList = ({ friend, mode }) => {
 
 const MyFriends = ({ mode }) => {
   const { profile } = useProfile();
-  console.log(mode);
-  console.log(profile);
   const{closeDialog} =useDialog()
   return (
     <div id="my-friends">
@@ -109,7 +97,7 @@ const MyFriends = ({ mode }) => {
       </header>
       <div className="dialog-content">
         {profile[mode.toLowerCase()].map((friend) => {
-          return <FriendList friend={friend} mode={mode} />;
+          return <FriendList key={friend} friend={friend} mode={mode} />;
         })}
       </div>
     </div>
