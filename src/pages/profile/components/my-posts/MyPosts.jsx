@@ -41,7 +41,7 @@ const MyPosts = () => {
       return (
         <div className="posts-wrapper">
           {filterUserPosts().map((post) => {
-            return <PostsCard post={post} />;
+            return <PostsCard post={post} key={post.postId} />;
           })}
         </div>
       );

@@ -8,7 +8,6 @@ import { fetchCurrentUserDetails } from "../../services/UserService";
 import { toast } from "react-toastify";
 export const PrivateRoute = ({ children }) => {
   const { user, loading, stopLoading, saveUser } = useUser();
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (userFound) => {
       try {
@@ -26,5 +25,5 @@ export const PrivateRoute = ({ children }) => {
     return () => unsubscribe();
   }, []);
   if (loading) return <Loader />;
-  else return user ? children : <Navigate to={"/auth"} />;
+  return user ? children : <Navigate to={"/auth"} />;
 };

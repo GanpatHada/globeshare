@@ -16,14 +16,9 @@ import { useMenu } from "../../../../hooks/useMenu";
 import Menu from "../../../../components/menu/Menu";
 
 const PostHeader = ({ post }) => {
-  const{postId,time,user}=post;
-  const{openMenu,isMenuOpen}=useMenu();
-
-  
-
+  const{time,user}=post;
   return (
     <header className="post-header">
-      {isMenuOpen && <Menu/>}
       <UserInfo userId={user} />
       <span className="post-time" title={getPostCreationDate(time)}>
         {getTimeDifference(time)} ago

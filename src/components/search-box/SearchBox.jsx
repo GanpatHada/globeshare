@@ -9,9 +9,6 @@ import UserInfo from "../user-info/UserInfo";
 const SearchBox = ({ searchBox, closeSearchBox }) => {
   const { searchText,loading, setSearchText, startSearchLoading,setSearchResults, stopSearchLoading ,searchResults} =
     useSearch();
-  console.log(searchResults);
-  console.log(loading)
-
   const searchRef = useRef(null);
   useClickOutsideHandler(searchRef, closeSearchBox);
 

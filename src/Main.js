@@ -16,6 +16,8 @@ import MyFriends from "./pages/profile/components/myFriends/MyFriends";
 
 import "./Main.css";
 import { Outlet } from "react-router-dom";
+import { useMenu } from "./hooks/useMenu";
+import Menu from "./components/menu/Menu";
 
 const AppSideNav = () => {
   const [searchBox, setSearchBox] = useState(false);
@@ -38,6 +40,12 @@ const AppContent = () => {
     </section>
   );
 };
+
+const MenuController=()=>{
+  const {isMenuOpen}=useMenu()
+  if(isMenuOpen)
+    return <Menu/>
+}
 
 const ModalController = () => {
   const { isModalOpen, modalContentType} = useModal();
@@ -76,6 +84,7 @@ const DialogController = () => {
 const Main = () => {
   return (
     <main id="main-app">
+      <MenuController/>
       <ModalController />
       <DialogController />
       <AppSideNav />
