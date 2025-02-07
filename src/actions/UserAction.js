@@ -19,3 +19,7 @@ export const saveUserDetails = (dispatch, user) =>
 
 export const stopUserLoading = (dispatch) => 
     dispatch({ type: "STOP_LOADING" });
+export const startUserLoading=(dispatch)=>
+  dispatch({type:'START_LOADING'})
+
+export const removeUser=(dispatch)=>dispatch({type:'REMOVE_USER'})

@@ -5,9 +5,9 @@ import Info from "./authComponents/Info";
 import LoginBox from "./authComponents/LoginBox";
 import SignupBox from "./authComponents/SignupBox";
 
-
 const Login = () => {
   const [page, setPage] = useState("login");
+
   return (
     <div id="login-page" className="all-centered">
       <aside className="all-centered">

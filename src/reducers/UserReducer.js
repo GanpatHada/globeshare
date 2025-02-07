@@ -59,7 +59,7 @@ export function userReducer(state, action) {
     }
     case "REMOVE_USER":
       return {
-        ...initialUser,
+        ...state,user:null,loading:false
       };
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
