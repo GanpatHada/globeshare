@@ -1,10 +1,8 @@
-
 import React, { useReducer } from "react";
 import GuestButton from "./GuestButton";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import Loading from "../../../images/loading.svg";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 import {
   initialLoginFormState,
   loginFormReducer,
@@ -12,17 +10,12 @@ import {
 import { areThereLoginErrors, getLoginError } from "../../../utils/LoginHelper";
 import { login } from "../../../services/LoginService";
 import "../Login.css";
-
 const LoginBox = ({ setPage }) => {
   const [state, dispatch] = useReducer(loginFormReducer, initialLoginFormState);
   const { email, password, showPassword, loading } = state;
-
-  const navigate = useNavigate();
-
   const handleFieldChange = ({ target: { name, value } }) => {
     return dispatch({ type: "SET_FIELD", payload: { field: name, value } });
   };
-
   const handleShowPassword = () => {
     return dispatch({ type: "TOGGLE_SHOW_PASSWORD" });
   };
@@ -34,7 +27,6 @@ const LoginBox = ({ setPage }) => {
     startLoading();
     try {
       await login(email.trim(), password.trim());
-      navigate("/");
     } catch (errorCode) {
       toast.error(getLoginError(errorCode), { autoClose: 2000 });
     } finally {

@@ -1,5 +1,6 @@
-import { createContext, useReducer } from "react";
+import { createContext,useEffect,useReducer } from "react";
 import { initialUser, userReducer } from "../reducers/UserReducer";
+
 
 export const UserContext = createContext();
 export function UserProvider({ children }) {

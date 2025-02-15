@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Login.css";
 import "react-toastify/dist/ReactToastify.css";
 import Info from "./authComponents/Info";
 import LoginBox from "./authComponents/LoginBox";
 import SignupBox from "./authComponents/SignupBox";
+import { useUser } from "../../hooks/useUser";
 
 const Login = () => {
   const [page, setPage] = useState("login");
+  const{startLoading}=useUser();
+  useEffect(()=>{
+     startLoading();
+  },[])
 
   return (
     <div id="login-page" className="all-centered">

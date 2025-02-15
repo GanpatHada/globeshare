@@ -18,14 +18,6 @@ export function userReducer(state, action) {
         ...state,
         user: action.payload,
       };
-    case "ADD_FOLLOWING":
-      return {
-        ...state,
-        userDetails: {
-          ...state.userDetails,
-          following: [...state.userDetails.following, action.payload],
-        },
-      };
     case "ADD_TO_BOOKMARK":
       return {
         ...state,
@@ -59,7 +51,7 @@ export function userReducer(state, action) {
     }
     case "REMOVE_USER":
       return {
-        ...state,user:null,loading:false
+        ...state,user:null,loading:true
       };
     default:
       throw new Error(`Unhandled action type: ${action.type}`);

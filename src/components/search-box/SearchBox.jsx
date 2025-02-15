@@ -16,7 +16,6 @@ const SearchBox = ({ searchBox, closeSearchBox }) => {
     try {
       startSearchLoading();
       const results=await fetchAllUsers();
-      console.log(results)
       setSearchResults(results)
     } catch (error) {
     } finally {
@@ -52,7 +51,7 @@ const SearchBox = ({ searchBox, closeSearchBox }) => {
       <div id="search-content">
        
         {
-          getSearchResults().map(result=><div><UserInfo key={result.userId} userId={result.userId}/></div>)
+          getSearchResults().map(result=><div key={result.userId}><UserInfo  userId={result.userId}/></div>)
         }  
        
       </div>

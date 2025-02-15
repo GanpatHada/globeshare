@@ -1,12 +1,10 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, {useRef } from "react";
 import "./Menu.css";
-import { GoMoon, GoSun } from "react-icons/go";
 import { AiOutlineLogout } from "react-icons/ai";
 import useClickOutsideHandler from "../../hooks/useClickOutsideHandler";
 import { logout } from "../../services/LoginService";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../contexts/UserContext";
 import { useUser } from "../../hooks/useUser";
 const Menu = ({menuBox,closeMenuBox}) => {
   const{logoutUser,startLoading}=useUser()
