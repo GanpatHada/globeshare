@@ -2,7 +2,7 @@ import React, { useContext, useRef, useState } from "react";
 import "./LeftSideBar.css";
 import globeShare from "../../images/mainLogoText.svg";
 import globeShareMin from "../../images/mainLogoMin.svg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Search } from "@mui/icons-material";
 import Menu from "./Menu";
 import {BsPlusSquare } from "react-icons/bs";
@@ -15,8 +15,9 @@ import { useUser } from "../../hooks/useUser";
 import { useModal } from "../../hooks/useModal";
 
 const SideNavHeader = ({ searchBox }) => {
+  const navigate=useNavigate()
   return (
-    <section id={"main-logo"} className={searchBox ? "all-centered" : ""}>
+    <section onClick={()=>navigate("/")} id={"main-logo"} className={searchBox ? "all-centered" : ""}>
       <img src={searchBox ? globeShareMin : globeShare} alt="..." />
     </section>
   );
