@@ -50,37 +50,44 @@ const SideNavs = ({ openSearchBox,searchBox }) => {
   return (
     <section id="side-navs">
       <ul>
-        <NavLink to={"/"} className="navs">
+        <li>
+          <NavLink to={"/"} className="navs">
           <span className="icons">
             <GoHome />
           </span>
           Home
         </NavLink>
+        </li>
         <li className={`navs ${searchBox&&'active-search-nav'}`} onClick={openSearchBox}>
           <span className="icons">
             <Search />
           </span>
           Search
         </li>
-        <NavLink to={'/explore'} className="navs">
+        <li>
+          <NavLink to={'/explore'} className="navs">
           <span className="icons">
             <MdOutlineExplore />
           </span>
           Explore
         </NavLink>
+        </li>
         <li className="navs" onClick={()=>openModal(null,'CREATE_POST')}>
           <span className="icons">
             <BsPlusSquare />
           </span>
           Create
         </li>
-        <NavLink className="navs">
+        <li>
+           <NavLink className="navs">
           <span className="icons">
             <AiOutlineHeart />
           </span>
           Notifications
         </NavLink>
-        <NavLink className="navs" to={`/profile/${userId}`}>
+        </li>
+        <li>
+          <NavLink className="navs" to={`/profile/${userId}`}>
           <span className="icons" >
             <div id="profile">
               <img src={profilePhoto?.url ?? defaultProfileImage} alt="" />
@@ -88,6 +95,7 @@ const SideNavs = ({ openSearchBox,searchBox }) => {
           </span>
           Profile
         </NavLink>
+        </li>
       </ul>
       <MenuNav />
     </section>

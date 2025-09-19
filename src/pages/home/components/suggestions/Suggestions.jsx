@@ -68,7 +68,7 @@ const Suggestions = () => {
       ) : (
         <>
           <header id="user-suggestion">
-            <h4>Suggested for you</h4>
+            <h1>Suggested for you</h1>
           </header>
           <section id="suggested-users">
             {filterSuggestedUsers().map((user) => {
