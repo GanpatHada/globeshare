@@ -24,7 +24,7 @@ const FriendList = ({ friend, mode }) => {
       unFollowUserOnClient(friend);
     } catch (error) {
       toast.error("Unable to unfollow");
-      console.log(error);
+      
     } finally {
       setLoading(false);
     }
@@ -37,7 +37,7 @@ const FriendList = ({ friend, mode }) => {
       followUserOnClient(friend)
     } catch (error) {
       toast.error('unable to follow');
-      console.log(error);
+    
     }
     finally{
       setLoading(false)
@@ -52,7 +52,7 @@ const FriendList = ({ friend, mode }) => {
 
     } catch (error) {
       toast.error('Unable to remove')
-      console.log(error);
+      
     }
     finally{
       setLoading(false)

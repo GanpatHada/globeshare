@@ -5,7 +5,7 @@ import { fetchUserBasicInfo } from "../../services/UserService";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../hooks/useUser";
 
-const UserInfo = ({ userId, comment = false,closeOnClickUser=false }) => {
+const UserInfo = ({ userId, comment = false,closeOnClickUser=false,userData }) => {
   const { user: me } = useUser();
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({ profilePhoto: null, userName: null });
@@ -31,8 +31,13 @@ const UserInfo = ({ userId, comment = false,closeOnClickUser=false }) => {
   };
 
   useEffect(() => {
-    getUserBasicInfo();
-  }, []);
+  if (!userData) {
+    getUserBasicInfo(); 
+  } else {
+    setUser({ profilePhoto: userData?.profilePhoto, userName: userData?.userName });
+    setLoading(false);
+  }
+}, []);
 
   return (
     <div className="user-basic-info">

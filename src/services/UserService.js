@@ -56,7 +56,6 @@ export async function updateProfile(userId, updatedProfile) {
     const docRef = doc(db, "users", userId);
     await updateDoc(docRef, updatedProfile);
     const updatedDoc = await getDoc(docRef);
-    console.log(updatedDoc);
     return { userId, ...updatedDoc.data() };
   } catch (error) {
     throw error;

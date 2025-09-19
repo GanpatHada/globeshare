@@ -36,7 +36,6 @@ const LikeButton = ({ post }) => {
       }
     } catch (error) {
       toast.error("Something went wrong");
-      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -85,7 +84,6 @@ const BookMarkButton = ({ post }) => {
       }
     } catch (error) {
       toast.error("Something went wrong");
-      console.log(error);
     } finally {
       setLoading(false);
     }

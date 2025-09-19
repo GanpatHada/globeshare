@@ -1,19 +1,16 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, {useEffect,useState } from "react";
 import "./Post.css";
 import { MdMoreHoriz } from "react-icons/md";
 import {
   getPostCreationDate,
   getTimeDifference,
 } from "../../../../utils/PostsHelper";
-import { ModalContext } from "../../../../contexts/ModalContext";
 import UserInfo from "../../../../components/user-info/UserInfo";
 import PostActions from "../../../../components/post-actions/PostActions";
 import DoComment from "../../../../components/do-comment/DoComment";
 import PostImages from "../../../../components/post-images/PostImages";
 import PostLikes from "../../../../components/post-likes/PostLikes";
 import { useModal } from "../../../../hooks/useModal";
-import { useMenu } from "../../../../hooks/useMenu";
-import Menu from "../../../../components/menu/Menu";
 
 const PostHeader = ({ post }) => {
   const{time,user}=post;

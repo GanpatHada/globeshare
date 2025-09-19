@@ -32,8 +32,8 @@
 }
 .do-comment .emoji-popup {
     position: absolute;
-    top: -460px;
-    right: 10px;
+    top: 0px;
+    right: 50px;
     height: 450px;
     width: 350px;
     background-color: white;

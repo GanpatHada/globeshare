@@ -55,7 +55,6 @@ const DoComment = ({ post }) => {
       commentOnPostOnClient(commentObj, postId);
     } catch (error) {
       toast.error("Something went wrong ");
-      console.log(error);
     } finally {
       setCommentText("");
       setLoading(false);

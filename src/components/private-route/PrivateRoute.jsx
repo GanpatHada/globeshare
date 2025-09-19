@@ -9,10 +9,8 @@ import { toast } from "react-toastify";
 
 export const PrivateRoute = ({ children }) => {
   const { user, loading, stopLoading, saveUser } = useUser();
-  console.log(user,loading);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-      console.log(firebaseUser,loading)
       if (firebaseUser) {
         try {
           const userDetails = await fetchCurrentUserDetails(firebaseUser.uid);

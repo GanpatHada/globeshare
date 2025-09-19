@@ -6,6 +6,9 @@
     
     
 }
+#post-details .emoji-popup{
+    top: -410px;
+}
 #post-details > header{
     position: fixed;
     top: 0px;

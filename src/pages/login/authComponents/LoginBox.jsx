@@ -10,9 +10,11 @@ import {
 import { areThereLoginErrors, getLoginError } from "../../../utils/LoginHelper";
 import { login } from "../../../services/LoginService";
 import "../Login.css";
+import { useNavigate } from "react-router-dom";
 const LoginBox = ({ setPage }) => {
   const [state, dispatch] = useReducer(loginFormReducer, initialLoginFormState);
   const { email, password, showPassword, loading } = state;
+  const navigate=useNavigate()
   const handleFieldChange = ({ target: { name, value } }) => {
     return dispatch({ type: "SET_FIELD", payload: { field: name, value } });
   };
@@ -27,6 +29,7 @@ const LoginBox = ({ setPage }) => {
     startLoading();
     try {
       await login(email.trim(), password.trim());
+      navigate("/")
     } catch (errorCode) {
       toast.error(getLoginError(errorCode), { autoClose: 2000 });
     } finally {

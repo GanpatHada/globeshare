@@ -24,7 +24,6 @@ const EditProfile = () => {
 
   const openSelectProfilePhotoModal = () => {
     dispatch({type:'OPEN_SELECT_PHOTO_MODAL'})
-    console.log(state)
   };
 
   const handleUpdate = async () => {
@@ -48,7 +47,6 @@ const EditProfile = () => {
         toast.success("Profile edited successfully");
       } catch (error) {
         toast.error("unable to update at the moment");
-        console.log(error);
       } finally {
         dispatch({ type: "STOP_LOADING" });
       }

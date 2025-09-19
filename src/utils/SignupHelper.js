@@ -1,25 +1,44 @@
 import isEmail from "validator/lib/isEmail";
 
 export const userObject = {
-  userName: null,
   profilePhoto: null,
   followers: [],
   following: [],
   bookmarks: [],
   bio: "i am using globeshare",
-  website: null,
-  isPrivate:false,
-  fullName:null
+  website: "",
+  isPrivate: false,
+  fullName: ""
 };
 
 function createInitialUsrName(email) {
   return email.slice(0, email.indexOf("@"));
 }
 
+function generateNGrams(text, n = 3) {
+  text = text.toLowerCase();
+  const result = [];
+  for (let i = 0; i <= text.length - n; i++) {
+    result.push(text.substring(i, i + n));
+  }
+  return result;
+}
+
 export function getUserDetails(email) {
-  const userDetails = { ...userObject, userName: createInitialUsrName(email) };
+  const userName = createInitialUsrName(email);
+  const userNameLower = userName.toLowerCase();
+  const userNameIndex = generateNGrams(userNameLower);
+
+  const userDetails = {
+    ...userObject,
+    userName,
+    userNameLower,
+    userNameIndex
+  };
+
   return userDetails;
 }
+
 
 export function areThereSignupErrors(email, password, confirmPassword) {
   if (email.trim().length === 0) {

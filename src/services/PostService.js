@@ -170,7 +170,7 @@ export async function commentOnPost(postId, comment) {
       comments: arrayUnion(comment),
     });
   } catch (error) {
-    console.log(error);
+    
   }
 }
 
