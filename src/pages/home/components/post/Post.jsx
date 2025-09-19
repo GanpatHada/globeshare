@@ -46,7 +46,7 @@ const PostCaption = ({ post }) => {
   const [showMore, setShowMore] = useState(false);
   useEffect(() => {
     if (finalCaption.length > 100) setShowMore(true);
-  }, [caption]);
+  }, [finalCaption]);
 
   return (
     <section

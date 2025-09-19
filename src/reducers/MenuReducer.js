@@ -16,5 +16,6 @@ export function menuReducer(state, action) {
     }
 
     case "CLOSE_MENU" : return{...initialMenuState}
+    default : return initialMenuState
   }
 }

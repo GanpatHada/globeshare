@@ -59,7 +59,7 @@ const SearchBox = ({ searchBox, closeSearchBox }) => {
     }, 300);
 
     return () => clearTimeout(debounceTimeout);
-  }, [searchText]);
+  }, [searchText, setSearchResults, startSearchLoading, stopSearchLoading]);
 
   const showNoResults =
     !loading && !isSearching && searchText.trim().length >= 3 && searchResults.length === 0;

@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import {useState } from "react";
 import "./LeftSideBar.css";
 import globeShare from "../../images/mainLogoText.svg";
 import globeShareMin from "../../images/mainLogoMin.svg";
@@ -10,7 +10,6 @@ import { GoHome } from "react-icons/go";
 import { AiOutlineHeart, AiOutlineMenu } from "react-icons/ai";
 import { MdOutlineExplore } from "react-icons/md";
 import defaultProfileImage from "../../images/profile.png";
-import { ModalContext } from "../../contexts/ModalContext";
 import { useUser } from "../../hooks/useUser";
 import { useModal } from "../../hooks/useModal";
 

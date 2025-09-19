@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import {useState } from "react";
 import "./PostActions.css";
 import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
 import {
@@ -48,7 +48,7 @@ const LikeButton = ({ post }) => {
           {isPostLiked() ? <IoIosHeart color="#e40000" /> : <IoIosHeartEmpty />}
         </>
       ) : (
-        <img src={Spinner} />
+        <img src={Spinner} alt="..." />
       )}
     </button>
   );
@@ -98,7 +98,7 @@ const BookMarkButton = ({ post }) => {
           <IoBookmarkOutline />
         )
       ) : (
-        <img src={Spinner} />
+        <img src={Spinner} alt="..." />
       )}
     </button>
   );

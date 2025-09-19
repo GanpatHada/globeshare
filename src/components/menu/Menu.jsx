@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import "./Menu.css";
 import useClickOutsideHandler from "../../hooks/useClickOutsideHandler";
 import { useMenu } from "../../hooks/useMenu";
@@ -8,7 +8,7 @@ import { deletePost } from "../../services/PostService";
 import { toast } from "react-toastify";
 import { useModal } from "../../hooks/useModal";
 const Menu = () => {
-  const { closeMenu, menuContentId, menuContentType } = useMenu();
+  const { closeMenu, menuContentId} = useMenu();
   const { closeModal,openModal} = useModal();
   const { posts, deletePostOnClient } = usePosts();
   const menuRef = useRef();

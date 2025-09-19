@@ -1,4 +1,3 @@
-import React, { useContext } from "react";
 import "./ProfileNav.css";
 import { NavLink, useParams } from "react-router-dom";
 import { useUser } from "../../../../hooks/useUser";

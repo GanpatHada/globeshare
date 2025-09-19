@@ -50,6 +50,7 @@ export function editProfileReducer(state, action) {
       return { ...state, userNameFetching: false };
 
     case "SET_USERNAME_INFO":
-        return { ...state, userNameInfo:{...state.userNameInfo,type:action.payload.type,infoText:action.payload.infoText} };    
+        return { ...state, userNameInfo:{...state.userNameInfo,type:action.payload.type,infoText:action.payload.infoText} };   
+    default  : return state   
   }
 }

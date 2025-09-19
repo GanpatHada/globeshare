@@ -1,4 +1,3 @@
-import React  from "react";
 import "./Home.css";
 import Suggestions from "./components/suggestions/Suggestions";
 import Feed from "./components/feed/Feed";

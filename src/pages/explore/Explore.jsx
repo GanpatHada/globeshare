@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import "./Explore.css";
 import PostsCard from "../../components/posts-card/PostsCard";
 import { toast } from "react-toastify";
@@ -66,8 +66,6 @@ const SmallDeviceSearchBox = () => {
     setSearchResults([]);
   };
 
-  const showNoResults =
-    !loading && !isSearching && searchInput.trim().length >= 3 && searchResults.length === 0;
 
   return (
     <>
@@ -129,7 +127,7 @@ const Explore = () => {
   const { user } = useUser();
   const { posts, loading, addPosts, startLoadingPosts, stopLoadingPosts } = usePosts();
 
-  const getExploringPosts = async () => {
+ const getExploringPosts = useCallback(async () => {
     try {
       startLoadingPosts();
       const exploringPosts = await fetchExploringPosts([user.userId, ...user.following]);
@@ -139,14 +137,14 @@ const Explore = () => {
     } finally {
       stopLoadingPosts();
     }
-  };
+  }, [user.userId, user.following, addPosts, startLoadingPosts, stopLoadingPosts]);
 
   const finalPosts = () =>
     posts.filter(post => !user.following.includes(post.user) && post.user !== user.userId);
 
   useEffect(() => {
     getExploringPosts();
-  }, []);
+  }, [getExploringPosts]);
 
   return (
     <div id="explore-page" className="app-pages">

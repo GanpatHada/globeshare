@@ -27,7 +27,7 @@ const EditProfile = () => {
   };
 
   const handleUpdate = async () => {
-    {
+    
       try {
         dispatch({ type: "START_LOADING" });
         let updatedProfile=state.updatedProfile
@@ -50,7 +50,7 @@ const EditProfile = () => {
       } finally {
         dispatch({ type: "STOP_LOADING" });
       }
-    }
+    
     
   };
 

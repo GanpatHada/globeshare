@@ -57,7 +57,7 @@ const Suggestions = () => {
       }
     };
     getSuggestedUsers();
-  }, []);
+  }, [user]);
 
   const filterSuggestedUsers=()=>suggestedUsers.filter(sUser=>!user.following.includes(sUser));
 

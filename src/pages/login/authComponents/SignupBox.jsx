@@ -1,9 +1,8 @@
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import "../Login.css";
 import Loading from "../../../images/loading.svg";
-import GoogleButton from "./GoogleButton";
 import GuestButton from "./GuestButton";
-import { useReducer, useState } from "react";
+import { useReducer} from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import {
@@ -25,7 +24,6 @@ const SignupBox = ({ setPage }) => {
     showPassword,
     showConfirmPassword,
     loading,
-    error,
   } = state;
 
   const handleFieldChange = ({ target: { name, value } }) => {

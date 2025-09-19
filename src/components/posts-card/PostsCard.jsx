@@ -1,5 +1,3 @@
-import React from "react";
-import Icon from "../../components/copy/Copy";
 import "./PostsCard.css";
 import {AiFillHeart} from 'react-icons/ai'
 import {FaComment} from 'react-icons/fa'

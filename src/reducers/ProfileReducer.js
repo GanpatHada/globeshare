@@ -9,18 +9,19 @@ export function profileReducer(state, action) {
         ...state,
         profile: action.payload,
       };
-    case "START_LOADING": {
+    case "START_LOADING": 
       return {
         ...state,
         loading: true,
       };
-    }
-    case "STOP_LOADING": {
+    
+    case "STOP_LOADING": 
       return {
         ...state,
         loading: false,
       };
-    }
+      default : return state
+    
     
   }
 }

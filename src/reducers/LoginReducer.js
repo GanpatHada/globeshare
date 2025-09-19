@@ -23,16 +23,16 @@ export const loginFormReducer = (state, action) => {
             ...state,
             showPassword:!state.showPassword
         };
-      case "START_LOADING":{
+      case "START_LOADING":
         return {
             ...state,loading:true
         }  
-      };
-      case "STOP_LOADING":{
+      
+      case "STOP_LOADING":
         return {
             ...state,loading:false
         }  
-      } 
+      
       default:
         throw new Error(`Unhandled action type: ${action.type}`);
     }

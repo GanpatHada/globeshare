@@ -50,5 +50,6 @@ export function createPostReducer(state, action) {
         ...state,
         emojiPopup: false,
       };
+    default : return state;  
   }
 }

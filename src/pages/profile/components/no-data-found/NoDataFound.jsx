@@ -1,4 +1,3 @@
-import React, { useContext } from "react";
 import emptyBox from "../../../../images/empty-box.png";
 import './NoDataFound.css'
 const NoDataFound = ({type='data'}) => {

@@ -31,7 +31,7 @@ const PostDetails = () => {
   const postDetailsRef = useRef(null);
   const{modalContentId:contentId,closeModal}=useModal()
   const currentPost=posts.find(post=>post.postId===contentId);
-  const {images,likes,user,caption,comments,time,postId}=currentPost;
+  const {images,user,caption,comments,time,postId}=currentPost;
   const {openMenu}=useMenu(); 
   const handleMenuClick=()=>{
     openMenu(postId,'POST')

@@ -1,4 +1,4 @@
-import React, { useReducer, useRef } from "react";
+import {useRef } from "react";
 import "./UploadImage.css";
 import { CiImageOn } from "react-icons/ci";
 

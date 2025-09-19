@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./UserInfo.css";
 import defaultProfile from "../../images/profile.png";
 import { fetchUserBasicInfo } from "../../services/UserService";
@@ -11,18 +11,21 @@ const UserInfo = ({ userId, comment = false,closeOnClickUser=false,userData }) =
   const [user, setUser] = useState({ profilePhoto: null, userName: null });
   const navigate = useNavigate();
 
-  const getUserBasicInfo = async () => {
+const getUserBasicInfo = useCallback(async () => {
     try {
-      if (userId === me.userId)
+      if (userId === me.userId) {
         return setUser({ profilePhoto: me.profilePhoto, userName: "You" });
-      const user = await fetchUserBasicInfo(userId);
-      setUser(user);
+      }
+      const fetchedUser = await fetchUserBasicInfo(userId);
+      setUser(fetchedUser);
     } catch (error) {
-      throw error;
+      // Handle the error appropriately, e.g., logging it or showing a message
+      console.error(error);
+      setUser(null);
     } finally {
       setLoading(false);
     }
-  };
+  }, [userId, me.userId, me.profilePhoto]);
 
   const handleUserClick = () => {
     navigate(`/profile/${userId}`);
@@ -37,7 +40,7 @@ const UserInfo = ({ userId, comment = false,closeOnClickUser=false,userData }) =
     setUser({ profilePhoto: userData?.profilePhoto, userName: userData?.userName });
     setLoading(false);
   }
-}, []);
+}, [getUserBasicInfo,userData]);
 
   return (
     <div className="user-basic-info">

@@ -32,5 +32,6 @@ export const postsReducer=(state,action)=>{
         case 'ADD_COMMENT':return{
             ...state,posts:commentHandler(state.posts,action.payload.comment,action.payload.postId)
         }
+        default : return state;
     }
 }

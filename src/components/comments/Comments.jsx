@@ -1,21 +1,16 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./Comments.css";
-
-import User from "../user/User";
 import FeedHeader from "../../pages/feeds/components/feed-header/FeedHeader";
 import FeedActions from "../../pages/feeds/components/feed-actions/FeedActions";
-import { MakeComment } from "../../pages/feeds/components/feed/Feed";
 import FeedImage from "../../pages/feeds/components/feed-image/FeedImage";
 import FeedCaption from "../../pages/feeds/components/feed-caption/FeedCaption";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../assets/Firebase";
 import { toast } from "react-toastify";
 import CommentBox from "../comment-box/CommentBox";
-import { PostContext } from "../../contexts/PostContext";
 import { UserContext } from "../../contexts/UserContext";
 import defaultProfile from '../../images/profile.png'
 const EachComments = ({ comment: { comment, userId } }) => {
-  const { setCurrentPost } = useContext(PostContext);
   const [user, setUser] = useState(null);
 
   const fetchUserDetails = async () => {

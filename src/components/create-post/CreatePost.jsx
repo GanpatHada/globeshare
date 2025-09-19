@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer, useRef } from "react";
+import {useEffect, useReducer, useRef } from "react";
 import "./CreatePost.css";
 import CrossButton from "../cross-button/CrossButton";
 import UploadImage from "./components/upload-image/UploadImage";
@@ -162,7 +162,7 @@ const CreatePost = ({ mode, closeModal }) => {
         });
       dispatch({ type: "SET_CAPTION", payload: currentPost.caption });
     }
-  }, []);
+  }, [modalContentId,mode,posts]);
   
 
   const { loading } = state;

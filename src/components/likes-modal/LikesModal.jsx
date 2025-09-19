@@ -1,6 +1,5 @@
-import React, { useContext, useRef } from "react";
+import {useRef } from "react";
 import "./LikesModal.css";
-import useClickOutsideHandler from "../../hooks/useClickOutsideHandler";
 import CrossButton from "../cross-button/CrossButton";
 import UserInfo from "../user-info/UserInfo";
 import { usePosts } from "../../hooks/usePosts";
