@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useEffect, useState, useRef} from "react";
 import "./Explore.css";
 import PostsCard from "../../components/posts-card/PostsCard";
 import { toast } from "react-toastify";
@@ -127,7 +127,9 @@ const Explore = () => {
   const { user } = useUser();
   const { posts, loading, addPosts, startLoadingPosts, stopLoadingPosts } = usePosts();
 
- const getExploringPosts = useCallback(async () => {
+  console.log(posts)
+
+ const getExploringPosts = async () => {
     try {
       startLoadingPosts();
       const exploringPosts = await fetchExploringPosts([user.userId, ...user.following]);
@@ -137,14 +139,14 @@ const Explore = () => {
     } finally {
       stopLoadingPosts();
     }
-  }, [user.userId, user.following, addPosts, startLoadingPosts, stopLoadingPosts]);
+  }
 
   const finalPosts = () =>
     posts.filter(post => !user.following.includes(post.user) && post.user !== user.userId);
 
   useEffect(() => {
     getExploringPosts();
-  }, [getExploringPosts]);
+  }, []);
 
   return (
     <div id="explore-page" className="app-pages">

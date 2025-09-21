@@ -3,7 +3,7 @@ import "./LeftSideBar.css";
 import globeShare from "../../images/mainLogoText.svg";
 import globeShareMin from "../../images/mainLogoMin.svg";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Search } from "@mui/icons-material";
+import { IoSearch } from "react-icons/io5";
 import Menu from "./Menu";
 import {BsPlusSquare } from "react-icons/bs";
 import { GoHome } from "react-icons/go";
@@ -60,7 +60,7 @@ const SideNavs = ({ openSearchBox,searchBox }) => {
         </li>
         <li className={`navs ${searchBox&&'active-search-nav'}`} onClick={openSearchBox}>
           <span className="icons">
-            <Search />
+            <IoSearch />
           </span>
           Search
         </li>

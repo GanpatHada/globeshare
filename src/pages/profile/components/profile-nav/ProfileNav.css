@@ -8,27 +8,30 @@
     display: flex;
     margin: auto;
 }
-#profile-nav-container > a{
+#profile-nav-container a{
     flex: 1;
     justify-content: center;
-    padding: 10px ;
-    color: rgb(75, 75, 75);
+    padding: 10px 25px;
+    color: #868686;
     display: flex;
-    height: 2.5rem;
+    font-size: 1.5rem;
     align-items: center;
     position: relative;
-    
-    
+        
+}
+#profile-nav-container  a.active{
+    font-weight: bold;
+    color: black;
 }
 #profile-nav-container > a:hover{
     text-decoration: none;
     color: rgb(24, 24, 24);
 }
-#profile-nav-container > a.active::after{
+#profile-nav-container  a.active::after{
     content: "";
-    border-bottom: 1px solid black;
+    border-bottom: 2px solid black;
     position: absolute;
-    top: 0px;
+    top: -2px;
     left: 0px;
     height: 100%;
     width: 100%;

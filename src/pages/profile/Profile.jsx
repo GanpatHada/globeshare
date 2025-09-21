@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import "./Profile.css";
 import ProfileHeader from "./components/profile-header/ProfileHeader";
 import ProfileNav from "./components/profile-nav/ProfileNav";
@@ -15,10 +15,9 @@ const Profile = () => {
   const { user } = useUser();
   const { profile, stopProfileLoading, profileLoading, saveProfileDetails } = useProfile();
 
-  const getUserProfile = useCallback(async () => {
+  const getUserProfile = async () => {
     try {
       let userProfile;
-
       if (user.userId === currentUserId) {
         userProfile = user;
       } else {
@@ -36,14 +35,11 @@ const Profile = () => {
     } finally {
       stopProfileLoading();
     }
-  }, [user, currentUserId, saveProfileDetails, stopProfileLoading, navigate]);
+  };
 
-  useEffect(() => {
-    // Only fetch profile if it's not the current profile
-    if (!profile || profile.userId !== currentUserId) {
+  useEffect(() => { 
       getUserProfile();
-    }
-  }, [currentUserId, getUserProfile, profile]);
+  }, [currentUserId]);
 
   return (
     <div id="profile-page" className="app-pages">

@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import "./SearchBox.css";
 import useClickOutsideHandler from "../../hooks/useClickOutsideHandler";
 import { useSearch } from "../../hooks/useSearch";
 import UserInfo from "../user-info/UserInfo";
 import { fetchSearchedUsers } from "../../services/SearchService";
-import loadingImage from '../../images/loading2.gif';
+import loadingImage from "../../images/loading2.gif";
 
 const SearchBox = ({ searchBox, closeSearchBox }) => {
   const {
@@ -17,7 +17,6 @@ const SearchBox = ({ searchBox, closeSearchBox }) => {
     searchResults,
   } = useSearch();
 
-  const [isSearching, setIsSearching] = useState(false); // new state
   const searchRef = useRef(null);
   useClickOutsideHandler(searchRef, closeSearchBox);
 
@@ -36,8 +35,6 @@ const SearchBox = ({ searchBox, closeSearchBox }) => {
       return;
     }
 
-    setIsSearching(true); // start debounce search
-
     const debounceTimeout = setTimeout(() => {
       const fetchUsers = async () => {
         try {
@@ -47,22 +44,22 @@ const SearchBox = ({ searchBox, closeSearchBox }) => {
           const results = await fetchSearchedUsers({ nGrams: queryNGrams });
           setSearchResults(results);
         } catch (error) {
-          
           setSearchResults([]);
         } finally {
           stopSearchLoading();
-          setIsSearching(false); // search finished
         }
       };
+      
 
       fetchUsers();
     }, 300);
-
+    
     return () => clearTimeout(debounceTimeout);
-  }, [searchText, setSearchResults, startSearchLoading, stopSearchLoading]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchText]);
 
   const showNoResults =
-    !loading && !isSearching && searchText.trim().length >= 3 && searchResults.length === 0;
+    !loading && searchText.trim().length >= 3 && searchResults.length === 0;
 
   return (
     <div
@@ -79,7 +76,7 @@ const SearchBox = ({ searchBox, closeSearchBox }) => {
             onChange={(e) => setSearchText(e.target.value)}
             placeholder="Type at least 3 characters to search"
           />
-          {(loading || isSearching) && (
+          {loading && (
             <div className="loading">
               <img src={loadingImage} alt="loading" />
             </div>
@@ -87,15 +84,13 @@ const SearchBox = ({ searchBox, closeSearchBox }) => {
         </div>
       </header>
       <div id="search-content">
-        {searchResults.length > 0 ? (
-          searchResults.map((result) => (
-            <div key={result.userId}>
-              <UserInfo userId={result.userId} userData={result} />
-            </div>
-          ))
-        ) : (
-          showNoResults && <div className="no-results">No results found</div>
-        )}
+        {searchResults.length > 0
+          ? searchResults.map((result) => (
+              <div key={result.userId}>
+                <UserInfo userId={result.userId} userData={result} />
+              </div>
+            ))
+          : showNoResults && <div className="no-results">No results found</div>}
       </div>
     </div>
   );

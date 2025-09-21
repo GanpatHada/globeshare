@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-
 import { useModal } from "./hooks/useModal";
 import { useDialog } from "./hooks/useDialog";
-
 import LeftSideBar from "./components/left-side-bar/LeftSideBar";
 import Header from "./components/header/Header";
 import BottomNavbar from "./components/bottom-navbar/BottomNavbar";

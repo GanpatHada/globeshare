@@ -16,13 +16,7 @@ const MyBookmarks = () => {
   const navigate = useNavigate();
   const { posts, loading, startLoadingPosts, stopLoadingPosts, addPosts } = usePosts();
 
-  // Redirect if the current user is not the profile owner
-  useEffect(() => {
-    if (userId !== currentUser) navigate("/404");
-  }, [userId, currentUser, navigate]);
-
-  // Fetch bookmarks
-  const getMyBookmarks = useCallback(async () => {
+  const getMyBookmarks =async () => {
     try {
       startLoadingPosts();
       const bookmarks = await fetchMyBookmarks(user.bookmarks);
@@ -32,24 +26,23 @@ const MyBookmarks = () => {
     } finally {
       stopLoadingPosts();
     }
-  }, [user.bookmarks, startLoadingPosts, addPosts, stopLoadingPosts]);
+  }
 
   useEffect(() => {
+     if (userId !== currentUser) 
+      navigate("/404");
     getMyBookmarks();
-  }, [getMyBookmarks]);
+  }, [currentUser,userId]);
 
-  const savedPosts = useCallback(
-    () => posts.filter((post) => user.bookmarks.includes(post.postId)),
-    [posts, user.bookmarks]
-  );
+  const savedPosts = posts.filter((post) => user.bookmarks.includes(post.postId));
 
   if (loading) return <Waiting />;
 
-  if (savedPosts().length === 0) return <NoDataFound type="saved posts" />;
+  if (savedPosts.length === 0) return <NoDataFound type="saved posts" />;
 
   return (
     <div className="posts-wrapper">
-      {savedPosts().map((post) => (
+      {savedPosts.map((post) => (
         <PostsCard key={post.postId} post={post} />
       ))}
     </div>

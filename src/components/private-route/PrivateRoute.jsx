@@ -27,7 +27,7 @@ export const PrivateRoute = ({ children }) => {
     });
 
     return () => unsubscribe(); 
-  }, [saveUser,stopLoading]);
+  }, []);
 
   if (loading) return <Loader />;
   return user ? children : <Navigate to="/auth" />;

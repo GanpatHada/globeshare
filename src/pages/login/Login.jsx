@@ -11,7 +11,7 @@ const Login = () => {
   const{startLoading}=useUser();
   useEffect(()=>{
      startLoading();
-  },[startLoading])
+  },[page])
 
   return (
     <div id="login-page" className="all-centered">
