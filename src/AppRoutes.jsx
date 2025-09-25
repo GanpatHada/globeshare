@@ -15,6 +15,7 @@ import Login from "./pages/login/Login";
 const AppRoutes = () => {
   return (
     <Routes>
+      <Route path="/auth" element={<Login />} />
       <Route
         path="/"
         element={
@@ -24,8 +25,8 @@ const AppRoutes = () => {
         }
       >
         <Route index element={<Home />} />
-        <Route path="/explore" element={<Explore />} />
-        <Route path="/profile/:userId" element={<Profile />}>
+        <Route path="explore" element={<Explore />} />
+        <Route path="profile/:userId" element={<Profile />}>
           <Route index element={<MyPosts />} />
           <Route path="bookmarks" element={<MyBookmarks />} />
         </Route>
@@ -38,7 +39,6 @@ const AppRoutes = () => {
           }
         />
       </Route>
-      <Route path="/auth" element={<Login />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

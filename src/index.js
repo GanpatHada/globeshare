@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 import { UserProvider } from "./contexts/UserContext";
 import { PostsProvider } from "./contexts/PostsContext";
@@ -13,7 +12,10 @@ import { ProfileProvider } from "./contexts/ProfileContext";
 import { SearchProvider } from "./contexts/SearchContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <Router>
+  <Router future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true, 
+      }}>
     <UserProvider>
       <PostsProvider>
         <ModalProvider>
@@ -31,4 +33,3 @@ root.render(
     </UserProvider>
   </Router>
 );
-reportWebVitals();

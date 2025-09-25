@@ -127,7 +127,6 @@ const Explore = () => {
   const { user } = useUser();
   const { posts, loading, addPosts, startLoadingPosts, stopLoadingPosts } = usePosts();
 
-  console.log(posts)
 
  const getExploringPosts = async () => {
     try {

@@ -71,7 +71,7 @@ const DoComment = ({ post }) => {
           onChange={(e) => handleCommentText(e.target.value)}
           type="text"
           className="comment-input"
-          placeholder="Add a comment"
+          placeholder="Add a comment..."
           maxLength={200}
         />
       </section>
@@ -87,7 +87,7 @@ const DoComment = ({ post }) => {
         </section>
       )}
       <section>
-        <button
+        <span
           className="emoji-button all-centered"
           onClick={() => setShowEmoji(true)}
         >
@@ -97,8 +97,8 @@ const DoComment = ({ post }) => {
               addEmojiToComment={addEmojiToComment}
             />
           )}
-          <BsEmojiSmile />
-        </button>
+          <BsEmojiSmile size={'24px'} />
+        </span>
       </section>
     </div>
   );
