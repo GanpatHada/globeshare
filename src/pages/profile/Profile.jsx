@@ -39,7 +39,7 @@ const Profile = () => {
 
   useEffect(() => { 
       getUserProfile();
-  }, [currentUserId]);
+  }, [currentUserId,user]);
 
   return (
     <div id="profile-page" className="app-pages">

@@ -10,6 +10,7 @@ import { isProfilePhotoChnaged } from "../../utils/EditProfileHelper";
 import defaultProfile from '../../images/profile.png'
 import { useUser } from "../../hooks/useUser";
 import SelectProfilePhotoModal from "./components/select-profile-photo-modal/SelectProfilePhotoModal";
+import { generateNGrams } from "../../utils/SignupHelper";
 
 
 const EditProfile = () => {
@@ -39,6 +40,11 @@ const EditProfile = () => {
               updatedProfile={...updatedProfile,profilePhoto:{...updatedProfile.profilePhoto,url:savedProfilePhotoUrl}}
             }
         }
+        if(user.userName.trim()!==updatedProfile.userName.trim())
+        {
+          updatedProfile.userNameLower=updatedProfile.userName.toLowerCase();
+          updatedProfile.userNameIndex=generateNGrams(updatedProfile.userNameLower);
+        }
         const updatedData = await updateProfile(
           user.userId,
           updatedProfile
@@ -46,6 +52,7 @@ const EditProfile = () => {
         saveUser(updatedData);
         toast.success("Profile edited successfully");
       } catch (error) {
+        console.log(error)
         toast.error("unable to update at the moment");
       } finally {
         dispatch({ type: "STOP_LOADING" });
@@ -153,7 +160,7 @@ const EditProfile = () => {
                 placeholder="Username "
                 id="user-name"
                 value={userName}
-                maxLength={50}
+                maxLength={20}
                 name="userName"
                 onChange={(e) => handleUserName(e)}
                 onKeyDown={handleKeyDown}

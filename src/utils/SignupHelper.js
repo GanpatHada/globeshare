@@ -15,7 +15,7 @@ function createInitialUsrName(email) {
   return email.slice(0, email.indexOf("@"));
 }
 
-function generateNGrams(text, n = 3) {
+export function generateNGrams(text, n = 3) {
   text = text.toLowerCase();
   const result = [];
   for (let i = 0; i <= text.length - n; i++) {
