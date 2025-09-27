@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 const LoginBox = ({ setPage }) => {
   const [state, dispatch] = useReducer(loginFormReducer, initialLoginFormState);
   const { email, password, showPassword, loading } = state;
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const handleFieldChange = ({ target: { name, value } }) => {
     return dispatch({ type: "SET_FIELD", payload: { field: name, value } });
   };
@@ -29,23 +29,30 @@ const LoginBox = ({ setPage }) => {
     startLoading();
     try {
       await login(email.trim(), password.trim());
-      navigate("/")
+      navigate("/");
     } catch (errorCode) {
       toast.error(getLoginError(errorCode), { autoClose: 2000 });
     } finally {
       stopLoading();
     }
   };
-  const handleLogin = () => {
+  const handleLogin = (e) => {
+    e.preventDefault();
     const loginError = areThereLoginErrors(email, password);
     if (!loginError) return loginUser();
     return toast.warning(loginError, { autoClose: 2000 });
   };
   return (
-    <div id="login-box" className="authbox">
+    <form
+      onSubmit={handleLogin}
+      autoComplete="off"
+      id="login-box"
+      className="authbox"
+    >
       <h2>Login</h2>
       <div className="emailbox">
         <input
+          autoComplete="email"
           type="email"
           name="email"
           value={email}
@@ -55,14 +62,14 @@ const LoginBox = ({ setPage }) => {
       </div>
       <div className="passwordbox">
         <input
-          autoComplete="new-password"
+          autoComplete="current-password"
           name="password"
           value={password}
           onChange={(e) => handleFieldChange(e)}
           type={showPassword ? "text" : "password"}
           placeholder="Enter password"
         />
-        <button id="eyebox" onClick={handleShowPassword}>
+        <button type="button" id="eyebox" onClick={handleShowPassword}>
           {showPassword ? (
             <BsEyeSlashFill className="eye" title="Hide Password" />
           ) : (
@@ -72,7 +79,7 @@ const LoginBox = ({ setPage }) => {
       </div>
       <a href="/">forgotten Password ?</a>
       <button
-        onClick={handleLogin}
+        type="submit"
         id="login-btn"
         className="all-centered login-page-btns"
       >
@@ -84,8 +91,9 @@ const LoginBox = ({ setPage }) => {
         Don't have an Account ?
         <span onClick={() => setPage("signup")}> SignUp</span>
       </p>
+      <hr />
       <GuestButton />
-    </div>
+    </form>
   );
 };
 

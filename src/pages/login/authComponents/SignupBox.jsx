@@ -2,7 +2,7 @@ import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import "../Login.css";
 import Loading from "../../../images/loading.svg";
 import GuestButton from "./GuestButton";
-import { useReducer} from "react";
+import { useReducer } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import {
@@ -11,12 +11,14 @@ import {
 } from "../../../reducers/SignupReducer";
 import { areThereSignupErrors, getSignupError } from "../../../utils/SignupHelper";
 import { signup } from "../../../services/SignupService";
+
 const SignupBox = ({ setPage }) => {
   const navigate = useNavigate();
   const [state, dispatch] = useReducer(
     signupFormReducer,
     initialSignupFormState
   );
+
   const {
     email,
     password,
@@ -26,65 +28,77 @@ const SignupBox = ({ setPage }) => {
     loading,
   } = state;
 
+  // Input field change
   const handleFieldChange = ({ target: { name, value } }) => {
-    return dispatch({ type: "SET_FIELD", payload: { field: name, value } });
+    dispatch({ type: "SET_FIELD", payload: { field: name, value } });
   };
 
-  const handleTogglePassword = () => dispatch({ type: "TOGGLE_SHOW_PASSWORD" });
+  // Toggle password visibility
+  const handleTogglePassword = () =>
+    dispatch({ type: "TOGGLE_SHOW_PASSWORD" });
   const handleToggleConfirmPassword = () =>
     dispatch({ type: "TOGGLE_SHOW_CONFIRM_PASSWORD" });
 
+  // Loading states
+  const startLoading = () => dispatch({ type: "START_LOADING" });
+  const stopLoading = () => dispatch({ type: "STOP_LOADING" });
 
-  const startLoading=()=>dispatch({type:'START_LOADING'})
-  const stopLoading=()=>dispatch({type:'STOP_LOADING'})
-
-
-
-
+  // Signup API call
   const signupUser = async () => {
     startLoading();
     try {
-      await signup(email.trim(),password.trim());
-      navigate("/")
+      await signup(email.trim(), password.trim());
+      navigate("/");
     } catch (errorCode) {
       toast.error(getSignupError(errorCode), { autoClose: 2000 });
-    }
-    finally{
+    } finally {
       stopLoading();
     }
   };
 
-  const handleSignup = () => {
-    const signupError = areThereSignupErrors(email,password,confirmPassword);
+  // Handle form submit
+  const handleSignup = (e) => {
+    e.preventDefault();
+    const signupError = areThereSignupErrors(email, password, confirmPassword);
     if (!signupError) {
       return signupUser();
     }
-    return toast.warning(signupError, { autoClose: 2000 });
+    toast.warning(signupError, { autoClose: 2000 });
   };
 
   return (
-    <div id="login-box" className="authbox">
+    <form onSubmit={handleSignup} autoComplete="new-user" id="login-box" className="authbox">
       <h2>Signup</h2>
 
+      {/* Email */}
       <div className="emailbox">
         <input
-          type="text"
+          autoComplete="email"
+          type="email"
           name="email"
           value={email}
-          onChange={(e) => handleFieldChange(e)}
+          onChange={handleFieldChange}
           placeholder="Enter email"
         />
       </div>
+
+      {/* Password */}
       <div className="passwordbox">
         <input
           autoComplete="new-password"
+          id="new-password"
+          type={showPassword ? "text" : "password"}
           name="password"
           value={password}
-          onChange={(e) => handleFieldChange(e)}
-          type={showPassword ? "text" : "password"}
-          placeholder="Enter password atleast 6 characters"
+          onChange={handleFieldChange}
+          placeholder="Enter password at least 6 characters"
         />
-        <button id="eyebox" onClick={handleTogglePassword}>
+        <button
+          type="button"
+          id="eyebox"
+          onClick={handleTogglePassword}
+          aria-label="Toggle password visibility"
+        >
           {showPassword ? (
             <BsEyeSlashFill className="eye" />
           ) : (
@@ -93,16 +107,23 @@ const SignupBox = ({ setPage }) => {
         </button>
       </div>
 
+      {/* Confirm Password */}
       <div className="passwordbox">
         <input
           autoComplete="new-password"
+          id="new-password"
+          type={showConfirmPassword ? "text" : "password"}
           name="confirmPassword"
           value={confirmPassword}
-          onChange={(e) => handleFieldChange(e)}
-          type={showConfirmPassword ? "text" : "password"}
+          onChange={handleFieldChange}
           placeholder="Confirm password"
         />
-        <button id="eyebox" onClick={handleToggleConfirmPassword}>
+        <button
+          type="button"
+          id="eyebox"
+          onClick={handleToggleConfirmPassword}
+          aria-label="Toggle confirm password visibility"
+        >
           {showConfirmPassword ? (
             <BsEyeSlashFill className="eye" />
           ) : (
@@ -110,26 +131,36 @@ const SignupBox = ({ setPage }) => {
           )}
         </button>
       </div>
+
+      {/* Submit Button */}
       <button
+        type="submit"
         disabled={loading}
         id="signup-btn"
-        onClick={handleSignup}
         className="all-centered login-page-btns"
       >
         {loading ? (
-          <img src={Loading} id="loadingimg" alt="..." />
+          <img src={Loading} id="loadingimg" alt="Loading..." />
         ) : (
           "Create Account"
         )}
       </button>
-      {/* <GoogleButton /> */}
+
+      {/* Divider */}
       <hr />
+
+      {/* Login Link */}
       <p>
-        Already have an account ?
-        <span onClick={() => setPage("login")}> Login</span>{" "}
+        Already have an account?
+        <span onClick={() => setPage("login")} style={{ cursor: "pointer" }}>
+          {" "}Login
+        </span>
       </p>
+      <hr />
+      {/* Guest Button */}
       <GuestButton />
-    </div>
+    </form>
   );
 };
+
 export default SignupBox;

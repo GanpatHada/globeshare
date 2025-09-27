@@ -6,20 +6,19 @@
     width: 244px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
     border-radius: 5px;
-    flex-direction: column;
-    
+    flex-direction: column;   
 }
 #menu-box button{
-    height: 50px;
-    width: calc(100% - 20px);
+    height: 40px;
+    width: calc(244px - 20px);
     color: rgb(34, 34, 34);
     font-size: 0.9rem;
     border-radius: 5px;
-    margin: 10px;
     display: flex;
     align-items: center;
     justify-content: left;
     font-family: Arial, Helvetica, sans-serif;
+    margin: 10px;
 }
 #menu-box button span{
     

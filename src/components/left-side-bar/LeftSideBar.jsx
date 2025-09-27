@@ -1,11 +1,11 @@
-import {useState } from "react";
+import { useState } from "react";
 import "./LeftSideBar.css";
 import globeShare from "../../images/mainLogoText.svg";
 import globeShareMin from "../../images/mainLogoMin.svg";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
 import Menu from "./Menu";
-import {BsPlusSquare } from "react-icons/bs";
+import { BsPlusSquare } from "react-icons/bs";
 import { GoHome } from "react-icons/go";
 import { AiOutlineHeart, AiOutlineMenu } from "react-icons/ai";
 import { MdOutlineExplore } from "react-icons/md";
@@ -14,9 +14,13 @@ import { useUser } from "../../hooks/useUser";
 import { useModal } from "../../hooks/useModal";
 
 const SideNavHeader = ({ searchBox }) => {
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   return (
-    <section onClick={()=>navigate("/")} id={"main-logo"} className={searchBox ? "all-centered" : ""}>
+    <section
+      onClick={() => navigate("/")}
+      id={"main-logo"}
+      className={searchBox ? "all-centered" : ""}
+    >
       <img src={searchBox ? globeShareMin : globeShare} alt="..." />
     </section>
   );
@@ -43,58 +47,67 @@ const MenuNav = () => {
   );
 };
 
-const SideNavs = ({ openSearchBox,searchBox }) => {
-  const{user:{profilePhoto,userId}}=useUser();
-  const{openModal}=useModal();
+const SideNavs = ({ openSearchBox, searchBox }) => {
+  const {
+    user: { profilePhoto, userId },
+  } = useUser();
+  const { openModal } = useModal();
 
   return (
     <section id="side-navs">
       <ul>
         <li>
           <NavLink to={"/"} className="navs">
-          <span className="icons">
-            <GoHome />
-          </span>
-          Home
-        </NavLink>
+            <span className="icons">
+              <GoHome />
+            </span>
+            Home
+          </NavLink>
         </li>
-        <li className={`navs ${searchBox&&'active-search-nav'}`} onClick={openSearchBox}>
-          <span className="icons">
-            <IoSearch />
-          </span>
-          Search
-        </li>
-        <li>
-          <NavLink to={'/explore'} className="navs">
-          <span className="icons">
-            <MdOutlineExplore />
-          </span>
-          Explore
-        </NavLink>
-        </li>
-        <li className="navs" onClick={()=>openModal(null,'CREATE_POST')}>
-          <span className="icons">
-            <BsPlusSquare />
-          </span>
-          Create
+        <li
+          className={`navs ${searchBox && "active-search-nav"}`}
+          onClick={openSearchBox}
+        >
+          <Link className="navs">
+            <span className="icons">
+              <IoSearch />
+            </span>
+            Search
+          </Link>
         </li>
         <li>
-           <NavLink className="navs">
-          <span className="icons">
-            <AiOutlineHeart />
-          </span>
-          Notifications
-        </NavLink>
+          <NavLink to={"/explore"} className="navs">
+            <span className="icons">
+              <MdOutlineExplore />
+            </span>
+            Explore
+          </NavLink>
+        </li>
+        <li className="navs" onClick={() => openModal(null, "CREATE_POST")}>
+          <Link to={""} className="navs">
+            <span className="icons">
+              <BsPlusSquare />
+            </span>
+            Create
+          </Link>
+        </li>
+        <li>
+          <NavLink to={"/messages"} className="navs">
+            <span className="icons">
+              <AiOutlineHeart />
+            </span>
+            Notifications
+          </NavLink>
         </li>
         <li>
           <NavLink className="navs" to={`/profile/${userId}`}>
-          <span className="icons" >
-            <div id="profile">
-              <img src={profilePhoto?.url ?? defaultProfileImage} alt="" />
-            </div>
-          </span>
-          Profile
-        </NavLink>
+            <span className="icons">
+              <div id="profile">
+                <img src={profilePhoto?.url ?? defaultProfileImage} alt="" />
+              </div>
+            </span>
+            Profile
+          </NavLink>
         </li>
       </ul>
       <MenuNav />

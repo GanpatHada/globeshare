@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../Login.css";
 import Loading from "../../../images/loading.svg";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";

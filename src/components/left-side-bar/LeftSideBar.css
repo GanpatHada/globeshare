@@ -16,6 +16,12 @@
 }
 #left-nav a{
     text-decoration: none;
+    color: #414141;
+    width: 100%;
+}
+#left-nav a.active{
+    font-weight: bold;
+    color: black;
 }
 #main-logo{
     
@@ -54,7 +60,6 @@
     overflow: hidden;
     gap: 10px;
     font-weight: normal;
-    color: black;
 }
 #side-navs .navs:hover{
     background-color: whitesmoke;

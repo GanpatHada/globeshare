@@ -6,11 +6,13 @@ import { logout } from "../../services/LoginService";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../hooks/useUser";
+import { BsBookmark } from "react-icons/bs";
 const Menu = ({menuBox,closeMenuBox}) => {
   const{logoutUser,startLoading}=useUser()
   const menuRef=useRef(null);
   useClickOutsideHandler(menuRef,closeMenuBox);
   const navigate=useNavigate(null);
+  const {user}=useUser()
 
   const handleLogout=async()=>{
     try {
@@ -25,14 +27,14 @@ const Menu = ({menuBox,closeMenuBox}) => {
   
   return (
     <div id="menu-box" ref={menuRef} style={{display:menuBox?'flex':'none'}}>
-      {/* <li>
-        <button>
+      <li>
+        <button onClick={()=>navigate(`/profile/${user.userId}/bookmarks`)}>
           <span>
-            <GoMoon />
+            <BsBookmark />
           </span>
-          Switch appearance
+          Saved
         </button>
-      </li> */}
+      </li>
       <hr />
       <li>
         <button onClick={handleLogout}>
