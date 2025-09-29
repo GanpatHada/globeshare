@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 import loader from '../../../../images/loading2.gif'
 const ProfileHeader = ({ userProfile }) => {
   const { posts } = usePosts();
-  const { user } = useUser();
+  const { user} = useUser();
   const { openDialog } = useDialog();
   const {
       followUserOnClient,
@@ -33,8 +33,8 @@ const ProfileHeader = ({ userProfile }) => {
   const myPostsCount = () =>
     posts.filter((post) => post.user === userId).length;
 
-  const showFollowing = () => openDialog(null, "FOLLOWING");
-  const showFollowers = () => openDialog(null, "FOLLOWERS");
+  const showFollowing = () => openDialog(userId, "FOLLOWING");
+  const showFollowers = () => openDialog(userId, "FOLLOWERS");
 
   const isFollowing = user.following.includes(userId);
 

@@ -11,6 +11,7 @@ import { PrivateRoute } from "./components/private-route/PrivateRoute";
 import Main from "./Main";
 import PageNotFound from "./components/page-not-found/PageNotFound";
 import Login from "./pages/login/Login";
+import { ProfileProvider } from "./contexts/ProfileContext";
 
 const AppRoutes = () => {
   return (
@@ -26,7 +27,7 @@ const AppRoutes = () => {
       >
         <Route index element={<Home />} />
         <Route path="explore" element={<Explore />} />
-        <Route path="profile/:userId" element={<Profile />}>
+        <Route path="profile/:userId" element={<ProfileProvider><Profile /></ProfileProvider>}>
           <Route index element={<MyPosts />} />
           <Route path="bookmarks" element={<MyBookmarks />} />
         </Route>

@@ -18,12 +18,7 @@ const Profile = () => {
   const getUserProfile = async () => {
     try {
       let userProfile;
-      if (user.userId === currentUserId) {
-        userProfile = user;
-      } else {
-        userProfile = await fetchCurrentUserDetails(currentUserId);
-      }
-
+      userProfile = await fetchCurrentUserDetails(currentUserId);
       if (userProfile) {
         saveProfileDetails(userProfile);
       } else {

@@ -12,19 +12,19 @@ import { ProfileProvider } from "./contexts/ProfileContext";
 import { SearchProvider } from "./contexts/SearchContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <Router future={{
-        v7_startTransition: true,
-        v7_relativeSplatPath: true, 
-      }}>
+  <Router
+    future={{
+      v7_startTransition: true,
+      v7_relativeSplatPath: true,
+    }}
+  >
     <UserProvider>
       <PostsProvider>
         <ModalProvider>
           <MenuProvider>
             <DialogProvider>
               <SearchProvider>
-              <ProfileProvider>
                 <App />
-              </ProfileProvider>
               </SearchProvider>
             </DialogProvider>
           </MenuProvider>

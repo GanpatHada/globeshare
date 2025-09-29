@@ -12,9 +12,19 @@
 #dialog > div{
   display: flex;
   flex-direction: column;
-  width: 400px;
-  height: 500px;
+  width: 500px;
+  height: 400px;
 
+}
+.search-box{
+  height: 54px;
+  padding: 10px;
+}
+.search-box input{
+  display: block;
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
 }
 .dialog-content {
   flex: 1;
@@ -26,6 +36,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.dialog-content > div .buttons{
+  display: flex;
+  gap: 10px;
 }
 
 .dialog-header {

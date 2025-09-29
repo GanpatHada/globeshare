@@ -8,14 +8,13 @@ import SearchBox from "./components/search-box/SearchBox";
 import ModalManager from "./components/modal-manager/ModalManager";
 import CreatePost from "./components/create-post/CreatePost";
 import PostDetails from "./components/post-details/PostDetails";
-import LikesModal from "./components/likes-modal/LikesModal";
 import Dialog from "./components/dialog/Dialog";
-import MyFriends from "./pages/profile/components/myFriends/MyFriends";
 
 import "./Main.css";
 import { Outlet } from "react-router-dom";
 import { useMenu } from "./hooks/useMenu";
 import Menu from "./components/menu/Menu";
+import UserListDialog from "./components/user-list-dialog/UserListDialog";
 
 const AppSideNav = () => {
   const [searchBox, setSearchBox] = useState(false);
@@ -63,13 +62,12 @@ const ModalController = () => {
 };
 
 const DialogController = () => {
-  const { isDialogOpen, dialogContentType } = useDialog();
+  const { isDialogOpen} = useDialog();
   return (
     <React.Fragment>
       {isDialogOpen && (
         <Dialog>
-          {dialogContentType === "LIKES" && <LikesModal />}
-          {(dialogContentType==='FOLLOWING' || dialogContentType==='FOLLOWERS') && <MyFriends mode={dialogContentType}/>}
+          <UserListDialog/>
         </Dialog>
       )}
      
