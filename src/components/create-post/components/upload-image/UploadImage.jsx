@@ -32,7 +32,7 @@ const UploadImage = ({state,dispatch}) => {
           onChange={handleSelectedImages}
           ref={fileRef}
         />
-        {/* <button id="enter-url">Enter URL</button> */}    
+       {images.length<3&&<span>{3 - images.length} {images.length<3&&images.length>0&&'more'} images can be selected</span>}  
       </div>
     </section>
   );

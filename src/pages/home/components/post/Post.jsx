@@ -11,9 +11,13 @@ import DoComment from "../../../../components/do-comment/DoComment";
 import PostImages from "../../../../components/post-images/PostImages";
 import PostLikes from "../../../../components/post-likes/PostLikes";
 import { useModal } from "../../../../hooks/useModal";
+import { useMenu } from "../../../../hooks/useMenu";
 
 const PostHeader = ({ post }) => {
+  console.log(post)
+  const {openMenu}=useMenu()
   const{time,user}=post;
+  const handleMenuClick=()=>openMenu(post.postId,"POST")
   return (
     <header className="post-header">
       <UserInfo userId={user} />
@@ -21,7 +25,7 @@ const PostHeader = ({ post }) => {
         {getTimeDifference(time)} ago
       </span>
 
-      <button className="more all-centered">
+      <button onClick={handleMenuClick} className="more all-centered">
         <MdMoreHoriz />
       </button>
     </header>

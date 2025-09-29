@@ -92,7 +92,7 @@ const SideNavs = ({ openSearchBox, searchBox }) => {
           </Link>
         </li>
         <li>
-          <NavLink to={"/messages"} className="navs">
+          <NavLink to={"/notifications"} className="navs">
             <span className="icons">
               <AiOutlineHeart />
             </span>

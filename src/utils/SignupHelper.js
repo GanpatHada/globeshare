@@ -26,11 +26,13 @@ export function generateNGrams(text, n = 3) {
 
 export function getUserDetails(email) {
   const userName = createInitialUsrName(email);
+  const fullName = userName.charAt(0).toUpperCase() + userName.slice(1).toLowerCase();
   const userNameLower = userName.toLowerCase();
   const userNameIndex = generateNGrams(userNameLower);
 
   const userDetails = {
     ...userObject,
+    fullName,
     userName,
     userNameLower,
     userNameIndex

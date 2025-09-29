@@ -1,0 +1,13 @@
+#notifications{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#notifications img{
+    width: 100px;
+    height: 100px;
+    color: gray;
+}

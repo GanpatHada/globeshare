@@ -5,21 +5,20 @@ import { fetchUserBasicInfo } from "../../services/UserService";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../hooks/useUser";
 
-const UserInfo = ({ userId, comment = false,closeOnClickUser=false,userData }) => {
+const UserInfo = ({ userId, comment = false,closeOnClickUser=false,userData}) => {
   const { user: me } = useUser();
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState({ profilePhoto: null, userName: null });
+  const [user, setUser] = useState({ profilePhoto: null, userName: null,fullName:null });
   const navigate = useNavigate();
 
 const getUserBasicInfo = useCallback(async () => {
     try {
       if (userId === me.userId) {
-        return setUser({ profilePhoto: me.profilePhoto, userName: "You" });
+        return setUser({ profilePhoto: me.profilePhoto, userName: "You", fullName:me.fullName });
       }
       const fetchedUser = await fetchUserBasicInfo(userId);
       setUser(fetchedUser);
     } catch (error) {
-      // Handle the error appropriately, e.g., logging it or showing a message
       console.error(error);
       setUser(null);
     } finally {
@@ -37,7 +36,7 @@ const getUserBasicInfo = useCallback(async () => {
   if (!userData) {
     getUserBasicInfo(); 
   } else {
-    setUser({ profilePhoto: userData?.profilePhoto, userName: userData?.userName });
+    setUser({ profilePhoto: userData?.profilePhoto, userName: userData?.userName, fullName:userData?.fullName});
     setLoading(false);
   }
 }, [getUserBasicInfo,userData]);
@@ -58,6 +57,7 @@ const getUserBasicInfo = useCallback(async () => {
             ? user.userName
             : "not found"}
         </button>
+        {!loading&&!comment&&<p>{user.fullName}</p>}
         {comment &&  <span className="user-comment">{comment}</span>}
       </div>
     </div>

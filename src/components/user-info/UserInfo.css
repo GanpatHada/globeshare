@@ -21,6 +21,10 @@
     
    
 }
+.user-basic-info p{
+    color:rgb(83, 83, 83);
+    font-size: 0.8rem;
+}
 .user-basic-info .user-comment{
     color: rgb(100, 100, 100);
     font-size: 0.9rem;

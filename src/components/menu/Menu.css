@@ -15,11 +15,38 @@
 
   
 }
+#menu .loading{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  inset: 0;
+  display: flex;
+  background-color: rgba(201, 201, 201, 0.705);
+  align-items: center;
+  justify-content: center;
+}
+#menu .share-options{
+  width: 100%;
+  background-color:white;
+  display: flex;
+  flex-direction: column;
+}
+#menu .share-options button{
+  color: rgb(65, 65, 65);
+}
+#menu .loading img{
+  height: 50px;
+  width: 50px;
+}
 #menu button{
     padding: 10px;
     font-size: 0.95rem;
     background-color: white;
 }
+.menu-btn.danger {
+  color: #c90000;
+}
+
 @keyframes menu-animation {
   0% {
     transform: scale(0);

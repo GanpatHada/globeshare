@@ -161,8 +161,8 @@ export async function fetchUserBasicInfo(userId) {
     const docSnap = await getDoc(docRef);
     let userDetails = null;
     if (docSnap.exists()) {
-      const { userName, profilePhoto } = docSnap.data();
-      userDetails = { userName, profilePhoto };
+      const { userName, profilePhoto,fullName } = docSnap.data();
+      userDetails = { userName, profilePhoto,fullName };
     }
     return userDetails;
   } catch (error) {

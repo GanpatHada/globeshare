@@ -5,10 +5,13 @@
     display: flex;
     flex-direction: column;
     
+    
 }
 #create-post-box .image-section{
     flex: 1;
     display: flex;    
+    min-height: 0px;
+    overflow: auto;
 }
 #create-post-header{
     display: flex;

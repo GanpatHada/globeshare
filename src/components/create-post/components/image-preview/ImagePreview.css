@@ -2,16 +2,22 @@
     display: flex;
     gap: 5px;
     padding: 5px;
-    border-left: 1px solid rgb(238, 238, 238); 
+    border: 1px solid rgb(238, 238, 238); 
+    margin: 10px;
     flex-direction: column;
+    border-radius: 8px;
     flex: 0.5;
+    overflow: auto;
+    height: fit-content;
+    box-shadow: 0 0 5px 2px rgba(170, 170, 170, 0.514);
 }
 .image-preview-box{
     overflow: hidden;
     background-color: rgb(43, 43, 43);
     display: flex;
     position: relative;
-    height: 190px;
+    aspect-ratio: 3/2;
+    border-radius: 8px;
 }
 .delete-preview-button{
     position: absolute;
