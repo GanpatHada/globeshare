@@ -83,6 +83,9 @@ button label{
   border-radius: 0.3rem;
   font-size: 0.9rem;
 }
+.secondary-btn:hover{
+  background-color: rgb(212, 212, 212);
+}
 .primary-btn{
   color: white;
   background-color: var(--primary-color);
@@ -90,7 +93,7 @@ button label{
   padding: 8px 12px;
 }
 .primary-btn:hover{
-  background-color: #006eff;
+  background-color: #00a3d4;
 }
 .primary-btn:active{
   background-color: rgb(68, 165, 255);

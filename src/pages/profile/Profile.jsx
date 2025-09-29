@@ -37,6 +37,8 @@ const Profile = () => {
     }
   };
 
+  console.log(user)
+
   useEffect(() => { 
       getUserProfile();
   }, [currentUserId,user]);

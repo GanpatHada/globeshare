@@ -42,7 +42,7 @@ const PostDetails = () => {
     <div id="post-details" ref={postDetailsRef}>
       <header>
               <button onClick={closeModal}><IoChevronBack /></button>
-             <h1>Post</h1>
+             <h1>Comments</h1>
       </header>
       {images.length !== 0 && (
         <section className="image-section">
