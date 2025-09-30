@@ -32,7 +32,6 @@ const Menu = () => {
   const isOwner = postOwnerId === user.userId;
   const isFollowing = user.following.includes(postOwnerId);
 
-  /** Handlers **/
   const handleDeletePost = async () => {
     try {
       setLoading(true);

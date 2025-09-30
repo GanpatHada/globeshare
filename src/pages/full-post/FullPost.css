@@ -56,7 +56,6 @@
     
 .more-posts .posts-wrapper{
     margin-top: 10px;
-    background-color: yellow;
     display: grid;
     grid-template-columns: repeat(3,1fr);
     gap: 2px;
