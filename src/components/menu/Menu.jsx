@@ -10,12 +10,14 @@ import { useModal } from "../../hooks/useModal";
 import Loading from '../../images/loading2.gif';
 import { followUser, unfollowUser } from "../../services/UserService";
 import { FaWhatsapp, FaLink } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Menu = () => {
   const { closeMenu, menuContentId } = useMenu();
   const { closeModal, openModal } = useModal();
   const { posts, deletePostOnClient } = usePosts();
   const { user, unFollowUserOnClient, followUserOnClient } = useUser();
+  const navigate=useNavigate()
 
   const menuRef = useRef();
   useClickOutsideHandler(menuRef, closeMenu);
@@ -93,6 +95,12 @@ const Menu = () => {
     setShowShareOptions((prev) => !prev);
   };
 
+  const handleGoToPost=()=>{
+    navigate(`/${postId}`);
+    closeMenu();
+    closeModal()
+  }
+
   return (
     <div id="menu-wrapper" className="overlay all-centered">
       <div id="menu" ref={menuRef}>
@@ -102,7 +110,7 @@ const Menu = () => {
           </div>
         )}
 
-        {!isOwner && <button className="menu-btn danger">Report</button>}
+        {/* {!isOwner && <button className="menu-btn danger">Report</button>} */}
 
         {isOwner && (
           <>
@@ -124,7 +132,7 @@ const Menu = () => {
           </button>
         )}
 
-        <button className="menu-btn">Go to post</button>
+        <button onClick={handleGoToPost} className="menu-btn">Go to post</button>
 
         <button onClick={toggleShareOptions} className="menu-btn">
           Share to...

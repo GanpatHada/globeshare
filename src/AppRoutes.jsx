@@ -13,6 +13,7 @@ import PageNotFound from "./components/page-not-found/PageNotFound";
 import Login from "./pages/login/Login";
 import { ProfileProvider } from "./contexts/ProfileContext";
 import Notifications from "./pages/notifications/Notifications";
+import FullPost from "./pages/full-post/FullPost";
 
 const AppRoutes = () => {
   return (
@@ -33,6 +34,7 @@ const AppRoutes = () => {
           <Route index element={<MyPosts />} />
           <Route path="bookmarks" element={<MyBookmarks />} />
         </Route>
+        <Route path="/:postId" element={<FullPost/>}/>
         <Route
           path="profile/edit"
           element={

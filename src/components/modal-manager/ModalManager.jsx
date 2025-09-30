@@ -24,7 +24,7 @@ const ModalManager = ({ children }) => {
   
 
   return (
-    <div id="main-modal" className="all-centered" onClick={closeModal}>
+    <div id="main-modal" className="all-centered overlay" onClick={closeModal}>
       <div id="main-modal-content" onClick={(e) => e.stopPropagation()}>
         {children}
       </div>

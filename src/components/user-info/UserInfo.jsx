@@ -58,7 +58,7 @@ const getUserBasicInfo = useCallback(async () => {
             : "not found"}
         </button>
         {!loading&&!comment&&<p>{user.fullName}</p>}
-        {comment &&  <span className="user-comment">{comment}</span>}
+        {comment &&  <p className="user-comment">{comment}</p>}
       </div>
     </div>
   );

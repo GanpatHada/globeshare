@@ -141,6 +141,38 @@ export async function getPostDetails(postId) {
   }
 }
 
+export async function getPostOwnerWithPosts(postId) {
+  try {
+    const postRef = doc(db, "posts", postId);
+    const postSnap = await getDoc(postRef);
+
+    if (!postSnap.exists()) return null;
+
+    const userId = postSnap.data().user;
+
+    const userRef = doc(db, "users", userId);
+    const userSnap = await getDoc(userRef);
+
+    if (!userSnap.exists()) return null;
+    const userName = userSnap.data().userName;
+
+    const postsQuery = query(collection(db, "posts"), where("user", "==", userId));
+    const postsSnap = await getDocs(postsQuery);
+
+    const posts = postsSnap.docs.map((doc) => ({ postId: doc.id, ...doc.data() }));
+
+    return {
+      userId,
+      userName,
+      posts,
+    };
+  } catch (error) {
+    console.error("Error fetching user posts:", error);
+    throw error;
+  }
+}
+
+
 export async function likePost(userId, postId) {
   try {
     const docRef = doc(db, "posts", postId);

@@ -6,7 +6,7 @@ import {
   IoBookmarkOutline,
   IoChatbubbleOutline,
 } from "react-icons/io5";
-import { BsSend } from "react-icons/bs";
+
 import { useUser } from "../../hooks/useUser";
 import { likePost, unlikePost } from "../../services/PostService";
 import { usePosts } from "../../hooks/usePosts";
@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import { addToBookmark, removeFromBookmark } from "../../services/UserService";
 import Spinner from "../../images/loading2.gif";
 import { useModal } from "../../hooks/useModal";
+import ShareButton from "../share-button/ShareButton";
 
 const LikeButton = ({ post }) => {
   const {
@@ -104,13 +105,7 @@ const BookMarkButton = ({ post }) => {
   );
 };
 
-const ShareButton = () => {
-  return (
-    <button>
-      <BsSend />
-    </button>
-  );
-};
+
 
 const PostActions = ({ post }) => {
   return (
@@ -118,7 +113,7 @@ const PostActions = ({ post }) => {
       <div>
         <LikeButton post={post} />
         <CommentButton post={post} />
-        <ShareButton />
+        <ShareButton url={`https://globeshare.vercel.app/${post.postId}`} title={'globeshare'} text={'Found something'} />
       </div>
       <div>
         <BookMarkButton post={post} />

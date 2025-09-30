@@ -3,6 +3,20 @@
     display: flex;
     width: 100%;
     height: 100%;  
+    position: relative;
+}
+#post-details .loading{
+    position:absolute;
+    inset: 0;
+    background-color: white;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#post-details .loading img{
+    height: 40px;
+    width: 40px;
 }
 #post-details .emoji-popup{
     top: -410px;
@@ -38,12 +52,15 @@
 }
 #post-details .image-section{
     width: 50%;
-    background-color: whitesmoke;
+    background-color: #000000;
     overflow: hidden;
 
     
      
 }
+#post-details .image-section img{
+        object-fit: contain;
+    }
 
 #post-details .post-info-section{
     flex: 1;
@@ -184,10 +201,8 @@
         width: 100%;
         height: 40%;
         aspect-ratio: auto;
-        margin-top: 63px;
         display: none;
-    }
-   
+    } 
     #post-details .post-info-section{
         flex: 1;
         aspect-ratio: auto;

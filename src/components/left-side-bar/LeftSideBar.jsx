@@ -84,12 +84,12 @@ const SideNavs = ({ openSearchBox, searchBox }) => {
           </NavLink>
         </li>
         <li className="navs" onClick={() => openModal(null, "CREATE_POST")}>
-          <Link to={""} className="navs">
+         
             <span className="icons">
               <BsPlusSquare />
             </span>
             Create
-          </Link>
+          
         </li>
         <li>
           <NavLink to={"/notifications"} className="navs">

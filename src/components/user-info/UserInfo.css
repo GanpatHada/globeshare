@@ -31,8 +31,4 @@
     
     
 }
-.user-basic-info .user-comment::before{
-    position: relative;
-    content: ": ";
-    color: black;
-}
+
