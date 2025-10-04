@@ -16,8 +16,7 @@ GlobeShare is a modern social media web application built with React and Firebas
 - ❤️ Like and Comment on Posts
 - 👤 User Profiles and Follow System
 - 📸 Upload and Share Images
-<!-- - 🔔 Real-time Notifications
-- 🌙 Light/Dark Mode -->
+
 
 ## 🛠️ Tech Stack
 

@@ -5,6 +5,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  limit,
   orderBy,
   query,
   updateDoc,
@@ -66,15 +67,25 @@ export async function fetchSuggestedUser({ following }) {
   try {
     const currentUserId = auth.currentUser.uid;
     const usersCollection = collection(db, "users");
+
     const usersQuery = query(
       usersCollection,
       where("__name__", "not-in", [currentUserId, ...following]),
-      orderBy("__name__")
+      orderBy("__name__"),
+      limit(10)
     );
+
     const querySnapshot = await getDocs(usersQuery);
     const otherUsers = [];
+
     querySnapshot.forEach((doc) => {
-      otherUsers.push(doc.id);
+      const data = doc.data();
+      otherUsers.push({
+        id: doc.id,
+        userName: data.userName || "",
+        fullName: data.fullName || "",
+        profilePhoto: data.profilePhoto || ""
+      });
     });
 
     return otherUsers;
@@ -82,7 +93,6 @@ export async function fetchSuggestedUser({ following }) {
     throw error;
   }
 }
-
 export async function followUser(userId,userTofollow) {
   try {
     const docRefHost = doc(db, "users", userId);

@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import Post from "../post/Post";
 import NoFeedIcon from "../../../../images/Home.svg";
 import NoPostIcon from "../../../../images/NoPost.png";
+
 const FeedLoading = () => {
   return (
     <div id="feed-loading">
@@ -25,10 +26,11 @@ const NoFeed = ({ noFollowers }) => {
         </section>
         <h2>Welcome to globeshare</h2>
         {noFollowers ? (
-          <p>Follow People,you'll find their posts here</p>
+          <p>Follow people, you'll find their posts here</p>
         ) : (
           <p>
-            Whenever your followers post something ,you'll find their posts here
+            Whenever your followers post something, you'll find their posts
+            here
           </p>
         )}
       </div>
@@ -36,10 +38,10 @@ const NoFeed = ({ noFollowers }) => {
   );
 };
 
-const Feed = () => {
-  const { addPosts, startLoadingPosts, stopLoadingPosts, loading, posts } =
-    usePosts();
+const Feed = ({ filter }) => {
+  const { addPosts, startLoadingPosts, stopLoadingPosts, loading, posts } = usePosts();
   const { user } = useUser();
+
   useEffect(() => {
     const getFeed = async () => {
       try {
@@ -53,12 +55,25 @@ const Feed = () => {
       }
     };
     getFeed();
-    // eslint-disable-next-line
-  }, [user.following]);
+  }, []);
 
   const getFeedFromPosts = () => {
-    return posts.filter((post) => user.following.includes(post.user));
+    const feedPosts = posts.filter((post) => user.following.includes(post.user));
+    if (filter === "Trending") {
+      return feedPosts.sort(
+        (a, b) =>
+          (b.likes?.length + b.comments?.length) -
+          (a.likes?.length + a.comments?.length)
+      );
+    } else if (filter === "Date Posted") {
+      return feedPosts.sort(
+        (a, b) => b.time -a.time
+      );
+    }
+    return feedPosts;
   };
+
+  const feedToShow = getFeedFromPosts();
 
   return (
     <div id="feed">
@@ -66,10 +81,10 @@ const Feed = () => {
         <NoFeed noFollowers={true} />
       ) : loading ? (
         <FeedLoading />
-      ) : getFeedFromPosts().length === 0 ? (
+      ) : feedToShow.length === 0 ? (
         <NoFeed noFollowers={false} />
       ) : (
-        getFeedFromPosts().map((post) => <Post key={post.postId} post={post} />)
+        feedToShow.map((post) => <Post key={post.postId} post={post} />)
       )}
     </div>
   );

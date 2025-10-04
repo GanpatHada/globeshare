@@ -2,6 +2,7 @@
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
+    cursor: pointer;
     
 
 }
@@ -14,16 +15,14 @@
 }
 .user-basic-info .username{
     font-size: 0.9rem;
-    font-weight: 500;
-    min-width: fit-content;
-    color: black;
-    margin-right: 0.3rem;
+    font-weight: 600;
+    
     
    
 }
 .user-basic-info p{
-    color:rgb(83, 83, 83);
-    font-size: 0.8rem;
+    color:rgb(131, 131, 131);
+    font-size: 0.75rem;
 }
 .user-basic-info .user-comment{
     color: rgb(100, 100, 100);

@@ -1,0 +1,56 @@
+#sort-filter{
+    height: fit-content;
+    grid-row: 1;
+    grid-column: 2;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #e9e9e9;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: space-between;
+}
+#sort-filter > button{
+   border: 1px solid rgb(207, 207, 207);
+   padding: 5px 10px;
+   border-radius: 20px;
+   display: flex;
+   align-items: center;
+   gap: 5px;
+   color: rgb(48, 48, 48);
+   &:hover{
+    background-color: aliceblue;
+   }
+}
+#sort-filter .filters{
+   position: absolute;
+   top: 25%;
+   right: 10px;
+   background-color: white;
+   border: 1px solid rgb(207, 207, 207);
+   display: flex;
+   flex-direction: column;
+   border-radius: 6px;
+   overflow: hidden;
+}
+#sort-filter .filters{
+  font-size: 1rem;
+}
+#sort-filter .filters h5{
+  padding: 10px 15px;
+  border-bottom: 1px solid rgb(223, 223, 223);
+}
+#sort-filter .filters li{
+  font-size: 0.8rem;
+  padding: 10px 15px;
+  cursor: pointer;
+  &:hover{
+    background-color: whitesmoke;
+  }
+}
+
+@media only screen and (max-width: 1044px) {
+  #sort-filter {
+    display: none;
+  }
+}

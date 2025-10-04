@@ -1,0 +1,84 @@
+#notification {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  background-color: white;
+  padding: 15px;
+  max-width: 400px;
+  width: calc(90vw - 10px);
+  z-index: 10;
+  border-radius: 10px;
+  box-shadow: 0 0 4px 3px rgba(138, 138, 138, 0.24);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: gray;
+  border: 1px solid rgb(214, 214, 214);
+  animation: popupIn 0.25s ease-out forwards;
+}
+
+/* ✅ Animate In */
+@keyframes popupIn {
+  0% {
+    transform: translateX(-50%) scale(0.6);
+    opacity: 0;
+  }
+  60% {
+    transform: translateX(-50%) scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+  }
+}
+
+/* ✅ Animate Out */
+#notification.hide {
+  animation: popupOut 0.2s ease-in forwards;
+}
+
+@keyframes popupOut {
+  0% {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-50%) scale(0.6);
+    opacity: 0;
+  }
+}
+
+/* Inner content */
+#notification main {
+  font-size: 0.9rem;
+}
+
+#notification aside {
+  height: 40px;
+  width: 40px;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+/* Close button */
+#close-notification {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 24px;
+  background-color: rgb(231, 231, 231);
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(46, 46, 46);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+#close-notification:hover {
+  background-color: rgb(221, 221, 221);
+}

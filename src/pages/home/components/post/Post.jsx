@@ -14,7 +14,6 @@ import { useModal } from "../../../../hooks/useModal";
 import { useMenu } from "../../../../hooks/useMenu";
 
 const PostHeader = ({ post }) => {
-  console.log(post)
   const {openMenu}=useMenu()
   const{time,user}=post;
   const handleMenuClick=()=>openMenu(post.postId,"POST")

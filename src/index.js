@@ -1,15 +1,7 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
-import { UserProvider } from "./contexts/UserContext";
-import { PostsProvider } from "./contexts/PostsContext";
-import { ModalProvider } from "./contexts/ModalContext";
-import { DialogProvider } from "./contexts/DialogContext";
-import "./Fonts.css";
-import { MenuProvider } from "./contexts/MenuContext";
-import { ProfileProvider } from "./contexts/ProfileContext";
-import { SearchProvider } from "./contexts/SearchContext";
+import Providers from "./Providers";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Router
@@ -18,18 +10,8 @@ root.render(
       v7_relativeSplatPath: true,
     }}
   >
-    <UserProvider>
-      <PostsProvider>
-        <ModalProvider>
-          <MenuProvider>
-            <DialogProvider>
-              <SearchProvider>
-                <App />
-              </SearchProvider>
-            </DialogProvider>
-          </MenuProvider>
-        </ModalProvider>
-      </PostsProvider>
-    </UserProvider>
+     <Providers>
+      <App />
+    </Providers>
   </Router>
 );

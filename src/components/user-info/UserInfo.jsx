@@ -42,7 +42,7 @@ const getUserBasicInfo = useCallback(async () => {
 }, [getUserBasicInfo,userData]);
 
   return (
-    <div className="user-basic-info">
+    <div className="user-basic-info" onClick={handleUserClick}>
       <div className="profile-photo">
         <img
           src={user.profilePhoto ? user.profilePhoto.url : defaultProfile}
@@ -50,13 +50,13 @@ const getUserBasicInfo = useCallback(async () => {
         />
       </div>
       <div>
-        <button onClick={handleUserClick} className="username">
+        <h5 className="username">
           {loading
             ? "Loading ..."
             : user.userName
             ? user.userName
             : "not found"}
-        </button>
+        </h5>
         {!loading&&!comment&&<p>{user.fullName}</p>}
         {comment &&  <p className="user-comment">{comment}</p>}
       </div>

@@ -1,9 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&family=Lato&family=Poppins&display=swap');
 *{
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;  
 }
+
+@font-face {
+  font-family: 'YourFont';
+  src: url('./fonts/roboto-regular.ttf') format('truetype');
+  font-style: normal;
+}
+
+body {
+  font-family: 'YourFont', sans-serif;
+}
+
 .App{
   height: 100%; 
 }
@@ -25,7 +35,7 @@ button{
   cursor: pointer;
   letter-spacing: normal;
   background-color: transparent;
-  font-family: "Inter", serif;
+  font-family: inherit;
  
 }
 button:disabled{
