@@ -4,12 +4,12 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    
-    
+       
 }
 #create-post-box .image-section{
     flex: 1;
-    display: flex;    
+    display: flex;  
+    flex-direction: column;  
     min-height: 0px;
     overflow: auto;
 }
@@ -85,9 +85,7 @@
     transform-origin: bottom right;   
 }
 @media  screen and (max-width:768px) {
-    #create-post-content{
-
-    }
+    
     #create-post-emoji{
       display: none;
     }

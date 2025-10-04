@@ -1,24 +1,60 @@
-#upload-image{
+#upload-image {
     flex: 1;
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    padding: 30px;
+    transition: all 0.25s ease-in-out;
+    margin: 20px;
 }
-#upload-image-content{
+
+#upload-image.drag-active {
+    background-color: aliceblue;
+    border-color: #004f6e;
+}
+
+#upload-image .info {
+    color: rgb(173, 173, 173);
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}
+#upload-image .info  span{
+    color: rgb(14, 167, 255);
+    text-decoration: none;
+    cursor:default;
+}
+
+#upload-image-content {
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
 }
-#upload-image-content #upload-image-placeholder{
-    font-size: 2rem;
+
+#upload-image-content #upload-image-placeholder {
+    font-size: 4.5rem;
+    color: rgb(119, 119, 119);
 }
-#upload-image-content button{
+
+#upload-image-content button {
     padding: 10px 15px;
     font-size: 1rem;
-    
 }
-#upload-from-device{
-    padding: 10px;
-    font-family: Roboto;
+
+#upload-from-device {
+    padding: 10px 15px;
     cursor: pointer;
+    background-color: #0073a0;
+    color: white;
+    border-radius: 6px;
+    transition: 0.2s;
 }
-#upload-image-content #enter-url{
+
+#upload-from-device:hover {
+    background-color: #004f6e;
+}
+
+#upload-image-content #enter-url {
     padding: 0px;
     margin: 5px 0px;
-    
 }
