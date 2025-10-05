@@ -10,7 +10,7 @@ import {
 import { areThereLoginErrors, getLoginError } from "../../../utils/LoginHelper";
 import { login } from "../../../services/LoginService";
 import "../Login.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const LoginBox = ({ setPage }) => {
   const [state, dispatch] = useReducer(loginFormReducer, initialLoginFormState);
   const { email, password, showPassword, loading } = state;
@@ -77,7 +77,7 @@ const LoginBox = ({ setPage }) => {
           )}
         </button>
       </div>
-      <a href="/">forgotten Password ?</a>
+      <Link to={"/auth/forget-password"}>forgotten Password ?</Link>
       <button
         type="submit"
         id="login-btn"
