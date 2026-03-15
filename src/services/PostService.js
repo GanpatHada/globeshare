@@ -14,24 +14,23 @@ import {
 } from "firebase/firestore";
 import { db, storage } from "../assets/Firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { uploadToCloudinary } from "../assets/Cloudinary";
 
 export async function createPost(userId, images, caption) {
   try {
-    let imageURLs = [];
-    for (let image of images) {
-      const storageRef = ref(storage, `${image.name}`);
-      const snapshot = await uploadBytes(storageRef, image);
-      const downloadUrl = await getDownloadURL(snapshot.ref);
-      imageURLs.push(downloadUrl);
-    }
+    const imageURLs = await Promise.all(
+      images.map((img) => uploadToCloudinary(img, userId,'posts'))
+    );
+
     const docRef = await addDoc(collection(db, "posts"), {
       user: userId,
-      caption: caption,
+      caption,
       images: imageURLs,
       likes: [],
       comments: [],
       time: Date.now(),
     });
+
     const addedPost = await getDoc(doc(db, "posts", docRef.id));
     return { postId: docRef.id, ...addedPost.data() };
   } catch (error) {

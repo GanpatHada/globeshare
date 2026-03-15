@@ -13,6 +13,7 @@ import {
 } from "firebase/firestore";
 import { auth, db, storage } from "../assets/Firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { uploadToCloudinary } from "../assets/Cloudinary";
 
 
 export async function fetchCurrentUserDetails(userId) {
@@ -41,12 +42,14 @@ export async function isUserNameAvialable(userName, myUserName) {
   }
 }
 
-export async function saveProfilePhoto(porfilePhotoUrl) {
+export async function saveProfilePhoto(profilePhoto, userId) {
   try {
-    const storageRef = ref(storage, `profile-photos/${porfilePhotoUrl.name}`);
-    const snapshot = await uploadBytes(storageRef, porfilePhotoUrl);
-    const downloadUrl = await getDownloadURL(snapshot.ref);
-    return downloadUrl;
+    const url = await uploadToCloudinary(
+      profilePhoto,
+      userId,
+      "users"
+    );
+    return url;
   } catch (error) {
     throw error;
   }

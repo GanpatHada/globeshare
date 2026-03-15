@@ -36,7 +36,7 @@ const EditProfile = () => {
         {
             if(updatedProfile.profilePhoto?.type==='DEVICE')
             {
-              let savedProfilePhotoUrl=await saveProfilePhoto(updatedProfile.profilePhoto.url)
+              let savedProfilePhotoUrl=await saveProfilePhoto(updatedProfile.profilePhoto.url,user.userId)
               updatedProfile={...updatedProfile,profilePhoto:{...updatedProfile.profilePhoto,url:savedProfilePhotoUrl}}
             }
         }

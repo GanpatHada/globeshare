@@ -27,7 +27,7 @@ const UploadImage = ({ state, dispatch }) => {
   };
 
   const handleDragOver = (e) => {
-    if (images.length >= MAX_IMAGES) return; // ❌ block drag if full
+    if (images.length >= MAX_IMAGES) return;
     e.preventDefault();
     setIsDragging(true);
   };
