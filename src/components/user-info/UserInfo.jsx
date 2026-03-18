@@ -24,7 +24,7 @@ const getUserBasicInfo = useCallback(async () => {
     } finally {
       setLoading(false);
     }
-  }, [userId, me.userId, me.profilePhoto]);
+  }, [userId, me.userId, me.profilePhoto,me.fullName]);
 
   const handleUserClick = () => {
     navigate(`/profile/${userId}`);

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useCallback } from "react";
 import { UserContext } from "../contexts/UserContext";
 import {
   addToBookmark,
@@ -16,25 +16,50 @@ export const useUser = () => {
   const { state, dispatch } = useContext(UserContext);
   const { user, loading } = state;
 
-  const followUserOnClient = (userIdToFollow) =>
-    followUser(dispatch, userIdToFollow);
+  const followUserOnClient = useCallback(
+    (userIdToFollow) => followUser(dispatch, userIdToFollow),
+    [dispatch]
+  );
 
-  const unFollowUserOnClient = (userIdToUnfollow) =>
-    unfollowUser(dispatch, userIdToUnfollow);
+  const unFollowUserOnClient = useCallback(
+    (userIdToUnfollow) => unfollowUser(dispatch, userIdToUnfollow),
+    [dispatch]
+  );
 
-  const removeFollowerOnClient = (userToRemove) =>
-    removeFollower(dispatch, userToRemove);
+  const removeFollowerOnClient = useCallback(
+    (userToRemove) => removeFollower(dispatch, userToRemove),
+    [dispatch]
+  );
 
-  const addToBookmarkOnClient = (postId) => addToBookmark(dispatch, postId);
-  const removeFromBookmarkOnClient = (postId) =>
-    removeFromBookmark(dispatch, postId);
+  const addToBookmarkOnClient = useCallback(
+    (postId) => addToBookmark(dispatch, postId),
+    [dispatch]
+  );
 
-  const stopLoading = () => stopUserLoading(dispatch);
-  const startLoading = () => startUserLoading(dispatch);
+  const removeFromBookmarkOnClient = useCallback(
+    (postId) => removeFromBookmark(dispatch, postId),
+    [dispatch]
+  );
 
-  const saveUser = (userDetails) => saveUserDetails(dispatch, userDetails);
+  const stopLoading = useCallback(
+    () => stopUserLoading(dispatch),
+    [dispatch]
+  );
 
-  const logoutUser = () => removeUser(dispatch);
+  const startLoading = useCallback(
+    () => startUserLoading(dispatch),
+    [dispatch]
+  );
+
+  const saveUser = useCallback(
+    (userDetails) => saveUserDetails(dispatch, userDetails),
+    [dispatch]
+  );
+
+  const logoutUser = useCallback(
+    () => removeUser(dispatch),
+    [dispatch]
+  );
 
   return {
     user,

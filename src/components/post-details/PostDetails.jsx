@@ -74,7 +74,7 @@ const PostDetails = (props) => {
     );
   }
 
-  const { images, user, caption, comments, time, postId } = currentPost;
+  const { images, user, caption, comments, time} = currentPost;
 
   return (
     <div id="post-details" ref={postDetailsRef}>

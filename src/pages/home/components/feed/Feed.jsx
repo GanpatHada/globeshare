@@ -55,7 +55,7 @@ const Feed = ({ filter }) => {
       }
     };
     getFeed();
-  }, []);
+  }, [addPosts,startLoadingPosts,stopLoadingPosts,user]);
 
   const getFeedFromPosts = () => {
     const feedPosts = posts.filter((post) => user.following.includes(post.user));

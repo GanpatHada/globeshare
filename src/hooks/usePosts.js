@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useCallback } from "react";
 import { PostsContext } from "../contexts/PostsContext";
 import {
   commentOnPost,
@@ -15,20 +15,45 @@ export const usePosts = () => {
   const { state, dispatch } = useContext(PostsContext);
   const { posts, loading } = state;
 
-  const addPosts = (newPosts) => savePosts(dispatch, newPosts);
+  const addPosts = useCallback(
+    (newPosts) => savePosts(dispatch, newPosts),
+    [dispatch]
+  );
 
-  const startLoadingPosts = () => startLoading(dispatch);
-  const stopLoadingPosts = () => stopLoading(dispatch);
+  const startLoadingPosts = useCallback(
+    () => startLoading(dispatch),
+    [dispatch]
+  );
 
-  const likePostOnClient = (userId, postId) =>
-    likePost(dispatch, userId, postId);
-  const unlikePostOnClient = (userId, postId) =>
-    unlikePost(dispatch, userId, postId);
-  const commentOnPostOnClient = (comment, postId) =>
-    commentOnPost(dispatch, comment, postId);
-  const deletePostOnClient = (postId) => deletePost(dispatch, postId);
+  const stopLoadingPosts = useCallback(
+    () => stopLoading(dispatch),
+    [dispatch]
+  );
 
-  const editPostOnClient=editedPost=>editPost(dispatch,editedPost)
+  const likePostOnClient = useCallback(
+    (userId, postId) => likePost(dispatch, userId, postId),
+    [dispatch]
+  );
+
+  const unlikePostOnClient = useCallback(
+    (userId, postId) => unlikePost(dispatch, userId, postId),
+    [dispatch]
+  );
+
+  const commentOnPostOnClient = useCallback(
+    (comment, postId) => commentOnPost(dispatch, comment, postId),
+    [dispatch]
+  );
+
+  const deletePostOnClient = useCallback(
+    (postId) => deletePost(dispatch, postId),
+    [dispatch]
+  );
+
+  const editPostOnClient = useCallback(
+    (editedPost) => editPost(dispatch, editedPost),
+    [dispatch]
+  );
 
   return {
     posts,
@@ -40,6 +65,6 @@ export const usePosts = () => {
     unlikePostOnClient,
     commentOnPostOnClient,
     deletePostOnClient,
-    editPostOnClient
+    editPostOnClient,
   };
 };

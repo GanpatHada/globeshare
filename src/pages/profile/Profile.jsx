@@ -15,7 +15,12 @@ const Profile = () => {
   const { user } = useUser();
   const { profile, stopProfileLoading, profileLoading, saveProfileDetails } = useProfile();
 
-  const getUserProfile = async () => {
+  
+
+  console.log(user)
+
+  useEffect(() => { 
+    const getUserProfile = async () => {
     try {
       let userProfile;
       userProfile = await fetchCurrentUserDetails(currentUserId);
@@ -31,12 +36,8 @@ const Profile = () => {
       stopProfileLoading();
     }
   };
-
-  console.log(user)
-
-  useEffect(() => { 
       getUserProfile();
-  }, [currentUserId,user]);
+  }, [currentUserId,user,navigate,saveProfileDetails,stopProfileLoading]);
 
   return (
     <div id="profile-page" className="app-pages">

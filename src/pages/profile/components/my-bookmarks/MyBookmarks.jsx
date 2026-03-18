@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import { useEffect} from "react";
 import "./MyBookmarks.css";
 import NoDataFound from "../no-data-found/NoDataFound";
 import PostsCard from "../../../../components/posts-card/PostsCard";
@@ -16,7 +16,14 @@ const MyBookmarks = () => {
   const navigate = useNavigate();
   const { posts, loading, startLoadingPosts, stopLoadingPosts, addPosts } = usePosts();
 
-  const getMyBookmarks =async () => {
+  
+
+  useEffect(() => {
+     if (userId !== currentUser) {
+      navigate("/404");
+      return;
+    }
+    const getMyBookmarks =async () => {
     try {
       startLoadingPosts();
       const bookmarks = await fetchMyBookmarks(user.bookmarks);
@@ -27,12 +34,8 @@ const MyBookmarks = () => {
       stopLoadingPosts();
     }
   }
-
-  useEffect(() => {
-     if (userId !== currentUser) 
-      navigate("/404");
     getMyBookmarks();
-  }, [currentUser,userId]);
+  }, [currentUser,userId,navigate,addPosts,stopLoadingPosts,startLoadingPosts,user.bookmarks]);
 
   const savedPosts = posts.filter((post) => user.bookmarks.includes(post.postId));
 

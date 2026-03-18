@@ -13,7 +13,10 @@ const FullPost = () => {
   const { postId } = useParams();
 
 
-  const getUserInfo=async()=>{
+ 
+
+  useEffect(()=>{
+     const getUserInfo=async()=>{
     try {
       const data=await getPostOwnerWithPosts(postId)
       setUserInfo(data);
@@ -24,10 +27,8 @@ const FullPost = () => {
       setLoading(false)
     }
   }
-
-  useEffect(()=>{
     getUserInfo()
-  },[])
+  },[postId])
   return (
     <div id="full-post" className="app-pages">
       <div id="post-details-wrapper">
