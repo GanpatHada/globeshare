@@ -11,8 +11,7 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import { auth, db, storage } from "../assets/Firebase";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { auth, db} from "../assets/Firebase";
 import { uploadToCloudinary } from "../assets/Cloudinary";
 
 
